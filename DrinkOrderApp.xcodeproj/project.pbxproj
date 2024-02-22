@@ -1,0 +1,612 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EB94C1D92B8734F5008098DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB94C1D82B8734F5008098DE /* AppDelegate.swift */; };
+		EB94C1DB2B8734F5008098DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB94C1DA2B8734F5008098DE /* SceneDelegate.swift */; };
+		EB94C1DD2B8734F5008098DE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB94C1DC2B8734F5008098DE /* ViewController.swift */; };
+		EB94C1E02B8734F5008098DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB94C1DE2B8734F5008098DE /* Main.storyboard */; };
+		EB94C1E22B8734F7008098DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB94C1E12B8734F7008098DE /* Assets.xcassets */; };
+		EB94C1E52B8734F7008098DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB94C1E32B8734F7008098DE /* LaunchScreen.storyboard */; };
+		EB94C1F02B8734F7008098DE /* DrinkOrderAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB94C1EF2B8734F7008098DE /* DrinkOrderAppTests.swift */; };
+		EB94C1FA2B8734F7008098DE /* DrinkOrderAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB94C1F92B8734F7008098DE /* DrinkOrderAppUITests.swift */; };
+		EB94C1FC2B8734F7008098DE /* DrinkOrderAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB94C1FB2B8734F7008098DE /* DrinkOrderAppUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EB94C1EC2B8734F7008098DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB94C1CD2B8734F5008098DE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB94C1D42B8734F5008098DE;
+			remoteInfo = DrinkOrderApp;
+		};
+		EB94C1F62B8734F7008098DE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB94C1CD2B8734F5008098DE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB94C1D42B8734F5008098DE;
+			remoteInfo = DrinkOrderApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EB94C1D52B8734F5008098DE /* DrinkOrderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrinkOrderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB94C1D82B8734F5008098DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EB94C1DA2B8734F5008098DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		EB94C1DC2B8734F5008098DE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EB94C1DF2B8734F5008098DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EB94C1E12B8734F7008098DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EB94C1E42B8734F7008098DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EB94C1E62B8734F7008098DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EB94C1EB2B8734F7008098DE /* DrinkOrderAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrinkOrderAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB94C1EF2B8734F7008098DE /* DrinkOrderAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkOrderAppTests.swift; sourceTree = "<group>"; };
+		EB94C1F52B8734F7008098DE /* DrinkOrderAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrinkOrderAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB94C1F92B8734F7008098DE /* DrinkOrderAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkOrderAppUITests.swift; sourceTree = "<group>"; };
+		EB94C1FB2B8734F7008098DE /* DrinkOrderAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkOrderAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EB94C1D22B8734F5008098DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB94C1E82B8734F7008098DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB94C1F22B8734F7008098DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EB94C1CC2B8734F5008098DE = {
+			isa = PBXGroup;
+			children = (
+				EB94C1D72B8734F5008098DE /* DrinkOrderApp */,
+				EB94C1EE2B8734F7008098DE /* DrinkOrderAppTests */,
+				EB94C1F82B8734F7008098DE /* DrinkOrderAppUITests */,
+				EB94C1D62B8734F5008098DE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EB94C1D62B8734F5008098DE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EB94C1D52B8734F5008098DE /* DrinkOrderApp.app */,
+				EB94C1EB2B8734F7008098DE /* DrinkOrderAppTests.xctest */,
+				EB94C1F52B8734F7008098DE /* DrinkOrderAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EB94C1D72B8734F5008098DE /* DrinkOrderApp */ = {
+			isa = PBXGroup;
+			children = (
+				EB94C1D82B8734F5008098DE /* AppDelegate.swift */,
+				EB94C1DA2B8734F5008098DE /* SceneDelegate.swift */,
+				EB94C1DC2B8734F5008098DE /* ViewController.swift */,
+				EB94C1DE2B8734F5008098DE /* Main.storyboard */,
+				EB94C1E12B8734F7008098DE /* Assets.xcassets */,
+				EB94C1E32B8734F7008098DE /* LaunchScreen.storyboard */,
+				EB94C1E62B8734F7008098DE /* Info.plist */,
+			);
+			path = DrinkOrderApp;
+			sourceTree = "<group>";
+		};
+		EB94C1EE2B8734F7008098DE /* DrinkOrderAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				EB94C1EF2B8734F7008098DE /* DrinkOrderAppTests.swift */,
+			);
+			path = DrinkOrderAppTests;
+			sourceTree = "<group>";
+		};
+		EB94C1F82B8734F7008098DE /* DrinkOrderAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				EB94C1F92B8734F7008098DE /* DrinkOrderAppUITests.swift */,
+				EB94C1FB2B8734F7008098DE /* DrinkOrderAppUITestsLaunchTests.swift */,
+			);
+			path = DrinkOrderAppUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EB94C1D42B8734F5008098DE /* DrinkOrderApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB94C1FF2B8734F7008098DE /* Build configuration list for PBXNativeTarget "DrinkOrderApp" */;
+			buildPhases = (
+				EB94C1D12B8734F5008098DE /* Sources */,
+				EB94C1D22B8734F5008098DE /* Frameworks */,
+				EB94C1D32B8734F5008098DE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DrinkOrderApp;
+			productName = DrinkOrderApp;
+			productReference = EB94C1D52B8734F5008098DE /* DrinkOrderApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EB94C1EA2B8734F7008098DE /* DrinkOrderAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB94C2022B8734F7008098DE /* Build configuration list for PBXNativeTarget "DrinkOrderAppTests" */;
+			buildPhases = (
+				EB94C1E72B8734F7008098DE /* Sources */,
+				EB94C1E82B8734F7008098DE /* Frameworks */,
+				EB94C1E92B8734F7008098DE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EB94C1ED2B8734F7008098DE /* PBXTargetDependency */,
+			);
+			name = DrinkOrderAppTests;
+			productName = DrinkOrderAppTests;
+			productReference = EB94C1EB2B8734F7008098DE /* DrinkOrderAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EB94C1F42B8734F7008098DE /* DrinkOrderAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB94C2052B8734F7008098DE /* Build configuration list for PBXNativeTarget "DrinkOrderAppUITests" */;
+			buildPhases = (
+				EB94C1F12B8734F7008098DE /* Sources */,
+				EB94C1F22B8734F7008098DE /* Frameworks */,
+				EB94C1F32B8734F7008098DE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EB94C1F72B8734F7008098DE /* PBXTargetDependency */,
+			);
+			name = DrinkOrderAppUITests;
+			productName = DrinkOrderAppUITests;
+			productReference = EB94C1F52B8734F7008098DE /* DrinkOrderAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EB94C1CD2B8734F5008098DE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					EB94C1D42B8734F5008098DE = {
+						CreatedOnToolsVersion = 15.2;
+					};
+					EB94C1EA2B8734F7008098DE = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = EB94C1D42B8734F5008098DE;
+					};
+					EB94C1F42B8734F7008098DE = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = EB94C1D42B8734F5008098DE;
+					};
+				};
+			};
+			buildConfigurationList = EB94C1D02B8734F5008098DE /* Build configuration list for PBXProject "DrinkOrderApp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EB94C1CC2B8734F5008098DE;
+			productRefGroup = EB94C1D62B8734F5008098DE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EB94C1D42B8734F5008098DE /* DrinkOrderApp */,
+				EB94C1EA2B8734F7008098DE /* DrinkOrderAppTests */,
+				EB94C1F42B8734F7008098DE /* DrinkOrderAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EB94C1D32B8734F5008098DE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB94C1E52B8734F7008098DE /* LaunchScreen.storyboard in Resources */,
+				EB94C1E22B8734F7008098DE /* Assets.xcassets in Resources */,
+				EB94C1E02B8734F5008098DE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB94C1E92B8734F7008098DE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB94C1F32B8734F7008098DE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EB94C1D12B8734F5008098DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB94C1DD2B8734F5008098DE /* ViewController.swift in Sources */,
+				EB94C1D92B8734F5008098DE /* AppDelegate.swift in Sources */,
+				EB94C1DB2B8734F5008098DE /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB94C1E72B8734F7008098DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB94C1F02B8734F7008098DE /* DrinkOrderAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB94C1F12B8734F7008098DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB94C1FC2B8734F7008098DE /* DrinkOrderAppUITestsLaunchTests.swift in Sources */,
+				EB94C1FA2B8734F7008098DE /* DrinkOrderAppUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EB94C1ED2B8734F7008098DE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB94C1D42B8734F5008098DE /* DrinkOrderApp */;
+			targetProxy = EB94C1EC2B8734F7008098DE /* PBXContainerItemProxy */;
+		};
+		EB94C1F72B8734F7008098DE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB94C1D42B8734F5008098DE /* DrinkOrderApp */;
+			targetProxy = EB94C1F62B8734F7008098DE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EB94C1DE2B8734F5008098DE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EB94C1DF2B8734F5008098DE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EB94C1E32B8734F7008098DE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EB94C1E42B8734F7008098DE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EB94C1FD2B8734F7008098DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EB94C1FE2B8734F7008098DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EB94C2002B8734F7008098DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7NJ9W73ML8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DrinkOrderApp/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dawei.DrinkOrderApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EB94C2012B8734F7008098DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7NJ9W73ML8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DrinkOrderApp/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dawei.DrinkOrderApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		EB94C2032B8734F7008098DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7NJ9W73ML8;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dawei.DrinkOrderAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DrinkOrderApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DrinkOrderApp";
+			};
+			name = Debug;
+		};
+		EB94C2042B8734F7008098DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7NJ9W73ML8;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dawei.DrinkOrderAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DrinkOrderApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DrinkOrderApp";
+			};
+			name = Release;
+		};
+		EB94C2062B8734F7008098DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7NJ9W73ML8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dawei.DrinkOrderAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DrinkOrderApp;
+			};
+			name = Debug;
+		};
+		EB94C2072B8734F7008098DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7NJ9W73ML8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dawei.DrinkOrderAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DrinkOrderApp;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EB94C1D02B8734F5008098DE /* Build configuration list for PBXProject "DrinkOrderApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB94C1FD2B8734F7008098DE /* Debug */,
+				EB94C1FE2B8734F7008098DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB94C1FF2B8734F7008098DE /* Build configuration list for PBXNativeTarget "DrinkOrderApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB94C2002B8734F7008098DE /* Debug */,
+				EB94C2012B8734F7008098DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB94C2022B8734F7008098DE /* Build configuration list for PBXNativeTarget "DrinkOrderAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB94C2032B8734F7008098DE /* Debug */,
+				EB94C2042B8734F7008098DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB94C2052B8734F7008098DE /* Build configuration list for PBXNativeTarget "DrinkOrderAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB94C2062B8734F7008098DE /* Debug */,
+				EB94C2072B8734F7008098DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EB94C1CD2B8734F5008098DE /* Project object */;
+}
