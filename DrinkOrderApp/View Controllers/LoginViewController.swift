@@ -14,7 +14,6 @@ class LoginViewController: UIViewController {
         let logoImageView: UIImageView = UIImageView()
         logoImageView.image       = Images.kebukeLoginLogo
         logoImageView.contentMode = .scaleToFill
-        
         return logoImageView
     } ()
     
@@ -22,7 +21,7 @@ class LoginViewController: UIViewController {
     var enterNameLabel: UILabel = {
         let enterNameLabel: UILabel = UILabel()
         enterNameLabel.text      = "Enter your name"
-        enterNameLabel.textColor = Colors.darkGrey
+        enterNameLabel.textColor = Colors.darkGray
         enterNameLabel.translatesAutoresizingMaskIntoConstraints = false
         return enterNameLabel
     } ()
@@ -36,7 +35,7 @@ class LoginViewController: UIViewController {
         )
         enterNameTextField.attributedPlaceholder = attributedPlaceholder
         enterNameTextField.borderStyle      = .roundedRect
-        enterNameTextField.textColor        = Colors.darkGrey
+        enterNameTextField.textColor        = Colors.darkGray
         enterNameTextField.translatesAutoresizingMaskIntoConstraints = false
         return enterNameTextField
     } ()
@@ -92,30 +91,21 @@ class LoginViewController: UIViewController {
         enterNameLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
         enterNameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
-        enterNameTextField.widthAnchor.constraint(equalToConstant: 350).isActive = true
+        enterNameTextField.widthAnchor.constraint(equalToConstant: 280).isActive = true
         enterNameTextField.heightAnchor.constraint(equalToConstant: 45).isActive = true
         
-        loginButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
+        loginButton.widthAnchor.constraint(equalToConstant: 280).isActive = true
         loginButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
         
-        let imageViewWidth: Double = 380
+        let imageViewWidth: Double = 320
         logoImageView.widthAnchor.constraint(equalToConstant: imageViewWidth).isActive = true
         logoImageView.heightAnchor.constraint(equalToConstant: imageViewWidth * 0.7).isActive = true
-        
-//        logoImageView.layer.borderWidth = 1
-//        logoImageView.layer.borderColor = Colors.kebukeBrown.cgColor
         
         stackView.addArrangedSubview(logoImageView)
         stackView.addArrangedSubview(enterNameTextField)
         stackView.addArrangedSubview(loginButton)
         
-//        stackView.layer.borderColor = Colors.kebukeBrown.cgColor
-//        stackView.layer.borderWidth = 1
-        
-        // Add stack view to the main view
         view.addSubview(stackView)
-        // secondStackView
-        
         NSLayoutConstraint.activate([
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
