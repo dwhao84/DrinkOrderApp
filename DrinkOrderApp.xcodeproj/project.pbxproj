@@ -44,11 +44,11 @@
 /* Begin PBXFileReference section */
 		D38E53842B887A6C008E8BDE /* ImageConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConstants.swift; sourceTree = "<group>"; };
 		D38E53872B887AAC008E8BDE /* ColorsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsConstants.swift; sourceTree = "<group>"; };
-		D38E53892B888F50008E8BDE /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginButton.swift; path = DrinkOrderApp/LoginButton.swift; sourceTree = SOURCE_ROOT; };
+		D38E53892B888F50008E8BDE /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = SOURCE_ROOT; };
 		D38E538B2B8897DD008E8BDE /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		D38E538D2B8897EF008E8BDE /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		D38E53952B889ADD008E8BDE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		D38E53972B889B04008E8BDE /* OrderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrderListViewController.swift; path = DrinkOrderApp/ViewControllers/OrderListViewController.swift; sourceTree = SOURCE_ROOT; };
+		D38E53972B889B04008E8BDE /* OrderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrderListViewController.swift; path = "DrinkOrderApp/View Controllers/OrderListViewController.swift"; sourceTree = SOURCE_ROOT; };
 		EB94C1D52B8734F5008098DE /* DrinkOrderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrinkOrderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB94C1D82B8734F5008098DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB94C1DA2B8734F5008098DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,9 +93,7 @@
 			children = (
 				EB94C1D82B8734F5008098DE /* AppDelegate.swift */,
 				EB94C1DA2B8734F5008098DE /* SceneDelegate.swift */,
-				EB94C1DE2B8734F5008098DE /* Main.storyboard */,
 				EB94C1E12B8734F7008098DE /* Assets.xcassets */,
-				EB94C1E32B8734F7008098DE /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -117,27 +115,37 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		D38E539B2B88AB92008E8BDE /* ViewControllers */ = {
+		D38E539B2B88AB92008E8BDE /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				D38E53952B889ADD008E8BDE /* LoginViewController.swift */,
 				D38E53972B889B04008E8BDE /* OrderListViewController.swift */,
 			);
-			path = ViewControllers;
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
-		D38E539C2B88ABA3008E8BDE /* ViewModels */ = {
+		D38E539C2B88ABA3008E8BDE /* View Models */ = {
 			isa = PBXGroup;
 			children = (
 				D38E538D2B8897EF008E8BDE /* ViewModel.swift */,
 			);
-			path = ViewModels;
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		D38E539D2B88ADF1008E8BDE /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				EB94C1DE2B8734F5008098DE /* Main.storyboard */,
+				EB94C1E32B8734F7008098DE /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		EB94C1CC2B8734F5008098DE = {
 			isa = PBXGroup;
 			children = (
 				EB94C1D72B8734F5008098DE /* DrinkOrderApp */,
+				D38E53892B888F50008E8BDE /* LoginButton.swift */,
 				EB94C1EE2B8734F7008098DE /* DrinkOrderAppTests */,
 				EB94C1F82B8734F7008098DE /* DrinkOrderAppUITests */,
 				EB94C1D62B8734F5008098DE /* Products */,
@@ -157,13 +165,13 @@
 		EB94C1D72B8734F5008098DE /* DrinkOrderApp */ = {
 			isa = PBXGroup;
 			children = (
-				D38E537D2B8876FD008E8BDE /* Supporting Files */,
 				EB94C1E62B8734F7008098DE /* Info.plist */,
+				D38E537D2B8876FD008E8BDE /* Supporting Files */,
+				D38E539D2B88ADF1008E8BDE /* Storyboards */,
 				D38E53862B887A85008E8BDE /* Constants */,
-				D38E53892B888F50008E8BDE /* LoginButton.swift */,
 				D38E538F2B889A07008E8BDE /* Models */,
-				D38E539C2B88ABA3008E8BDE /* ViewModels */,
-				D38E539B2B88AB92008E8BDE /* ViewControllers */,
+				D38E539C2B88ABA3008E8BDE /* View Models */,
+				D38E539B2B88AB92008E8BDE /* View Controllers */,
 			);
 			path = DrinkOrderApp;
 			sourceTree = "<group>";
