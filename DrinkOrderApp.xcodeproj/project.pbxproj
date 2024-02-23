@@ -47,8 +47,8 @@
 		D38E53892B888F50008E8BDE /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginButton.swift; path = DrinkOrderApp/LoginButton.swift; sourceTree = SOURCE_ROOT; };
 		D38E538B2B8897DD008E8BDE /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		D38E538D2B8897EF008E8BDE /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		D38E53952B889ADD008E8BDE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = DrinkOrderApp/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
-		D38E53972B889B04008E8BDE /* OrderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrderListViewController.swift; path = DrinkOrderApp/OrderListViewController.swift; sourceTree = SOURCE_ROOT; };
+		D38E53952B889ADD008E8BDE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D38E53972B889B04008E8BDE /* OrderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrderListViewController.swift; path = DrinkOrderApp/ViewControllers/OrderListViewController.swift; sourceTree = SOURCE_ROOT; };
 		EB94C1D52B8734F5008098DE /* DrinkOrderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrinkOrderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB94C1D82B8734F5008098DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB94C1DA2B8734F5008098DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,13 +117,21 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		D38E53902B889A14008E8BDE /* ViewControllers */ = {
+		D38E539B2B88AB92008E8BDE /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				D38E53952B889ADD008E8BDE /* LoginViewController.swift */,
 				D38E53972B889B04008E8BDE /* OrderListViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D38E539C2B88ABA3008E8BDE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				D38E538D2B8897EF008E8BDE /* ViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		EB94C1CC2B8734F5008098DE = {
@@ -154,8 +162,8 @@
 				D38E53862B887A85008E8BDE /* Constants */,
 				D38E53892B888F50008E8BDE /* LoginButton.swift */,
 				D38E538F2B889A07008E8BDE /* Models */,
-				D38E53902B889A14008E8BDE /* ViewControllers */,
-				D38E538D2B8897EF008E8BDE /* ViewModel.swift */,
+				D38E539C2B88ABA3008E8BDE /* ViewModels */,
+				D38E539B2B88AB92008E8BDE /* ViewControllers */,
 			);
 			path = DrinkOrderApp;
 			sourceTree = "<group>";
