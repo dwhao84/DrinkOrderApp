@@ -17,14 +17,14 @@ class LoginViewController: UIViewController {
         return logoImageView
     } ()
     
-    // enterNameLabel
-    var enterNameLabel: UILabel = {
-        let enterNameLabel: UILabel = UILabel()
-        enterNameLabel.text      = "Enter your name"
-        enterNameLabel.textColor = Colors.darkGray
-        enterNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        return enterNameLabel
-    } ()
+//    // enterNameLabel
+//    var enterNameLabel: UILabel = {
+//        let enterNameLabel: UILabel = UILabel()
+//        enterNameLabel.text      = "Enter your name"
+//        enterNameLabel.textColor = Colors.darkGray
+//        enterNameLabel.translatesAutoresizingMaskIntoConstraints = false
+//        return enterNameLabel
+//    } ()
     
     // enterNameTextField
     var enterNameTextField: UITextField = {
@@ -52,7 +52,7 @@ class LoginViewController: UIViewController {
         let stackView: UIStackView = UIStackView()
         stackView.axis             = .vertical
         stackView.alignment        = .center
-        stackView.spacing          = 20
+        stackView.spacing          = 25
         stackView.distribution     = .fill
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -88,8 +88,8 @@ class LoginViewController: UIViewController {
     
     func setupLayout() {
         // Add elements to the stack view
-        enterNameLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        enterNameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+//        enterNameLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
+//        enterNameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         enterNameTextField.widthAnchor.constraint(equalToConstant: 280).isActive = true
         enterNameTextField.heightAnchor.constraint(equalToConstant: 45).isActive = true
