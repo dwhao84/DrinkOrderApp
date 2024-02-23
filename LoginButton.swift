@@ -23,7 +23,9 @@ class LoginButton: UIButton {
         
         var config                 = UIButton.Configuration.filled()
         config.baseBackgroundColor = Colors.kebukeBrown
-        config.title               = "Login"
+        var container = AttributeContainer()
+        container.font = UIFont.boldSystemFont(ofSize: 18)
+        config.attributedTitle = AttributedString("Login", attributes: container)
         config.titleAlignment      = .center
         config.cornerStyle         = .large
         self.configuration         = config
