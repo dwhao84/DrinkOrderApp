@@ -14,4 +14,8 @@ struct Images {
     // TabBarController Logo
     static let list: UIImage            = UIImage(systemName: "list.bullet")!
     static let homePage: UIImage        = UIImage(systemName: "house")!
+    static let setting: UIImage         = UIImage(systemName: "gearshape.fill")!
+    static let phone: UIImage           = UIImage(systemName: "phone")!
+    static let map: UIImage             = UIImage(systemName: "mappin.circle")!
+//    static let phone: UIImage           = UIImage(systemName: "phone")!
 }
