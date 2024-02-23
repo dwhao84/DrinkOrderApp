@@ -17,5 +17,10 @@ struct Images {
     static let setting: UIImage         = UIImage(systemName: "gearshape.fill")!
     static let phone: UIImage           = UIImage(systemName: "phone")!
     static let map: UIImage             = UIImage(systemName: "mappin.circle")!
+    static let mail: UIImage            = UIImage(systemName: "envelope")!
+    static let report: UIImage          = UIImage(systemName: "doc")!
+    static let declaration: UIImage     = UIImage(systemName: "doc.text")!
+    static let brandStory: UIImage      = UIImage(systemName: "book.closed.fill")!
+    static let privacy: UIImage         = UIImage(systemName: "lock")!
 //    static let phone: UIImage           = UIImage(systemName: "phone")!
 }
