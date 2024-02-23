@@ -11,7 +11,7 @@ struct Images {
     static let kebukeLogo: UIImage      = UIImage(named: "kebuke.logo")!
     static let kebukeLoginLogo: UIImage = UIImage(named: "kebuke.logo2")!
 
-    // TabBar Controller Logo
-    static let list: UIImage     = UIImage(systemName: "list.bullet")!
-    static let homePage: UIImage = UIImage(systemName: "house")!
+    // TabBarController Logo
+    static let list: UIImage            = UIImage(systemName: "list.bullet")!
+    static let homePage: UIImage        = UIImage(systemName: "house")!
 }
