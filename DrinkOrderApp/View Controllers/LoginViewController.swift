@@ -17,15 +17,6 @@ class LoginViewController: UIViewController {
         return logoImageView
     } ()
     
-//    // enterNameLabel
-//    var enterNameLabel: UILabel = {
-//        let enterNameLabel: UILabel = UILabel()
-//        enterNameLabel.text      = "Enter your name"
-//        enterNameLabel.textColor = Colors.darkGray
-//        enterNameLabel.translatesAutoresizingMaskIntoConstraints = false
-//        return enterNameLabel
-//    } ()
-    
     // enterNameTextField
     var enterNameTextField: UITextField = {
         let enterNameTextField: UITextField = UITextField()

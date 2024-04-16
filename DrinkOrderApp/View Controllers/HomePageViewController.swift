@@ -8,23 +8,33 @@
 import UIKit
 
 class HomePageViewController: UIViewController {
-
+    
+    var productImageView: UIImageView = {
+        let imageView: UIImageView = UIImageView()
+//        imageView.image = Images.kebukeLogo
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    } ()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        self.view.backgroundColor = Colors.kebukeLightBlue
+        
+        setupUI()
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setupUI () {
+        self.view.backgroundColor = Colors.kebukeLightBlue
+        setupNavigationView()
     }
-    */
+    
+    func setupNavigationView () {
+        self.navigationItem.titleView = productImageView
+    }
+}
 
+#Preview {
+    UINavigationController(rootViewController: HomePageViewController())
 }

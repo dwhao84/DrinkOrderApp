@@ -9,22 +9,25 @@ import UIKit
 
 class SettingTableViewController: UIViewController {
 
+    var tableView: UITableView = {
+        let tableView: UITableView = UITableView()
+        tableView.backgroundColor = Colors.kebukeLightBlue
+        tableView.estimatedRowHeight = 100
+        tableView.allowsSelection = true
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    } ()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.view.backgroundColor = Colors.kebukeBrown
     }
+
     
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+#Preview {
+    UINavigationController(rootViewController: SettingTableViewController())
 }
