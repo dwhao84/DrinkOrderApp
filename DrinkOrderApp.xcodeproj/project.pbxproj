@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D30C48912BCEDC3100C5B908 /* CustomKebukeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30C48902BCEDC3100C5B908 /* CustomKebukeView.swift */; };
 		D38E53852B887A6C008E8BDE /* ImageConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38E53842B887A6C008E8BDE /* ImageConstants.swift */; };
 		D38E53882B887AAC008E8BDE /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38E53872B887AAC008E8BDE /* ColorConstants.swift */; };
 		D38E538A2B888F50008E8BDE /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38E53892B888F50008E8BDE /* LoginButton.swift */; };
@@ -43,9 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D30C48902BCEDC3100C5B908 /* CustomKebukeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKebukeView.swift; sourceTree = "<group>"; };
 		D38E53842B887A6C008E8BDE /* ImageConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConstants.swift; sourceTree = "<group>"; };
 		D38E53872B887AAC008E8BDE /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
-		D38E53892B888F50008E8BDE /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = SOURCE_ROOT; };
+		D38E53892B888F50008E8BDE /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginButton.swift; path = DrinkOrderApp/LoginButton.swift; sourceTree = SOURCE_ROOT; };
 		D38E53952B889ADD008E8BDE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D38E53972B889B04008E8BDE /* OrderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrderListViewController.swift; path = "DrinkOrderApp/View Controllers/OrderListViewController.swift"; sourceTree = SOURCE_ROOT; };
 		D38E539E2B88C2D8008E8BDE /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
@@ -141,7 +143,6 @@
 			isa = PBXGroup;
 			children = (
 				EB94C1D72B8734F5008098DE /* DrinkOrderApp */,
-				D38E53892B888F50008E8BDE /* LoginButton.swift */,
 				EB94C1EE2B8734F7008098DE /* DrinkOrderAppTests */,
 				EB94C1F82B8734F7008098DE /* DrinkOrderAppUITests */,
 				EB94C1D62B8734F5008098DE /* Products */,
@@ -167,6 +168,8 @@
 				D38E53862B887A85008E8BDE /* Constants */,
 				D38E538F2B889A07008E8BDE /* Models */,
 				D38E539B2B88AB92008E8BDE /* View Controllers */,
+				D30C48902BCEDC3100C5B908 /* CustomKebukeView.swift */,
+				D38E53892B888F50008E8BDE /* LoginButton.swift */,
 			);
 			path = DrinkOrderApp;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				D38E538A2B888F50008E8BDE /* LoginButton.swift in Sources */,
 				EB94C1D92B8734F5008098DE /* AppDelegate.swift in Sources */,
 				D38E53962B889ADD008E8BDE /* LoginViewController.swift in Sources */,
+				D30C48912BCEDC3100C5B908 /* CustomKebukeView.swift in Sources */,
 				EB94C1DB2B8734F5008098DE /* SceneDelegate.swift in Sources */,
 				D38E53A12B88CB4B008E8BDE /* SettingTableViewController.swift in Sources */,
 				D38E53882B887AAC008E8BDE /* ColorConstants.swift in Sources */,
