@@ -9,9 +9,15 @@ import UIKit
 
 struct Images {
     
-    static let kebukeLogo: UIImage      = UIImage(named: "kebuke.logo")!
+    static let kebukeLogo: UIImage      = UIImage(named: "kebuke.Logo")!
     static let kebukeLoginLogo: UIImage = UIImage(named: "kebuke.logo2")!
 
+    
+    static let banner: UIImage = UIImage(named: "00")!
+    static let banner_01: UIImage = UIImage(named: "01_紅玉熟成")!
+    static let banner_02: UIImage = UIImage(named: "02_芒波&麥雪")!
+    static let banner_03: UIImage = UIImage(named: "03_茉玉春蘋")!
+    
     // TabBarController Logo
     static let list: UIImage            = UIImage(systemName: "list.bullet")!
     static let homePage: UIImage        = UIImage(systemName: "house")!
