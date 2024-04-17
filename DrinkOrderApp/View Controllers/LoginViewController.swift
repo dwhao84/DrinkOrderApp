@@ -9,7 +9,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    // logoImageView
+    // MARK: - UI set up:
     var logoImageView: UIImageView = {
         let logoImageView: UIImageView = UIImageView()
         logoImageView.image       = Images.kebukeLoginLogo
@@ -68,7 +68,7 @@ class LoginViewController: UIViewController {
         return thirdStackView
     } ()
     
-    // MARK: - Life Cycle
+    // MARK: - Life Cycle:
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -104,6 +104,7 @@ class LoginViewController: UIViewController {
         
     }
 }
+
 
 #Preview {
     UINavigationController(rootViewController: LoginViewController())
