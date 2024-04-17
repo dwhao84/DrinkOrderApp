@@ -9,6 +9,7 @@ import UIKit
 
 class SettingTableViewController: UIViewController {
 
+    // MARK: - UI set up:
     var tableView: UITableView = {
         let tableView: UITableView = UITableView()
         tableView.backgroundColor = Colors.kebukeLightBlue
@@ -18,6 +19,7 @@ class SettingTableViewController: UIViewController {
         return tableView
     } ()
     
+    // MARK: - Life cycle:
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,6 +29,10 @@ class SettingTableViewController: UIViewController {
 
     
 }
+
+// MARK: - Extension:
+
+
 
 #Preview {
     UINavigationController(rootViewController: SettingTableViewController())
