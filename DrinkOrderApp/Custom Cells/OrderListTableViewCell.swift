@@ -35,7 +35,7 @@ class OrderListTableViewCell: UITableViewCell {
         return label
     } ()
     
-    var drinksSubtitleLabel: UILabel = {
+    var drinksDescriptionLabel: UILabel = {
         var label: UILabel = UILabel()
         label.text = "帶有濃穩果香的經典紅茶"
         label.textColor = Colors.kebukeBrown
@@ -68,9 +68,6 @@ class OrderListTableViewCell: UITableViewCell {
         stepper.translatesAutoresizingMaskIntoConstraints = false
         return stepper
     } ()
-    
-    
-    
     
     var stackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
