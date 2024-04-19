@@ -35,3 +35,8 @@ class LoginButton: UIButton {
         }
     }
 }
+
+#Preview {
+    let loginBtn = LoginButton()
+    return loginBtn
+}
