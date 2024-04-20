@@ -12,12 +12,19 @@ class DrinkTableViewCell: UITableViewCell {
     static let identifier: String = "DrinkTableViewCell"
     
     // MARK: - UI set up:
+    var plusImageView: UIImageView = {
+        var imageView: UIImageView = UIImageView()
+        imageView.image = Images.plusImage
+        imageView.tintColor = Colors.kebukeBrown
+        return imageView
+    } ()
+    
     var drinksImageView: UIImageView = {
         var imageView: UIImageView = UIImageView()
         imageView.image = Images.banner_03
         imageView.layer.cornerRadius = 5
         imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     } ()
@@ -26,9 +33,9 @@ class DrinkTableViewCell: UITableViewCell {
         var label: UILabel = UILabel()
         label.text = "熟成紅茶"
         label.textColor = Colors.darkGray
-        label.font = UIFont.boldSystemFont(ofSize: 22)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textAlignment = .left
-        label.adjustsFontSizeToFitWidth = false
+        label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     } ()
@@ -37,7 +44,7 @@ class DrinkTableViewCell: UITableViewCell {
         var label: UILabel = UILabel()
         label.text = "帶有濃穩果香的經典紅茶"
         label.textColor = Colors.kebukeBrown
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = UIFont.systemFont(ofSize: 12)
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +55,7 @@ class DrinkTableViewCell: UITableViewCell {
         let label: UILabel = UILabel()
         label.text = "$"
         label.textColor = Colors.lightGray
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -60,23 +67,24 @@ class DrinkTableViewCell: UITableViewCell {
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
         stackView.alignment = .leading
-        stackView.spacing = 15
+        stackView.spacing = 10
         return stackView
     } ()
     
     // MARK: - Life cycle:
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: "DrinkTableViewCell")
-        
+        super.init(style: .default, reuseIdentifier: "drinkCell")
 
         configureStackView()
         addConstraints()
+        
+        self.backgroundColor = Colors.white
      }
-     
-     required init?(coder: NSCoder) {
-         fatalError("init(coder:) has not been implemented")
-     }
-     
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
      override func setHighlighted(_ highlighted: Bool, animated: Bool) {
          super.setHighlighted(highlighted, animated: animated)
          if highlighted {
@@ -84,11 +92,15 @@ class DrinkTableViewCell: UITableViewCell {
 
          } else {
              // 在放開時恢復 cell 的正常樣式
-
          }
      }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        print("DEBUG PRINT: prepareForReuse")
+    }
     
+    // MARK: - Begin
     func configureStackView () {
         stackView.addArrangedSubview(drinksTitleLabel)
         stackView.addArrangedSubview(drinksDescriptionLabel)
@@ -110,6 +122,15 @@ class DrinkTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: self.drinksImageView.trailingAnchor, constant: 20),
             stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        ])
+        
+        self.addSubview(plusImageView)
+        plusImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            plusImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            plusImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
+            plusImageView.widthAnchor.constraint(equalToConstant: 35),
+            plusImageView.heightAnchor.constraint(equalToConstant: 35)
         ])
     }
 }
