@@ -12,9 +12,8 @@ class OrderListViewController: UIViewController {
     // MARK: - UI set up:
     var tableView: UITableView = {
         let tableView: UITableView = UITableView()
-        tableView.backgroundColor = Colors.kebukeLightBlue
-        tableView.allowsSelection = true
-        tableView.rowHeight = 150
+        tableView.backgroundColor = Colors.white
+        tableView.allowsSelection = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     } ()
@@ -46,6 +45,13 @@ class OrderListViewController: UIViewController {
         addConstraints()
         addDelegateAndDatasource()
         setupNavigationItem()
+        configureTableView()
+    }
+    
+    func configureTableView () {
+        tableView.register(OrderListTableViewCell.self, forCellReuseIdentifier: OrderListTableViewCell.identifier)
+        tableView.rowHeight = 150
+        tableView.isPrefetchingEnabled = true
     }
     
     func addDelegateAndDatasource () {
@@ -86,8 +92,12 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: OrderListTableViewCell.identifier, for: indexPath) as! OrderListTableViewCell
+        cell.drinksTitleLabel.text = "熟成紅茶"
+        cell.drinksDescriptionLabel.text = "帶有濃穩果香的經典紅茶"
+        cell.drinksPriceLabel.text = "中: / 大:"
+        cell.drinksImageView.image = Images.banner_01
+        return cell
     }
     
     
