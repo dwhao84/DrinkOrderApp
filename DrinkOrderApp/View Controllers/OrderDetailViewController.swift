@@ -38,6 +38,7 @@ class OrderDetailViewController: UIViewController {
         setNavigationView()
         addConstraints()
     }
+    
 
     func setNavigationView () {
         self.navigationItem.title = "飲料名稱"
