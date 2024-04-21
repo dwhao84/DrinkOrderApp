@@ -29,4 +29,8 @@ struct Images {
     static let declaration: UIImage     = UIImage(systemName: "doc.text")!
     static let brandStory: UIImage      = UIImage(systemName: "book.closed.fill")!
     static let privacy: UIImage         = UIImage(systemName: "lock")!
+    
+    static let plusWithCircle: UIImage = UIImage(systemName: "plus.circle.fill")!
+    static let plus: UIImage = UIImage(systemName: "plus")!
+    static let minus: UIImage = UIImage(systemName: "minus")!
 }
