@@ -50,7 +50,7 @@ class OrderListViewController: UIViewController {
     
     func configureTableView () {
         tableView.register(OrderListTableViewCell.self, forCellReuseIdentifier: OrderListTableViewCell.identifier)
-        tableView.rowHeight = 150
+        tableView.rowHeight = 170
         tableView.isPrefetchingEnabled = true
     }
     
