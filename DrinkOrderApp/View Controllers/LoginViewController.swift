@@ -8,7 +8,6 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-    
     // MARK: - UI set up:
     var logoImageView: UIImageView = {
         let logoImageView: UIImageView = UIImageView()
@@ -73,14 +72,62 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = Colors.kebukeDarkBlue
-        setupLayout()
+        setupUI()
+        addTarget()
     }
     
+    func addTarget () {
+        loginButton.addTarget(self, action: #selector(loginBtnTapped), for: .touchUpInside)
+    }
     
-    func setupLayout() {
-        // Add elements to the stack view
-//        enterNameLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
-//        enterNameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    @objc func loginBtnTapped (_ sender: UIButton) {
+        print("DEBUG PRINT: loginBtnTapped")
+        let tabBarController = createTabBarController()
+        tabBarController.modalPresentationStyle = .overFullScreen
+        self.present(tabBarController, animated: true)
+    }
+    
+    func createTheHomePageNavigationVC () -> UINavigationController {
+        let homePageVC              = HomePageViewController()
+        let homePageNC              = UINavigationController(rootViewController: homePageVC)
+        homePageNC.tabBarItem.image = Images.homePage
+        homePageNC.tabBarItem.title = "Home"
+        return homePageNC
+    }
+    
+    func createTheOrderListNavigationVC () -> UINavigationController {
+        let orderListVC              = OrderListViewController()
+        let orderListNC              = UINavigationController(rootViewController: orderListVC)
+        orderListNC.tabBarItem.image = Images.list
+        orderListNC.tabBarItem.title = "List"
+        return orderListNC
+    }
+    
+    func createTheSettingTableViewNavigationVC () -> UINavigationController {
+        let settingTableVC           = SettingTableViewController()
+        let settingTableNC           = UINavigationController(rootViewController: settingTableVC)
+        settingTableNC.tabBarItem.image = Images.setting
+        settingTableNC.tabBarItem.title = "Setting"
+        return settingTableNC
+    }
+    
+    func createTabBarController () -> UITabBarController {
+        let tabBarController                  = UITabBarController()
+        tabBarController.tabBar.barTintColor  = Colors.white
+        tabBarController.viewControllers      = [
+            createTheHomePageNavigationVC        (),
+            createTheOrderListNavigationVC       (),
+            createTheSettingTableViewNavigationVC()
+        ]
+        tabBarController.tabBar.tintColor     = Colors.kebukeBrown
+        tabBarController.tabBar.isTranslucent = true
+        let standardAppearance = UITabBarAppearance()
+        tabBarController.tabBar.standardAppearance = standardAppearance
+        tabBarController.tabBar.scrollEdgeAppearance = standardAppearance
+        return tabBarController
+    }
+    
+    func setupUI() {
         
         enterNameTextField.widthAnchor.constraint(equalToConstant: 280).isActive = true
         enterNameTextField.heightAnchor.constraint(equalToConstant: 45).isActive = true
@@ -104,7 +151,6 @@ class LoginViewController: UIViewController {
         
     }
 }
-
 
 #Preview {
     UINavigationController(rootViewController: LoginViewController())
