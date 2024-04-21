@@ -14,7 +14,7 @@ class DrinkTableViewCell: UITableViewCell {
     // MARK: - UI set up:
     var plusImageView: UIImageView = {
         var imageView: UIImageView = UIImageView()
-        imageView.image = Images.plusImage
+        imageView.image = Images.plusWithCircle
         imageView.tintColor = Colors.kebukeBrown
         return imageView
     } ()
