@@ -84,8 +84,6 @@ class CustomStepper: UIControl {
     func addConstraints () {
         self.addSubview(stackView)
         NSLayoutConstraint.activate([
-            stackView.widthAnchor.constraint(equalToConstant: 100),
-            stackView.heightAnchor.constraint(equalToConstant: 30),
             stackView.topAnchor.constraint(equalTo: self.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
