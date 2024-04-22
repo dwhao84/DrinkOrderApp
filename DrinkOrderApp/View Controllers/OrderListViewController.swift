@@ -8,12 +8,12 @@
 import UIKit
 
 class OrderListViewController: UIViewController {
-
+    
     // MARK: - UI set up:
     var tableView: UITableView = {
         let tableView: UITableView = UITableView()
         tableView.backgroundColor = Colors.white
-        tableView.allowsSelection = false
+        tableView.allowsSelection = true
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     } ()
@@ -33,12 +33,22 @@ class OrderListViewController: UIViewController {
         return imageView
     } ()
     
+    var refreshControl: UIRefreshControl = {
+        // Initialize with a string and separately declared attribute(s)
+        let attribute = [ NSAttributedString.Key.foregroundColor: Colors.kebukeBrown ]
+        let attrString = NSAttributedString(string: "Refresh tableView.", attributes: attribute)
+        
+        let refreshControl: UIRefreshControl = UIRefreshControl()
+        refreshControl.tintColor = Colors.kebukeBrown
+        refreshControl.attributedTitle = attrString
+        return refreshControl
+    } ()
+    
     // MARK: - Life cycle:
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
-        
     }
     
     func setupUI () {
@@ -46,12 +56,23 @@ class OrderListViewController: UIViewController {
         addDelegateAndDatasource()
         setupNavigationItem()
         configureTableView()
+        addTargets ()
+    }
+    
+    func addTargets () {
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+    }
+
+    @objc func refresh(_ sender: Any) {
+        refreshControl.endRefreshing()
+        print("DEBUG PRINT: End refresh")
     }
     
     func configureTableView () {
         tableView.register(OrderListTableViewCell.self, forCellReuseIdentifier: OrderListTableViewCell.identifier)
         tableView.rowHeight = 170
         tableView.isPrefetchingEnabled = true
+        tableView.refreshControl = refreshControl
     }
     
     func addDelegateAndDatasource () {
@@ -81,7 +102,6 @@ class OrderListViewController: UIViewController {
         appearance.backgroundColor = Colors.kebukeDarkBlue
         self.navigationItem.standardAppearance = appearance
         self.navigationItem.scrollEdgeAppearance = appearance
-        
     }
 }
 
@@ -97,6 +117,7 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.drinksDescriptionLabel.text = "帶有濃穩果香的經典紅茶"
         cell.drinksPriceLabel.text = "中: / 大:"
         cell.drinksImageView.image = Images.banner_01
+        cell.selectionStyle = .default
         return cell
     }
     
