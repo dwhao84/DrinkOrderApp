@@ -85,16 +85,6 @@ class DrinkTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-         super.setHighlighted(highlighted, animated: animated)
-         if highlighted {
-             // 在按住時修改 cell 的樣式
-
-         } else {
-             // 在放開時恢復 cell 的正常樣式
-         }
-     }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         print("DEBUG PRINT: prepareForReuse")
@@ -121,7 +111,7 @@ class DrinkTableViewCell: UITableViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: self.drinksImageView.trailingAnchor, constant: 20),
-            stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20)
         ])
         
         self.addSubview(plusImageView)
