@@ -64,6 +64,17 @@ class OrderListTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+//    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+//        super.setHighlighted(highlighted, animated: animated)
+//        if highlighted {
+//            // 在按住時修改 cell 的樣式
+//            contentView.backgroundColor = Colors.systemGray6
+//        } else {
+//            // 在放開時恢復 cell 的正常樣式
+//            contentView.backgroundColor = Colors.white
+//        }
+//    }
+    
     private func setupViews() {
         contentView.addSubview(drinksImageView)
         contentView.addSubview(drinksTitleLabel)
