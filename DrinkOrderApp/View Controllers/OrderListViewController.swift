@@ -17,14 +17,7 @@ class OrderListViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     } ()
-    
-    var checkoutView: UIView = {
-        let view: UIView  = UIView()
-        view.backgroundColor = Colors.kebukeLightBlue
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    } ()
-    
+
     var productImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.image = Images.kebukeLogo
@@ -42,6 +35,12 @@ class OrderListViewController: UIViewController {
         refreshControl.tintColor = Colors.kebukeBrown
         refreshControl.attributedTitle = attrString
         return refreshControl
+    } ()
+    
+    var checkoutView: CheckoutView = {
+        let checkoutView: CheckoutView = CheckoutView()
+        checkoutView.translatesAutoresizingMaskIntoConstraints = false
+        return checkoutView
     } ()
     
     // MARK: - Life cycle:
@@ -65,7 +64,7 @@ class OrderListViewController: UIViewController {
 
     @objc func refresh(_ sender: Any) {
         refreshControl.endRefreshing()
-        print("DEBUG PRINT: End refresh")
+        print("DEBUG PRINT: End Refresh")
     }
     
     func configureTableView () {
@@ -87,6 +86,14 @@ class OrderListViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
+        view.addSubview(checkoutView)
+        NSLayoutConstraint.activate([
+            checkoutView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            checkoutView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            checkoutView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            checkoutView.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
