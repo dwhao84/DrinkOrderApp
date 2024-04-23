@@ -65,9 +65,9 @@ class DrinkTableViewCell: UITableViewCell {
     var stackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
         stackView.axis = .vertical
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
         stackView.alignment = .leading
-        stackView.spacing = 10
+        stackView.spacing = 12
         return stackView
     } ()
     
