@@ -61,7 +61,7 @@ class CustomStepper: UIControl {
         return stackView
     } ()
     
-    // MARK: init
+    // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
@@ -74,6 +74,7 @@ class CustomStepper: UIControl {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - UI Setup.
     func configStackView () {
         numberLabel.widthAnchor.constraint(equalToConstant: 40).isActive = true
         stackView.addArrangedSubview(minusStepperBtn)
