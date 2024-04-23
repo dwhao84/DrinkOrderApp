@@ -34,7 +34,7 @@ class OrderListTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "帶有濃穩果香的經典紅茶"
         label.textColor = Colors.kebukeBrown
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -42,6 +42,15 @@ class OrderListTableViewCell: UITableViewCell {
     let drinksPriceLabel: UILabel = {
         let label = UILabel()
         label.text = "$35"
+        label.textColor = Colors.darkGray
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let orderNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "HandSomeBoy"
         label.textColor = Colors.darkGray
         label.font = UIFont.systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -80,6 +89,7 @@ class OrderListTableViewCell: UITableViewCell {
         contentView.addSubview(drinksTitleLabel)
         contentView.addSubview(drinksDescriptionLabel)
         contentView.addSubview(drinksPriceLabel)
+        contentView.addSubview(orderNameLabel)
         contentView.addSubview(customStepper)
     }
     
@@ -90,17 +100,22 @@ class OrderListTableViewCell: UITableViewCell {
             drinksImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             drinksImageView.widthAnchor.constraint(equalToConstant: 150),
             
-            drinksTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            drinksTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
             drinksTitleLabel.leadingAnchor.constraint(equalTo: drinksImageView.trailingAnchor, constant: 20),
             drinksTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             
-            drinksDescriptionLabel.topAnchor.constraint(equalTo: drinksTitleLabel.bottomAnchor, constant: 15),
+            drinksDescriptionLabel.topAnchor.constraint(equalTo: drinksTitleLabel.bottomAnchor, constant: 10),
             drinksDescriptionLabel.leadingAnchor.constraint(equalTo: drinksTitleLabel.leadingAnchor),
             drinksDescriptionLabel.trailingAnchor.constraint(equalTo: drinksTitleLabel.trailingAnchor),
             
-            drinksPriceLabel.topAnchor.constraint(equalTo: drinksDescriptionLabel.bottomAnchor, constant: 15),
+            drinksPriceLabel.topAnchor.constraint(equalTo: drinksDescriptionLabel.bottomAnchor, constant: 10),
             drinksPriceLabel.leadingAnchor.constraint(equalTo: drinksTitleLabel.leadingAnchor),
             drinksPriceLabel.trailingAnchor.constraint(equalTo: drinksTitleLabel.trailingAnchor),
+            
+            orderNameLabel.topAnchor.constraint(equalTo: drinksPriceLabel.bottomAnchor,
+                                               constant: 10),
+            orderNameLabel.leadingAnchor.constraint(equalTo: drinksTitleLabel.leadingAnchor),
+            orderNameLabel.trailingAnchor.constraint(equalTo: drinksTitleLabel.trailingAnchor),
                         
             customStepper.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -45),
             customStepper.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
