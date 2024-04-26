@@ -180,14 +180,13 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource, UI
     
     // MARK: - UITableViewDataSource:
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("DEBUG PRINT: 資料為\(drinks.count)")
+        print("DEBUG PRINT: 資料為\(drinks.count)筆")
         return drinks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DrinkTableViewCell.identifier, for: indexPath) as! DrinkTableViewCell
         
-        cell.selectionStyle = .gray
         // Define the drinksData from drinks(an array).
         let drinksData = drinks[indexPath.row]
         
@@ -197,15 +196,20 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource, UI
         } else {
             cell.drinksImageView.image = Images.banner_02 // Set a default image if URL is not available
         }
-        
         cell.drinksTitleLabel.text       = drinksData.fields.drinksName
         cell.drinksDescriptionLabel.text = drinksData.fields.drinksDescription
         cell.drinksPriceLabel.text       = "中杯:\(drinksData.fields.mediumPrice) / 大杯: \(drinksData.fields.largePrice)"
+        
+        // Set up tableView cell when selected will show inside of the corner shape.
+        let backgroundView: UIView = UIView()
+        backgroundView.backgroundColor = Colors.systemGray6
+        backgroundView.layer.cornerRadius = 15
+        backgroundView.clipsToBounds = true
+        cell.selectedBackgroundView = backgroundView
         return cell
     }
     
     // MARK: - UITableViewDelegate:
-    
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         print("DEBUG PRINT:\(indexPath.row)")
         let orderDetailVC = OrderDetailViewController()
