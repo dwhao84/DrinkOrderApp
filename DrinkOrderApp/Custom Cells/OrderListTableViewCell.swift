@@ -33,8 +33,9 @@ class OrderListTableViewCell: UITableViewCell {
     let drinksDescriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "帶有濃穩果香的經典紅茶"
+        label.numberOfLines = 2
         label.textColor = Colors.kebukeBrown
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
