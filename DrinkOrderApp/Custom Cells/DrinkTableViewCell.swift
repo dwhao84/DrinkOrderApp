@@ -44,7 +44,7 @@ class DrinkTableViewCell: UITableViewCell {
         var label: UILabel = UILabel()
         label.text = "帶有濃穩果香的經典紅茶"
         label.textColor = Colors.kebukeBrown
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 10)
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
