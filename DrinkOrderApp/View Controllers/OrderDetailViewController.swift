@@ -37,16 +37,16 @@ class OrderDetailViewController: UIViewController {
         
         setNavigationView()
         addConstraints()
+        
+        self.view.backgroundColor = Colors.white
     }
     
 
     func setNavigationView () {
         self.navigationItem.title = "飲料名稱"
-        self.navigationItem.titleView?.backgroundColor = Colors.kebukeLightBlue
-        self.navigationController?.navigationBar.tintColor = Colors.kebukeDarkBlue
-        
-        
         let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = Colors.kebukeLightBlue
+        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.standardAppearance = appearance
         self.navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
