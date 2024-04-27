@@ -24,6 +24,10 @@
 		D39CB0202BD95E98004B96C5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D39CB01F2BD95E98004B96C5 /* Kingfisher */; };
 		D39CB0232BDAB18B004B96C5 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0222BDAB18B004B96C5 /* SettingTableViewCell.swift */; };
 		D39CB0252BDBFE39004B96C5 /* StoreLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0242BDBFE39004B96C5 /* StoreLocationViewController.swift */; };
+		D39CB0272BDC0B0D004B96C5 /* KebukeStoreJson.json in Resources */ = {isa = PBXBuildFile; fileRef = D39CB0262BDC0B0D004B96C5 /* KebukeStoreJson.json */; };
+		D39CB0292BDC8782004B96C5 /* KebukeStoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0282BDC8782004B96C5 /* KebukeStoreModel.swift */; };
+		D39CB02F2BDD4F15004B96C5 /* KebukeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB02E2BDD4F15004B96C5 /* KebukeAnnotation.swift */; };
+		D39CB0312BDD5F07004B96C5 /* KebukeAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0302BDD5F07004B96C5 /* KebukeAnnotationView.swift */; };
 		EB94C1D92B8734F5008098DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB94C1D82B8734F5008098DE /* AppDelegate.swift */; };
 		EB94C1DB2B8734F5008098DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB94C1DA2B8734F5008098DE /* SceneDelegate.swift */; };
 		EB94C1E02B8734F5008098DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB94C1DE2B8734F5008098DE /* Main.storyboard */; };
@@ -68,6 +72,10 @@
 		D38E53A22B88CE40008E8BDE /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		D39CB0222BDAB18B004B96C5 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		D39CB0242BDBFE39004B96C5 /* StoreLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreLocationViewController.swift; sourceTree = "<group>"; };
+		D39CB0262BDC0B0D004B96C5 /* KebukeStoreJson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = KebukeStoreJson.json; path = ../../../../Desktop/KebukeStoreJson.json; sourceTree = "<group>"; };
+		D39CB0282BDC8782004B96C5 /* KebukeStoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KebukeStoreModel.swift; sourceTree = "<group>"; };
+		D39CB02E2BDD4F15004B96C5 /* KebukeAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KebukeAnnotation.swift; sourceTree = "<group>"; };
+		D39CB0302BDD5F07004B96C5 /* KebukeAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KebukeAnnotationView.swift; sourceTree = "<group>"; };
 		EB94C1D52B8734F5008098DE /* DrinkOrderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrinkOrderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB94C1D82B8734F5008098DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB94C1DA2B8734F5008098DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +150,7 @@
 			children = (
 				D30C48962BD0D44F00C5B908 /* DrinksModel.swift */,
 				D38E53A22B88CE40008E8BDE /* SettingsModel.swift */,
+				D39CB0282BDC8782004B96C5 /* KebukeStoreModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -201,6 +210,9 @@
 				D30C489A2BD263BE00C5B908 /* Custom Cells */,
 				D30C489B2BD41C1C00C5B908 /* CustomStepper.swift */,
 				D30C489F2BD79D8500C5B908 /* CheckoutView.swift */,
+				D39CB0302BDD5F07004B96C5 /* KebukeAnnotationView.swift */,
+				D39CB02E2BDD4F15004B96C5 /* KebukeAnnotation.swift */,
+				D39CB0262BDC0B0D004B96C5 /* KebukeStoreJson.json */,
 			);
 			path = DrinkOrderApp;
 			sourceTree = "<group>";
@@ -334,6 +346,7 @@
 			files = (
 				EB94C1E52B8734F7008098DE /* LaunchScreen.storyboard in Resources */,
 				EB94C1E22B8734F7008098DE /* Assets.xcassets in Resources */,
+				D39CB0272BDC0B0D004B96C5 /* KebukeStoreJson.json in Resources */,
 				EB94C1E02B8734F5008098DE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,6 +375,7 @@
 				D30C48992BD1F41E00C5B908 /* DrinkTableViewCell.swift in Sources */,
 				D30C48952BD08EB400C5B908 /* OrderDetailViewController.swift in Sources */,
 				D38E53A32B88CE40008E8BDE /* SettingsModel.swift in Sources */,
+				D39CB0292BDC8782004B96C5 /* KebukeStoreModel.swift in Sources */,
 				D38E53982B889B04008E8BDE /* OrderListViewController.swift in Sources */,
 				D38E53852B887A6C008E8BDE /* ImageConstants.swift in Sources */,
 				D30C489C2BD41C1C00C5B908 /* CustomStepper.swift in Sources */,
@@ -377,6 +391,8 @@
 				D38E539F2B88C2D8008E8BDE /* HomePageViewController.swift in Sources */,
 				D30C48A02BD79D8500C5B908 /* CheckoutView.swift in Sources */,
 				D30C48932BD0218800C5B908 /* OrderListTableViewCell.swift in Sources */,
+				D39CB02F2BDD4F15004B96C5 /* KebukeAnnotation.swift in Sources */,
+				D39CB0312BDD5F07004B96C5 /* KebukeAnnotationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

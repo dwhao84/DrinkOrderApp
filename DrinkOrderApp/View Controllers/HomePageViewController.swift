@@ -203,7 +203,7 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource, UI
         // Set up tableView cell when selected will show inside of the corner shape.
         let backgroundView: UIView = UIView()
         backgroundView.backgroundColor = Colors.systemGray6
-        backgroundView.layer.cornerRadius = 15
+        backgroundView.layer.cornerRadius = 25
         backgroundView.clipsToBounds = true
         cell.selectedBackgroundView = backgroundView
         return cell
