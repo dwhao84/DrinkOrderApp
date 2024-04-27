@@ -33,4 +33,6 @@ struct Images {
     static let plusWithCircle: UIImage = UIImage(systemName: "plus.circle.fill")!
     static let plus: UIImage = UIImage(systemName: "plus")!
     static let minus: UIImage = UIImage(systemName: "minus")!
+    
+    static let mapIcon: UIImage = UIImage(named: "map-icon")!
 }
