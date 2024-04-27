@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class SettingTableViewController: UIViewController {
     
@@ -112,6 +113,18 @@ extension SettingTableViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("DEBUG PRINT:\(indexPath)")
         
+        // The row's value is start from 0 to 6.
+        switch indexPath.row  {
+        case 1:
+            print("DEBUG PRINT: 店家地址")
+            let storeLocationVC = StoreLocationViewController()
+            storeLocationVC.navigationItem.title = "店家地址"
+            storeLocationVC.modalPresentationStyle = .overFullScreen
+            self.navigationController?.pushViewController(storeLocationVC, animated: true)
+            
+        default:
+            break
+        }
     }
 }
 
