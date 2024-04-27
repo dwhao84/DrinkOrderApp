@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" data-name="圖層 1" viewBox="0 0 32 32">
+  <defs/>
+  <defs>
+    <clipPath id="a">
+      <path fill="none" d="M9.9 9.9h12.19v12.19H9.9z" transform="rotate(-45 15.999 16.003)"/>
+    </clipPath>
+    <clipPath id="b">
+      <path fill="none" d="M-8.38-8.38h48.76v48.76H-8.38z"/>
+    </clipPath>
+  </defs>
+  <path fill="#bc955c" d="M16 32a16 16 0 1116-16 16 16 0 01-16 16zm0-30.48A14.48 14.48 0 1030.48 16 14.5 14.5 0 0016 1.52z"/>
+  <g clip-path="url(#a)">
+    <g clip-path="url(#b)">
+      <path fill="#bc955c" d="M-3.391 16L16.004-3.396 35.4 16 16.004 35.396z"/>
+    </g>
+  </g>
+</svg>
