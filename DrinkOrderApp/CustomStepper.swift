@@ -15,7 +15,7 @@ class CustomStepper: UIControl {
         let plusStepperBtn: UIButton = UIButton(type: .system)
         var config = UIButton.Configuration.bordered()
         config.image = Images.plus
-        config.baseForegroundColor = Colors.darkGray
+        config.baseForegroundColor = Colors.lightGray
         config.automaticallyUpdateForSelection = true
         plusStepperBtn.configuration = config
         plusStepperBtn.isUserInteractionEnabled = true
@@ -30,7 +30,7 @@ class CustomStepper: UIControl {
         let minusStepperBtn: UIButton = UIButton(type: .system)
         var config = UIButton.Configuration.bordered()
         config.image = Images.minus
-        config.baseForegroundColor = Colors.darkGray
+        config.baseForegroundColor = Colors.lightGray
         config.automaticallyUpdateForSelection = true
         minusStepperBtn.configuration = config
         minusStepperBtn.isUserInteractionEnabled = true
@@ -44,7 +44,7 @@ class CustomStepper: UIControl {
     let numberLabel : UILabel = {
         let label: UILabel = UILabel()
         label.text = "0"
-        label.textColor = Colors.darkGray
+        label.textColor = Colors.white
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
