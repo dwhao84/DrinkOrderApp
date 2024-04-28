@@ -21,7 +21,7 @@ class CheckoutView: UIView {
     var cupCountLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "共計X杯"
-        label.textColor = Colors.systemGray4
+        label.textColor = Colors.lightGray
         label.font = UIFont.systemFont(ofSize: 12)
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +52,7 @@ class CheckoutView: UIView {
 
     // MARK: - UI Setup:
     func setupUI () {
-        self.backgroundColor = Colors.kebukeLightBlue
+        self.backgroundColor = Colors.kebukeDarkBlue
     }
     
     func addConstraints () {
