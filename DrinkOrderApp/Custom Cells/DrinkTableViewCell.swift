@@ -21,7 +21,7 @@ class DrinkTableViewCell: UITableViewCell {
     
     var drinksImageView: UIImageView = {
         var imageView: UIImageView = UIImageView()
-        imageView.image = Images.banner_03
+        imageView.image = Images.banner03
         imageView.layer.cornerRadius = 5
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleToFill
@@ -32,7 +32,7 @@ class DrinkTableViewCell: UITableViewCell {
     var drinksTitleLabel: UILabel = {
         var label: UILabel = UILabel()
         label.text = "熟成紅茶"
-        label.textColor = Colors.darkGray
+        label.textColor = Colors.white
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = true
@@ -43,7 +43,7 @@ class DrinkTableViewCell: UITableViewCell {
     var drinksDescriptionLabel: UILabel = {
         var label: UILabel = UILabel()
         label.text = "帶有濃穩果香的經典紅茶"
-        label.textColor = Colors.kebukeBrown
+        label.textColor = Colors.lightGray
         label.font = UIFont.systemFont(ofSize: 10)
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = true
@@ -53,9 +53,9 @@ class DrinkTableViewCell: UITableViewCell {
     
     var drinksPriceLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "$"
-        label.textColor = Colors.lightGray
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.text = "中: 40 / 大: 45"
+        label.textColor = Colors.white
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -78,7 +78,7 @@ class DrinkTableViewCell: UITableViewCell {
         configureStackView()
         addConstraints()
         
-        self.backgroundColor = Colors.white
+        self.backgroundColor = Colors.kebukeLightBlue
      }
     
     required init?(coder: NSCoder) {
@@ -93,8 +93,8 @@ class DrinkTableViewCell: UITableViewCell {
     // MARK: - Begin
     func configureStackView () {
         stackView.addArrangedSubview(drinksTitleLabel)
-        stackView.addArrangedSubview(drinksDescriptionLabel)
         stackView.addArrangedSubview(drinksPriceLabel)
+        stackView.addArrangedSubview(drinksDescriptionLabel)
     }
     
     func addConstraints () {
