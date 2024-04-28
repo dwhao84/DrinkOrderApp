@@ -13,7 +13,7 @@ class OrderListTableViewCell: UITableViewCell {
     
     let drinksImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = Images.banner_01
+        imageView.image = Images.banner01
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
@@ -24,7 +24,7 @@ class OrderListTableViewCell: UITableViewCell {
     let drinksTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "熟成紅茶"
-        label.textColor = Colors.darkGray
+        label.textColor = Colors.white
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -34,8 +34,8 @@ class OrderListTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "帶有濃穩果香的經典紅茶"
         label.numberOfLines = 2
-        label.textColor = Colors.kebukeBrown
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.textColor = Colors.lightGray
+        label.font = UIFont.systemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -43,17 +43,17 @@ class OrderListTableViewCell: UITableViewCell {
     let drinksPriceLabel: UILabel = {
         let label = UILabel()
         label.text = "$35"
-        label.textColor = Colors.darkGray
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = Colors.white
+        label.font = UIFont.systemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let orderNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "HandSomeBoy"
-        label.textColor = Colors.darkGray
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.text = "Boy"
+        label.textColor = Colors.white
+        label.font = UIFont.boldSystemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -74,18 +74,10 @@ class OrderListTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-//        super.setHighlighted(highlighted, animated: animated)
-//        if highlighted {
-//            // 在按住時修改 cell 的樣式
-//            contentView.backgroundColor = Colors.systemGray6
-//        } else {
-//            // 在放開時恢復 cell 的正常樣式
-//            contentView.backgroundColor = Colors.white
-//        }
-//    }
+
     
     private func setupViews() {
+        contentView.backgroundColor = Colors.kebukeLightBlue
         contentView.addSubview(drinksImageView)
         contentView.addSubview(drinksTitleLabel)
         contentView.addSubview(drinksDescriptionLabel)
