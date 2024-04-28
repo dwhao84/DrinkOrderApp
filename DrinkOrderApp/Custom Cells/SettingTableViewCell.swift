@@ -15,7 +15,7 @@ class SettingTableViewCell: UITableViewCell {
         let imageView: UIImageView = UIImageView()
         imageView.image = Images.phone
         imageView.contentMode = .scaleAspectFill
-        imageView.tintColor = Colors.kebukeLightBlue
+        imageView.tintColor = Colors.kebukeBrown
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     } ()
@@ -23,7 +23,7 @@ class SettingTableViewCell: UITableViewCell {
     var serviceTitleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "XXXX"
-        label.textColor = Colors.darkGray
+        label.textColor = Colors.white
         label.textAlignment = .left
         label.font = UIFont.boldSystemFont(ofSize: 22)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -34,7 +34,7 @@ class SettingTableViewCell: UITableViewCell {
         super.init(style: .default, reuseIdentifier: "drinkCell")
 
         addConstraints()
-        self.backgroundColor = Colors.white
+        self.backgroundColor = Colors.kebukeLightBlue
      }
     
     required init?(coder: NSCoder) {
