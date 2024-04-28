@@ -14,7 +14,7 @@ struct Store: Codable {
     let longitude: Double
     let phone: String
 
-    // Add CodingKeys for Kebuke store json.
+    // Add CodingKeys for able to connect Kebuke store json.
     enum CodingKeys: String, CodingKey {
         case name = "店家名稱"
         case address = "店家地址"
