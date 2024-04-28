@@ -71,6 +71,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("Into the LoginVC")
+        
         self.view.backgroundColor = Colors.kebukeDarkBlue
         setupUI()
         addTarget()
@@ -98,7 +100,7 @@ class LoginViewController: UIViewController {
     func createTheOrderListNavigationVC () -> UINavigationController {
         let orderListVC              = OrderListViewController()
         let orderListNC              = UINavigationController(rootViewController: orderListVC)
-        orderListNC.tabBarItem.image = Images.list
+        orderListNC.tabBarItem.image = Images.cart
         orderListNC.tabBarItem.title = "List"
         return orderListNC
     }
@@ -117,7 +119,7 @@ class LoginViewController: UIViewController {
         tabBarController.viewControllers      = [
             createTheHomePageNavigationVC        (),
             createTheOrderListNavigationVC       (),
-            createTheSettingTableViewNavigationVC()
+//            createTheSettingTableViewNavigationVC()
         ]
         tabBarController.tabBar.tintColor     = Colors.kebukeBrown
         tabBarController.tabBar.isTranslucent = true
