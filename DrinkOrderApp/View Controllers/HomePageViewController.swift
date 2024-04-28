@@ -9,7 +9,18 @@ import UIKit
 import Kingfisher
 
 class HomePageViewController: UIViewController {
- 
+
+    let bannerImageViewArray: [UIImage] = [
+        Images.banner01,
+        Images.banner02,
+        Images.banner03,
+        Images.banner04,
+        Images.banner05,
+        Images.banner06,
+        Images.banner07,
+        Images.banner08,
+    ]
+    
     static let shared: String = "HomePageViewController"
     let apiKey: String = "patxAQx4KLgwEsh8O.28a883dd0c29a3920aee1cc069fc876738b14186ec8ec2dd07cc762b70497e0c"
     
@@ -27,8 +38,8 @@ class HomePageViewController: UIViewController {
     
     var bannerImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
-        imageView.image = Images.banner_03
-        imageView.contentMode = .scaleAspectFill
+        imageView.image = Images.banner01
+        imageView.contentMode = .scaleToFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     } ()
@@ -36,10 +47,9 @@ class HomePageViewController: UIViewController {
     var pageControl: UIPageControl = {
         let pageControl: UIPageControl = UIPageControl()
         pageControl.direction = .leftToRight
-        pageControl.currentPageIndicatorTintColor = Colors.white
-        pageControl.tintColor = Colors.kebukeBrown
-        pageControl.backgroundStyle = .prominent
-        pageControl.numberOfPages = 5
+        pageControl.currentPageIndicatorTintColor = Colors.kebukeBrown
+        pageControl.backgroundStyle = .minimal
+        pageControl.numberOfPages = 8
         pageControl.currentPage = 0
         
         let timeProgress = UIPageControlTimerProgress(preferredDuration: 3.5)
@@ -55,8 +65,16 @@ class HomePageViewController: UIViewController {
         let tableView: UITableView = UITableView()
         tableView.allowsSelection = true
         tableView.isScrollEnabled = true
+        tableView.backgroundColor = Colors.kebukeLightBlue
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
+    } ()
+    
+    var refreshControl: UIRefreshControl = {
+        // Initialize with a string and separately declared attribute(s)
+        let refreshControl: UIRefreshControl = UIRefreshControl()
+        refreshControl.tintColor = Colors.kebukeBrown
+        return refreshControl
     } ()
     
     var scrollView: UIScrollView = {
@@ -66,34 +84,42 @@ class HomePageViewController: UIViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
-    
+        
     // MARK: - Life cycle:
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("Into the HomePageVC")
         
         setupUI()
         
     }
     
     func setupUI () {
-        self.view.backgroundColor = Colors.white
+        self.view.backgroundColor = Colors.kebukeLightBlue
         setupNavigationItem()
         setupTableView()
         addDelegateAndDataSource()
         addConstraints()
         fetchDrinksData()
+        
+        addTargets()
     }
+    
     
     func setupTableView () {
         drinksTableView.register(DrinkTableViewCell.self, forCellReuseIdentifier: DrinkTableViewCell.identifier)
         drinksTableView.rowHeight = 170
-        drinksTableView.allowsSelection = true
+        drinksTableView.refreshControl = refreshControl
     }
     
     func setupNavigationItem () {
         // set up titleView
+        productImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
         self.navigationItem.titleView = productImageView
+        
         self.navigationItem.titleView?.backgroundColor = Colors.kebukeDarkBlue
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Images.list, style: .plain, target: self, action: #selector(listBarBtnTapped))
         
         // set up appearance
         let appearance = UINavigationBarAppearance()
@@ -114,6 +140,8 @@ class HomePageViewController: UIViewController {
         scrollView.addSubview(pageControl)
         scrollView.addSubview(drinksTableView)
         
+        let widthOfView = view.bounds.width
+        
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -123,17 +151,34 @@ class HomePageViewController: UIViewController {
             bannerImageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             bannerImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bannerImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bannerImageView.heightAnchor.constraint(equalToConstant: view.bounds.height / 5),
+            bannerImageView.heightAnchor.constraint(equalToConstant: widthOfView * 0.56),
 
-            pageControl.topAnchor.constraint(equalTo: bannerImageView.bottomAnchor, constant: 70),
+            pageControl.topAnchor.constraint(equalTo: bannerImageView.bottomAnchor, constant: 10),
             pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pageControl.heightAnchor.constraint(equalToConstant: 20),
+            pageControl.heightAnchor.constraint(equalToConstant: 10),
 
             drinksTableView.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: 10),
             drinksTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             drinksTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             drinksTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    func addTargets () {
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        pageControl.addTarget(self, action: #selector(pageControlValueChanged), for: .valueChanged)
+    }
+    
+    @objc func refresh(_ sender: Any) {
+        //  your code to reload tableView
+        refreshControl.endRefreshing()
+        drinksTableView.reloadData()
+        print("DEBUG PRINT: End Refreshing")
+    }
+    
+    @objc func pageControlValueChanged(_ sender: UIPageControl) {
+        bannerImageView.image = bannerImageViewArray[(sender.currentPage) % bannerImageViewArray.count]
+        print(sender.currentPage)
     }
     
     func fetchDrinksData() {
@@ -173,6 +218,12 @@ class HomePageViewController: UIViewController {
             }
         }.resume()
     }
+    
+    @objc func listBarBtnTapped () {
+        let settingVC = SettingTableViewController()
+        settingVC.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(settingVC, animated: true)
+    }
 }
 
 // MARK: - Extension:
@@ -187,6 +238,8 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource, UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DrinkTableViewCell.identifier, for: indexPath) as! DrinkTableViewCell
         
+        cell.backgroundColor = Colors.kebukeLightBlue
+        cell.selectionStyle = .gray
         // Define the drinksData from drinks(an array).
         let drinksData = drinks[indexPath.row]
         
@@ -194,15 +247,15 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource, UI
         if let imageUrlString = drinksData.fields.drinksImages?.last?.url, let url = URL(string: imageUrlString) {
             cell.drinksImageView.kf.setImage(with: url)
         } else {
-            cell.drinksImageView.image = Images.banner_02 // Set a default image if URL is not available
+            cell.drinksImageView.image = Images.banner02 // Set a default image if URL is not available
         }
         cell.drinksTitleLabel.text       = drinksData.fields.drinksName
         cell.drinksDescriptionLabel.text = drinksData.fields.drinksDescription
-        cell.drinksPriceLabel.text       = "中杯:\(drinksData.fields.mediumPrice) / 大杯: \(drinksData.fields.largePrice)"
+        cell.drinksPriceLabel.text       = "中 : \(drinksData.fields.mediumPrice) / 大 : \(drinksData.fields.largePrice)"
         
         // Set up tableView cell when selected will show inside of the corner shape.
         let backgroundView: UIView = UIView()
-        backgroundView.backgroundColor = Colors.systemGray6
+        backgroundView.backgroundColor = Colors.kebukeDarkBlueWithAlpha
         backgroundView.layer.cornerRadius = 25
         backgroundView.clipsToBounds = true
         cell.selectedBackgroundView = backgroundView
@@ -212,9 +265,13 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource, UI
     // MARK: - UITableViewDelegate:
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         print("DEBUG PRINT:\(indexPath.row)")
+        
+        let drinksName = drinks[indexPath.row].fields.drinksName
         let orderDetailVC = OrderDetailViewController()
         orderDetailVC.modalPresentationStyle = .popover
-        self.navigationController?.pushViewController(orderDetailVC, animated: true)
+        orderDetailVC.navigateTitle = drinksName
+        print("\(drinksName)")
+        self.present(orderDetailVC, animated: true)
     }
 }
 
