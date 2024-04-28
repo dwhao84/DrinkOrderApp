@@ -30,12 +30,14 @@ class StoreLocationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("Into the StoreLocationVC")
+        
         setupUI()
         decodeTheStoresData()
     }
     
     func setupUI () {
-        self.tabBarController?.tabBar.isHidden = true
+//        self.tabBarController?.tabBar.isHidden = true
         setupMapView()
         addConstraints()
     }
