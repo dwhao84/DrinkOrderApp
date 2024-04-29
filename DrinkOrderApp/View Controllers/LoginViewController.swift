@@ -37,6 +37,13 @@ class LoginViewController: UIViewController {
         return button
     } ()
     
+    // Register
+    var registerButton: RegisterButton = {
+        let button = RegisterButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    } ()
+    
     // stackView
     var stackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
@@ -80,13 +87,21 @@ class LoginViewController: UIViewController {
     
     func addTarget () {
         loginButton.addTarget(self, action: #selector(loginBtnTapped), for: .touchUpInside)
+        registerButton.addTarget(self, action: #selector(registerBtnTapped), for: .touchUpInside)
     }
     
     @objc func loginBtnTapped (_ sender: UIButton) {
         print("DEBUG PRINT: loginBtnTapped")
         let tabBarController = createTabBarController()
         tabBarController.modalPresentationStyle = .overFullScreen
-        self.present(tabBarController, animated: true)
+        self.navigationController?.pushViewController(tabBarController, animated: true)
+    }
+    
+    @objc func registerBtnTapped (_ sender: UIButton) {
+        print("DEBUG PRINT: registerBtnTapped")
+        let registerVC = RegisterViewController()
+        registerVC.modalPresentationStyle = .overFullScreen
+        self.navigationController?.pushViewController(registerVC, animated: true)
     }
     
     func createTheHomePageNavigationVC () -> UINavigationController {
@@ -137,6 +152,9 @@ class LoginViewController: UIViewController {
         loginButton.widthAnchor.constraint(equalToConstant: 280).isActive = true
         loginButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
         
+        registerButton.widthAnchor.constraint(equalToConstant: 280).isActive = true
+        registerButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        
         let imageViewWidth: Double = 320
         logoImageView.widthAnchor.constraint(equalToConstant: imageViewWidth).isActive = true
         logoImageView.heightAnchor.constraint(equalToConstant: imageViewWidth * 0.7).isActive = true
@@ -144,6 +162,7 @@ class LoginViewController: UIViewController {
         stackView.addArrangedSubview(logoImageView)
         stackView.addArrangedSubview(enterNameTextField)
         stackView.addArrangedSubview(loginButton)
+        stackView.addArrangedSubview(registerButton)
         
         view.addSubview(stackView)
         NSLayoutConstraint.activate([
