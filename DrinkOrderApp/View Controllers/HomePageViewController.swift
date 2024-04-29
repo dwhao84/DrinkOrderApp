@@ -269,7 +269,7 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource, UI
         let drinksName = drinks[indexPath.row].fields.drinksName
         let orderDetailVC = OrderDetailViewController()
         orderDetailVC.modalPresentationStyle = .popover
-        orderDetailVC.navigateTitle = drinksName
+//        orderDetailVC.navigateTitle = drinksName
         print("\(drinksName)")
         self.present(orderDetailVC, animated: true)
     }
