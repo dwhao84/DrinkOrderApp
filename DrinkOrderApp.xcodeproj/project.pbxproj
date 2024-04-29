@@ -28,6 +28,9 @@
 		D39CB0292BDC8782004B96C5 /* KebukeStoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0282BDC8782004B96C5 /* KebukeStoreModel.swift */; };
 		D39CB02F2BDD4F15004B96C5 /* KebukeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB02E2BDD4F15004B96C5 /* KebukeAnnotation.swift */; };
 		D39CB0312BDD5F07004B96C5 /* KebukeAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0302BDD5F07004B96C5 /* KebukeAnnotationView.swift */; };
+		D39CB0522BDFFC07004B96C5 /* RegisterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0512BDFFC07004B96C5 /* RegisterButton.swift */; };
+		D39CB0552BDFFDB5004B96C5 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0542BDFFDB5004B96C5 /* RegisterViewController.swift */; };
+		D39CB0572BE00897004B96C5 /* SecRegisterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0562BE00897004B96C5 /* SecRegisterButton.swift */; };
 		EB94C1D92B8734F5008098DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB94C1D82B8734F5008098DE /* AppDelegate.swift */; };
 		EB94C1DB2B8734F5008098DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB94C1DA2B8734F5008098DE /* SceneDelegate.swift */; };
 		EB94C1E02B8734F5008098DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB94C1DE2B8734F5008098DE /* Main.storyboard */; };
@@ -64,7 +67,7 @@
 		D30C489F2BD79D8500C5B908 /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
 		D38E53842B887A6C008E8BDE /* ImageConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageConstants.swift; sourceTree = "<group>"; };
 		D38E53872B887AAC008E8BDE /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
-		D38E53892B888F50008E8BDE /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginButton.swift; path = DrinkOrderApp/LoginButton.swift; sourceTree = SOURCE_ROOT; };
+		D38E53892B888F50008E8BDE /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginButton.swift; path = "DrinkOrderApp/Custom Buttons/LoginButton.swift"; sourceTree = SOURCE_ROOT; };
 		D38E53952B889ADD008E8BDE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D38E53972B889B04008E8BDE /* OrderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OrderListViewController.swift; path = "DrinkOrderApp/View Controllers/OrderListViewController.swift"; sourceTree = SOURCE_ROOT; };
 		D38E539E2B88C2D8008E8BDE /* HomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +79,9 @@
 		D39CB0282BDC8782004B96C5 /* KebukeStoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KebukeStoreModel.swift; sourceTree = "<group>"; };
 		D39CB02E2BDD4F15004B96C5 /* KebukeAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KebukeAnnotation.swift; sourceTree = "<group>"; };
 		D39CB0302BDD5F07004B96C5 /* KebukeAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KebukeAnnotationView.swift; sourceTree = "<group>"; };
+		D39CB0512BDFFC07004B96C5 /* RegisterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterButton.swift; sourceTree = "<group>"; };
+		D39CB0542BDFFDB5004B96C5 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		D39CB0562BE00897004B96C5 /* SecRegisterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecRegisterButton.swift; sourceTree = "<group>"; };
 		EB94C1D52B8734F5008098DE /* DrinkOrderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrinkOrderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB94C1D82B8734F5008098DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB94C1DA2B8734F5008098DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -159,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				D38E53952B889ADD008E8BDE /* LoginViewController.swift */,
+				D39CB0542BDFFDB5004B96C5 /* RegisterViewController.swift */,
 				D38E539E2B88C2D8008E8BDE /* HomePageViewController.swift */,
 				D38E53972B889B04008E8BDE /* OrderListViewController.swift */,
 				D38E53A02B88CB4B008E8BDE /* SettingTableViewController.swift */,
@@ -175,6 +182,16 @@
 				EB94C1E32B8734F7008098DE /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		D39CB0532BDFFCF3004B96C5 /* Custom Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				D38E53892B888F50008E8BDE /* LoginButton.swift */,
+				D39CB0512BDFFC07004B96C5 /* RegisterButton.swift */,
+				D39CB0562BE00897004B96C5 /* SecRegisterButton.swift */,
+			);
+			path = "Custom Buttons";
 			sourceTree = "<group>";
 		};
 		EB94C1CC2B8734F5008098DE = {
@@ -206,7 +223,7 @@
 				D38E53862B887A85008E8BDE /* Constants */,
 				D38E538F2B889A07008E8BDE /* Models */,
 				D38E539B2B88AB92008E8BDE /* View Controllers */,
-				D38E53892B888F50008E8BDE /* LoginButton.swift */,
+				D39CB0532BDFFCF3004B96C5 /* Custom Buttons */,
 				D30C489A2BD263BE00C5B908 /* Custom Cells */,
 				D30C489B2BD41C1C00C5B908 /* CustomStepper.swift */,
 				D30C489F2BD79D8500C5B908 /* CheckoutView.swift */,
@@ -386,12 +403,15 @@
 				D39CB0232BDAB18B004B96C5 /* SettingTableViewCell.swift in Sources */,
 				D39CB0252BDBFE39004B96C5 /* StoreLocationViewController.swift in Sources */,
 				EB94C1DB2B8734F5008098DE /* SceneDelegate.swift in Sources */,
+				D39CB0552BDFFDB5004B96C5 /* RegisterViewController.swift in Sources */,
 				D38E53A12B88CB4B008E8BDE /* SettingTableViewController.swift in Sources */,
 				D38E53882B887AAC008E8BDE /* ColorConstants.swift in Sources */,
 				D38E539F2B88C2D8008E8BDE /* HomePageViewController.swift in Sources */,
 				D30C48A02BD79D8500C5B908 /* CheckoutView.swift in Sources */,
 				D30C48932BD0218800C5B908 /* OrderListTableViewCell.swift in Sources */,
 				D39CB02F2BDD4F15004B96C5 /* KebukeAnnotation.swift in Sources */,
+				D39CB0522BDFFC07004B96C5 /* RegisterButton.swift in Sources */,
+				D39CB0572BE00897004B96C5 /* SecRegisterButton.swift in Sources */,
 				D39CB0312BDD5F07004B96C5 /* KebukeAnnotationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
