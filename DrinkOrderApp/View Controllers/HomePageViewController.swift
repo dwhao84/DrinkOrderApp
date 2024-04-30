@@ -99,11 +99,11 @@ class HomePageViewController: UIViewController {
         self.view.backgroundColor = Colors.kebukeLightBlue
         setupNavigationItem()
         setupTableView()
-        addDelegateAndDataSource()
-        addConstraints()
         fetchDrinksData()
         
         addTargets()
+        addDelegateAndDataSource()
+        addConstraints()
     }
     
     
@@ -157,7 +157,7 @@ class HomePageViewController: UIViewController {
             pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pageControl.heightAnchor.constraint(equalToConstant: 10),
 
-            drinksTableView.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: 10),
+            drinksTableView.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: 0),
             drinksTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             drinksTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             drinksTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -178,7 +178,7 @@ class HomePageViewController: UIViewController {
     
     @objc func pageControlValueChanged(_ sender: UIPageControl) {
         bannerImageView.image = bannerImageViewArray[(sender.currentPage) % bannerImageViewArray.count]
-        print(sender.currentPage)
+        print("DEBUG PRINT: Product ImageView 第\(sender.currentPage)頁")
     }
     
     func fetchDrinksData() {
@@ -230,6 +230,16 @@ class HomePageViewController: UIViewController {
 extension HomePageViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     // MARK: - UITableViewDataSource:
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        40.0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView: UIView = DrinksTableHeaderView()
+        tableView.dequeueReusableCell(withIdentifier: DrinksTableHeaderView.identifier)
+        return headerView
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("DEBUG PRINT: 資料為\(drinks.count)筆")
         return drinks.count
