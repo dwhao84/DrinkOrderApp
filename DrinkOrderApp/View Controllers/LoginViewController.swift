@@ -26,6 +26,7 @@ class LoginViewController: UIViewController {
         enterNameTextField.attributedPlaceholder = attributedPlaceholder
         enterNameTextField.borderStyle      = .roundedRect
         enterNameTextField.textColor        = Colors.darkGray
+        enterNameTextField.clearButtonMode = .whileEditing
         enterNameTextField.translatesAutoresizingMaskIntoConstraints = false
         return enterNameTextField
     } ()
@@ -83,6 +84,7 @@ class LoginViewController: UIViewController {
         self.view.backgroundColor = Colors.kebukeDarkBlue
         setupUI()
         addTarget()
+        addDelegate()
     }
     
     func addTarget () {
@@ -90,18 +92,22 @@ class LoginViewController: UIViewController {
         registerButton.addTarget(self, action: #selector(registerBtnTapped), for: .touchUpInside)
     }
     
+    func addDelegate () {
+        enterNameTextField.delegate = self
+    }
+    
     @objc func loginBtnTapped (_ sender: UIButton) {
         print("DEBUG PRINT: loginBtnTapped")
         let tabBarController = createTabBarController()
         tabBarController.modalPresentationStyle = .overFullScreen
-        self.navigationController?.pushViewController(tabBarController, animated: true)
+        self.present(tabBarController, animated: true)
     }
     
     @objc func registerBtnTapped (_ sender: UIButton) {
         print("DEBUG PRINT: registerBtnTapped")
         let registerVC = RegisterViewController()
-        registerVC.modalPresentationStyle = .overFullScreen
-        self.navigationController?.pushViewController(registerVC, animated: true)
+        registerVC.modalPresentationStyle = .fullScreen
+        self.present(registerVC, animated: true)
     }
     
     func createTheHomePageNavigationVC () -> UINavigationController {
@@ -133,8 +139,7 @@ class LoginViewController: UIViewController {
         tabBarController.tabBar.barTintColor  = Colors.white
         tabBarController.viewControllers      = [
             createTheHomePageNavigationVC        (),
-            createTheOrderListNavigationVC       (),
-//            createTheSettingTableViewNavigationVC()
+            createTheOrderListNavigationVC       ()
         ]
         tabBarController.tabBar.tintColor     = Colors.kebukeBrown
         tabBarController.tabBar.isTranslucent = true
@@ -170,6 +175,25 @@ class LoginViewController: UIViewController {
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
         
+    }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("textFieldShouldReturn")
+        textField.resignFirstResponder()
+        return true
+    }
+    
+//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+//        print("textFieldShouldBeginEditing")
+//        textField.becomeFirstResponder()
+//        return true
+//    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        print("textFieldDidChangeSelection")
+        textField.resignFirstResponder()
     }
 }
 

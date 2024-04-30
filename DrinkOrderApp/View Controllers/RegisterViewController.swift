@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class RegisterViewController: UIViewController {
     
@@ -19,49 +20,50 @@ class RegisterViewController: UIViewController {
     } ()
     
     // MARK: - UITextField
-    // name TextField:
     var nameTextField: UITextField = {
-        let enterNameTextField: UITextField = UITextField()
+        let nameTextField: UITextField = UITextField()
         let attributedPlaceholder = NSAttributedString(
             string: "Enter your name",
             attributes: [NSAttributedString.Key.foregroundColor: Colors.kebukeBrown]
         )
-        enterNameTextField.attributedPlaceholder = attributedPlaceholder
-        enterNameTextField.borderStyle      = .roundedRect
-        enterNameTextField.textColor        = Colors.darkGray
-        enterNameTextField.translatesAutoresizingMaskIntoConstraints = false
-        return enterNameTextField
+        nameTextField.attributedPlaceholder = attributedPlaceholder
+        nameTextField.borderStyle      = .roundedRect
+        nameTextField.textColor        = Colors.darkGray
+        nameTextField.clearButtonMode = .whileEditing
+        nameTextField.translatesAutoresizingMaskIntoConstraints = false
+        return nameTextField
     } ()
     
-    // mail TextField:
     var mailTextField: UITextField = {
-        let enterNameTextField: UITextField = UITextField()
+        let mailTextField: UITextField = UITextField()
         let attributedPlaceholder = NSAttributedString(
             string: "Enter your mail",
             attributes: [NSAttributedString.Key.foregroundColor: Colors.kebukeBrown]
         )
-        enterNameTextField.attributedPlaceholder = attributedPlaceholder
-        enterNameTextField.borderStyle      = .roundedRect
-        enterNameTextField.textColor        = Colors.darkGray
-        enterNameTextField.translatesAutoresizingMaskIntoConstraints = false
-        return enterNameTextField
+        mailTextField.attributedPlaceholder = attributedPlaceholder
+        mailTextField.borderStyle      = .roundedRect
+        mailTextField.textColor        = Colors.darkGray
+        mailTextField.clearButtonMode = .whileEditing
+        mailTextField.translatesAutoresizingMaskIntoConstraints = false
+        return mailTextField
     } ()
     
-    // password TextField:
     var passwordTextField: UITextField = {
-        let enterNameTextField: UITextField = UITextField()
+        let passwordTextField: UITextField = UITextField()
         let attributedPlaceholder = NSAttributedString(
             string: "Enter your password",
             attributes: [NSAttributedString.Key.foregroundColor: Colors.kebukeBrown]
         )
-        enterNameTextField.attributedPlaceholder = attributedPlaceholder
-        enterNameTextField.borderStyle      = .roundedRect
-        enterNameTextField.textColor        = Colors.darkGray
-        enterNameTextField.translatesAutoresizingMaskIntoConstraints = false
-        return enterNameTextField
+        passwordTextField.attributedPlaceholder = attributedPlaceholder
+        passwordTextField.borderStyle      = .roundedRect
+        passwordTextField.textColor        = Colors.darkGray
+        passwordTextField.clearButtonMode = .whileEditing
+        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+        return passwordTextField
     } ()
     
-    // Register Button:
+    
+    // MARK: - UIButton:
     var registerButton: SecRegisterButton = {
         let button = SecRegisterButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -148,6 +150,19 @@ class RegisterViewController: UIViewController {
     func setupUI () {
         self.view.backgroundColor = Colors.kebukeDarkBlue
         addConstraints()
+        addDelegates ()
+        addTargets ()
+        
+    }
+    
+    func addTargets () {
+        registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
+    }
+    
+    func addDelegates () {
+        nameTextField.delegate = self
+        mailTextField.delegate = self
+        passwordTextField.delegate = self
     }
     
     func addConstraints () {
@@ -194,18 +209,55 @@ class RegisterViewController: UIViewController {
         ])
     }
     
-    @objc func registerButtonTapped () {
+    @objc func registerButtonTapped (_ sender: UIButton) {
         print("registerButtonTapped")
-        
-        showSucessfulAlert()
+        showSuccessAC()
     }
     
-    func showSucessfulAlert () {
-        let controller = UIAlertController(title: "Register Success", message: "", preferredStyle: .alert)
+    func showSuccessAC () {
+        let controller = UIAlertController(
+            title: """
+            註冊成功
+            Register Success
+            """,
+            message: "",
+            preferredStyle: .alert
+        )
         controller.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(controller, animated: true, completion: nil)
     }
     
+    
+}
+
+extension RegisterViewController: UITextFieldDelegate {
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        print("textFieldShouldEndEditing")
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("textFieldShouldReturn")
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("textFieldDidBeginEditing")
+        textField.becomeFirstResponder()
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        print("textFieldDidChangeSelection")
+        textField.becomeFirstResponder()
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        print("textFieldShouldClear")
+        textField.text = ""
+        return true
+    }
 }
 
 #Preview {
