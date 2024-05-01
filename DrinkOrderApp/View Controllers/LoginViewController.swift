@@ -106,7 +106,7 @@ class LoginViewController: UIViewController {
     @objc func registerBtnTapped (_ sender: UIButton) {
         print("DEBUG PRINT: registerBtnTapped")
         let registerVC = RegisterViewController()
-        registerVC.modalPresentationStyle = .fullScreen
+        registerVC.modalPresentationStyle = .popover
         self.present(registerVC, animated: true)
     }
     
@@ -184,12 +184,6 @@ extension LoginViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-    
-//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-//        print("textFieldShouldBeginEditing")
-//        textField.becomeFirstResponder()
-//        return true
-//    }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         print("textFieldDidChangeSelection")
