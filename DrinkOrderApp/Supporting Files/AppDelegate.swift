@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = Colors.kebukeBrown
         
         // Configure Firebase SDK
-//        FirebaseApp.configure()
+        FirebaseApp.configure()
         
         return true
     }

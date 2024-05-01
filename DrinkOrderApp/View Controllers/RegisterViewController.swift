@@ -10,7 +10,7 @@ import FirebaseAuth
 
 class RegisterViewController: UIViewController {
     
-    // MARK: - UIImageView
+    // MARK: - UIImageView:
     var logoImageView: UIImageView = {
         let logoImageView: UIImageView = UIImageView()
         logoImageView.image       = Images.kebukeLoginLogo
@@ -19,7 +19,7 @@ class RegisterViewController: UIViewController {
         return logoImageView
     } ()
     
-    // MARK: - UITextField
+    // MARK: - UITextField:
     var nameTextField: UITextField = {
         let nameTextField: UITextField = UITextField()
         let attributedPlaceholder = NSAttributedString(
@@ -73,7 +73,7 @@ class RegisterViewController: UIViewController {
         return button
     } ()
     
-    // MARK: - UILabel
+    // MARK: - UILabel:
     var nameLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "Enter your name:"
@@ -142,6 +142,8 @@ class RegisterViewController: UIViewController {
         return stackView
     } ()
     
+    
+    // MARK: - Life Cycle:
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -150,6 +152,7 @@ class RegisterViewController: UIViewController {
         
     }
     
+    // MARK: - Beginning to set up:
     func setupUI () {
         self.view.backgroundColor = Colors.kebukeDarkBlue
         addConstraints()
@@ -212,6 +215,7 @@ class RegisterViewController: UIViewController {
         ])
     }
     
+    // MARK: - Action:
     @objc func registerButtonTapped (_ sender: UIButton) {
         if nameTextField.text == "" {
             print("DEBUG PRINT: 缺少 nameTextField.text")
@@ -229,6 +233,8 @@ class RegisterViewController: UIViewController {
         print("registerButtonTapped")
     }
     
+    
+    // MARK: - Alert Controller:
     func showSuccessAC () {
         let controller = UIAlertController(
             title: """
@@ -280,6 +286,7 @@ class RegisterViewController: UIViewController {
     
 }
 
+// MARK: - Extension:
 extension RegisterViewController: UITextFieldDelegate {
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         print("textFieldShouldEndEditing")
