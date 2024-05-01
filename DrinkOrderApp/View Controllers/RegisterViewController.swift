@@ -29,6 +29,7 @@ class RegisterViewController: UIViewController {
         nameTextField.attributedPlaceholder = attributedPlaceholder
         nameTextField.borderStyle      = .roundedRect
         nameTextField.textColor        = Colors.darkGray
+        nameTextField.keyboardType = .default
         nameTextField.clearButtonMode = .whileEditing
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
         return nameTextField
@@ -43,6 +44,7 @@ class RegisterViewController: UIViewController {
         mailTextField.attributedPlaceholder = attributedPlaceholder
         mailTextField.borderStyle      = .roundedRect
         mailTextField.textColor        = Colors.darkGray
+        mailTextField.keyboardType = .default
         mailTextField.clearButtonMode = .whileEditing
         mailTextField.translatesAutoresizingMaskIntoConstraints = false
         return mailTextField
@@ -57,6 +59,7 @@ class RegisterViewController: UIViewController {
         passwordTextField.attributedPlaceholder = attributedPlaceholder
         passwordTextField.borderStyle      = .roundedRect
         passwordTextField.textColor        = Colors.darkGray
+        passwordTextField.keyboardType = .default
         passwordTextField.clearButtonMode = .whileEditing
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         return passwordTextField
@@ -210,8 +213,20 @@ class RegisterViewController: UIViewController {
     }
     
     @objc func registerButtonTapped (_ sender: UIButton) {
+        if nameTextField.text == "" {
+            print("DEBUG PRINT: 缺少 nameTextField.text")
+            showMissingNameAC()
+        } else if mailTextField.text == "" {
+            print("DEBUG PRINT: 缺少 mailTextField.text")
+            showMissingMailAC()
+        } else if passwordTextField.text == "" {
+            print("DEBUG PRINT: 缺少 passwordTextField.text")
+            showMissingPasswordAC()
+        } else {
+            print("DEBUG PRINT: 填寫完成")
+            showSuccessAC()
+        }
         print("registerButtonTapped")
-        showSuccessAC()
     }
     
     func showSuccessAC () {
@@ -227,6 +242,41 @@ class RegisterViewController: UIViewController {
         self.present(controller, animated: true, completion: nil)
     }
     
+    func showMissingNameAC () {
+        let controller = UIAlertController(
+            title: """
+            缺少姓名資料
+            """,
+            message: "",
+            preferredStyle: .alert
+        )
+        controller.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(controller, animated: true, completion: nil)
+    }
+    
+    func showMissingMailAC () {
+        let controller = UIAlertController(
+            title: """
+            缺少信箱資料
+            """,
+            message: "",
+            preferredStyle: .alert
+        )
+        controller.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(controller, animated: true, completion: nil)
+    }
+    
+    func showMissingPasswordAC () {
+        let controller = UIAlertController(
+            title: """
+            缺少密碼資料
+            """,
+            message: "",
+            preferredStyle: .alert
+        )
+        controller.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(controller, animated: true, completion: nil)
+    }
     
 }
 
@@ -255,6 +305,7 @@ extension RegisterViewController: UITextFieldDelegate {
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         print("textFieldShouldClear")
+        
         textField.text = ""
         return true
     }
