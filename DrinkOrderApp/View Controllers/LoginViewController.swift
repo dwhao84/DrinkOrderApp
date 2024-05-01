@@ -8,7 +8,7 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-    // MARK: - UI set up:
+    // MARK: - UIImageView:
     var logoImageView: UIImageView = {
         let logoImageView: UIImageView = UIImageView()
         logoImageView.image       = Images.kebukeLoginLogo
@@ -16,6 +16,7 @@ class LoginViewController: UIViewController {
         return logoImageView
     } ()
     
+    // MARK: - UITextField:
     // enterNameTextField
     var enterNameTextField: UITextField = {
         let enterNameTextField: UITextField = UITextField()
@@ -31,6 +32,7 @@ class LoginViewController: UIViewController {
         return enterNameTextField
     } ()
     
+    // MARK: - UIButton:
     // loginButton
     var loginButton: LoginButton = {
         let button = LoginButton(type: .system)
@@ -45,6 +47,7 @@ class LoginViewController: UIViewController {
         return button
     } ()
     
+    // MARK: - UIStackView:
     // stackView
     var stackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
@@ -96,20 +99,26 @@ class LoginViewController: UIViewController {
         enterNameTextField.delegate = self
     }
     
+    // MARK: - Actions:
     @objc func loginBtnTapped (_ sender: UIButton) {
+        if enterNameTextField.text == "" {
+            showMissingPasswordAC()
+        } else {
+            let tabBarController = createTabBarController()
+            tabBarController.modalPresentationStyle = .overFullScreen
+            self.present(tabBarController, animated: true)
+        }
         print("DEBUG PRINT: loginBtnTapped")
-        let tabBarController = createTabBarController()
-        tabBarController.modalPresentationStyle = .overFullScreen
-        self.present(tabBarController, animated: true)
     }
     
     @objc func registerBtnTapped (_ sender: UIButton) {
-        print("DEBUG PRINT: registerBtnTapped")
         let registerVC = RegisterViewController()
         registerVC.modalPresentationStyle = .popover
         self.present(registerVC, animated: true)
+        print("DEBUG PRINT: registerBtnTapped")
     }
     
+    // MARK: - Create multiple navigation controller:
     func createTheHomePageNavigationVC () -> UINavigationController {
         let homePageVC              = HomePageViewController()
         let homePageNC              = UINavigationController(rootViewController: homePageVC)
@@ -149,6 +158,7 @@ class LoginViewController: UIViewController {
         return tabBarController
     }
     
+    // MARK: - Setup UI:
     func setupUI() {
         
         enterNameTextField.widthAnchor.constraint(equalToConstant: 280).isActive = true
@@ -174,19 +184,37 @@ class LoginViewController: UIViewController {
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
-        
+    }
+    
+    // MARK: - Show Alert Controller:
+    func showMissingPasswordAC () {
+        let controller = UIAlertController(
+            title: """
+            缺少姓名資料
+            """,
+            message: "",
+            preferredStyle: .alert
+        )
+        controller.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(controller, animated: true, completion: nil)
     }
 }
 
+// MARK: - Extenstion:
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("textFieldShouldReturn")
+        print("DEBUG PRINT: textFieldShouldReturn")
+        
+        if textField.text == "" {
+            print("DEBUG PRINT: textField is empty.")
+        }
+        
         textField.resignFirstResponder()
         return true
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        print("textFieldDidChangeSelection")
+        print("DEBUG PRINT: textFieldDidChangeSelection")
         textField.resignFirstResponder()
     }
 }
