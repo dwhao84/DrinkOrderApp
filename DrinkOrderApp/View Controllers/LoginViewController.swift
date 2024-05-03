@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     // MARK: - UIImageView:
@@ -101,14 +102,15 @@ class LoginViewController: UIViewController {
     
     // MARK: - Actions:
     @objc func loginBtnTapped (_ sender: UIButton) {
-        if enterNameTextField.text == "" {
-            showMissingPasswordAC()
-        } else {
+        guard let textInput = enterNameTextField.text, !textInput.isEmpty 
+        else {
             let tabBarController = createTabBarController()
             tabBarController.modalPresentationStyle = .overFullScreen
             self.present(tabBarController, animated: true)
+            print("DEBUG PRINT: loginBtnTapped")
+            return
         }
-        print("DEBUG PRINT: loginBtnTapped")
+        showMissingPasswordAC()
     }
     
     @objc func registerBtnTapped (_ sender: UIButton) {
@@ -214,8 +216,10 @@ extension LoginViewController: UITextFieldDelegate {
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        print("DEBUG PRINT: textFieldDidChangeSelection")
-        textField.resignFirstResponder()
+        print("""
+              DEBUG PRINT: textFieldDidChangeSelection
+              \(textField.text ?? "")
+              """)
     }
 }
 
