@@ -146,7 +146,7 @@ class RegisterViewController: UIViewController {
     // MARK: - Life Cycle:
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         print("Into the RegisterVC")
         setupUI()
         
@@ -181,7 +181,7 @@ class RegisterViewController: UIViewController {
         
         passwordStackView.addArrangedSubview(passwordLabel)
         passwordStackView.addArrangedSubview(passwordTextField)
-
+        
         mainStackView.addArrangedSubview(nameStackView)
         mainStackView.addArrangedSubview(mailStackView)
         mainStackView.addArrangedSubview(passwordStackView)
@@ -216,22 +216,35 @@ class RegisterViewController: UIViewController {
     }
     
     // MARK: - Action:
-    @objc func registerButtonTapped (_ sender: UIButton) {
-        if nameTextField.text == "" {
-            print("DEBUG PRINT: 缺少 nameTextField.text")
-            showMissingNameAC()
-        } else if mailTextField.text == "" {
-            print("DEBUG PRINT: 缺少 mailTextField.text")
-            showMissingMailAC()
-        } else if passwordTextField.text == "" {
-            print("DEBUG PRINT: 缺少 passwordTextField.text")
-            showMissingPasswordAC()
-        } else {
-            print("DEBUG PRINT: 填寫完成")
-            showSuccessAC()
+    @objc func registerButtonTapped(_ sender: UIButton) {
+        guard let name = nameTextField.text, !name.isEmpty,
+              let email = mailTextField.text, !email.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty else {
+            // 如果其中一個欄位是空的，顯示相應的錯誤提示。
+            if nameTextField.text == "" {
+                showMissingNameAC()
+            } else if mailTextField.text == "" {
+                showMissingMailAC()
+            } else if passwordTextField.text == "" {
+                showMissingPasswordAC()
+            }
+            return
         }
-        print("registerButtonTapped")
+        
+        // 使用電子郵件和密碼註冊新用戶
+        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            if let error = error {
+                // 處理可能的錯誤，如郵件格式錯誤或密碼不符合要求等
+                let errorAlert = UIAlertController(title: "Registration Error", message: error.localizedDescription, preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(errorAlert, animated: true)
+                return
+            }
+            // 註冊成功後，顯示成功訊息
+            self.showSuccessAC()
+        }
     }
+    
     
     
     // MARK: - Alert Controller:
@@ -307,6 +320,7 @@ extension RegisterViewController: UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         print("textFieldDidChangeSelection")
+        print("DEBUG PRINT: \(textField.text ?? "")")
         textField.becomeFirstResponder()
     }
     
