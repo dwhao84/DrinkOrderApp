@@ -8,6 +8,13 @@
 import UIKit
 
 class OrderDetailViewController: UIViewController {
+    
+    var tableView: UITableView = {
+        let tableView: UITableView = UITableView()
+        tableView.backgroundColor = Colors.kebukeDarkBlue
+        tableView.isScrollEnabled = true
+        return tableView
+    }()
 
     // Show the product image at the top.
     var productImageView: UIImageView = {
