@@ -102,15 +102,17 @@ class LoginViewController: UIViewController {
     
     // MARK: - Actions:
     @objc func loginBtnTapped (_ sender: UIButton) {
-        guard let textInput = enterNameTextField.text, !textInput.isEmpty 
-        else {
-            let tabBarController = createTabBarController()
-            tabBarController.modalPresentationStyle = .overFullScreen
-            self.present(tabBarController, animated: true)
-            print("DEBUG PRINT: loginBtnTapped")
+        guard let text = enterNameTextField.text, !text.isEmpty else {
+            print("you didn't enter anything.")
+            showMissingNameAC()
             return
         }
-        showMissingPasswordAC()
+        
+        let tabBarController = createTabBarController()
+        tabBarController.modalPresentationStyle = .overFullScreen
+        self.present(tabBarController, animated: true)
+        
+        print("DEBUG PRINT: loginBtnTapped")
     }
     
     @objc func registerBtnTapped (_ sender: UIButton) {
@@ -189,7 +191,7 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: - Show Alert Controller:
-    func showMissingPasswordAC () {
+    func showMissingNameAC () {
         let controller = UIAlertController(
             title: """
             缺少姓名資料
