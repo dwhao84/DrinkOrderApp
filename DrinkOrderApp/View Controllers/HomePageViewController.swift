@@ -9,7 +9,7 @@ import UIKit
 import Kingfisher
 
 class HomePageViewController: UIViewController {
-
+    
     let bannerImageViewArray: [UIImage] = [
         Images.banner01,
         Images.banner02,
