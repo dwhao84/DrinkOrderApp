@@ -16,6 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window                     = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene        = windowScene
         window?.rootViewController = createTheLoginVC()
+        window?.overrideUserInterfaceStyle = .light     // Set up as light mode.
         self.window?.makeKeyAndVisible()
     }
     
@@ -24,46 +25,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         return loginVC
     }
     
-//    func createTheHomePageNavigationVC () -> UINavigationController {
-//        let homePageVC              = HomePageViewController()
-//        let homePageNC              = UINavigationController(rootViewController: homePageVC)
-//        homePageNC.tabBarItem.image = Images.homePage
-//        homePageNC.tabBarItem.title = "Home"
-//        return homePageNC
-//    }
-//
-//    func createTheOrderListNavigationVC () -> UINavigationController {
-//        let orderListVC              = OrderListViewController()
-//        let orderListNC              = UINavigationController(rootViewController: orderListVC)
-//        orderListNC.tabBarItem.image = Images.list
-//        orderListNC.tabBarItem.title = "List"
-//        return orderListNC
-//    }
-//    
-//    func createTheSettingTableViewNavigationVC () -> UINavigationController {
-//        let settingTableVC           = SettingTableViewController()
-//        let settingTableNC           = UINavigationController(rootViewController: settingTableVC)
-//        settingTableNC.tabBarItem.image = Images.setting
-//        settingTableNC.tabBarItem.title = "Setting"
-//        return settingTableNC
-//    }
-//    
-//    func createTabBarController () -> UITabBarController {
-//         let tabBarController                  = UITabBarController()
-//         tabBarController.tabBar.barTintColor  = Colors.white
-//         tabBarController.viewControllers      = [
-//            createTheHomePageNavigationVC        (),
-//            createTheOrderListNavigationVC       (),
-//            createTheSettingTableViewNavigationVC()
-//         ]
-//         tabBarController.tabBar.tintColor     = Colors.kebukeBrown
-//         tabBarController.tabBar.isTranslucent = true
-//         let standardAppearance = UITabBarAppearance()
-//         tabBarController.tabBar.standardAppearance = standardAppearance
-//         tabBarController.tabBar.scrollEdgeAppearance = standardAppearance
-//         return tabBarController
-//     }
-//    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
