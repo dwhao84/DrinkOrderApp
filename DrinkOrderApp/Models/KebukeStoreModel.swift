@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - Decode the JSON file for Store location.
 struct Store: Codable {
     let name: String
     let address: String
