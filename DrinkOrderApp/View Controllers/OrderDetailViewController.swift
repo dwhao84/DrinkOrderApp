@@ -19,7 +19,7 @@ class OrderDetailViewController: UIViewController {
     // Show the product image at the top.
     var productImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
-        imageView.image = Images.kebukeLogo
+        imageView.image = Images.banner03
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -41,10 +41,9 @@ class OrderDetailViewController: UIViewController {
     }
     
     func setupUI () {
-        
         setNavigationView()
+        view.addSubview(productImageView)
         addConstraints()
-        
         self.view.backgroundColor = Colors.white
     }
     
@@ -60,21 +59,13 @@ class OrderDetailViewController: UIViewController {
     
     func addConstraints () {
         scrollView.delegate = self
-        
-        view.addSubview(scrollView)
+        productImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            productImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            productImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            productImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            productImageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9)
         ])
-        
-        scrollView.addSubview(productImageView)
-        NSLayoutConstraint.activate([
-            productImageView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-            productImageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
-        ])
-        
     }
 }
 
