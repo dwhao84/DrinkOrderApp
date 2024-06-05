@@ -84,6 +84,20 @@ class HomePageViewController: UIViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
+    
+    // MARK: - Result type:
+    enum Result <value, Error> {
+        case success(value)
+        case failure(Error)
+    }
+    
+    enum NetworkError: Error {
+        case invaildURL
+        case requestFailed
+        case unexpectedStatusCode
+        case noDataReceived
+        case decodeError
+    }
         
     // MARK: - Life cycle:
     override func viewDidLoad() {
@@ -129,9 +143,9 @@ class HomePageViewController: UIViewController {
     }
     
     func addDelegateAndDataSource () {
-        drinksTableView.delegate = self
+        drinksTableView.delegate   = self
         drinksTableView.dataSource = self
-        scrollView.delegate = self
+        scrollView.delegate        = self
     }
     
     func addConstraints () {
@@ -228,8 +242,7 @@ class HomePageViewController: UIViewController {
 
 // MARK: - Extension:
 extension HomePageViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
-    
-    // MARK: - UITableViewDataSource:
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         40.0
     }
@@ -249,7 +262,7 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource, UI
         let cell = tableView.dequeueReusableCell(withIdentifier: DrinkTableViewCell.identifier, for: indexPath) as! DrinkTableViewCell
         
         cell.backgroundColor = Colors.kebukeLightBlue
-        cell.selectionStyle = .gray
+        cell.selectionStyle  = .gray
         // Define the drinksData from drinks(an array).
         let drinksData = drinks[indexPath.row]
         
@@ -257,30 +270,34 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource, UI
         if let imageUrlString = drinksData.fields.drinksImages?.last?.url, let url = URL(string: imageUrlString) {
             cell.drinksImageView.kf.setImage(with: url)
         } else {
-            cell.drinksImageView.image = Images.banner02 // Set a default image if URL is not available
+            cell.drinksImageView.image   = Images.banner02 // Set a default image if URL is not available
         }
+        
         cell.drinksTitleLabel.text       = drinksData.fields.drinksName
         cell.drinksDescriptionLabel.text = drinksData.fields.drinksDescription
         cell.drinksPriceLabel.text       = "中 : \(drinksData.fields.mediumPrice) / 大 : \(drinksData.fields.largePrice)"
         
         // Set up tableView cell when selected will show inside of the corner shape.
-        let backgroundView: UIView = UIView()
-        backgroundView.backgroundColor = Colors.kebukeDarkBlueWithAlpha
-        backgroundView.layer.cornerRadius = 25
-        backgroundView.clipsToBounds = true
-        cell.selectedBackgroundView = backgroundView
+//        let backgroundView: UIView        = UIView()
+//        backgroundView.backgroundColor    = Colors.kebukeDarkBlueWithAlpha
+//        backgroundView.layer.cornerRadius = 25
+//        backgroundView.clipsToBounds      = true
+//        cell.selectedBackgroundView       = backgroundView
         return cell
     }
     
     // MARK: - UITableViewDelegate:
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("DEBUG PRINT:\(indexPath.row)")
         
-        let drinksName = drinks[indexPath.row].fields.drinksName
+        let drinks = drinks[indexPath.row]
         let orderDetailVC = OrderDetailViewController()
-        orderDetailVC.modalPresentationStyle = .popover
-        print("\(drinksName)")
-        self.present(orderDetailVC, animated: true)
+        orderDetailVC.modalPresentationStyle = .overFullScreen
+        
+        orderDetailVC.drinksName        = drinks.fields.drinksName
+        orderDetailVC.drinksDescription = drinks.fields.drinksDescription
+
+        self.navigationController?.pushViewController(orderDetailVC, animated: true)
     }
 }
 
