@@ -29,20 +29,20 @@ struct Fields: Codable {
     let drinksName, drinksDescription: String
 
     enum CodingKeys: String, CodingKey {
-        case largePrice = "large price"
-        case drinksImages = "Drinks Images"
-        case category = "Category"
-        case mediumPrice = "medium price"
-        case drinksName = "Drinks name"
+        case largePrice        = "large price"
+        case drinksImages      = "Drinks Images"
+        case category          = "Category"
+        case mediumPrice       = "medium price"
+        case drinksName        = "Drinks name"
         case drinksDescription = "Drinks Description"
     }
 }
 
 enum Category: String, Codable {
-    case 單品茶 = "單品茶"
-    case 季節限定 = "季節限定"
-    case 歐蕾MilkTea = "歐蕾 Milk tea"
-    case 調茶MixTea = "調茶 Mix tea"
+    case 單品茶                  = "單品茶"
+    case 季節限定                = "季節限定"
+    case 歐蕾MilkTea            = "歐蕾 Milk tea"
+    case 調茶MixTea             = "調茶 Mix tea"
     case 雲蓋SweetCreamColdFoam = "雲蓋 Sweet Cream Cold Foam"
 }
 
