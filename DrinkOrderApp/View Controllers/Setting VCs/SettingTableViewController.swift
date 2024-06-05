@@ -94,7 +94,7 @@ class SettingTableViewController: UIViewController {
             if application.canOpenURL(phoneCallURL) {
                 application.open(phoneCallURL, options: [:], completionHandler: nil)
             } else {
-                print("DEBUG PRINT: 無法撥打客服電話")
+                print("DEBUG PRINT: 無法撥打可不可的客服電話")
             }
         }
     }
