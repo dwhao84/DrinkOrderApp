@@ -40,4 +40,6 @@ struct Images {
     static let plus: UIImage           = UIImage(systemName: "plus")!
     static let minus: UIImage          = UIImage(systemName: "minus")!
     static let mapIcon: UIImage        = UIImage(named: "map-icon")!
+    
+    static let photoFill: UIImage   = UIImage(systemName: "photo.fill")!
 }
