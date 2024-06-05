@@ -123,6 +123,8 @@ class DrinkTableViewCell: UITableViewCell {
             plusImageView.heightAnchor.constraint(equalToConstant: 35)
         ])
     }
+    
+    
 }
 
 #Preview(traits: .fixedLayout(width: 428, height: 150), body: {
