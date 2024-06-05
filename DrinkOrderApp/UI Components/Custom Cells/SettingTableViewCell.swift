@@ -41,6 +41,11 @@ class SettingTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        print("DEBUG PRINT: prepareForReuse")
+    }
+    
     func addConstraints() {
         self.addSubview(serviceImageView)
         self.addSubview(serviceTitleLabel)
