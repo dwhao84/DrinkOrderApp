@@ -17,11 +17,11 @@ struct Store: Codable {
 
     // Add CodingKeys for able to connect Kebuke store json.
     enum CodingKeys: String, CodingKey {
-        case name = "店家名稱"
-        case address = "店家地址"
-        case latitude = "Latitude"
+        case name      = "店家名稱"
+        case address   = "店家地址"
+        case latitude  = "Latitude"
         case longitude = "Longitude"
-        case phone = "電話"
+        case phone     = "電話"
     }
 }
 
