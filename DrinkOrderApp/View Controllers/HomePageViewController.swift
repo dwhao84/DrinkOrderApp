@@ -277,12 +277,12 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource, UI
         cell.drinksDescriptionLabel.text = drinksData.fields.drinksDescription
         cell.drinksPriceLabel.text       = "中 : \(drinksData.fields.mediumPrice) / 大 : \(drinksData.fields.largePrice)"
         
-        // Set up tableView cell when selected will show inside of the corner shape.
-//        let backgroundView: UIView        = UIView()
-//        backgroundView.backgroundColor    = Colors.kebukeDarkBlueWithAlpha
-//        backgroundView.layer.cornerRadius = 25
-//        backgroundView.clipsToBounds      = true
-//        cell.selectedBackgroundView       = backgroundView
+//         Set up tableView cell when selected will show inside of the corner shape.
+        let backgroundView: UIView        = UIView()
+        backgroundView.backgroundColor    = Colors.kebukeDarkBlueWithAlpha
+        backgroundView.layer.cornerRadius = 25
+        backgroundView.clipsToBounds      = true
+        cell.selectedBackgroundView       = backgroundView
         return cell
     }
     
@@ -296,6 +296,7 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource, UI
         
         orderDetailVC.drinksName        = drinks.fields.drinksName
         orderDetailVC.drinksDescription = drinks.fields.drinksDescription
+        orderDetailVC.drinksImageURL    = drinks.fields.drinksImages?.last?.url
 
         self.navigationController?.pushViewController(orderDetailVC, animated: true)
     }
