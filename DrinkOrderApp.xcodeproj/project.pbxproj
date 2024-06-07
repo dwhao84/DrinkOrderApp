@@ -48,6 +48,9 @@
 		D39CB0522BDFFC07004B96C5 /* RegisterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0512BDFFC07004B96C5 /* RegisterButton.swift */; };
 		D39CB0552BDFFDB5004B96C5 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0542BDFFDB5004B96C5 /* RegisterViewController.swift */; };
 		D39CB0572BE00897004B96C5 /* SecRegisterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0562BE00897004B96C5 /* SecRegisterButton.swift */; };
+		D3E8B6742C134667004D00BF /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E8B6732C134667004D00BF /* SubmitButton.swift */; };
+		D3E8B6762C134B48004D00BF /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E8B6752C134B48004D00BF /* CustomTextField.swift */; };
+		D3E8B6782C134ECF004D00BF /* CustomOrderDetailLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E8B6772C134ECF004D00BF /* CustomOrderDetailLabel.swift */; };
 		EB94C1D92B8734F5008098DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB94C1D82B8734F5008098DE /* AppDelegate.swift */; };
 		EB94C1DB2B8734F5008098DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB94C1DA2B8734F5008098DE /* SceneDelegate.swift */; };
 		EB94C1E02B8734F5008098DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB94C1DE2B8734F5008098DE /* Main.storyboard */; };
@@ -101,6 +104,9 @@
 		D39CB0512BDFFC07004B96C5 /* RegisterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterButton.swift; sourceTree = "<group>"; };
 		D39CB0542BDFFDB5004B96C5 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		D39CB0562BE00897004B96C5 /* SecRegisterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecRegisterButton.swift; sourceTree = "<group>"; };
+		D3E8B6732C134667004D00BF /* SubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
+		D3E8B6752C134B48004D00BF /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		D3E8B6772C134ECF004D00BF /* CustomOrderDetailLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOrderDetailLabel.swift; sourceTree = "<group>"; };
 		EB94C1D52B8734F5008098DE /* DrinkOrderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrinkOrderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB94C1D82B8734F5008098DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB94C1DA2B8734F5008098DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -178,6 +184,8 @@
 		D35F55882C0F5EDC001A3730 /* UI Components */ = {
 			isa = PBXGroup;
 			children = (
+				D3E8B6772C134ECF004D00BF /* CustomOrderDetailLabel.swift */,
+				D3E8B6752C134B48004D00BF /* CustomTextField.swift */,
 				D30C489B2BD41C1C00C5B908 /* CustomStepper.swift */,
 				D39CB0302BDD5F07004B96C5 /* KebukeAnnotationView.swift */,
 				D39CB02E2BDD4F15004B96C5 /* KebukeAnnotation.swift */,
@@ -262,6 +270,7 @@
 				D38E53892B888F50008E8BDE /* LoginButton.swift */,
 				D39CB0512BDFFC07004B96C5 /* RegisterButton.swift */,
 				D39CB0562BE00897004B96C5 /* SecRegisterButton.swift */,
+				D3E8B6732C134667004D00BF /* SubmitButton.swift */,
 			);
 			path = "Custom Buttons";
 			sourceTree = "<group>";
@@ -482,6 +491,7 @@
 				D38E53852B887A6C008E8BDE /* ImageConstants.swift in Sources */,
 				D30C489C2BD41C1C00C5B908 /* CustomStepper.swift in Sources */,
 				D30C48972BD0D44F00C5B908 /* DrinksModel.swift in Sources */,
+				D3E8B6762C134B48004D00BF /* CustomTextField.swift in Sources */,
 				D38E538A2B888F50008E8BDE /* LoginButton.swift in Sources */,
 				EB94C1D92B8734F5008098DE /* AppDelegate.swift in Sources */,
 				D38E53962B889ADD008E8BDE /* LoginViewController.swift in Sources */,
@@ -495,8 +505,10 @@
 				D38E539F2B88C2D8008E8BDE /* HomePageViewController.swift in Sources */,
 				D30C48A02BD79D8500C5B908 /* CheckoutView.swift in Sources */,
 				D30C48932BD0218800C5B908 /* OrderListTableViewCell.swift in Sources */,
+				D3E8B6742C134667004D00BF /* SubmitButton.swift in Sources */,
 				D39CB02F2BDD4F15004B96C5 /* KebukeAnnotation.swift in Sources */,
 				D39CB0522BDFFC07004B96C5 /* RegisterButton.swift in Sources */,
+				D3E8B6782C134ECF004D00BF /* CustomOrderDetailLabel.swift in Sources */,
 				D39CB0572BE00897004B96C5 /* SecRegisterButton.swift in Sources */,
 				D39CB0312BDD5F07004B96C5 /* KebukeAnnotationView.swift in Sources */,
 			);
