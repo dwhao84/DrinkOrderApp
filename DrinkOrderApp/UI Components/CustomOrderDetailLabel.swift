@@ -20,7 +20,7 @@ class CustomOrderDetailLabel: UILabel {
     }
     
     private func commonInit () {
-        self.font = UIFont.boldSystemFont(ofSize: 18)
+        self.font = UIFont.boldSystemFont(ofSize: 15)
         self.textColor = Colors.darkGray
         self.textAlignment = .left
         self.translatesAutoresizingMaskIntoConstraints = false
