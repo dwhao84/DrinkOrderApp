@@ -26,5 +26,9 @@ class CustomTextField: UITextField {
         self.textColor = Colors.darkGray
         self.translatesAutoresizingMaskIntoConstraints = false
     }
+}
 
+#Preview {
+    let customTextField = CustomTextField()
+    return customTextField
 }
