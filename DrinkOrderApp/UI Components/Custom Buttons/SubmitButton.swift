@@ -35,3 +35,8 @@ class SubmitButton: UIButton {
         }
     }
 }
+
+#Preview {
+    let submitBtn = SubmitButton()
+    return submitBtn
+}
