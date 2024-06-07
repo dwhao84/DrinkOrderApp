@@ -226,11 +226,16 @@ class OrderDetailViewController: UIViewController {
         toolBar.barStyle = .default
         toolBar.isTranslucent = true
         toolBar.isUserInteractionEnabled = true
+        toolBar.layer.cornerRadius = 20
+        toolBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        toolBar.layer.masksToBounds = true
         toolBar.sizeToFit()
+        toolBar.layer.borderColor = Colors.lightGray.cgColor
+        toolBar.layer.borderWidth = 0.2
         
         // FIXME: - Auto Layout 有些問題
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneBtnTapped))
-        let spaceButton = UIBarButtonItem(systemItem: .flexibleSpace)
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelBtnTapped))
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         
@@ -266,7 +271,6 @@ class OrderDetailViewController: UIViewController {
         view.addSubview(iceLevelStackView)
         view.addSubview(sugarLevelStackView)
         view.addSubview(toppingChooseStackView)
-        
         view.addSubview(submitBtn)
         view.addSubview(mainStackView)
         
