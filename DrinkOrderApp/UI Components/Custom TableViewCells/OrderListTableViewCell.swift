@@ -13,7 +13,7 @@ class OrderListTableViewCell: UITableViewCell {
     
     let drinksImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = Images.banner01
+        imageView.image = Images.banner02
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
@@ -51,7 +51,7 @@ class OrderListTableViewCell: UITableViewCell {
     
     let orderNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Boy"
+        label.text = "顯示狀態"
         label.textColor = Colors.white
         label.font = UIFont.boldSystemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
