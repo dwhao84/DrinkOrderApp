@@ -27,8 +27,8 @@ class RegisterViewController: UIViewController {
             attributes: [NSAttributedString.Key.foregroundColor: Colors.kebukeBrown]
         )
         nameTextField.attributedPlaceholder = attributedPlaceholder
-        nameTextField.borderStyle      = .roundedRect
-        nameTextField.textColor        = Colors.darkGray
+        nameTextField.borderStyle = .roundedRect
+        nameTextField.textColor = Colors.darkGray
         nameTextField.keyboardType = .default
         nameTextField.clearButtonMode = .whileEditing
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
