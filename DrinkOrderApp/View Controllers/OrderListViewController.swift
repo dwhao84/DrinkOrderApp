@@ -9,6 +9,8 @@ import UIKit
 
 class OrderListViewController: UIViewController {
     
+    static let shared: String = "OrderListViewController"
+    
     // MARK: - UI set up:
     var tableView: UITableView = {
         let tableView: UITableView = UITableView()
@@ -27,13 +29,9 @@ class OrderListViewController: UIViewController {
     } ()
     
     var refreshControl: UIRefreshControl = {
-        // Initialize with a string and separately declared attribute(s)
-        let attribute = [ NSAttributedString.Key.foregroundColor: Colors.kebukeBrown ]
-        let attrString = NSAttributedString(string: "Refresh Data.", attributes: attribute)
-        
+        // Initialize with a string and separately declared attribute(s)        
         let refreshControl: UIRefreshControl = UIRefreshControl()
         refreshControl.tintColor = Colors.kebukeBrown
-        refreshControl.attributedTitle = attrString
         return refreshControl
     } ()
     
@@ -137,13 +135,11 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
         backgroundView.layer.cornerRadius = 18
         backgroundView.clipsToBounds = true
         cell.selectedBackgroundView = backgroundView
-        
         return cell
     }
     
     
 }
-
 
 #Preview {
     UINavigationController(rootViewController: OrderListViewController())

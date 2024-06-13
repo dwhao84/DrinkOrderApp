@@ -9,26 +9,16 @@ import UIKit
 import Kingfisher
 
 class HomePageViewController: UIViewController {
-    
-    let bannerImageViewArray: [UIImage] = [
-        Images.banner01,
-        Images.banner02,
-        Images.banner03,
-        Images.banner04,
-        Images.banner05,
-        Images.banner06,
-        Images.banner07,
-        Images.banner08,
-    ]
-    
+
     static let shared: String = "HomePageViewController"
-    let apiKey: String = "patxAQx4KLgwEsh8O.28a883dd0c29a3920aee1cc069fc876738b14186ec8ec2dd07cc762b70497e0c"
+    private let apiKey: String = "patxAQx4KLgwEsh8O.28a883dd0c29a3920aee1cc069fc876738b14186ec8ec2dd07cc762b70497e0c"
+    private let baseUrl: String = "https://api.airtable.com/v0/appS5I28H2YO3bJzv/Kebuke"
     
-    var drinks = [Record] ()
-    var drinksOfselectedCategory = [Record]()
+    var drinks: [Record] = []
+//    var drinksOfSelectedCategory = [Record]()
     
     // MARK: - UI set up:
-    var productImageView: UIImageView = {
+    let kebukeLogoImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.image = Images.kebukeLogo
         imageView.contentMode = .scaleAspectFit
@@ -36,32 +26,7 @@ class HomePageViewController: UIViewController {
         return imageView
     } ()
     
-    var bannerImageView: UIImageView = {
-        let imageView: UIImageView = UIImageView()
-        imageView.image = Images.banner01
-        imageView.contentMode = .scaleToFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    } ()
-    
-    var pageControl: UIPageControl = {
-        let pageControl: UIPageControl = UIPageControl()
-        pageControl.direction = .leftToRight
-        pageControl.currentPageIndicatorTintColor = Colors.kebukeBrown
-        pageControl.backgroundStyle = .minimal
-        pageControl.numberOfPages = 8
-        pageControl.currentPage = 0
-        
-        let timeProgress = UIPageControlTimerProgress(preferredDuration: 3.5)
-        pageControl.progress = timeProgress
-        timeProgress.resetsToInitialPageAfterEnd = true
-        timeProgress.resumeTimer()
-        timeProgress.currentProgress = 1
-        pageControl.translatesAutoresizingMaskIntoConstraints = false
-        return pageControl
-    } ()
-    
-    var drinksTableView: UITableView = {
+    let productTableView: UITableView = {
         let tableView: UITableView = UITableView()
         tableView.allowsSelection = true
         tableView.isScrollEnabled = true
@@ -70,29 +35,21 @@ class HomePageViewController: UIViewController {
         return tableView
     } ()
     
-    var refreshControl: UIRefreshControl = {
+    let refreshControl: UIRefreshControl = {
         // Initialize with a string and separately declared attribute(s)
         let refreshControl: UIRefreshControl = UIRefreshControl()
         refreshControl.tintColor = Colors.kebukeBrown
         return refreshControl
     } ()
-    
-    var scrollView: UIScrollView = {
-        let scrollView: UIScrollView = UIScrollView()
-        scrollView.showsVerticalScrollIndicator = true
-        scrollView.isScrollEnabled = true
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        return scrollView
-    }()
-    
+
     // MARK: - Result type:
-    enum Result <value, Error> {
-        case success(value)
+    enum Result<drinks, Error: Swift.Error>  {
+        case success(drinks)
         case failure(Error)
     }
     
-    enum NetworkError: Error {
-        case invaildURL
+    enum NetworkError: Swift.Error {
+        case invalidURL
         case requestFailed
         case unexpectedStatusCode
         case noDataReceived
@@ -104,34 +61,33 @@ class HomePageViewController: UIViewController {
         super.viewDidLoad()
         
         print("Into the HomePageVC")
-        
         setupUI()
         
+        fetchDrinksData(url: baseUrl) {  [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let drinks):
+                self.drinks = drinks.records
+                print("DEBUG PRINT: drinks data \(drinks.self.records.count)")
+                self.productTableView.reloadData()
+            case .failure(let error):
+                print("DEBUG PRINT: Error fetching drinks data: \(error)")
+            }
+        }
     }
     
     func setupUI () {
         self.view.backgroundColor = Colors.kebukeLightBlue
         setupNavigationItem()
-        setupTableView()
-        fetchDrinksData()
-        
         addTargets()
         addDelegateAndDataSource()
         addConstraints()
     }
-    
-    
-    func setupTableView () {
-        drinksTableView.register(DrinkTableViewCell.self, forCellReuseIdentifier: DrinkTableViewCell.identifier)
-        drinksTableView.rowHeight = 170
-        drinksTableView.refreshControl = refreshControl
-    }
-    
-    func setupNavigationItem () {
-        // set up titleView
-        productImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        self.navigationItem.titleView = productImageView
         
+    // set up titleView
+    func setupNavigationItem () {
+        kebukeLogoImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        self.navigationItem.titleView = kebukeLogoImageView
         self.navigationItem.titleView?.backgroundColor = Colors.kebukeDarkBlue
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: Images.list, style: .plain, target: self, action: #selector(listBarBtnTapped))
         
@@ -142,95 +98,79 @@ class HomePageViewController: UIViewController {
         self.navigationItem.scrollEdgeAppearance = appearance
     }
     
+    // Add tableview delegate & dataSource
     func addDelegateAndDataSource () {
-        drinksTableView.delegate   = self
-        drinksTableView.dataSource = self
-        scrollView.delegate        = self
+        productTableView.delegate = self
+        productTableView.dataSource = self
+        productTableView.register(DrinkTableViewCell.self, forCellReuseIdentifier: DrinkTableViewCell.identifier)
+        productTableView.rowHeight = 150
+        productTableView.refreshControl = refreshControl
     }
     
+    // Add Constraints
     func addConstraints () {
-        view.addSubview(scrollView)
-        scrollView.addSubview(bannerImageView)
-        scrollView.addSubview(pageControl)
-        scrollView.addSubview(drinksTableView)
+        self.view.addSubview(productTableView)
         
-        let widthOfView = view.bounds.width
-        
+        // MARK:  Constraint TableView
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-
-            bannerImageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            bannerImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bannerImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bannerImageView.heightAnchor.constraint(equalToConstant: widthOfView * 0.56),
-
-            pageControl.topAnchor.constraint(equalTo: bannerImageView.bottomAnchor, constant: 10),
-            pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pageControl.heightAnchor.constraint(equalToConstant: 10),
-
-            drinksTableView.topAnchor.constraint(equalTo: pageControl.bottomAnchor, constant: 0),
-            drinksTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            drinksTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            drinksTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            productTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            productTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            productTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            productTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
     
-    func addTargets () {
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        pageControl.addTarget(self, action: #selector(pageControlValueChanged), for: .valueChanged)
-    }
-    
-    @objc func refresh(_ sender: Any) {
-        //  your code to reload tableView
-        refreshControl.endRefreshing()
-        drinksTableView.reloadData()
-        print("DEBUG PRINT: End Refreshing")
-    }
-    
-    @objc func pageControlValueChanged(_ sender: UIPageControl) {
-        bannerImageView.image = bannerImageViewArray[(sender.currentPage) % bannerImageViewArray.count]
-        print("DEBUG PRINT: Product ImageView 第\(sender.currentPage)頁")
-    }
-    
-    func fetchDrinksData() {
-        guard let url = URL(string: "https://api.airtable.com/v0/appS5I28H2YO3bJzv/Kebuke") else {
-            print("DEBUG PRINT: Invalid URL")
+    func fetchDrinksData(url: String, completion: @escaping( Result<Kebuke, NetworkError>) -> Void) {
+        guard let url = URL(string: baseUrl) else {
+            print("Unable to fetch url")
+            completion(.failure(.invalidURL))
             return
         }
-
+        
         var request = URLRequest(url: url)
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        
+        URLSession.shared.dataTask(with: request) {  data, response, error in
             if let error = error {
-                print("DEBUG PRINT: Request error: \(error.localizedDescription)")
+                print("\(error.localizedDescription)")
+                completion(.failure(.requestFailed))
                 return
             }
-
+            
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                // TODO: - print out response
+                print("\(String(describing: response))")
+                completion(.failure(.unexpectedStatusCode))
+                return
+            }
+            
             guard let data = data else {
-                print("DEBUG PRINT: No data received")
+                print("No data received")
+                completion(.failure(.noDataReceived))
                 return
             }
-
+            
             do {
                 let decoder = JSONDecoder()
-                let kebuke = try decoder.decode(Kebuke.self, from: data)
-                self.drinks = kebuke.records
-                print("DEBUG PRINT: Drinks loaded successfully with \(self.drinks.count) records.")
-
-                DispatchQueue.main.async {
-                    self.drinksTableView.reloadData()  // Ensure UI updates happen on the main thread
-                }
+                let drinksData = try decoder.decode(Kebuke.self, from: data)
+                completion(.success(drinksData))
             } catch {
-                print("Decode error: \(error.localizedDescription)")
-                if let rawJSONString = String(data: data, encoding: .utf8) {
-                    print("DEBUG PRINT: Received JSON - \(rawJSONString)")
-                }
+                completion(.failure(.decodeError))
             }
         }.resume()
+    }
+    
+    // Add targets
+    func addTargets () {
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+    }
+    
+    // MARK: - Actions
+    @objc func refresh(_ sender: Any) {
+        refreshControl.endRefreshing()
+        // TODO: -
+        productTableView.reloadData()
+        print("DEBUG PRINT: End Refreshing")
     }
     
     @objc func listBarBtnTapped () {
@@ -241,17 +181,7 @@ class HomePageViewController: UIViewController {
 }
 
 // MARK: - Extension:
-extension HomePageViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        40.0
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView: UIView = DrinksTableHeaderView()
-        tableView.dequeueReusableCell(withIdentifier: DrinksTableHeaderView.identifier)
-        return headerView
-    }
+extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("DEBUG PRINT: 資料為\(drinks.count)筆")
@@ -260,7 +190,7 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource, UI
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DrinkTableViewCell.identifier, for: indexPath) as! DrinkTableViewCell
-        
+//        
         cell.backgroundColor = Colors.kebukeLightBlue
         cell.selectionStyle  = .gray
         // Define the drinksData from drinks(an array).
@@ -293,11 +223,10 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource, UI
         let drinks = drinks[indexPath.row]
         let orderDetailVC = OrderDetailViewController()
         orderDetailVC.modalPresentationStyle = .overFullScreen
-        
+
         orderDetailVC.drinksName        = drinks.fields.drinksName
         orderDetailVC.drinksDescription = drinks.fields.drinksDescription
         orderDetailVC.drinksImageURL    = drinks.fields.drinksImages?.last?.url
-
         self.navigationController?.pushViewController(orderDetailVC, animated: true)
     }
 }
