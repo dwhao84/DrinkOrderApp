@@ -10,6 +10,8 @@ import Kingfisher
 
 class OrderDetailViewController: UIViewController {
     
+    static let shared: String = "OrderDetailViewController"
+    
     let cupSize: [String]    = ["中杯 M", "大杯 L"]
     let sugarLevel: [String] = ["正常糖", "少糖", "半糖", "微糖", "二分糖", "一分糖", "無糖"]
     let iceLevel: [String]   = ["正常冰", "少冰", "微冰", "去冰", "完全去冰", "常溫", "溫", "熱"]
