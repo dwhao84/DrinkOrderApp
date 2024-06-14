@@ -138,7 +138,14 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "刪除")  { _,_,_ in
+            
+            print("DEBUG PRINT: 刪除")
+        }
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
 }
 
 #Preview {
