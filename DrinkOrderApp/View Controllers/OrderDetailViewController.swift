@@ -196,11 +196,12 @@ class OrderDetailViewController: UIViewController {
         let drinksImageUrl = URL(string: url)
         drinksImageView.kf.setImage(with: drinksImageUrl)
         
-        sugarLevelTextField.text   = sugarLevel[0]
-        iceLevelTextField.text     = iceLevel[0]
-        toppingTextField.text = toppingChoose[0]
+        sugarLevelTextField.text = sugarLevel[0]
+        iceLevelTextField.text   = iceLevel[0]
+        toppingTextField.text    = toppingChoose[0]
     }
     
+    // MARK: - Set up UI.
     func setupUI () {
         self.view.backgroundColor = Colors.white
         setNavigationView()
@@ -214,13 +215,12 @@ class OrderDetailViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
     }
     
+    // MARK: - Add targets
     func addTargets () {
         submitBtn.addTarget(self, action: #selector(submitBtnTapped), for: .touchUpInside)
     }
     
     func setupTextFields () {
-        
-        // FIXME: - Auto Layout 有些問題
         let toolBar: UIToolbar = UIToolbar()
         let toolAppearance = UIToolbarAppearance()
         toolBar.standardAppearance = toolAppearance
@@ -299,6 +299,7 @@ class OrderDetailViewController: UIViewController {
             drinksInfoStackView.topAnchor.constraint(equalTo: drinksImageView.bottomAnchor, constant: 20)
         ])
         
+        // mainStackView
         NSLayoutConstraint.activate([
             mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
@@ -345,7 +346,6 @@ class OrderDetailViewController: UIViewController {
         mainStackView.addArrangedSubview(iceLevelStackView)
         mainStackView.addArrangedSubview(sugarLevelStackView)
         mainStackView.addArrangedSubview(toppingChooseStackView)
-
     }
     
     func addDelegateAndDataSource () {
@@ -369,14 +369,46 @@ class OrderDetailViewController: UIViewController {
         toppingTextField.delegate = self
     }
     
+    func showAlertVC (title: String, message: String) {
+        let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default)
+        controller.addAction(okAction)
+        present(controller, animated: true)
+    }
+    
     // MARK: - Actions
     @objc func submitBtnTapped (_ sender: UIButton) {
-        print("sumbit btn tapped")
         
+        let selectionStatus: [String] = ["尺寸選擇", "請選擇冰塊", "甜度選擇", "加料選擇"]
+        let selectionStatusContent: [String] = ["請選擇飲料尺寸", "請選擇飲料冰塊", "請選擇飲料甜度", "請選擇飲料加料內容"]
         
+        print("DEBUG PRINT: sumbit btn tapped")
         
-        let orderListVC = OrderListViewController()
-        self.navigationController?.pushViewController(orderListVC, animated: true)
+        // 當textField.text 為 尺寸選擇，則跳出alertVC.
+        if cupSizeTextField.text == selectionStatus[0] {
+            print("DEBUG PRINT: 尚未選擇飲料尺寸")
+            showAlertVC(title: selectionStatusContent[0], message: selectionStatusContent[0])
+            
+        // 當textField.text 為 請選擇冰塊，則跳出alertVC.
+        } else if iceLevelTextField.text == selectionStatus[1] {
+            print("DEBUG PRINT: 尚未選擇飲料冰塊")
+            showAlertVC(title: selectionStatusContent[1], message: selectionStatusContent[1])
+            
+        // 當textField.text 為 甜度選擇，則跳出alertVC.
+        } else if sugarLevelTextField.text == selectionStatus[2] {
+            print("DEBUG PRINT: 尚未選擇飲料甜度")
+            showAlertVC(title: selectionStatusContent[2], message: selectionStatusContent[2])
+        
+        // 當textField.text 為 加料選擇，則跳出alertVC.
+        } else if toppingTextField.text == selectionStatus[3] {
+            print("DEBUG PRINT: 尚未選擇飲料加料內容")
+            showAlertVC(title: selectionStatusContent[3], message: selectionStatus[3])
+            
+        } else {
+            print("DEBUG PRINT: 飲料內容選擇完畢，將頁面傳送OrderListVC")
+            let orderListVC = OrderListViewController()
+            self.navigationController?.pushViewController(orderListVC, animated: true)
+        }
     }
     
     @objc func cancelBtnTapped (_ sender: UIBarButtonItem) {
@@ -429,7 +461,21 @@ extension OrderDetailViewController: UITextFieldDelegate {
             
         } else if ( textField == toppingTextField ) {
             textField.resignFirstResponder()
-
+        }
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if ( textField == cupSizeTextField ) {
+            print(cupSizeTextField.text ?? "Unable to get cupSizeTextField's text")
+            
+        } else if ( textField == iceLevelTextField ) {
+            print(iceLevelTextField.text ?? "Unable to get iceLevelTextField's text")
+            
+        } else if ( textField == sugarLevelTextField ) {
+            print(sugarLevelTextField.text ?? "Unable to get sugarLevelTextField's text")
+            
+        } else if ( textField == toppingTextField ) {
+            print(toppingTextField.text ?? "Unable to get toppingTextField's text")
         }
     }
 }
@@ -469,18 +515,22 @@ extension OrderDetailViewController: UIPickerViewDelegate, UIPickerViewDataSourc
         
         if (pickerView == cupSizePickerView ) {
             cupSizeTextField.text = cupSize[row]
+            print("\(String(describing: cupSizeTextField.text))")
             cupSizePickerView.resignFirstResponder()
             
         } else if (pickerView == iceLevelPickerView) {
             iceLevelTextField.text = iceLevel[row]
+            print("\(String(describing: iceLevelTextField.text))")
             iceLevelPickerView.resignFirstResponder()
             
         } else if (pickerView == sugarLevelPickerView) {
             sugarLevelTextField.text = sugarLevel[row]
+            print("\(String(describing: sugarLevelTextField.text))")
             sugarLevelPickerView.resignFirstResponder()
             
         } else if (pickerView == toppingPickerView) {
             toppingTextField.text = toppingChoose[row]
+            print("\(String(describing: toppingTextField.text))")
             toppingPickerView.resignFirstResponder()
         }
     }
