@@ -30,6 +30,7 @@ class HomePageViewController: UIViewController {
         let tableView: UITableView = UITableView()
         tableView.allowsSelection = true
         tableView.isScrollEnabled = true
+        tableView.separatorStyle = .singleLine
         tableView.backgroundColor = Colors.kebukeLightBlue
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -69,11 +70,16 @@ class HomePageViewController: UIViewController {
             case .success(let drinks):
                 self.drinks = drinks.records
                 print("DEBUG PRINT: drinks data \(drinks.self.records.count)")
-                self.productTableView.reloadData()
+                print("RawValue \(drinks.records.map { $0.fields.category })")
+                DispatchQueue.main.async {
+                    self.productTableView.reloadData()
+                }
             case .failure(let error):
                 print("DEBUG PRINT: Error fetching drinks data: \(error)")
             }
         }
+        
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     func setupUI () {
@@ -151,6 +157,7 @@ class HomePageViewController: UIViewController {
             }
             
             do {
+                // TODO:
                 let decoder = JSONDecoder()
                 let drinksData = try decoder.decode(Kebuke.self, from: data)
                 completion(.success(drinksData))
@@ -182,6 +189,14 @@ class HomePageViewController: UIViewController {
 
 // MARK: - Extension:
 extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        30
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return ""
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("DEBUG PRINT: 資料為\(drinks.count)筆")
