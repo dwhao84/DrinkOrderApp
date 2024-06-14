@@ -16,6 +16,7 @@ class HomePageViewController: UIViewController {
     
     var drinks: [Record] = []
 //    var drinksOfSelectedCategory = [Record]()
+
     
     // MARK: - UI set up:
     let kebukeLogoImageView: UIImageView = {
@@ -133,10 +134,19 @@ class HomePageViewController: UIViewController {
             return
         }
         
+        DispatchQueue.main.async {
+            self.showActivityIndicator()
+        }
+            
         var request = URLRequest(url: url)
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: request) {  data, response, error in
+            
+            DispatchQueue.main.async {
+                self.hideActivityIndicator()
+            }
+            
             if let error = error {
                 print("\(error.localizedDescription)")
                 completion(.failure(.requestFailed))
@@ -185,6 +195,23 @@ class HomePageViewController: UIViewController {
         settingVC.modalPresentationStyle = .fullScreen
         self.navigationController?.pushViewController(settingVC, animated: true)
     }
+    
+    func showActivityIndicator() {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        // 設置tag 以便後續查找 以及 移除
+        activityIndicator.tag = 1
+        activityIndicator.center = self.view.center
+        activityIndicator.color = Colors.kebukeBrown
+        activityIndicator.startAnimating()
+        self.view.addSubview(activityIndicator)
+    }
+    
+    func hideActivityIndicator() {
+        if let activityIndicator = self.view.viewWithTag(1) as? UIActivityIndicatorView {
+            activityIndicator.stopAnimating()
+            activityIndicator.removeFromSuperview()
+        }
+    }
 }
 
 // MARK: - Extension:
@@ -222,7 +249,7 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
         cell.drinksDescriptionLabel.text = drinksData.fields.drinksDescription
         cell.drinksPriceLabel.text       = "中 : \(drinksData.fields.mediumPrice) / 大 : \(drinksData.fields.largePrice)"
         
-//         Set up tableView cell when selected will show inside of the corner shape.
+        // Set up tableView cell when selected will show inside of the corner shape.
         let backgroundView: UIView        = UIView()
         backgroundView.backgroundColor    = Colors.kebukeDarkBlueWithAlpha
         backgroundView.layer.cornerRadius = 25
