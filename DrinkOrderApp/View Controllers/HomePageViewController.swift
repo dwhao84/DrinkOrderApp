@@ -11,8 +11,6 @@ import Kingfisher
 class HomePageViewController: UIViewController {
 
     static let shared: String = "HomePageViewController"
-    private let apiKey: String = "patxAQx4KLgwEsh8O.28a883dd0c29a3920aee1cc069fc876738b14186ec8ec2dd07cc762b70497e0c"
-    private let baseUrl: String = "https://api.airtable.com/v0/appS5I28H2YO3bJzv/Kebuke"
     
     var drinks: [Record] = []
 //    var drinksOfSelectedCategory = [Record]()
@@ -43,13 +41,13 @@ class HomePageViewController: UIViewController {
         refreshControl.tintColor = Colors.kebukeBrown
         return refreshControl
     } ()
-
+    
     // MARK: - Result type:
     enum Result<drinks, Error: Swift.Error>  {
         case success(drinks)
         case failure(Error)
     }
-    
+    // Using ENUM to switch different NetworkError status
     enum NetworkError: Swift.Error {
         case invalidURL
         case requestFailed
@@ -57,30 +55,30 @@ class HomePageViewController: UIViewController {
         case noDataReceived
         case decodeError
     }
-        
+    
     // MARK: - Life cycle:
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         print("Into the HomePageVC")
         setupUI()
-        
-        fetchDrinksData(url: baseUrl) {  [weak self] result in
-            guard let self = self else { return }
+        fetchDrinksData ()
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    func fetchDrinksData() {
+        // Call Network Manager to fetch data
+        NetworkManager.shared.getOrdersData(url: NetworkManager.getApiUrl) { result in
             switch result {
-            case .success(let drinks):
-                self.drinks = drinks.records
-                print("DEBUG PRINT: drinks data \(drinks.self.records.count)")
-                print("RawValue \(drinks.records.map { $0.fields.category })")
+            case.success(let drinksData):
+                
+                // Using DispatchQueue.main.async to fetch data.
                 DispatchQueue.main.async {
-                    self.productTableView.reloadData()
+                    self.drinks = drinksData.records
                 }
-            case .failure(let error):
-                print("DEBUG PRINT: Error fetching drinks data: \(error)")
+            case .failure(_):
+                print("Unable to get data")
             }
         }
-        
-        self.tabBarController?.tabBar.isHidden = false
     }
     
     func setupUI () {
@@ -126,57 +124,7 @@ class HomePageViewController: UIViewController {
             productTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
-    
-    func fetchDrinksData(url: String, completion: @escaping( Result<Kebuke, NetworkError>) -> Void) {
-        guard let url = URL(string: baseUrl) else {
-            print("Unable to fetch url")
-            completion(.failure(.invalidURL))
-            return
-        }
-        
-        DispatchQueue.main.async {
-            self.showActivityIndicator()
-        }
-            
-        var request = URLRequest(url: url)
-        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-        
-        URLSession.shared.dataTask(with: request) {  data, response, error in
-            
-            DispatchQueue.main.async {
-                self.hideActivityIndicator()
-            }
-            
-            if let error = error {
-                print("\(error.localizedDescription)")
-                completion(.failure(.requestFailed))
-                return
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                // TODO: - print out response
-                print("\(String(describing: response))")
-                completion(.failure(.unexpectedStatusCode))
-                return
-            }
-            
-            guard let data = data else {
-                print("No data received")
-                completion(.failure(.noDataReceived))
-                return
-            }
-            
-            do {
-                // TODO:
-                let decoder = JSONDecoder()
-                let drinksData = try decoder.decode(Kebuke.self, from: data)
-                completion(.success(drinksData))
-            } catch {
-                completion(.failure(.decodeError))
-            }
-        }.resume()
-    }
-    
+
     // Add targets
     func addTargets () {
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
