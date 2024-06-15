@@ -20,9 +20,7 @@ Update(PATCH):
 
 Delete(DELETE):
 
-> Reference
-> 
-> [HTTP Verbs: 談 POST, PUT 和 PATCH 的應用](https://ihower.tw/blog/archives/6483)
+> Reference: [HTTP Verbs: 談 POST, PUT 和 PATCH 的應用](https://ihower.tw/blog/archives/6483)
 
 
 
