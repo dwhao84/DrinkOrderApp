@@ -42,4 +42,7 @@ struct Images {
     static let mapIcon: UIImage        = UIImage(named: "map-icon")!
     
     static let photoFill: UIImage   = UIImage(systemName: "photo.fill")!
+    
+    // For EmptyStateView
+    static let doc: UIImage = UIImage(systemName: "doc.text")!
 }
