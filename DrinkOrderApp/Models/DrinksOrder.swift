@@ -7,9 +7,12 @@
 
 import UIKit
 
-// MARK: - Create Order data model
 struct Order: Codable {
-    let id: String?
+    let fields: OrderFields
+}
+
+// MARK: - Create Order data model
+struct OrderFields: Codable {
     let drinkName: String
     let cupSize: String
     let sugarLevel: String
@@ -17,15 +20,15 @@ struct Order: Codable {
     let topping: String
     let qty: String
     
-    // MARK: - Make sure the CodingKey is right.
     enum CodingKeys: String, CodingKey {
-        case id         = "id"
-        case drinkName  = "Drink name"
-        case cupSize    = "Cup Size"
+        case drinkName = "Drink name"
+        case cupSize = "Cup Size"
         case sugarLevel = "Sugar Level"
-        case iceLevel   = "Ice Level"
-        case topping    = "Topping"
-        case qty        = "Qty"
+        case iceLevel = "Ice Level"
+        case topping = "Topping"
+        case qty = "Qty"
     }
 }
+
+
 
