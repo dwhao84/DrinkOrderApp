@@ -1,0 +1,20 @@
+//
+//  DrinksQtyStepper.swift
+//  DrinkOrderApp
+//
+//  Created by Dawei Hao on 2024/6/16.
+//
+
+import UIKit
+
+class DrinksQtyStepper: UIControl {
+
+    /*
+    // Only override draw() if you perform custom drawing.
+    // An empty implementation adversely affects performance during animation.
+    override func draw(_ rect: CGRect) {
+        // Drawing code
+    }
+    */
+
+}
