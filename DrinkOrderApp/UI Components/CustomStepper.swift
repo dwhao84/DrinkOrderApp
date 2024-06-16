@@ -44,7 +44,7 @@ class CustomStepper: UIControl {
     let numberLabel : UILabel = {
         let label: UILabel = UILabel()
         label.text = "0"
-        label.textColor = Colors.white
+        label.textColor = Colors.darkGray
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
