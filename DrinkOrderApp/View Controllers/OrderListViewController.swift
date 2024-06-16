@@ -11,8 +11,13 @@ class OrderListViewController: UIViewController {
     
     static let shared: String = "OrderListViewController"
     
+    private let baseUrl: String = "https://api.airtable.com/v0/appS5I28H2YO3bJzv/Kebuke"
+    private let apiKey: String = "Bearer patxAQx4KLgwEsh8O.28a883dd0c29a3920aee1cc069fc876738b14186ec8ec2dd07cc762b70497e0c"
+    
+    var orders: [Order] = []
+    
     // MARK: - UI set up:
-    var tableView: UITableView = {
+    private let tableView: UITableView = {
         let tableView: UITableView = UITableView()
         tableView.backgroundColor = Colors.white
         tableView.allowsSelection = true
@@ -20,7 +25,7 @@ class OrderListViewController: UIViewController {
         return tableView
     } ()
 
-    var productImageView: UIImageView = {
+    private let productImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.image = Images.kebukeLogo
         imageView.contentMode = .scaleAspectFit
@@ -28,17 +33,24 @@ class OrderListViewController: UIViewController {
         return imageView
     } ()
     
-    var refreshControl: UIRefreshControl = {
-        // Initialize with a string and separately declared attribute(s)        
+    private let refreshControl: UIRefreshControl = {
+        // Initialize with a string and separately declared attribute(s)
         let refreshControl: UIRefreshControl = UIRefreshControl()
         refreshControl.tintColor = Colors.kebukeBrown
         return refreshControl
     } ()
     
-    var checkoutView: CheckoutView = {
+    private var checkoutView: CheckoutView = {
         let checkoutView: CheckoutView = CheckoutView()
         checkoutView.translatesAutoresizingMaskIntoConstraints = false
         return checkoutView
+    } ()
+    
+    private let spinner: UIActivityIndicatorView = {
+        let spinner: UIActivityIndicatorView = UIActivityIndicatorView(style: .large)
+        spinner.hidesWhenStopped = true
+        spinner.color = Colors.kebukeBrown
+        return spinner
     } ()
     
     // MARK: - Life cycle:
@@ -74,6 +86,7 @@ class OrderListViewController: UIViewController {
         tableView.rowHeight = 170
         tableView.refreshControl = refreshControl
         tableView.backgroundColor = Colors.kebukeLightBlue
+        tableView.tableFooterView = spinner
     }
     
     func addDelegateAndDatasource () {
@@ -112,10 +125,14 @@ class OrderListViewController: UIViewController {
         self.navigationItem.standardAppearance = appearance
         self.navigationItem.scrollEdgeAppearance = appearance
     }
+    
+    func fetchDeleteDrinksData () {
+        
+    }
 }
 
 // MARK: - Extension:
-extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
+extension OrderListViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }
@@ -145,6 +162,15 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+    
+    // TODO: - Using calculate the tableView height to show whether spinner will show or not.
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+        
+        print("Offset: \(offsetY), contentHeight: \(contentHeight), height: \(height)")
     }
 }
 
