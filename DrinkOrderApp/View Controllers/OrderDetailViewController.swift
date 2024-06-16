@@ -103,6 +103,12 @@ class OrderDetailViewController: UIViewController {
         textField.text = "加料選擇"
         return textField
     } ()
+
+    let drinksQtyStepper: DrinksQtyStepper = {
+        let stepper: DrinksQtyStepper = DrinksQtyStepper()
+        stepper.translatesAutoresizingMaskIntoConstraints = false
+        return stepper
+    } ()
     
     // MARK: - Custom StackViews
     let drinksInfoStackView: UIStackView = {
@@ -286,7 +292,7 @@ class OrderDetailViewController: UIViewController {
         
         // SubmitButton:
         NSLayoutConstraint.activate([
-            submitBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -35),
+            submitBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
             submitBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             submitBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             submitBtn.heightAnchor.constraint(equalToConstant: 50)
@@ -346,6 +352,7 @@ class OrderDetailViewController: UIViewController {
         mainStackView.addArrangedSubview(iceLevelStackView)
         mainStackView.addArrangedSubview(sugarLevelStackView)
         mainStackView.addArrangedSubview(toppingChooseStackView)
+        mainStackView.addArrangedSubview(drinksQtyStepper)
     }
     
     func addDelegateAndDataSource () {
