@@ -67,10 +67,9 @@ class HomePageViewController: UIViewController {
     
     func fetchDrinksData() {
         // Call Network Manager to fetch data
-        NetworkManager.shared.getOrdersData(url: NetworkManager.getApiUrl) { result in
+        NetworkManager.shared.getOrdersData { result in
             switch result {
-            case.success(let drinksData):
-                
+            case .success(let drinksData):
                 // Using DispatchQueue.main.async to fetch data.
                 DispatchQueue.main.async {
                     self.drinks = drinksData.records
@@ -80,6 +79,7 @@ class HomePageViewController: UIViewController {
             }
         }
     }
+
     
     func setupUI () {
         self.view.backgroundColor = Colors.kebukeLightBlue
@@ -193,7 +193,7 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
             cell.drinksImageView.image   = Images.banner02 // Set a default image if URL is not available
         }
         
-        cell.drinksTitleLabel.text       = drinksData.fields.drinksName
+        cell.drinksTitleLabel.text       = drinksData.fields.drinkName
         cell.drinksDescriptionLabel.text = drinksData.fields.drinksDescription
         cell.drinksPriceLabel.text       = "中 : \(drinksData.fields.mediumPrice) / 大 : \(drinksData.fields.largePrice)"
         
@@ -214,7 +214,7 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
         let orderDetailVC = OrderDetailViewController()
         orderDetailVC.modalPresentationStyle = .overFullScreen
 
-        orderDetailVC.drinksName        = drinks.fields.drinksName
+        orderDetailVC.drinksName        = drinks.fields.drinkName
         orderDetailVC.drinksDescription = drinks.fields.drinksDescription
         orderDetailVC.drinksImageURL    = drinks.fields.drinksImages?.last?.url
         self.navigationController?.pushViewController(orderDetailVC, animated: true)
