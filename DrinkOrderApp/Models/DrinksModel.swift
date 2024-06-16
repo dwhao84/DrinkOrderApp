@@ -26,14 +26,14 @@ struct Fields: Codable {
     let drinksImages: [DrinksImage]?
     let category: Category
     let mediumPrice: Int
-    let drinksName, drinksDescription: String
+    let drinkName, drinksDescription: String
 
     enum CodingKeys: String, CodingKey {
         case largePrice        = "large price"
         case drinksImages      = "Drinks Images"
         case category          = "Category"
         case mediumPrice       = "medium price"
-        case drinksName        = "Drinks name"
+        case drinkName         = "Drink name"
         case drinksDescription = "Drinks Description"
     }
 }
