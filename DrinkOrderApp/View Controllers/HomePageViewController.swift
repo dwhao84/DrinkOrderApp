@@ -11,6 +11,7 @@ import Kingfisher
 class HomePageViewController: UIViewController {
 
     static let shared: String = "HomePageViewController"
+    var userName: String?
     
     var drinks: [Record] = []
 //    var drinksOfSelectedCategory = [Record]()
@@ -45,6 +46,7 @@ class HomePageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Into the HomePageVC")
+        
         setupUI()
         fetchDrinksData ()
         self.tabBarController?.tabBar.isHidden = false
@@ -197,6 +199,7 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
         orderDetailVC.drinksName        = drinks.fields.drinkName
         orderDetailVC.drinksDescription = drinks.fields.drinksDescription
         orderDetailVC.drinksImageURL    = drinks.fields.drinksImages?.last?.url
+        orderDetailVC.userName = userName
         self.navigationController?.pushViewController(orderDetailVC, animated: true)
     }
 }
