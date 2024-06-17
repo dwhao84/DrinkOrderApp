@@ -23,6 +23,7 @@ class OrderDetailViewController: UIViewController {
     let selectionStatusContent: [String] = ["請選擇飲料尺寸", "請選擇飲料冰塊", "請選擇飲料甜度", "請選擇飲料加料內容"]
     
     // MARK: - Passing Datas:
+    var userName: String?
     var drinksName: String?
     var drinksDescription: String?
     var drinksImageURL: String?
@@ -408,6 +409,7 @@ class OrderDetailViewController: UIViewController {
                 print("DEBUG PRINT: 飲料內容選擇完畢，將頁面傳送OrderListVC")
                 
                 let orderFields = OrderFields(
+                    userName: userName ?? "No User name",
                     drinkName: drinksName ?? "No drinks name",
                     cupSize: cupSizeTextField.text ?? "No Cup size",
                     sugarLevel: sugarLevelTextField.text ?? "No Sugar Level",
@@ -420,7 +422,7 @@ class OrderDetailViewController: UIViewController {
                 
                 NetworkManager.shared.postOrdersData(order: newOrder) { result in
                     switch result {
-                    case .success(let order):
+                    case .success(let newOrder):
                         DispatchQueue.main.async {
                             self.showAlertVC(title: "Order Created", message: "Your Order is created")
                             let orderListVC = OrderListViewController()
