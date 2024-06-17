@@ -1,22 +1,24 @@
 import UIKit
 
 class NetworkManager {
+    
     static let shared = NetworkManager()
     
     private init() {}
     
     // Set up API Key
     static let apiKey: String = "Bearer patxAQx4KLgwEsh8O.28a883dd0c29a3920aee1cc069fc876738b14186ec8ec2dd07cc762b70497e0c"
-    
     // GET URL from Airtable's Data.
     static let getApiUrl: String = "https://api.airtable.com/v0/appS5I28H2YO3bJzv/Kebuke"
     // POST, PATCH, DELETE from empty Airtable.
     private let apiUrl: String = "https://api.airtable.com/v0/appS5I28H2YO3bJzv/Kebuke%20Order"
-    
-    // Set up Authorization as a string for authorization.
-    static let authorization: String = "Authorization"
-    static let contentType: String = "Content-Type"
-    static let application_json: String = "application/json"
+
+    enum API {
+        // Set up Authorization as a string for authorization.
+        static let authorization: String = "Authorization"
+        static let contentType: String = "Content-Type"
+        static let application_json: String = "application/json"
+    }
     
     enum Result<T, Error: Swift.Error> {
         case success(T)
@@ -61,7 +63,7 @@ class NetworkManager {
         }
         
         var request = URLRequest(url: url)
-        request.setValue(NetworkManager.apiKey, forHTTPHeaderField: NetworkManager.authorization)
+        request.setValue(NetworkManager.apiKey, forHTTPHeaderField: API.authorization)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -83,7 +85,7 @@ class NetworkManager {
             }
             
             do {
-                // 打印原始数据
+                // print out jsonString
                 if let jsonString = String(data: data, encoding: .utf8) {
                     print("Response JSON: \(jsonString)")
                 }
@@ -110,13 +112,13 @@ class NetworkManager {
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue(NetworkManager.apiKey, forHTTPHeaderField: NetworkManager.authorization)
-        request.setValue(NetworkManager.application_json, forHTTPHeaderField: NetworkManager.contentType)
+        request.setValue(NetworkManager.apiKey, forHTTPHeaderField: API.authorization)
+        request.setValue(API.application_json, forHTTPHeaderField: API.contentType)
         
         do {
             let jsonData = try JSONEncoder().encode(order)
             request.httpBody = jsonData
-            // 打印发送的 JSON 数据
+            // print out json encode
             if let jsonString = String(data: jsonData, encoding: .utf8) {
                 print("Request JSON: \(jsonString)")
             }
@@ -137,7 +139,7 @@ class NetworkManager {
             }
             
             do {
-                // 打印响应数据以便调试
+                // print out jsonString
                 if let jsonString = String(data: data, encoding: .utf8) {
                     print("Response JSON: \(jsonString)")
                 }
@@ -145,7 +147,8 @@ class NetworkManager {
                 let createOrder = try JSONDecoder().decode(Order.self, from: data)
                 completion(.success(createOrder))
             } catch {
-                // 打印响应数据以便调试
+                
+                // print out jsonString for checking data's value.
                 if let jsonString = String(data: data, encoding: .utf8) {
                     print("Response JSON: \(jsonString)")
                 }
@@ -167,8 +170,8 @@ class NetworkManager {
         
         var request = URLRequest(url: url)
         request.httpMethod = "PATCH"
-        request.setValue(NetworkManager.apiKey, forHTTPHeaderField: NetworkManager.authorization)
-        request.setValue(NetworkManager.application_json, forHTTPHeaderField: NetworkManager.contentType)
+        request.setValue(NetworkManager.apiKey, forHTTPHeaderField: API.authorization)
+        request.setValue(API.application_json, forHTTPHeaderField: API.contentType)
         
         do {
             let jsonData = try JSONEncoder().encode(updatedOrder)
@@ -214,8 +217,8 @@ class NetworkManager {
         
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
-        request.setValue(NetworkManager.apiKey, forHTTPHeaderField: NetworkManager.authorization)
-        request.setValue(NetworkManager.application_json, forHTTPHeaderField: NetworkManager.contentType)
+        request.setValue(NetworkManager.apiKey, forHTTPHeaderField: API.authorization)
+        request.setValue(API.application_json, forHTTPHeaderField: API.contentType)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
