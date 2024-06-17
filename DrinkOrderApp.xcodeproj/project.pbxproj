@@ -47,6 +47,10 @@
 		D39CB0522BDFFC07004B96C5 /* RegisterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0512BDFFC07004B96C5 /* RegisterButton.swift */; };
 		D39CB0552BDFFDB5004B96C5 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0542BDFFDB5004B96C5 /* RegisterViewController.swift */; };
 		D39CB0572BE00897004B96C5 /* SecRegisterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0562BE00897004B96C5 /* SecRegisterButton.swift */; };
+		D3B242332C1DE7DA00EC0ED9 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B242322C1DE7DA00EC0ED9 /* EmptyStateView.swift */; };
+		D3B242352C1DEDC400EC0ED9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B242342C1DEDC400EC0ED9 /* NetworkManager.swift */; };
+		D3B2423A2C1EF9C800EC0ED9 /* DrinksQtyStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B242392C1EF9C800EC0ED9 /* DrinksQtyStepper.swift */; };
+		D3B2423C2C1F1F4000EC0ED9 /* DrinksOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B2423B2C1F1F4000EC0ED9 /* DrinksOrder.swift */; };
 		D3E8B6742C134667004D00BF /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E8B6732C134667004D00BF /* SubmitButton.swift */; };
 		D3E8B6762C134B48004D00BF /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E8B6752C134B48004D00BF /* CustomTextField.swift */; };
 		D3E8B6782C134ECF004D00BF /* CustomOrderDetailLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E8B6772C134ECF004D00BF /* CustomOrderDetailLabel.swift */; };
@@ -103,6 +107,10 @@
 		D39CB0512BDFFC07004B96C5 /* RegisterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterButton.swift; sourceTree = "<group>"; };
 		D39CB0542BDFFDB5004B96C5 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		D39CB0562BE00897004B96C5 /* SecRegisterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecRegisterButton.swift; sourceTree = "<group>"; };
+		D3B242322C1DE7DA00EC0ED9 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		D3B242342C1DEDC400EC0ED9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		D3B242392C1EF9C800EC0ED9 /* DrinksQtyStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksQtyStepper.swift; sourceTree = "<group>"; };
+		D3B2423B2C1F1F4000EC0ED9 /* DrinksOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksOrder.swift; sourceTree = "<group>"; };
 		D3E8B6732C134667004D00BF /* SubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
 		D3E8B6752C134B48004D00BF /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		D3E8B6772C134ECF004D00BF /* CustomOrderDetailLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOrderDetailLabel.swift; sourceTree = "<group>"; };
@@ -175,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				D30C489F2BD79D8500C5B908 /* CheckoutView.swift */,
+				D3B242322C1DE7DA00EC0ED9 /* EmptyStateView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -185,6 +194,7 @@
 				D3E8B6772C134ECF004D00BF /* CustomOrderDetailLabel.swift */,
 				D3E8B6752C134B48004D00BF /* CustomTextField.swift */,
 				D30C489B2BD41C1C00C5B908 /* CustomStepper.swift */,
+				D3B242392C1EF9C800EC0ED9 /* DrinksQtyStepper.swift */,
 				D39CB0302BDD5F07004B96C5 /* KebukeAnnotationView.swift */,
 				D39CB02E2BDD4F15004B96C5 /* KebukeAnnotation.swift */,
 				D39CB0532BDFFCF3004B96C5 /* Custom Buttons */,
@@ -237,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				D30C48962BD0D44F00C5B908 /* DrinksModel.swift */,
+				D3B2423B2C1F1F4000EC0ED9 /* DrinksOrder.swift */,
 				D38E53A22B88CE40008E8BDE /* SettingsModel.swift */,
 				D39CB0282BDC8782004B96C5 /* KebukeStoreModel.swift */,
 			);
@@ -266,6 +277,14 @@
 			path = "Custom Buttons";
 			sourceTree = "<group>";
 		};
+		D3B242362C1DEDD400EC0ED9 /* Network Manager */ = {
+			isa = PBXGroup;
+			children = (
+				D3B242342C1DEDC400EC0ED9 /* NetworkManager.swift */,
+			);
+			path = "Network Manager";
+			sourceTree = "<group>";
+		};
 		EB94C1CC2B8734F5008098DE = {
 			isa = PBXGroup;
 			children = (
@@ -293,6 +312,7 @@
 				EB94C1E62B8734F7008098DE /* Info.plist */,
 				D38E537D2B8876FD008E8BDE /* Supporting Files */,
 				D38E53862B887A85008E8BDE /* Constants */,
+				D3B242362C1DEDD400EC0ED9 /* Network Manager */,
 				D38E538F2B889A07008E8BDE /* Models */,
 				D38E539B2B88AB92008E8BDE /* View Controllers */,
 				D35F55882C0F5EDC001A3730 /* UI Components */,
@@ -480,6 +500,7 @@
 				D39CB0292BDC8782004B96C5 /* KebukeStoreModel.swift in Sources */,
 				D38E53982B889B04008E8BDE /* OrderListViewController.swift in Sources */,
 				D38E53852B887A6C008E8BDE /* ImageConstants.swift in Sources */,
+				D3B242332C1DE7DA00EC0ED9 /* EmptyStateView.swift in Sources */,
 				D30C489C2BD41C1C00C5B908 /* CustomStepper.swift in Sources */,
 				D30C48972BD0D44F00C5B908 /* DrinksModel.swift in Sources */,
 				D3E8B6762C134B48004D00BF /* CustomTextField.swift in Sources */,
@@ -487,9 +508,12 @@
 				EB94C1D92B8734F5008098DE /* AppDelegate.swift in Sources */,
 				D38E53962B889ADD008E8BDE /* LoginViewController.swift in Sources */,
 				D39CB0232BDAB18B004B96C5 /* SettingTableViewCell.swift in Sources */,
+				D3B242352C1DEDC400EC0ED9 /* NetworkManager.swift in Sources */,
+				D3B2423A2C1EF9C800EC0ED9 /* DrinksQtyStepper.swift in Sources */,
 				D39CB0252BDBFE39004B96C5 /* SettingTableViewController.swift in Sources */,
 				EB94C1DB2B8734F5008098DE /* SceneDelegate.swift in Sources */,
 				D39CB0552BDFFDB5004B96C5 /* RegisterViewController.swift in Sources */,
+				D3B2423C2C1F1F4000EC0ED9 /* DrinksOrder.swift in Sources */,
 				D38E53A12B88CB4B008E8BDE /* StoreLocationViewController.swift in Sources */,
 				D38E53882B887AAC008E8BDE /* ColorConstants.swift in Sources */,
 				D38E539F2B88C2D8008E8BDE /* HomePageViewController.swift in Sources */,

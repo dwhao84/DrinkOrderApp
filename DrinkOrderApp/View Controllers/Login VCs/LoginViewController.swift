@@ -104,14 +104,13 @@ class LoginViewController: UIViewController {
     @objc func loginBtnTapped (_ sender: UIButton) {
         guard let text = enterNameTextField.text, !text.isEmpty else {
             print("you didn't enter anything.")
-            showMissingNameAC()
+            showMissingNameAC(title: "缺少姓名資料", message: "")
             return
         }
         
         let tabBarController = createTabBarController()
         tabBarController.modalPresentationStyle = .overFullScreen
         self.present(tabBarController, animated: true)
-        
         print("DEBUG PRINT: loginBtnTapped")
     }
     
@@ -191,7 +190,7 @@ class LoginViewController: UIViewController {
     }
     
     // MARK: - Show Alert Controller:
-    func showMissingNameAC () {
+    func showMissingNameAC (title: String, message: String) {
         let controller = UIAlertController(
             title: """
             缺少姓名資料
