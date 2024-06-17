@@ -13,6 +13,7 @@ struct Order: Codable {
 
 // MARK: - Create Order data model
 struct OrderFields: Codable {
+    let userName: String
     let drinkName: String
     let cupSize: String
     let sugarLevel: String
@@ -21,12 +22,13 @@ struct OrderFields: Codable {
     let qty: String
     
     enum CodingKeys: String, CodingKey {
-        case drinkName = "Drink name"
-        case cupSize = "Cup Size"
-        case sugarLevel = "Sugar Level"
-        case iceLevel = "Ice Level"
-        case topping = "Topping"
-        case qty = "Qty"
+        case userName        = "User name"
+        case drinkName       = "Drink name"
+        case cupSize         = "Cup Size"
+        case sugarLevel      = "Sugar Level"
+        case iceLevel        = "Ice Level"
+        case topping         = "Topping"
+        case qty             = "Qty"
     }
 }
 
