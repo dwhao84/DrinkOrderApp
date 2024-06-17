@@ -131,6 +131,16 @@ class OrderDetailViewController: UIViewController {
     } ()
     
     // MARK: - Custom StackViews
+    let drinksContentStackView: UIStackView = {
+        let stackView: UIStackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.spacing = 5
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    } ()
+    
     let drinksInfoStackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
         stackView.axis = .vertical
@@ -191,15 +201,34 @@ class OrderDetailViewController: UIViewController {
         return stackView
     } ()
     
-    let mainStackView: UIStackView = {
+    let secondStackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .leading
         stackView.distribution = .fill
-        stackView.spacing = 15
+        stackView.spacing = 20
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     } ()
+    
+    let mainStackView: UIStackView = {
+        let stackView: UIStackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.spacing = 20
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    } ()
+    
+    // MARK: - ScrollView
+    let scrollView: UIScrollView = {
+        let scrollView: UIScrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = true
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    } ()
+    
     
     // MARK: - Custom Button:
     var submitBtn: SubmitButton = {
@@ -301,63 +330,44 @@ class OrderDetailViewController: UIViewController {
     }
     
     // MARK: - Add Constraints:
-    func addConstraints () {
-        view.addSubview(drinksImageView)
-        view.addSubview(drinksInfoStackView)
+    func addConstraints() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(mainStackView)
         
-        view.addSubview(cupSizeStackView)
-        view.addSubview(iceLevelStackView)
-        view.addSubview(sugarLevelStackView)
-        view.addSubview(toppingChooseStackView)
-        view.addSubview(submitBtn)
-        view.addSubview(mainStackView)
-        
-        // drinksImageView:
         NSLayoutConstraint.activate([
-            drinksImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            drinksImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            drinksImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            drinksImageView.heightAnchor.constraint(equalTo: drinksImageView.widthAnchor, multiplier: 0.75)
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            
+            mainStackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
+            mainStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            mainStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            mainStackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            mainStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -30),
         ])
-        
-        // SubmitButton:
-        NSLayoutConstraint.activate([
-            submitBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
-            submitBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            submitBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            submitBtn.heightAnchor.constraint(equalToConstant: 50)
-        ])
-        
-        // drinksInfoStackView
-        NSLayoutConstraint.activate([
-            drinksInfoStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            drinksInfoStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            drinksInfoStackView.topAnchor.constraint(equalTo: drinksImageView.bottomAnchor, constant: 20)
-        ])
-        
-        // mainStackView
-        NSLayoutConstraint.activate([
-            mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            mainStackView.topAnchor.constraint(equalTo: drinksInfoStackView.bottomAnchor, constant: 20)
-        ])
-        
     }
     
     func configStackView () {
-        userNameTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 210).isActive = true
+        drinksImageView.widthAnchor.constraint(equalToConstant: self.view.bounds.width - 60).isActive = true
+        drinksImageView.heightAnchor.constraint(equalTo: drinksImageView.widthAnchor, multiplier: 0.75).isActive = true
+        
+        submitBtn.widthAnchor.constraint(equalToConstant: self.view.bounds.width - 60).isActive = true
+        submitBtn.heightAnchor.constraint(equalTo: submitBtn.widthAnchor, multiplier: 0.15).isActive = true
+        
+        userNameTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 250).isActive = true
         userNameTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
         
-        cupSizeTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 210).isActive = true
+        cupSizeTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 250).isActive = true
         cupSizeTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
         
-        iceLevelTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 210).isActive = true
+        iceLevelTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 250).isActive = true
         iceLevelTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
         
-        sugarLevelTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 210).isActive = true
+        sugarLevelTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 250).isActive = true
         sugarLevelTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
         
-        toppingTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 210).isActive = true
+        toppingTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 250).isActive = true
         toppingTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
         
         cupSizeLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 35).isActive = true
@@ -369,6 +379,7 @@ class OrderDetailViewController: UIViewController {
         drinksInfoStackView.addArrangedSubview(drinkNameLabel)
         drinksInfoStackView.addArrangedSubview(drinkDescriptionLabel)
         
+        /// questions & answers stackView
         userNameStackView.addArrangedSubview(userNameLabel)
         userNameStackView.addArrangedSubview(userNameTextField)
         
@@ -384,12 +395,18 @@ class OrderDetailViewController: UIViewController {
         toppingChooseStackView.addArrangedSubview(toppingLevelLabel)
         toppingChooseStackView.addArrangedSubview(toppingTextField)
         
-        mainStackView.addArrangedSubview(userNameStackView)
-        mainStackView.addArrangedSubview(cupSizeStackView)
-        mainStackView.addArrangedSubview(iceLevelStackView)
-        mainStackView.addArrangedSubview(sugarLevelStackView)
-        mainStackView.addArrangedSubview(toppingChooseStackView)
-        mainStackView.addArrangedSubview(drinksQtyStepper)
+        /// secondStackView
+        secondStackView.addArrangedSubview(drinksInfoStackView)
+        secondStackView.addArrangedSubview(userNameStackView)
+        secondStackView.addArrangedSubview(cupSizeStackView)
+        secondStackView.addArrangedSubview(iceLevelStackView)
+        secondStackView.addArrangedSubview(sugarLevelStackView)
+        secondStackView.addArrangedSubview(toppingChooseStackView)
+        secondStackView.addArrangedSubview(drinksQtyStepper)
+
+        mainStackView.addArrangedSubview(drinksImageView)
+        mainStackView.addArrangedSubview(secondStackView)
+        mainStackView.addArrangedSubview(submitBtn)
     }
     
     func addDelegateAndDataSource () {
@@ -530,6 +547,7 @@ extension OrderDetailViewController: UITextFieldDelegate {
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
+        
         if ( textField == cupSizeTextField ) {
             print(cupSizeTextField.text ?? "Unable to get cupSizeTextField's text")
             
@@ -541,8 +559,18 @@ extension OrderDetailViewController: UITextFieldDelegate {
             
         } else if ( textField == toppingTextField ) {
             print(toppingTextField.text ?? "Unable to get toppingTextField's text")
+            
+        } else if ( textField == userNameTextField ) {
+            print("""
+                  DEBUG PRINT: textFieldDidChangeSelection
+                  \(textField.text ?? "")
+                  """)
         }
     }
+}
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+
 }
 
 
