@@ -20,7 +20,6 @@ class SubmitButton: UIButton {
     }
 
     private func commonInit() {
-        
         var config                 = UIButton.Configuration.filled()
         config.baseBackgroundColor = Colors.kebukeLightBlue
         var attributes = AttributeContainer()
@@ -29,10 +28,15 @@ class SubmitButton: UIButton {
         config.titleAlignment      = .center
         config.cornerStyle         = .large
         self.configuration         = config
-
         configurationUpdateHandler = { button in
             button.alpha = button.isHighlighted ? 0.5 : 1
         }
+        // Add Shadow for button.
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = 0.5
+        self.layer.shadowOffset = CGSize(width: 0, height: 5)
+        self.layer.shadowRadius = 4
+        self.layer.masksToBounds = false
     }
 }
 
