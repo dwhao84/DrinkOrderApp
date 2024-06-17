@@ -12,17 +12,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene      = (scene as? UIWindowScene) else { return }
-        window                     = UIWindow(frame: windowScene.coordinateSpace.bounds)
-        window?.windowScene        = windowScene
-        window?.rootViewController = createTheLoginVC()
-        window?.overrideUserInterfaceStyle = .light     // Set up as light mode.
-        self.window?.makeKeyAndVisible()
-    }
-    
-    func createTheLoginVC () -> UIViewController {
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window = UIWindow(windowScene: windowScene)
         let loginVC = LoginViewController()
-        return loginVC
+        let loginNC = UINavigationController(rootViewController: loginVC)
+        
+        window?.overrideUserInterfaceStyle = .light
+        window?.rootViewController = loginNC
+        window?.makeKeyAndVisible()
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
