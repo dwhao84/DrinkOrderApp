@@ -9,6 +9,9 @@ import UIKit
 import FirebaseAuth
 
 class LoginViewController: UIViewController {
+    
+    var userNameEntered: String?
+    
     // MARK: - UIImageView:
     var logoImageView: UIImageView = {
         let logoImageView: UIImageView = UIImageView()
@@ -84,7 +87,6 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         print("Into the LoginVC")
-        
         self.view.backgroundColor = Colors.kebukeDarkBlue
         setupUI()
         addTarget()
@@ -100,66 +102,66 @@ class LoginViewController: UIViewController {
         enterNameTextField.delegate = self
     }
     
-    // MARK: - Actions:
+    // MARK: - Actions
     @objc func loginBtnTapped (_ sender: UIButton) {
-        guard let text = enterNameTextField.text, !text.isEmpty else {
-            print("you didn't enter anything.")
-            showMissingNameAC(title: "缺少姓名資料", message: "")
-            return
-        }
-        
-        let tabBarController = createTabBarController()
-        tabBarController.modalPresentationStyle = .overFullScreen
-        self.present(tabBarController, animated: true)
-        print("DEBUG PRINT: loginBtnTapped")
-    }
-    
-    @objc func registerBtnTapped (_ sender: UIButton) {
-        let registerVC = RegisterViewController()
-        registerVC.modalPresentationStyle = .popover
-        self.present(registerVC, animated: true)
-        print("DEBUG PRINT: registerBtnTapped")
-    }
-    
-    // MARK: - Create multiple navigation controller:
-    func createTheHomePageNavigationVC () -> UINavigationController {
-        let homePageVC              = HomePageViewController()
-        let homePageNC              = UINavigationController(rootViewController: homePageVC)
-        homePageNC.tabBarItem.image = Images.homePage
-        homePageNC.tabBarItem.title = "Home"
-        return homePageNC
-    }
-    
-    func createTheOrderListNavigationVC () -> UINavigationController {
-        let orderListVC              = OrderListViewController()
-        let orderListNC              = UINavigationController(rootViewController: orderListVC)
-        orderListNC.tabBarItem.image = Images.cart
-        orderListNC.tabBarItem.title = "List"
-        return orderListNC
-    }
-    
-    func createTheSettingTableViewNavigationVC () -> UINavigationController {
-        let settingTableVC           = SettingTableViewController()
-        let settingTableNC           = UINavigationController(rootViewController: settingTableVC)
-        settingTableNC.tabBarItem.image = Images.setting
-        settingTableNC.tabBarItem.title = "Setting"
-        return settingTableNC
-    }
-    
-    func createTabBarController () -> UITabBarController {
-        let tabBarController                  = UITabBarController()
-        tabBarController.tabBar.barTintColor  = Colors.white
-        tabBarController.viewControllers      = [
-            createTheHomePageNavigationVC        (),
-            createTheOrderListNavigationVC       ()
-        ]
-        tabBarController.tabBar.tintColor     = Colors.kebukeBrown
-        tabBarController.tabBar.isTranslucent = true
-        let standardAppearance = UITabBarAppearance()
-        tabBarController.tabBar.standardAppearance = standardAppearance
-        tabBarController.tabBar.scrollEdgeAppearance = standardAppearance
-        return tabBarController
-    }
+          guard let text = enterNameTextField.text, !text.isEmpty else {
+              print("you didn't enter anything.")
+              showMissingNameAC(title: "缺少姓名資料", message: "")
+              return
+          }
+          
+          let tabBarController = createTabBarController()
+          tabBarController.modalPresentationStyle = .overFullScreen
+          self.present(tabBarController, animated: true)
+          print("DEBUG PRINT: loginBtnTapped")
+      }
+      
+      @objc func registerBtnTapped (_ sender: UIButton) {
+          let registerVC = RegisterViewController()
+          registerVC.modalPresentationStyle = .popover
+          self.present(registerVC, animated: true)
+          print("DEBUG PRINT: registerBtnTapped")
+      }
+      
+      // MARK: - Create multiple navigation controller:
+      func createTheHomePageNavigationVC () -> UINavigationController {
+          let homePageVC              = HomePageViewController()
+          let homePageNC              = UINavigationController(rootViewController: homePageVC)
+          homePageNC.tabBarItem.image = Images.homePage
+          homePageNC.tabBarItem.title = "Home"
+          return homePageNC
+      }
+      
+      func createTheOrderListNavigationVC () -> UINavigationController {
+          let orderListVC              = OrderListViewController()
+          let orderListNC              = UINavigationController(rootViewController: orderListVC)
+          orderListNC.tabBarItem.image = Images.cart
+          orderListNC.tabBarItem.title = "List"
+          return orderListNC
+      }
+      
+      func createTheSettingTableViewNavigationVC () -> UINavigationController {
+          let settingTableVC           = SettingTableViewController()
+          let settingTableNC           = UINavigationController(rootViewController: settingTableVC)
+          settingTableNC.tabBarItem.image = Images.setting
+          settingTableNC.tabBarItem.title = "Setting"
+          return settingTableNC
+      }
+      
+      func createTabBarController () -> UITabBarController {
+          let tabBarController                  = UITabBarController()
+          tabBarController.tabBar.barTintColor  = Colors.white
+          tabBarController.viewControllers      = [
+              createTheHomePageNavigationVC        (),
+              createTheOrderListNavigationVC       ()
+          ]
+          tabBarController.tabBar.tintColor     = Colors.kebukeBrown
+          tabBarController.tabBar.isTranslucent = true
+          let standardAppearance = UITabBarAppearance()
+          tabBarController.tabBar.standardAppearance = standardAppearance
+          tabBarController.tabBar.scrollEdgeAppearance = standardAppearance
+          return tabBarController
+      }
     
     // MARK: - Setup UI:
     func setupUI() {
