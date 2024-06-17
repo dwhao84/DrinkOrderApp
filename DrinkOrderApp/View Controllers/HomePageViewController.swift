@@ -14,7 +14,6 @@ class HomePageViewController: UIViewController {
     
     var drinks: [Record] = []
 //    var drinksOfSelectedCategory = [Record]()
-
     
     // MARK: - UI set up:
     let kebukeLogoImageView: UIImageView = {
@@ -41,20 +40,6 @@ class HomePageViewController: UIViewController {
         refreshControl.tintColor = Colors.kebukeBrown
         return refreshControl
     } ()
-    
-    // MARK: - Result type:
-    enum Result<drinks, Error: Swift.Error>  {
-        case success(drinks)
-        case failure(Error)
-    }
-    // Using ENUM to switch different NetworkError status
-    enum NetworkError: Swift.Error {
-        case invalidURL
-        case requestFailed
-        case unexpectedStatusCode
-        case noDataReceived
-        case decodeError
-    }
     
     // MARK: - Life cycle:
     override func viewDidLoad() {
@@ -164,11 +149,6 @@ class HomePageViewController: UIViewController {
 
 // MARK: - Extension:
 extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        30
-    }
-    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return ""
     }
