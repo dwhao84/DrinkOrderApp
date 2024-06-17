@@ -53,7 +53,7 @@ class OrderDetailViewController: UIViewController {
     let drinkDescriptionLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "Drink Description Label"
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont.systemFont(ofSize: 15)
         label.textColor = Colors.kebukeBrown
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -61,6 +61,12 @@ class OrderDetailViewController: UIViewController {
     } ()
     
     // MARK: - Custom Labels
+    let userNameLabel: CustomOrderDetailLabel = {
+        let label: CustomOrderDetailLabel = CustomOrderDetailLabel()
+        label.text = "填入姓名    "
+        return label
+    } ()
+    
     let cupSizeLabel: CustomOrderDetailLabel = {
         let label: CustomOrderDetailLabel = CustomOrderDetailLabel()
         label.text = "請選擇尺寸"
@@ -86,6 +92,14 @@ class OrderDetailViewController: UIViewController {
     } ()
     
     // MARK: - Custom TextFields
+    let userNameTextField: CustomTextField = {
+        let textField: CustomTextField = CustomTextField()
+        textField.text = "填入姓名"
+        textField.clearsOnBeginEditing = true
+        textField.clearButtonMode = .whileEditing
+        return textField
+    } ()
+    
     let cupSizeTextField: CustomTextField = {
         let textField: CustomTextField = CustomTextField()
         textField.text = "尺寸選擇"
@@ -122,7 +136,17 @@ class OrderDetailViewController: UIViewController {
         stackView.axis = .vertical
         stackView.alignment = .leading
         stackView.distribution = .fill
-        stackView.spacing = 15
+        stackView.spacing = 5
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    } ()
+    
+    let userNameStackView: UIStackView = {
+        let stackView: UIStackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.spacing = 40
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     } ()
@@ -196,7 +220,7 @@ class OrderDetailViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         setupUI()
-        
+
         // Passing Data from HomePageVC:
         guard let url = drinksImageURL else {
             print("Unable to get drinksURL")
@@ -321,6 +345,9 @@ class OrderDetailViewController: UIViewController {
     }
     
     func configStackView () {
+        userNameTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 210).isActive = true
+        userNameTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
+        
         cupSizeTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 210).isActive = true
         cupSizeTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
         
@@ -342,6 +369,9 @@ class OrderDetailViewController: UIViewController {
         drinksInfoStackView.addArrangedSubview(drinkNameLabel)
         drinksInfoStackView.addArrangedSubview(drinkDescriptionLabel)
         
+        userNameStackView.addArrangedSubview(userNameLabel)
+        userNameStackView.addArrangedSubview(userNameTextField)
+        
         cupSizeStackView.addArrangedSubview(cupSizeLabel)
         cupSizeStackView.addArrangedSubview(cupSizeTextField)
         
@@ -354,6 +384,7 @@ class OrderDetailViewController: UIViewController {
         toppingChooseStackView.addArrangedSubview(toppingLevelLabel)
         toppingChooseStackView.addArrangedSubview(toppingTextField)
         
+        mainStackView.addArrangedSubview(userNameStackView)
         mainStackView.addArrangedSubview(cupSizeStackView)
         mainStackView.addArrangedSubview(iceLevelStackView)
         mainStackView.addArrangedSubview(sugarLevelStackView)
@@ -396,20 +427,28 @@ class OrderDetailViewController: UIViewController {
             if cupSizeTextField.text == selectionStatus[0] {
                 print("DEBUG PRINT: 尚未選擇飲料尺寸")
                 showAlertVC(title: selectionStatusContent[0], message: selectionStatusContent[0])
+                
             } else if iceLevelTextField.text == selectionStatus[1] {
                 print("DEBUG PRINT: 尚未選擇飲料冰塊")
                 showAlertVC(title: selectionStatusContent[1], message: selectionStatusContent[1])
+                
             } else if sugarLevelTextField.text == selectionStatus[2] {
                 print("DEBUG PRINT: 尚未選擇飲料甜度")
                 showAlertVC(title: selectionStatusContent[2], message: selectionStatusContent[2])
+                
             } else if toppingTextField.text == selectionStatus[3] {
                 print("DEBUG PRINT: 尚未選擇飲料加料內容")
                 showAlertVC(title: selectionStatusContent[3], message: selectionStatus[3])
+                
+            } else if userNameTextField.text == "" {
+                print("DEBUG PRINT: 記得填入姓名，不然彼得不會幫你付錢")
+                showAlertVC(title: "記得填入姓名", message: "記得填入姓名，不然彼得不會幫你付錢")
+                
             } else {
                 print("DEBUG PRINT: 飲料內容選擇完畢，將頁面傳送OrderListVC")
-                
+
                 let orderFields = OrderFields(
-                    userName: userName ?? "No User name",
+                    userName: userNameTextField.text ?? "No User name",
                     drinkName: drinksName ?? "No drinks name",
                     cupSize: cupSizeTextField.text ?? "No Cup size",
                     sugarLevel: sugarLevelTextField.text ?? "No Sugar Level",
@@ -506,6 +545,8 @@ extension OrderDetailViewController: UITextFieldDelegate {
     }
 }
 
+
+// MARK: - PickerView Delegate & DataSource
 extension OrderDetailViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     // UIPickerViewDataSource
