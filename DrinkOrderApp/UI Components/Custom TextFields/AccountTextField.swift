@@ -8,13 +8,28 @@
 import UIKit
 
 class AccountTextField: UITextField {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
     }
-    */
-
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+    
+    private func commonInit () {
+        let attributedPlaceholder = NSAttributedString(
+            string: "Enter your account",
+            attributes: [NSAttributedString.Key.foregroundColor: Colors.lightGray]
+        )
+        self.attributedPlaceholder = attributedPlaceholder
+        self.borderStyle = .roundedRect
+        self.isEnabled = true
+        self.font = UIFont.systemFont(ofSize: 16)
+        self.textColor = Colors.darkGray
+        self.clearButtonMode  = .whileEditing
+        self.translatesAutoresizingMaskIntoConstraints = false
+    }
 }
