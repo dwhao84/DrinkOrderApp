@@ -16,11 +16,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window = UIWindow(windowScene: windowScene)
-        let loginVC = LoginViewController()
-        let loginNC = UINavigationController(rootViewController: loginVC)
+        let authSelectionVC = AuthSelectionViewController()
+        let authSelectionNC = UINavigationController(rootViewController: authSelectionVC)
         
         window?.overrideUserInterfaceStyle = .light
-        window?.rootViewController = loginNC
+        window?.rootViewController = authSelectionVC
         window?.makeKeyAndVisible()
     }
     
