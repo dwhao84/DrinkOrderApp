@@ -9,12 +9,12 @@ import UIKit
 import Kingfisher
 
 class HomePageViewController: UIViewController {
-
+    
     static let shared: String = "HomePageViewController"
     var userName: String?
     
     var drinks: [Record] = []
-//    var drinksOfSelectedCategory = [Record]()
+    lazy var filterDrinks = drinks
     
     // MARK: - UI set up:
     let kebukeLogoImageView: UIImageView = {
@@ -42,6 +42,23 @@ class HomePageViewController: UIViewController {
         return refreshControl
     } ()
     
+    private let searchController: UISearchController = {
+        let searchController = UISearchController()
+        searchController.searchBar.tintColor = Colors.lightGray
+        
+        let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15), NSAttributedString.Key.foregroundColor: Colors.lightGray]
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = attributes
+        
+        let attributedPlaceholder = NSAttributedString(string: "Search Drinks", attributes: attributes)
+        searchController.searchBar.searchTextField.textColor = Colors.white
+        searchController.searchBar.searchTextField.attributedPlaceholder = attributedPlaceholder
+        searchController.searchBar.searchTextField.clearButtonMode = .whileEditing
+        searchController.searchBar.searchTextField.tintColor = Colors.lightGray
+        searchController.searchBar.keyboardType = .default // Ensure the default keyboard is used
+        searchController.searchBar.returnKeyType = .search
+        return searchController
+    } ()
+    
     // MARK: - Life cycle:
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +69,18 @@ class HomePageViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    func setupUI () {
+        self.view.backgroundColor = Colors.kebukeLightBlue
+        
+        setupNavigationItem()
+        addTargets()
+        addDelegateAndDataSource()
+        addConstraints()
+        self.navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+        
+    }
+    
     func fetchDrinksData() {
         // Call Network Manager to fetch data
         NetworkManager.shared.getOrdersData { result in
@@ -60,22 +89,16 @@ class HomePageViewController: UIViewController {
                 // Using DispatchQueue.main.async to fetch data.
                 DispatchQueue.main.async {
                     self.drinks = drinksData.records
+                    self.filterDrinks = self.drinks
+                    self.productTableView.reloadData()
                 }
             case .failure(_):
                 print("Unable to get data")
             }
         }
     }
-
     
-    func setupUI () {
-        self.view.backgroundColor = Colors.kebukeLightBlue
-        setupNavigationItem()
-        addTargets()
-        addDelegateAndDataSource()
-        addConstraints()
-    }
-        
+    
     // set up titleView
     func setupNavigationItem () {
         kebukeLogoImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
@@ -88,6 +111,7 @@ class HomePageViewController: UIViewController {
         appearance.backgroundColor = Colors.kebukeDarkBlue
         self.navigationItem.standardAppearance = appearance
         self.navigationItem.scrollEdgeAppearance = appearance
+        self.navigationItem.hidesSearchBarWhenScrolling = true
     }
     
     // Add tableview delegate & dataSource
@@ -111,7 +135,7 @@ class HomePageViewController: UIViewController {
             productTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
-
+    
     // Add targets
     func addTargets () {
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
@@ -156,17 +180,17 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("DEBUG PRINT: 資料為\(drinks.count)筆")
-        return drinks.count
+        print("DEBUG PRINT: 資料為\(filterDrinks.count)筆")
+        return filterDrinks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DrinkTableViewCell.identifier, for: indexPath) as! DrinkTableViewCell
-//        
+        //
         cell.backgroundColor = Colors.kebukeLightBlue
         cell.selectionStyle  = .gray
         // Define the drinksData from drinks(an array).
-        let drinksData = drinks[indexPath.row]
+        let drinksData = filterDrinks[indexPath.row]
         
         // Using Kingfisher to set the image from URL
         if let imageUrlString = drinksData.fields.drinksImages?.last?.url, let url = URL(string: imageUrlString) {
@@ -192,15 +216,35 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("DEBUG PRINT:\(indexPath.row)")
         
-        let drinks = drinks[indexPath.row]
+        let drinkData = filterDrinks[indexPath.row]
         let orderDetailVC = OrderDetailViewController()
         orderDetailVC.modalPresentationStyle = .overFullScreen
-
-        orderDetailVC.drinksName        = drinks.fields.drinkName
-        orderDetailVC.drinksDescription = drinks.fields.drinksDescription
-        orderDetailVC.drinksImageURL    = drinks.fields.drinksImages?.last?.url
+        
+        orderDetailVC.drinksName        = drinkData.fields.drinkName
+        orderDetailVC.drinksDescription = drinkData.fields.drinksDescription
+        orderDetailVC.drinksImageURL    = drinkData.fields.drinksImages?.last?.url
         orderDetailVC.userName = userName
         self.navigationController?.pushViewController(orderDetailVC, animated: true)
+    }
+}
+
+extension HomePageViewController: UISearchResultsUpdating, UISearchTextFieldDelegate {
+    func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text, !searchText.isEmpty {
+            print(searchText)
+            filterDrinks = drinks.filter { drinksData in
+                return drinksData.fields.drinkName.localizedStandardContains(searchText)
+            }
+        } else {
+            filterDrinks = drinks
+        }
+        productTableView.reloadData()
+    }
+    
+    
+    func searchTextField(_ searchTextField: UISearchTextField, didSelect suggestion: UISearchSuggestion) {
+        print("searchTextField didSelect")
+        searchTextField.becomeFirstResponder()
     }
 }
 
