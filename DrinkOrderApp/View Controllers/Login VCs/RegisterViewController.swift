@@ -20,48 +20,18 @@ class RegisterViewController: UIViewController {
     } ()
     
     // MARK: - UITextField:
-    var nameTextField: UITextField = {
-        let nameTextField: UITextField = UITextField()
-        let attributedPlaceholder = NSAttributedString(
-            string: "Enter your name",
-            attributes: [NSAttributedString.Key.foregroundColor: Colors.kebukeBrown]
-        )
-        nameTextField.attributedPlaceholder = attributedPlaceholder
-        nameTextField.borderStyle = .roundedRect
-        nameTextField.textColor = Colors.darkGray
-        nameTextField.keyboardType = .default
-        nameTextField.clearButtonMode = .whileEditing
-        nameTextField.translatesAutoresizingMaskIntoConstraints = false
+    var nameTextField: NameTextField = {
+        let nameTextField: NameTextField = NameTextField()
         return nameTextField
     } ()
     
-    var mailTextField: UITextField = {
-        let mailTextField: UITextField = UITextField()
-        let attributedPlaceholder = NSAttributedString(
-            string: "Enter your mail",
-            attributes: [NSAttributedString.Key.foregroundColor: Colors.kebukeBrown]
-        )
-        mailTextField.attributedPlaceholder = attributedPlaceholder
-        mailTextField.borderStyle      = .roundedRect
-        mailTextField.textColor        = Colors.darkGray
-        mailTextField.keyboardType = .default
-        mailTextField.clearButtonMode = .whileEditing
-        mailTextField.translatesAutoresizingMaskIntoConstraints = false
+    var mailTextField: MailTextField = {
+        let mailTextField: MailTextField = MailTextField()
         return mailTextField
     } ()
     
-    var passwordTextField: UITextField = {
-        let passwordTextField: UITextField = UITextField()
-        let attributedPlaceholder = NSAttributedString(
-            string: "Enter your password",
-            attributes: [NSAttributedString.Key.foregroundColor: Colors.kebukeBrown]
-        )
-        passwordTextField.attributedPlaceholder = attributedPlaceholder
-        passwordTextField.borderStyle      = .roundedRect
-        passwordTextField.textColor        = Colors.darkGray
-        passwordTextField.keyboardType = .default
-        passwordTextField.clearButtonMode = .whileEditing
-        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+    var passwordTextField: PasswordTextField = {
+        let passwordTextField: PasswordTextField = PasswordTextField()
         return passwordTextField
     } ()
     
@@ -135,9 +105,9 @@ class RegisterViewController: UIViewController {
     var mainStackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
         stackView.axis = .vertical
-        stackView.distribution = .equalCentering
+        stackView.distribution = .fill
         stackView.alignment = .center
-        stackView.spacing = 35
+        stackView.spacing = 20
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     } ()
@@ -158,7 +128,6 @@ class RegisterViewController: UIViewController {
         addConstraints()
         addDelegates ()
         addTargets ()
-        
     }
     
     func addTargets () {
@@ -172,6 +141,9 @@ class RegisterViewController: UIViewController {
     }
     
     func addConstraints () {
+        let imageViewWidth: Double = self.view.bounds.width - 100.0
+        logoImageView.widthAnchor.constraint(equalToConstant: imageViewWidth).isActive = true
+        logoImageView.heightAnchor.constraint(equalToConstant: imageViewWidth * 0.7).isActive = true
         
         nameStackView.addArrangedSubview(nameLabel)
         nameStackView.addArrangedSubview(nameTextField)
@@ -182,36 +154,34 @@ class RegisterViewController: UIViewController {
         passwordStackView.addArrangedSubview(passwordLabel)
         passwordStackView.addArrangedSubview(passwordTextField)
         
+        mainStackView.addArrangedSubview(logoImageView)
         mainStackView.addArrangedSubview(nameStackView)
         mainStackView.addArrangedSubview(mailStackView)
         mainStackView.addArrangedSubview(passwordStackView)
         mainStackView.addArrangedSubview(registerButton)
         
-        view.addSubview(logoImageView)
         view.addSubview(mainStackView)
         
         NSLayoutConstraint.activate([
-            
-            logoImageView.widthAnchor.constraint(equalToConstant: 280),
-            logoImageView.heightAnchor.constraint(equalToConstant: 45),
+            // name TextField
             nameTextField.widthAnchor.constraint(equalToConstant: 280),
             nameTextField.heightAnchor.constraint(equalToConstant: 45),
+            
+            // password TextField
             passwordTextField.widthAnchor.constraint(equalToConstant: 280),
             passwordTextField.heightAnchor.constraint(equalToConstant: 45),
+            
+            // Mail TextField
             mailTextField.widthAnchor.constraint(equalToConstant: 280),
             mailTextField.heightAnchor.constraint(equalToConstant: 45),
             
             // Register Button
-            registerButton.widthAnchor.constraint(equalToConstant: 280),
+            registerButton.widthAnchor.constraint(equalToConstant: self.view.bounds.width - 180),
             registerButton.heightAnchor.constraint(equalToConstant: 50),
             
-            // Logo ImageView:
-            logoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
-            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
             // Main StackView:
-            mainStackView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 100),
             mainStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            mainStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
     
@@ -222,11 +192,14 @@ class RegisterViewController: UIViewController {
               let password = passwordTextField.text, !password.isEmpty else {
             // 如果其中一個欄位是空的，顯示相應的錯誤提示。
             if nameTextField.text == "" {
-                showMissingNameAC()
+                showAlertVC(title: "缺少姓名資料", message: "")
+                
             } else if mailTextField.text == "" {
-                showMissingMailAC()
+                showAlertVC(title: "缺少信箱資料", message: "")
+                
             } else if passwordTextField.text == "" {
-                showMissingPasswordAC()
+                showAlertVC(title: "缺少密碼資料", message: "")
+                
             }
             return
         }
@@ -241,62 +214,21 @@ class RegisterViewController: UIViewController {
                 return
             }
             // 註冊成功後，顯示成功訊息
-            self.showSuccessAC()
+            self.showAlertVC(title: "註冊成功 Register Success", message: "")
         }
     }
-    
-    
+
     
     // MARK: - Alert Controller:
-    func showSuccessAC () {
+    func showAlertVC (title: String, message: String) {
         let controller = UIAlertController(
-            title: """
-            註冊成功
-            Register Success
-            """,
-            message: "",
+            title: title,
+            message: message,
             preferredStyle: .alert
         )
         controller.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(controller, animated: true, completion: nil)
     }
-    
-    func showMissingNameAC () {
-        let controller = UIAlertController(
-            title: """
-            缺少姓名資料
-            """,
-            message: "",
-            preferredStyle: .alert
-        )
-        controller.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(controller, animated: true, completion: nil)
-    }
-    
-    func showMissingMailAC () {
-        let controller = UIAlertController(
-            title: """
-            缺少信箱資料
-            """,
-            message: "",
-            preferredStyle: .alert
-        )
-        controller.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(controller, animated: true, completion: nil)
-    }
-    
-    func showMissingPasswordAC () {
-        let controller = UIAlertController(
-            title: """
-            缺少密碼資料
-            """,
-            message: "",
-            preferredStyle: .alert
-        )
-        controller.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(controller, animated: true, completion: nil)
-    }
-    
 }
 
 // MARK: - Extension:
