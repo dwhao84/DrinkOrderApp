@@ -27,7 +27,7 @@ class RegisterButton: UIButton {
         container.font = UIFont.boldSystemFont(ofSize: 18)
         config.attributedTitle = AttributedString("Register", attributes: container)
         config.titleAlignment      = .center
-        config.cornerStyle         = .large
+        config.cornerStyle         = .capsule
         self.configuration         = config
 
         configurationUpdateHandler = { button in
