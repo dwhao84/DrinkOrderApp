@@ -140,10 +140,10 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: OrderListTableViewCell.identifier, for: indexPath) as! OrderListTableViewCell
         
-        cell.drinksTitleLabel.text = "熟成紅茶"
-        cell.drinksDescriptionLabel.text = "帶有濃穩果香的經典紅茶"
-        cell.drinksPriceLabel.text = "中: 40 / 大: 45"
-        cell.drinksImageView.image = Images.banner01
+        cell.drinksTitleLabel.text = "Loading..."
+        cell.toppingContentLabel.text = "Loading..."
+        cell.drinksPriceLabel.text = "Loading..."
+        cell.drinksImageView.image = Images.banner03
         cell.selectionStyle = .gray
         
         // Set up tableView cell when selected will show inside of the corner shape.
