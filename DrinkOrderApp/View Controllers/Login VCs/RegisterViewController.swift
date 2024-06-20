@@ -77,7 +77,7 @@ class RegisterViewController: UIViewController {
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .leading
-        stackView.spacing = 10
+        stackView.spacing = 5
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     } ()
@@ -87,7 +87,7 @@ class RegisterViewController: UIViewController {
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .leading
-        stackView.spacing = 10
+        stackView.spacing = 5
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     } ()
@@ -97,7 +97,7 @@ class RegisterViewController: UIViewController {
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .leading
-        stackView.spacing = 10
+        stackView.spacing = 5
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     } ()
@@ -107,11 +107,10 @@ class RegisterViewController: UIViewController {
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .center
-        stackView.spacing = 20
+        stackView.spacing = 25
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     } ()
-    
     
     // MARK: - Life Cycle:
     override func viewDidLoad() {
