@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let authSelectionNC = UINavigationController(rootViewController: authSelectionVC)
         
         window?.overrideUserInterfaceStyle = .light
-        window?.rootViewController = authSelectionVC
+        window?.rootViewController = authSelectionNC
         window?.makeKeyAndVisible()
     }
     
