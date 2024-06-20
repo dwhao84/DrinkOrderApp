@@ -56,13 +56,18 @@ class LoginViewController: UIViewController {
         print("Into the LoginVC")
         self.view.backgroundColor = Colors.kebukeDarkBlue
         setupUI()
-        addTarget()
-//        addDelegate()
+        addTargets()
+        addDelegates()
     }
     
-    func addTarget () {
-///*        loginButton.addTarget(self, action: #selector(loginBtnTapped), for: .touchUpInside)
+    // MARK: - Add Targets
+    func addTargets () {
         loginButton.addTarget(self, action: #selector(loginBtnTapped), for: .touchUpInside)
+    }
+    
+    func addDelegates () {
+        accountTextField.delegate  = self
+        passwordTextField.delegate = self
     }
     
     // MARK: - Actions
@@ -73,7 +78,7 @@ class LoginViewController: UIViewController {
           print("DEBUG PRINT: registerBtnTapped")
       }
       
-      // MARK: - Create multiple navigation controller:
+      // MARK: - Create multiple navigation controller for tabBarController:
       func createTheHomePageNavigationVC () -> UINavigationController {
           let homePageVC              = HomePageViewController()
           let homePageNC              = UINavigationController(rootViewController: homePageVC)
@@ -132,7 +137,6 @@ class LoginViewController: UIViewController {
         stackView.addArrangedSubview(accountTextField)
         stackView.addArrangedSubview(passwordTextField)
         stackView.addArrangedSubview(loginButton)
-
         
         view.addSubview(stackView)
         NSLayoutConstraint.activate([
@@ -157,6 +161,7 @@ class LoginViewController: UIViewController {
 
 // MARK: - Extenstion:
 extension LoginViewController: UITextFieldDelegate {
+    // MARK: - textField Should Return
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("DEBUG PRINT: textFieldShouldReturn")
         
@@ -168,19 +173,32 @@ extension LoginViewController: UITextFieldDelegate {
         return true
     }
     
+    // MARK: - textField Did Change Selection
     func textFieldDidChangeSelection(_ textField: UITextField) {
         
         if textField == accountTextField {
             print("""
-                  DEBUG PRINT: textFieldDidChangeSelection
+                  DEBUG PRINT: textField Did Change Selection
                   \(textField.text ?? "accountTextField Did Change")
                   """)
         } else if textField == passwordTextField {
             print("""
-                  DEBUG PRINT: textFieldDidChangeSelection
+                  DEBUG PRINT: textField Did Change Selection
                   \(textField.text ?? "passwordTextField Did Change")
                   """)
         }
+    }
+    
+    // MARK: - textField Did Begin Editing
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.becomeFirstResponder()
+        print("textField Did Begin Editing")
+    }
+    
+    // MARK: - textField Did End Editing
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.resignFirstResponder()
+        print("textField Did End Editing")
     }
 }
 
