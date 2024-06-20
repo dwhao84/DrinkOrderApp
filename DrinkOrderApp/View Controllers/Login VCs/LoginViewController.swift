@@ -25,8 +25,9 @@ class LoginViewController: UIViewController {
     } ()
     
     private let passwordTextField: PasswordTextField = {
-        let accountTextField: PasswordTextField = PasswordTextField()
-        return accountTextField
+        let passwordTextField: PasswordTextField = PasswordTextField()
+        passwordTextField.isSecureTextEntry = true
+        return passwordTextField
     } ()
     
     // MARK: - UIButton:
