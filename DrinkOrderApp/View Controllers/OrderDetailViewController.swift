@@ -478,7 +478,7 @@ class OrderDetailViewController: UIViewController {
                 
                 NetworkManager.shared.postOrdersData(order: newOrder) { result in
                     switch result {
-                    case .success(let newOrder):
+                    case .success(_):
                         DispatchQueue.main.async {
                             self.showAlertVC(title: "Order Created", message: "Your Order is created")
                             let orderListVC = OrderListViewController()
