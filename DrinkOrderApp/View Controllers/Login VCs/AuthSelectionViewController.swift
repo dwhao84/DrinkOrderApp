@@ -95,10 +95,10 @@ class AuthSelectionViewController: UIViewController {
     // MARK: - Setup UI:
     func setupUI() {
         loginButton.widthAnchor.constraint(equalToConstant: self.view.bounds.width - 120).isActive = true
-        loginButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        loginButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         registerButton.widthAnchor.constraint(equalToConstant: self.view.bounds.width - 120).isActive = true
-        registerButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        registerButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         let imageViewWidth: Double = self.view.bounds.width - 60.0
         logoImageView.widthAnchor.constraint(equalToConstant: imageViewWidth).isActive = true
