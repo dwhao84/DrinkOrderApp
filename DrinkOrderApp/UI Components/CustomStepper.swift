@@ -15,7 +15,9 @@ class CustomStepper: UIControl {
         let plusStepperBtn: UIButton = UIButton(type: .system)
         var config = UIButton.Configuration.bordered()
         config.image = Images.plus
-        config.baseForegroundColor = Colors.lightGray
+        config.cornerStyle = .capsule
+        config.baseForegroundColor = Colors.darkGray
+        config.baseBackgroundColor = Colors.clear
         config.automaticallyUpdateForSelection = true
         plusStepperBtn.configuration = config
         plusStepperBtn.isUserInteractionEnabled = true
@@ -30,7 +32,9 @@ class CustomStepper: UIControl {
         let minusStepperBtn: UIButton = UIButton(type: .system)
         var config = UIButton.Configuration.bordered()
         config.image = Images.minus
-        config.baseForegroundColor = Colors.lightGray
+        config.cornerStyle = .capsule
+        config.baseForegroundColor = Colors.darkGray
+        config.baseBackgroundColor = Colors.clear
         config.automaticallyUpdateForSelection = true
         minusStepperBtn.configuration = config
         minusStepperBtn.isUserInteractionEnabled = true
@@ -54,7 +58,9 @@ class CustomStepper: UIControl {
     let stackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
+        stackView.layer.cornerRadius = 15
+        stackView.clipsToBounds = true
+        stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.spacing = 0
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -64,7 +70,6 @@ class CustomStepper: UIControl {
     // MARK: - init
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        
         configStackView ()
         addConstraints()
         addTargets()
@@ -106,16 +111,25 @@ class CustomStepper: UIControl {
         value += 1
         if value >= 10 {
             value = 10
+            plusStepperBtn.configuration?.baseForegroundColor = Colors.lightGray
+            minusStepperBtn.configuration?.baseForegroundColor = Colors.darkGray
             print("DEBUG PRINT: value is over than 10")
         }
+        
+        minusStepperBtn.configuration?.baseForegroundColor = Colors.darkGray
         updateNumberLabel ()
     }
     
     @objc func minusStepperBtnTapped (_ sender: UIButton) {
         value -= 1
-        if value < 0 {
+        if value <= 0 {
             value = 0
+            plusStepperBtn.configuration?.baseForegroundColor = Colors.darkGray
+            minusStepperBtn.configuration?.baseForegroundColor = Colors.lightGray
             print("DEBUG PRINT: value is less than 0")
+        } else if value <= 10 {
+            plusStepperBtn.configuration?.baseForegroundColor = Colors.darkGray
+            minusStepperBtn.configuration?.baseForegroundColor = Colors.darkGray
         }
         updateNumberLabel ()
     }
