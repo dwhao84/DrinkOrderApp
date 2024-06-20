@@ -25,4 +25,5 @@ struct Colors {
     static let systemGray5: UIColor             = UIColor.systemGray5
     static let systemGray6: UIColor             = UIColor.systemGray6
     static let clear: UIColor                   = UIColor.clear
+    static let alphaColor: UIColor              = UIColor(red: 1, green: 1, blue: 1, alpha: 0.2)
 }
