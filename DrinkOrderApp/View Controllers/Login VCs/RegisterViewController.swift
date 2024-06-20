@@ -10,8 +10,13 @@ import FirebaseAuth
 
 class RegisterViewController: UIViewController {
     
+    // Create the condiction for register.
+    let word: String       = "abcdefghijklmnopqrstuvwxyz"
+    let digit: String      = "0123456789"
+    let correction: String = "&=_'-+,<>."
+    
     // MARK: - UIImageView:
-    var logoImageView: UIImageView = {
+    let logoImageView: UIImageView = {
         let logoImageView: UIImageView = UIImageView()
         logoImageView.image       = Images.kebukeLoginLogo
         logoImageView.contentMode = .scaleAspectFill
@@ -20,31 +25,32 @@ class RegisterViewController: UIViewController {
     } ()
     
     // MARK: - UITextField:
-    var nameTextField: NameTextField = {
+    let nameTextField: NameTextField = {
         let nameTextField: NameTextField = NameTextField()
         return nameTextField
     } ()
     
-    var mailTextField: MailTextField = {
+    let mailTextField: MailTextField = {
         let mailTextField: MailTextField = MailTextField()
         return mailTextField
     } ()
     
-    var passwordTextField: PasswordTextField = {
+    let passwordTextField: PasswordTextField = {
         let passwordTextField: PasswordTextField = PasswordTextField()
+        passwordTextField.isSecureTextEntry = true
         return passwordTextField
     } ()
     
     
     // MARK: - UIButton:
-    var registerButton: SecRegisterButton = {
+    let registerButton: SecRegisterButton = {
         let button = SecRegisterButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     } ()
     
     // MARK: - UILabel:
-    var nameLabel: UILabel = {
+    let nameLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "Enter your name:"
         label.textColor = Colors.white
@@ -53,7 +59,7 @@ class RegisterViewController: UIViewController {
         return label
     } ()
     
-    var mailLabel: UILabel = {
+    let mailLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "Enter your E-mail:"
         label.textColor = Colors.white
@@ -62,7 +68,7 @@ class RegisterViewController: UIViewController {
         return label
     } ()
     
-    var passwordLabel: UILabel = {
+    let passwordLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "Enter your Password:"
         label.textColor = Colors.white
@@ -71,8 +77,35 @@ class RegisterViewController: UIViewController {
         return label
     } ()
     
+    let enterNameStatusLabel: UILabel = {
+        let label: UILabel = UILabel()
+        label.text = "狀態"
+        label.textColor = Colors.red
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    } ()
+    
+    let enterEmailStatusLabel: UILabel = {
+        let label: UILabel = UILabel()
+        label.text = "狀態"
+        label.textColor = Colors.red
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    } ()
+    
+    let enterPasswordStatusLabel: UILabel = {
+        let label: UILabel = UILabel()
+        label.text = "狀態"
+        label.textColor = Colors.red
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    } ()
+    
     // MARK: - UIStackView:
-    var nameStackView: UIStackView = {
+    let nameStackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
@@ -82,7 +115,7 @@ class RegisterViewController: UIViewController {
         return stackView
     } ()
     
-    var mailStackView: UIStackView = {
+    let mailStackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
@@ -92,7 +125,7 @@ class RegisterViewController: UIViewController {
         return stackView
     } ()
     
-    var passwordStackView: UIStackView = {
+    let passwordStackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
@@ -102,7 +135,7 @@ class RegisterViewController: UIViewController {
         return stackView
     } ()
     
-    var mainStackView: UIStackView = {
+    let mainStackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fill
@@ -119,6 +152,7 @@ class RegisterViewController: UIViewController {
         print("Into the RegisterVC")
         setupUI()
         
+        enterPasswordStatusLabel.isHidden = true
     }
     
     // MARK: - Beginning to set up:
@@ -152,6 +186,7 @@ class RegisterViewController: UIViewController {
         
         passwordStackView.addArrangedSubview(passwordLabel)
         passwordStackView.addArrangedSubview(passwordTextField)
+        passwordStackView.addArrangedSubview(enterPasswordStatusLabel)
         
         mainStackView.addArrangedSubview(logoImageView)
         mainStackView.addArrangedSubview(nameStackView)
@@ -160,7 +195,6 @@ class RegisterViewController: UIViewController {
         mainStackView.addArrangedSubview(registerButton)
         
         view.addSubview(mainStackView)
-        
         NSLayoutConstraint.activate([
             // name TextField
             nameTextField.widthAnchor.constraint(equalToConstant: 280),
@@ -198,7 +232,6 @@ class RegisterViewController: UIViewController {
                 
             } else if passwordTextField.text == "" {
                 showAlertVC(title: "缺少密碼資料", message: "")
-                
             }
             return
         }
