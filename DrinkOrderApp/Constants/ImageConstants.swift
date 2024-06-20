@@ -40,9 +40,13 @@ struct Images {
     static let plus: UIImage           = UIImage(systemName: "plus")!
     static let minus: UIImage          = UIImage(systemName: "minus")!
     static let mapIcon: UIImage        = UIImage(named: "map-icon")!
-    
-    static let photoFill: UIImage   = UIImage(systemName: "photo.fill")!
+    static let photoFill: UIImage      = UIImage(systemName: "photo.fill")!
     
     // For EmptyStateView
-    static let doc: UIImage = UIImage(systemName: "doc.text")!
+    static let doc: UIImage            = UIImage(systemName: "doc.text")!
+    
+    // eye
+    static let eyeCircle: UIImage      = UIImage(systemName: "eye.circle")!
+    static let eyeSlashCircle: UIImage = UIImage(systemName: "eye.slash.circle")!
+    
 }
