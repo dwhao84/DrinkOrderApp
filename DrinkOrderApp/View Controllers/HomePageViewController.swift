@@ -104,7 +104,7 @@ class HomePageViewController: UIViewController {
         kebukeLogoImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
         self.navigationItem.titleView = kebukeLogoImageView
         self.navigationItem.titleView?.backgroundColor = Colors.kebukeDarkBlue
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: Images.list, style: .plain, target: self, action: #selector(listBarBtnTapped))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: Images.list, style: .plain, target: self, action: #selector(listBarBtnTapped))
         
         // set up appearance
         let appearance = UINavigationBarAppearance()
