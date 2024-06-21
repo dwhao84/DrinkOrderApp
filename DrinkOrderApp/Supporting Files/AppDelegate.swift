@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Firebase
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,9 +15,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Ask the UINavigationBar appearance's tintColor
         UINavigationBar.appearance().tintColor = Colors.kebukeBrown
-        
-        // Configure Firebase SDK
-        FirebaseApp.configure()
         
         return true
     }

@@ -31,4 +31,6 @@ enum PasswordCheck {
 enum EmailCheck {
     case valid
     case empty
+    case lackCorrection
+    case lackAt
 }
