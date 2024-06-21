@@ -6,14 +6,9 @@
 //
 
 import UIKit
-import FirebaseAuth
+//import FirebaseAuth
 
 class RegisterViewController: UIViewController {
-    
-    // Create the condiction for register.
-    let word: String       = "abcdefghijklmnopqrstuvwxyz"
-    let digit: String      = "0123456789"
-    let correction: String = "&=_'-+,<>."
     
     // MARK: - UIImageView:
     let logoImageView: UIImageView = {
@@ -152,6 +147,8 @@ class RegisterViewController: UIViewController {
         print("Into the RegisterVC")
         setupUI()
         
+        enterNameStatusLabel.isHidden = true
+        enterEmailStatusLabel.isHidden = true
         enterPasswordStatusLabel.isHidden = true
     }
     
@@ -159,7 +156,7 @@ class RegisterViewController: UIViewController {
     func setupUI () {
         self.view.backgroundColor = Colors.kebukeDarkBlue
         addConstraints()
-        addDelegates ()
+        addTextFieldsDelegate ()
         addTargets ()
     }
     
@@ -167,7 +164,7 @@ class RegisterViewController: UIViewController {
         registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
     }
     
-    func addDelegates () {
+    func addTextFieldsDelegate () {
         nameTextField.delegate = self
         mailTextField.delegate = self
         passwordTextField.delegate = self
@@ -180,9 +177,11 @@ class RegisterViewController: UIViewController {
         
         nameStackView.addArrangedSubview(nameLabel)
         nameStackView.addArrangedSubview(nameTextField)
+        nameStackView.addArrangedSubview(enterNameStatusLabel)
         
         mailStackView.addArrangedSubview(mailLabel)
         mailStackView.addArrangedSubview(mailTextField)
+        mailStackView.addArrangedSubview(enterEmailStatusLabel)
         
         passwordStackView.addArrangedSubview(passwordLabel)
         passwordStackView.addArrangedSubview(passwordTextField)
@@ -220,36 +219,48 @@ class RegisterViewController: UIViewController {
     
     // MARK: - Action:
     @objc func registerButtonTapped(_ sender: UIButton) {
-        guard let name = nameTextField.text, !name.isEmpty,
-              let email = mailTextField.text, !email.isEmpty,
-              let password = passwordTextField.text, !password.isEmpty else {
-            // 如果其中一個欄位是空的，顯示相應的錯誤提示。
-            if nameTextField.text == "" {
-                showAlertVC(title: "缺少姓名資料", message: "")
-                
-            } else if mailTextField.text == "" {
-                showAlertVC(title: "缺少信箱資料", message: "")
-                
-            } else if passwordTextField.text == "" {
-                showAlertVC(title: "缺少密碼資料", message: "")
-            }
-            return
-        }
+//        let account = account
+        let password = passwordTextField.text ?? ""
+        let email = mailTextField.text ?? ""
         
-        // 使用電子郵件和密碼註冊新用戶
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            if let error = error {
-                // 處理可能的錯誤，如郵件格式錯誤或密碼不符合要求等
-                let errorAlert = UIAlertController(title: "Registration Error", message: error.localizedDescription, preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
-                self.present(errorAlert, animated: true)
-                return
-            }
-            // 註冊成功後，顯示成功訊息
-            self.showAlertVC(title: "註冊成功 Register Success", message: "")
-        }
+        
+        
     }
 
+    func checkAccountResult(_ account: String) -> AccountCheck {
+        let word = "abcdefghijklmnopqrstuvwxyz"
+        let digits = "0123456789"
+        let correction = "&=_'-+,<>."
+        
+        if account.count < 16 && account.count > 9 { return .lackAccountTextLength }
+        if account.count == 0 { return .empty }
+        if !account.contains(where: word.contains) { return .lackWord }
+        if !account.contains(where: digits.contains) { return .lackDigits }
+        if !account.contains(where: correction.contains) { return .lackCorrection }
+        else { return .valid }
+    }
+    
+    func checkPasswordResult(_ password: String) -> PasswordCheck {
+        let tenCommonPasswords = ["123456", "123456789", "qwerty", "password", "12345678", "111111", "iloveyou", "1q2w3e", "123123", "password1"]
+        let digits = "0123456789"
+        let punctuation = "!@#$%^&*(),.<>;'`~[]{}\\|/?_-+= "
+        let textLength = Int(passwordTextField.text?.count ?? 0)
+        
+        if tenCommonPasswords.contains(password) { return .containsCommonPassword }
+        else if !digits.contains(where: { digits.contains($0) }) { return .lacksDigits }
+        else if !password.contains(where: { punctuation.contains($0) }) { return .lacksPunctuation }
+        else if textLength < 16 && textLength > 30 { return .lackTextLength }
+        else { return .valid }
+    }
+    
+    func checkEmailResult(_ email: String) -> EmailCheck {
+        let emailAddress: [String] = ["@gmail.com, @yahoo.com.tw"]
+        let punctuation = "!@#$%^&*(),.<>;'`~[]{}\\|/?_-+= "
+        
+        if email.contains(email) { return .lackAt }
+        else if !email.contains(where: { punctuation.contains($0) }) { return .lackCorrection }
+        else { return .valid }
+    }
     
     // MARK: - Alert Controller:
     func showAlertVC (title: String, message: String) {
