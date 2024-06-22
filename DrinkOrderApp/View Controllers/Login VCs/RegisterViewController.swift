@@ -219,28 +219,81 @@ class RegisterViewController: UIViewController {
     
     // MARK: - Action:
     @objc func registerButtonTapped(_ sender: UIButton) {
-//        let account = account
         let password = passwordTextField.text ?? ""
         let email = mailTextField.text ?? ""
         
+        let passwordCheckResult = checkPasswordCorrection(password)
+        let emailCheckResult = checkEmailResult(email)
         
+        // 檢查 password 是否正確
+        if passwordCheckResult != .valid {
+            switch passwordCheckResult {
+            case .valid:
+                print("輸入密碼成功")
+                enterPasswordStatusLabel.isHidden = true
+                
+            case .containsCommonPassword:
+                print("密碼是常使用密碼，建議更換")
+                enterPasswordStatusLabel.isHidden = false
+                enterPasswordStatusLabel.text = "密碼是常使用密碼，建議更換"
+                
+            case .lacksDigits:
+                print("缺少數字")
+                enterPasswordStatusLabel.isHidden = false
+                enterPasswordStatusLabel.text = "密碼缺少數字"
+                
+            case .lacksPunctuation:
+                print("密碼輸入錯誤的內容")
+                enterPasswordStatusLabel.isHidden = false
+                enterPasswordStatusLabel.text = "密碼輸入錯誤的內容"
+                
+            case .lackTextLength:
+                print("密碼長度內容有誤")
+                enterPasswordStatusLabel.isHidden = false
+                enterPasswordStatusLabel.text = "密碼長度內容有誤"
+                
+            case .empty:
+                print("密碼空白")
+                enterPasswordStatusLabel.isHidden = false
+                enterPasswordStatusLabel.text = "密碼空白"
+            }
+        } else if passwordCheckResult == .valid {
+            print("密碼輸入成功")
+            enterPasswordStatusLabel.isHidden = true
+        }
         
-    }
-
-    func checkAccountResult(_ account: String) -> AccountCheck {
-        let word = "abcdefghijklmnopqrstuvwxyz"
-        let digits = "0123456789"
-        let correction = "&=_'-+,<>."
+        // 檢查 email 是否正確
+        switch emailCheckResult {
+        case .valid:
+            print("E-mail 輸入成功")
+            enterEmailStatusLabel.isHidden = true
+        case .lackCorrection:
+            print("E-mail 輸入不正確")
+            enterEmailStatusLabel.text = "E-mail 輸入不正確"
+            enterEmailStatusLabel.isHidden = false
+        case .lackAt:
+            print("E-mail 缺少@")
+            enterEmailStatusLabel.text = "E-mail 缺少@"
+            enterEmailStatusLabel.isHidden = false
+        case .invalidDomain:
+            print("郵件輸入內容缺少網域")
+            enterEmailStatusLabel.text = "郵件輸入內容缺少Domain"
+            enterEmailStatusLabel.isHidden = false
+        }
         
-        if account.count < 16 && account.count > 9 { return .lackAccountTextLength }
-        if account.count == 0 { return .empty }
-        if !account.contains(where: word.contains) { return .lackWord }
-        if !account.contains(where: digits.contains) { return .lackDigits }
-        if !account.contains(where: correction.contains) { return .lackCorrection }
-        else { return .valid }
+        if passwordCheckResult == .valid && emailCheckResult != .valid {
+            print("郵件輸入錯誤")
+        } else if passwordCheckResult != .valid && emailCheckResult == .valid {
+            print("密碼輸入錯誤")
+        } else {
+            print("密碼 / 郵件 輸入正確")
+            let loginVC: UIViewController = LoginViewController()
+            self.present(loginVC, animated: true)
+        }
+        
     }
     
-    func checkPasswordResult(_ password: String) -> PasswordCheck {
+    func checkPasswordCorrection(_ password: String) -> PasswordCheck {
         let tenCommonPasswords = ["123456", "123456789", "qwerty", "password", "12345678", "111111", "iloveyou", "1q2w3e", "123123", "password1"]
         let digits = "0123456789"
         let punctuation = "!@#$%^&*(),.<>;'`~[]{}\\|/?_-+= "
@@ -248,18 +301,28 @@ class RegisterViewController: UIViewController {
         
         if tenCommonPasswords.contains(password) { return .containsCommonPassword }
         else if !digits.contains(where: { digits.contains($0) }) { return .lacksDigits }
-        else if !password.contains(where: { punctuation.contains($0) }) { return .lacksPunctuation }
+        else if password.contains(where: { punctuation.contains($0) }) { return .lacksPunctuation }
         else if textLength < 16 && textLength > 30 { return .lackTextLength }
         else { return .valid }
     }
     
     func checkEmailResult(_ email: String) -> EmailCheck {
-        let emailAddress: [String] = ["@gmail.com, @yahoo.com.tw"]
-        let punctuation = "!@#$%^&*(),.<>;'`~[]{}\\|/?_-+= "
+        let emailAddress: [String] = ["@gmail.com", "@yahoo.com.tw"]
+        let punctuation = "!#$%^&*(),.<>;'`~[]{}\\|/?_-+= "
         
-        if email.contains(email) { return .lackAt }
-        else if !email.contains(where: { punctuation.contains($0) }) { return .lackCorrection }
-        else { return .valid }
+        if !email.contains("@") {
+            print("DEBUG PRINT: 郵件地址缺少@")
+            return .lackAt
+        }
+        if email.contains(where: { punctuation.contains($0)}) {
+            print("DEBUG PRINT: 郵件地址內容不太正確")
+            return .lackCorrection
+        }
+        if !emailAddress.contains(where: { email.contains($0)}) {
+            print("DEBUG PRINT: 郵件地址網域不正確")
+            return .invalidDomain
+        }
+        return .valid
     }
     
     // MARK: - Alert Controller:
@@ -277,30 +340,30 @@ class RegisterViewController: UIViewController {
 // MARK: - Extension:
 extension RegisterViewController: UITextFieldDelegate {
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        print("textFieldShouldEndEditing")
+        print("textField Should EndEditing")
         textField.resignFirstResponder()
         return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("textFieldShouldReturn")
+        print("textField Should Return")
         textField.resignFirstResponder()
         return true
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("textFieldDidBeginEditing")
+        print("textField Did Begin Editing")
         textField.becomeFirstResponder()
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        print("textFieldDidChangeSelection")
+        print("textField Did Change Selection")
         print("DEBUG PRINT: \(textField.text ?? "")")
         textField.becomeFirstResponder()
     }
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        print("textFieldShouldClear")
+        print("textField Should Clear")
         
         textField.text = ""
         return true

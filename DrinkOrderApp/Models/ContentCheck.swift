@@ -30,7 +30,13 @@ enum PasswordCheck {
 // Checking E-mail:
 enum EmailCheck {
     case valid
-    case empty
     case lackCorrection
     case lackAt
+    case invalidDomain
+}
+
+enum NameCheck {
+    case valid
+    case empty
+    case lackTextlength
 }
