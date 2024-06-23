@@ -264,6 +264,13 @@ class OrderDetailViewController: UIViewController {
         sugarLevelTextField.text = sugarLevel[0]
         iceLevelTextField.text   = iceLevel[0]
         toppingTextField.text    = toppingChoose[0]
+        userNameTextField.text   = "填入姓名"
+    }
+    
+    // MARK: Using  viewWillAppear to Make sure the tabBar is hidding.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     // MARK: - Set up UI.
@@ -457,7 +464,7 @@ class OrderDetailViewController: UIViewController {
                 print("DEBUG PRINT: 尚未選擇飲料加料內容")
                 showAlertVC(title: selectionStatusContent[3], message: selectionStatus[3])
                 
-            } else if userNameTextField.text == "" {
+            } else if userNameTextField.text == "填入姓名" || userNameTextField.text == "" {
                 print("DEBUG PRINT: 記得填入姓名，不然彼得不會幫你付錢")
                 showAlertVC(title: "記得填入姓名", message: "記得填入姓名，不然彼得不會幫你付錢")
                 
