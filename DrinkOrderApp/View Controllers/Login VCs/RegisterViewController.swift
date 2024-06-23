@@ -6,9 +6,20 @@
 //
 
 import UIKit
-//import FirebaseAuth
 
 class RegisterViewController: UIViewController {
+    
+    enum  Condition {
+        // Create the condiction for register.
+        static let word: String       = "abcdefghijklmnopqrstuvwxyz"
+        static let digit: String      = "0123456789"
+        static let correction: String = "&=_'-+,<>."
+        static let tenCommonPasswords = ["123456", "123456789", "qwerty", "password", "12345678", "111111", "iloveyou", "1q2w3e", "123123", "password1"]
+        static let punctuation = "!@#$%^&*(),.<>;'`~[]{}\\|/?_-+= "
+        static let mailAddress = "@gmail.com, @yahoo.com.tw"
+    }
+    
+
     
     // MARK: - UIImageView:
     let logoImageView: UIImageView = {
@@ -218,113 +229,34 @@ class RegisterViewController: UIViewController {
     }
     
     // MARK: - Action:
-    @objc func registerButtonTapped(_ sender: UIButton) {
-        let password = passwordTextField.text ?? ""
-        let email = mailTextField.text ?? ""
+    @objc func registerButtonTapped(_ sender: UIButton)  {
         
-        let passwordCheckResult = checkPasswordCorrection(password)
-        let emailCheckResult = checkEmailResult(email)
+        let enteredName = nameTextField.text ?? ""
+        let enteredMail = mailTextField.text ?? ""
+        let enteredPassword = passwordTextField.text ?? ""
         
-        // 檢查 password 是否正確
-        if passwordCheckResult != .valid {
-            switch passwordCheckResult {
-            case .valid:
-                print("輸入密碼成功")
-                enterPasswordStatusLabel.isHidden = true
-                
-            case .containsCommonPassword:
-                print("密碼是常使用密碼，建議更換")
-                enterPasswordStatusLabel.isHidden = false
-                enterPasswordStatusLabel.text = "密碼是常使用密碼，建議更換"
-                
-            case .lacksDigits:
-                print("缺少數字")
-                enterPasswordStatusLabel.isHidden = false
-                enterPasswordStatusLabel.text = "密碼缺少數字"
-                
-            case .lacksPunctuation:
-                print("密碼輸入錯誤的內容")
-                enterPasswordStatusLabel.isHidden = false
-                enterPasswordStatusLabel.text = "密碼輸入錯誤的內容"
-                
-            case .lackTextLength:
-                print("密碼長度內容有誤")
-                enterPasswordStatusLabel.isHidden = false
-                enterPasswordStatusLabel.text = "密碼長度內容有誤"
-                
-            case .empty:
-                print("密碼空白")
-                enterPasswordStatusLabel.isHidden = false
-                enterPasswordStatusLabel.text = "密碼空白"
-            }
-        } else if passwordCheckResult == .valid {
-            print("密碼輸入成功")
-            enterPasswordStatusLabel.isHidden = true
+        if enteredName.isEmpty {
+            print("enteredName is empty")
         }
         
-        // 檢查 email 是否正確
-        switch emailCheckResult {
-        case .valid:
-            print("E-mail 輸入成功")
-            enterEmailStatusLabel.isHidden = true
-        case .lackCorrection:
-            print("E-mail 輸入不正確")
-            enterEmailStatusLabel.text = "E-mail 輸入不正確"
-            enterEmailStatusLabel.isHidden = false
-        case .lackAt:
-            print("E-mail 缺少@")
-            enterEmailStatusLabel.text = "E-mail 缺少@"
-            enterEmailStatusLabel.isHidden = false
-        case .invalidDomain:
-            print("郵件輸入內容缺少網域")
-            enterEmailStatusLabel.text = "郵件輸入內容缺少Domain"
-            enterEmailStatusLabel.isHidden = false
+        if enteredMail.isEmpty {
+            print("enteredMail is empty")
         }
         
-        if passwordCheckResult == .valid && emailCheckResult != .valid {
-            print("郵件輸入錯誤")
-        } else if passwordCheckResult != .valid && emailCheckResult == .valid {
-            print("密碼輸入錯誤")
-        } else {
-            print("密碼 / 郵件 輸入正確")
-            let loginVC: UIViewController = LoginViewController()
-            self.present(loginVC, animated: true)
+        if (enteredPassword.count == 0) {
+            print("")
+            return
         }
+        
+        
+        
+        
+        
         
     }
     
-    func checkPasswordCorrection(_ password: String) -> PasswordCheck {
-        let tenCommonPasswords = ["123456", "123456789", "qwerty", "password", "12345678", "111111", "iloveyou", "1q2w3e", "123123", "password1"]
-        let digits = "0123456789"
-        let punctuation = "!@#$%^&*(),.<>;'`~[]{}\\|/?_-+= "
-        let textLength = Int(passwordTextField.text?.count ?? 0)
-        
-        if tenCommonPasswords.contains(password) { return .containsCommonPassword }
-        else if !digits.contains(where: { digits.contains($0) }) { return .lacksDigits }
-        else if password.contains(where: { punctuation.contains($0) }) { return .lacksPunctuation }
-        else if textLength < 16 && textLength > 30 { return .lackTextLength }
-        else { return .valid }
-    }
     
-    func checkEmailResult(_ email: String) -> EmailCheck {
-        let emailAddress: [String] = ["@gmail.com", "@yahoo.com.tw"]
-        let punctuation = "!#$%^&*(),.<>;'`~[]{}\\|/?_-+= "
-        
-        if !email.contains("@") {
-            print("DEBUG PRINT: 郵件地址缺少@")
-            return .lackAt
-        }
-        if email.contains(where: { punctuation.contains($0)}) {
-            print("DEBUG PRINT: 郵件地址內容不太正確")
-            return .lackCorrection
-        }
-        if !emailAddress.contains(where: { email.contains($0)}) {
-            print("DEBUG PRINT: 郵件地址網域不正確")
-            return .invalidDomain
-        }
-        return .valid
-    }
-    
+
     // MARK: - Alert Controller:
     func showAlertVC (title: String, message: String) {
         let controller = UIAlertController(
@@ -340,30 +272,30 @@ class RegisterViewController: UIViewController {
 // MARK: - Extension:
 extension RegisterViewController: UITextFieldDelegate {
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        print("textField Should EndEditing")
+        print("textFieldShouldEndEditing")
         textField.resignFirstResponder()
         return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print("textField Should Return")
+        print("textFieldShouldReturn")
         textField.resignFirstResponder()
         return true
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("textField Did Begin Editing")
+        print("textFieldDidBeginEditing")
         textField.becomeFirstResponder()
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        print("textField Did Change Selection")
+        print("textFieldDidChangeSelection")
         print("DEBUG PRINT: \(textField.text ?? "")")
         textField.becomeFirstResponder()
     }
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        print("textField Should Clear")
+        print("textFieldShouldClear")
         
         textField.text = ""
         return true
