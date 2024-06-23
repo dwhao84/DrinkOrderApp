@@ -69,6 +69,12 @@ class HomePageViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    // MARK: Using  viewWillAppear to Make sure the tabBar is showing.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     func setupUI () {
         self.view.backgroundColor = Colors.kebukeLightBlue
         
