@@ -7,14 +7,19 @@
 
 import UIKit
 
-// Checking Account:
-enum AccountCheck {
+// Checking the user name:
+enum NameCheck {
     case valid
-    case lackWord
-    case lackDigits
-    case lackCorrection
-    case lackAccountTextLength
     case empty
+    case lackTextlength
+}
+
+// Checking E-mail:
+enum EmailCheck {
+    case valid
+    case lacksPunctuation
+    case lackAt
+    case invalidDomain
 }
 
 // Checking Password:
@@ -27,16 +32,4 @@ enum PasswordCheck {
     case empty
 }
 
-// Checking E-mail:
-enum EmailCheck {
-    case valid
-    case lackCorrection
-    case lackAt
-    case invalidDomain
-}
 
-enum NameCheck {
-    case valid
-    case empty
-    case lackTextlength
-}
