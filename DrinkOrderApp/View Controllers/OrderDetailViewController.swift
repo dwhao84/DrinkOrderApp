@@ -347,7 +347,7 @@ class OrderDetailViewController: UIViewController {
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
             
-            mainStackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
+            mainStackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 30),
             mainStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             mainStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             mainStackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
