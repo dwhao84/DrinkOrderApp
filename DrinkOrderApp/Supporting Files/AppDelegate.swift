@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // Import the IQKeyboardManager, when user using the textField, it'll automatically adjust the view's height.
+        IQKeyboardManager.shared.enable = true
         
         // Ask the UINavigationBar appearance's tintColor
         UINavigationBar.appearance().tintColor = Colors.kebukeBrown
