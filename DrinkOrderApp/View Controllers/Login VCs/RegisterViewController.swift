@@ -324,7 +324,7 @@ class RegisterViewController: UIViewController {
     }
     
     // MARK: - Action:
-    @objc func registerButtonTapped(_ sender: UIButton)  {
+    @objc func registerButtonTapped(_ sender: UIButton) {
         let enteredName = nameTextField.text ?? ""
         let enteredMail = mailTextField.text ?? ""
         let enteredPassword = passwordTextField.text ?? ""
@@ -333,16 +333,70 @@ class RegisterViewController: UIViewController {
         let emailResult = checkEmailCorrection(enteredMail)
         let passwordResult = checkPasswordCorrection(enteredPassword)
         
-        
-        
-        let loginVC = LoginViewController()
-        self.present(loginVC, animated: true)
-        
-        
+        if nameResult != .valid {
+            switch nameResult {
+            case .valid:
+                enterNameStatusLabel.isHidden = true
+                print("DEBUG PRINT: 姓名輸入正確")
+            case .empty:
+                enterNameStatusLabel.isHidden = false
+                enterNameStatusLabel.text = "姓名欄位不得空白"
+                print("DEBUG PRINT: 姓名是空白")
+            case .lackTextlength:
+                enterNameStatusLabel.isHidden = false
+                enterNameStatusLabel.text = "輸入姓名的字數不正確"
+                print("DEBUG PRINT: 姓名字數不正確")
+            }
+        } else if emailResult != .valid {
+            switch emailResult {
+            case .valid:
+                enterEmailStatusLabel.isHidden = true
+                print("DEBUG PRINT: 信箱輸入正確")
+            case .lacksPunctuation:
+                enterEmailStatusLabel.isHidden = false
+                enterEmailStatusLabel.text = "信箱缺少特殊字元"
+                print("DEBUG PRINT: 信箱輸入缺少特殊符號")
+            case .lackAt:
+                enterEmailStatusLabel.isHidden = false
+                enterEmailStatusLabel.text = "信箱缺少@"
+                print("DEBUG PRINT: 信箱輸入缺少@")
+            case .invalidDomain:
+                enterEmailStatusLabel.isHidden = false
+                enterEmailStatusLabel.text = "信箱域名不正確"
+                print("DEBUG PRINT: 信箱域名不正確")
+            }
+        } else if passwordResult != .valid {
+            switch passwordResult {
+            case .valid:
+                enterPasswordStatusLabel.isHidden = true
+                print("DEBUG PRINT: 密碼輸入正確")
+            case .containsCommonPassword:
+                enterPasswordStatusLabel.isHidden = false
+                enterPasswordStatusLabel.text = "請修改密碼"
+                print("DEBUG PRINT: 密碼設定太常見")
+            case .lacksDigits:
+                enterPasswordStatusLabel.isHidden = false
+                enterPasswordStatusLabel.text = "密碼缺少數字"
+                print("DEBUG PRINT: 密碼缺少數字")
+            case .lacksPunctuation:
+                enterPasswordStatusLabel.isHidden = false
+                enterPasswordStatusLabel.text = "密碼缺少特殊字元"
+                print("DEBUG PRINT: 密碼缺少特殊字元")
+            case .lackTextLength:
+                enterPasswordStatusLabel.isHidden = false
+                enterPasswordStatusLabel.text = "密碼字數不正確"
+                print("DEBUG PRINT: 密碼字數不正確")
+            case .empty:
+                enterPasswordStatusLabel.isHidden = false
+                enterPasswordStatusLabel.text = "密碼欄位不得空白"
+                print("DEBUG PRINT: 密碼為空白")
+            }
+        } else {
+            let loginVC = LoginViewController()
+            self.present(loginVC, animated: true)
+        }
     }
     
-    
-
     // MARK: - Alert Controller:
     func showAlertVC (title: String, message: String) {
         let controller = UIAlertController(
