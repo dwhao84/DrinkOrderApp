@@ -446,59 +446,63 @@ class OrderDetailViewController: UIViewController {
     
     // MARK: - Actions
     @objc func submitBtnTapped(_ sender: UIButton) {
-            print("DEBUG PRINT: submit btn tapped")
+        
+        print("DEBUG PRINT: submit btn tapped")
+        
+        if cupSizeTextField.text == selectionStatus[0] {
+            print("DEBUG PRINT: 尚未選擇飲料尺寸")
+            showAlertVC(title: selectionStatusContent[0], message: selectionStatusContent[0])
             
-            if cupSizeTextField.text == selectionStatus[0] {
-                print("DEBUG PRINT: 尚未選擇飲料尺寸")
-                showAlertVC(title: selectionStatusContent[0], message: selectionStatusContent[0])
-                
-            } else if iceLevelTextField.text == selectionStatus[1] {
-                print("DEBUG PRINT: 尚未選擇飲料冰塊")
-                showAlertVC(title: selectionStatusContent[1], message: selectionStatusContent[1])
-                
-            } else if sugarLevelTextField.text == selectionStatus[2] {
-                print("DEBUG PRINT: 尚未選擇飲料甜度")
-                showAlertVC(title: selectionStatusContent[2], message: selectionStatusContent[2])
-                
-            } else if toppingTextField.text == selectionStatus[3] {
-                print("DEBUG PRINT: 尚未選擇飲料加料內容")
-                showAlertVC(title: selectionStatusContent[3], message: selectionStatus[3])
-                
-            } else if userNameTextField.text == "填入姓名" || userNameTextField.text == "" {
-                print("DEBUG PRINT: 記得填入姓名，不然彼得不會幫你付錢")
-                showAlertVC(title: "記得填入姓名", message: "記得填入姓名，不然彼得不會幫你付錢")
-                
-            } else {
-                print("DEBUG PRINT: 飲料內容選擇完畢，將頁面傳送OrderListVC")
-
-                let orderFields = OrderFields(
-                    userName: userNameTextField.text ?? "No User name",
-                    drinkName: drinksName ?? "No drinks name",
-                    cupSize: cupSizeTextField.text ?? "No Cup size",
-                    sugarLevel: sugarLevelTextField.text ?? "No Sugar Level",
-                    iceLevel: iceLevelTextField.text ?? "No Ice Level",
-                    topping: toppingTextField.text ?? "No Topping",
-                    qty: String(Int(drinksQtyStepper.value))
-                )
-                
-                let newOrder = Order(fields: orderFields)
-                
-                NetworkManager.shared.postOrdersData(order: newOrder) { result in
-                    switch result {
-                    case .success(_):
-                        DispatchQueue.main.async {
-                            self.showAlertVC(title: "Order Created", message: "Your Order is created")
-                            let orderListVC = OrderListViewController()
-                            self.navigationController?.pushViewController(orderListVC, animated: true)
-                        }
-                    case .failure(let error):
-                        DispatchQueue.main.async {
-                            self.showAlertVC(title: "Error", message: error.localizedDescription)
-                        }
+        } else if iceLevelTextField.text == selectionStatus[1] {
+            print("DEBUG PRINT: 尚未選擇飲料冰塊")
+            showAlertVC(title: selectionStatusContent[1], message: selectionStatusContent[1])
+            
+        } else if sugarLevelTextField.text == selectionStatus[2] {
+            print("DEBUG PRINT: 尚未選擇飲料甜度")
+            showAlertVC(title: selectionStatusContent[2], message: selectionStatusContent[2])
+            
+        } else if toppingTextField.text == selectionStatus[3] {
+            print("DEBUG PRINT: 尚未選擇飲料加料內容")
+            showAlertVC(title: selectionStatusContent[3], message: selectionStatus[3])
+            
+        } else if userNameTextField.text == "填入姓名" || userNameTextField.text == "" {
+            print("DEBUG PRINT: 記得填入姓名，不然彼得不會幫你付錢")
+            showAlertVC(title: "記得填入姓名", message: "記得填入姓名，不然彼得不會幫你付錢")
+            
+        } else {
+            print("DEBUG PRINT: 飲料內容選擇完畢，將頁面傳送OrderListVC")
+            
+            let orderFields = OrderFields(
+                userName: userNameTextField.text ?? "No User name",
+                drinkName: drinksName ?? "No drinks name",
+                cupSize: cupSizeTextField.text ?? "No Cup size",
+                sugarLevel: sugarLevelTextField.text ?? "No Sugar Level",
+                iceLevel: iceLevelTextField.text ?? "No Ice Level",
+                topping: toppingTextField.text ?? "No Topping",
+                qty: String(Int(drinksQtyStepper.value))
+            )
+            
+            let newOrder = Order(fields: orderFields)
+            
+            NetworkManager.shared.postOrdersData(order: newOrder) { result in
+                switch result {
+                case .success(_):
+                    DispatchQueue.main.async {
+                        self.submitBtn.configuration?.showsActivityIndicator = true
+                        self.showAlertVC(title: "Order Created", message: "Your Order is created")
+                        let orderListVC = OrderListViewController()
+                        self.navigationController?.pushViewController(orderListVC, animated: true)
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        self.showAlertVC(title: "Error", message: error.localizedDescription)
+                        self.submitBtn.configuration?.showsActivityIndicator = false
                     }
                 }
+                
             }
         }
+    }
     
     @objc func cancelBtnTapped (_ sender: UIBarButtonItem) {
         print("cancelBtnTapped")
