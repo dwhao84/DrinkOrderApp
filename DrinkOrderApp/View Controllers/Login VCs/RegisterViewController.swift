@@ -392,8 +392,11 @@ class RegisterViewController: UIViewController {
                 print("DEBUG PRINT: 密碼為空白")
             }
         } else {
+            
+            registerButton.configuration?.showsActivityIndicator = true
             let loginVC = LoginViewController()
             self.present(loginVC, animated: true)
+            
         }
     }
     
