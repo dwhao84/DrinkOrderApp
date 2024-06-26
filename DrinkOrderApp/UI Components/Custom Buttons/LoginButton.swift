@@ -20,14 +20,14 @@ class LoginButton: UIButton {
     }
 
     private func commonInit() {
-        
         var config                 = UIButton.Configuration.filled()
         config.baseBackgroundColor = Colors.kebukeBrown
         var container = AttributeContainer()
         container.font = UIFont.boldSystemFont(ofSize: 18)
         config.attributedTitle = AttributedString("Login", attributes: container)
-        config.titleAlignment      = .center
+        config.titleAlignment      = .leading
         config.cornerStyle         = .capsule
+        config.showsActivityIndicator = false
         self.configuration         = config
 
         configurationUpdateHandler = { button in
