@@ -27,6 +27,7 @@ class OrderDetailViewController: UIViewController {
     var drinksName: String?
     var drinksDescription: String?
     var drinksImageURL: String?
+    var drinksPrice: String?
     
     // MARK: - Show the product image at the top.
     let drinksImageView: UIImageView = {
@@ -88,6 +89,16 @@ class OrderDetailViewController: UIViewController {
     let toppingLevelLabel: CustomOrderDetailLabel = {
         let label: CustomOrderDetailLabel = CustomOrderDetailLabel()
         label.text = "請選擇加料"
+        return label
+    } ()
+    
+    // 顯示商品價格
+    let priceLabel: UILabel = {
+        let label: UILabel = UILabel()
+        label.textColor = Colors.darkGray
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 20)
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     } ()
     
