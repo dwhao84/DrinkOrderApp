@@ -28,6 +28,8 @@ class RegisterButton: UIButton {
         config.attributedTitle = AttributedString("Register", attributes: container)
         config.titleAlignment      = .center
         config.cornerStyle         = .capsule
+        config.showsActivityIndicator = false
+        
         self.configuration         = config
 
         configurationUpdateHandler = { button in

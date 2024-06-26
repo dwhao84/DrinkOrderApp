@@ -27,6 +27,7 @@ class SubmitButton: UIButton {
         config.attributedTitle = AttributedString("Submit", attributes: attributes)
         config.titleAlignment      = .center
         config.cornerStyle         = .large
+        config.showsActivityIndicator = false
         self.configuration         = config
         configurationUpdateHandler = { button in
             button.alpha = button.isHighlighted ? 0.5 : 1
