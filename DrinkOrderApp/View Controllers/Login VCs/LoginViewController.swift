@@ -9,6 +9,8 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    var btnCount: Int = 0
+    
     // MARK: - UIImageView:
     private let logoImageView: UIImageView = {
         let logoImageView: UIImageView = UIImageView()
@@ -26,6 +28,7 @@ class LoginViewController: UIViewController {
     private let passwordTextField: PasswordTextField = {
         let passwordTextField: PasswordTextField = PasswordTextField()
         passwordTextField.isSecureTextEntry = true
+        passwordTextField.rightViewMode = .always
         return passwordTextField
     } ()
     
@@ -33,6 +36,12 @@ class LoginViewController: UIViewController {
     // loginButton
     private let loginButton: LoginButton = {
         let button = LoginButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    } ()
+    
+    let checkingPasswordBtn: CheckingPasswordButton = {
+        let button = CheckingPasswordButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     } ()
@@ -63,6 +72,7 @@ class LoginViewController: UIViewController {
     // MARK: - Add Targets
     func addTargets () {
         loginButton.addTarget(self, action: #selector(loginBtnTapped), for: .touchUpInside)
+        checkingPasswordBtn.addTarget(self, action: #selector(checkingPasswordBtnTapped), for: .touchUpInside)
     }
     
     func addDelegates () {
@@ -70,13 +80,37 @@ class LoginViewController: UIViewController {
         passwordTextField.delegate = self
     }
     
+    func configPasswordBtn (_ btn: UIButton) {
+        passwordTextField.rightView = btn
+        passwordTextField.rightViewMode = .whileEditing
+    }
+    
     // MARK: - Actions
-      @objc func loginBtnTapped (_ sender: UIButton) {
-          let tabBarController = createTabBarController()
-          tabBarController.modalPresentationStyle = .overFullScreen
-          self.present(tabBarController, animated: true)
-          print("DEBUG PRINT: registerBtnTapped")
-      }
+    @objc func loginBtnTapped(_ sender: UIButton) {
+        // Show activity indicator on the button
+        loginButton.configuration?.showsActivityIndicator = true
+        
+        // After the animation completes, present the tab bar controller
+        let tabBarController = self.createTabBarController()
+        tabBarController.modalPresentationStyle = .overFullScreen
+        self.present(tabBarController, animated: true, completion: nil)
+        
+        // Debugging print statement
+        print("DEBUG PRINT: loginBtnTapped")
+    }
+
+    
+    @objc func checkingPasswordBtnTapped (_ sender: UIButton) {
+        print("DEBUG PRINT: checkingPasswordBtnTapped")
+        btnCount += 1
+        if btnCount.isMultiple(of: 2) {
+            passwordTextField.isSecureTextEntry = true
+            
+        } else if btnCount.isMultiple(of: 1) {
+            passwordTextField.isSecureTextEntry = false
+        }
+        print("DEBUG PRINT: btnCount等於 \(btnCount)")
+    }
       
       // MARK: - Create multiple navigation controller for tabBarController:
       func createTheHomePageNavigationVC () -> UINavigationController {
@@ -120,6 +154,7 @@ class LoginViewController: UIViewController {
     
     // MARK: - Setup UI:
     func setupUI() {
+        configPasswordBtn(checkingPasswordBtn)
         loginButton.widthAnchor.constraint(equalToConstant: self.view.bounds.width - 180).isActive = true
         loginButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
 
