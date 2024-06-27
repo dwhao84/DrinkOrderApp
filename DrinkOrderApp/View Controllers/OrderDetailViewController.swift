@@ -27,7 +27,8 @@ class OrderDetailViewController: UIViewController {
     var drinksName: String?
     var drinksDescription: String?
     var drinksImageURL: String?
-    var drinksPrice: String?
+    var drinksMediumPrice: Int?
+    var drinksLargePrice: Int?
     
     // MARK: - Show the product image at the top.
     let drinksImageView: UIImageView = {
@@ -92,12 +93,12 @@ class OrderDetailViewController: UIViewController {
         return label
     } ()
     
-    // 顯示商品價格
-    let priceLabel: UILabel = {
+    // Show drinks medium / large price
+    let drinksPriceLabel: UILabel = {
         let label: UILabel = UILabel()
         label.textColor = Colors.darkGray
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 25)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     } ()
@@ -222,6 +223,16 @@ class OrderDetailViewController: UIViewController {
         return stackView
     } ()
     
+    let horizontalStackView: UIStackView = {
+        let stackView: UIStackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    } ()
+    
     let mainStackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
         stackView.axis = .vertical
@@ -269,6 +280,7 @@ class OrderDetailViewController: UIViewController {
         
         drinkNameLabel.text        = drinksName
         drinkDescriptionLabel.text = drinksDescription
+        drinksPriceLabel.text = "$ \(drinksMediumPrice ?? 0)"
         let drinksImageUrl = URL(string: url)
         drinksImageView.kf.setImage(with: drinksImageUrl)
         
@@ -276,6 +288,7 @@ class OrderDetailViewController: UIViewController {
         iceLevelTextField.text   = iceLevel[0]
         toppingTextField.text    = toppingChoose[0]
         userNameTextField.text   = "填入姓名"
+        
     }
     
     // MARK: Using  viewWillAppear to Make sure the tabBar is hidding.
@@ -393,6 +406,8 @@ class OrderDetailViewController: UIViewController {
         sugarLevelLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 35).isActive = true
         toppingLevelLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 35).isActive = true
         
+        drinksPriceLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50).isActive = true
+        
         // StackView:
         drinksInfoStackView.addArrangedSubview(drinkNameLabel)
         drinksInfoStackView.addArrangedSubview(drinkDescriptionLabel)
@@ -413,6 +428,9 @@ class OrderDetailViewController: UIViewController {
         toppingChooseStackView.addArrangedSubview(toppingLevelLabel)
         toppingChooseStackView.addArrangedSubview(toppingTextField)
         
+        horizontalStackView.addArrangedSubview(drinksQtyStepper)
+        horizontalStackView.addArrangedSubview(drinksPriceLabel)
+        
         /// secondStackView
         secondStackView.addArrangedSubview(drinksInfoStackView)
         secondStackView.addArrangedSubview(userNameStackView)
@@ -420,7 +438,7 @@ class OrderDetailViewController: UIViewController {
         secondStackView.addArrangedSubview(iceLevelStackView)
         secondStackView.addArrangedSubview(sugarLevelStackView)
         secondStackView.addArrangedSubview(toppingChooseStackView)
-        secondStackView.addArrangedSubview(drinksQtyStepper)
+        secondStackView.addArrangedSubview(horizontalStackView)
 
         mainStackView.addArrangedSubview(drinksImageView)
         mainStackView.addArrangedSubview(secondStackView)
@@ -490,7 +508,8 @@ class OrderDetailViewController: UIViewController {
                 sugarLevel: sugarLevelTextField.text ?? "No Sugar Level",
                 iceLevel: iceLevelTextField.text ?? "No Ice Level",
                 topping: toppingTextField.text ?? "No Topping",
-                qty: String(Int(drinksQtyStepper.value))
+                qty: String(Int(drinksQtyStepper.value)),
+                price: Double(drinksPriceLabel.text ?? "No Price")!
             )
             
             let newOrder = Order(fields: orderFields)
@@ -555,6 +574,17 @@ extension OrderDetailViewController: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if ( textField == cupSizeTextField ) {
+            let cupSizeText = cupSizeTextField.text
+            if cupSizeText == cupSize[0] {
+                print("DEBUG PRINT: 選擇 \(cupSizeTextField.text!)")
+                drinksPriceLabel.text = "$\(drinksMediumPrice!)"
+                
+            } else if cupSizeText == cupSize[1] {
+                print("DEBUG PRINT: 選擇 \(cupSizeTextField.text!)")
+                drinksPriceLabel.text = "$\(drinksLargePrice!)"
+            }
+            
+            print("\(drinkNameLabel.text!)")
             textField.resignFirstResponder()
             
         } else if ( textField == iceLevelTextField ) {
@@ -564,6 +594,40 @@ extension OrderDetailViewController: UITextFieldDelegate {
             textField.resignFirstResponder()
             
         } else if ( textField == toppingTextField ) {
+            let toppingText = toppingTextField.text
+            let cupSizeText = cupSizeTextField.text
+            
+            if toppingText == toppingChoose[1] {
+                print("加白玉")
+                if cupSizeText == cupSize[0] {
+                    drinksPriceLabel.text = "$ \(drinksMediumPrice! + 10)"
+                } else {
+                    drinksPriceLabel.text = "$ \(drinksLargePrice! + 10)"
+                }
+                    
+            } else if toppingText == toppingChoose[2] {
+                print("DEBUG PRINT: 加菓玉")
+                if cupSizeText == cupSize[0] {
+                    drinksPriceLabel.text = "$ \(drinksMediumPrice! + 10)"
+                } else {
+                    drinksPriceLabel.text = "$ \(drinksLargePrice! + 10)"
+                }
+                
+            } else if toppingText == toppingChoose[3] {
+                print("DEBUG PRINT: 加水玉")
+                if cupSizeText == cupSize[0] {
+                    drinksPriceLabel.text = "$ \(drinksMediumPrice! + 10)"
+                } else {
+                    drinksPriceLabel.text = "$ \(drinksLargePrice! + 10)"
+                }
+                
+            } else {
+                if cupSizeText == cupSize[0] {
+                    drinksPriceLabel.text = "$ \(drinksMediumPrice!)"
+                } else {
+                    drinksPriceLabel.text = "$ \(drinksLargePrice!)"
+                }
+            }
             textField.resignFirstResponder()
         }
     }
