@@ -104,7 +104,6 @@ class HomePageViewController: UIViewController {
         }
     }
     
-    
     // set up titleView
     func setupNavigationItem () {
         kebukeLogoImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
@@ -229,6 +228,8 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
         orderDetailVC.drinksName        = drinkData.fields.drinkName
         orderDetailVC.drinksDescription = drinkData.fields.drinksDescription
         orderDetailVC.drinksImageURL    = drinkData.fields.drinksImages?.last?.url
+        orderDetailVC.drinksMediumPrice = drinkData.fields.mediumPrice
+        orderDetailVC.drinksLargePrice  = drinkData.fields.largePrice
         orderDetailVC.userName = userName
         self.navigationController?.pushViewController(orderDetailVC, animated: true)
     }
