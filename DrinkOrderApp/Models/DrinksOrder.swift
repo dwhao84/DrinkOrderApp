@@ -20,6 +20,7 @@ struct OrderFields: Codable {
     let iceLevel: String
     let topping: String
     let qty: String
+    let price: Double
     
     enum CodingKeys: String, CodingKey {
         case userName        = "User name"
@@ -29,6 +30,7 @@ struct OrderFields: Codable {
         case iceLevel        = "Ice Level"
         case topping         = "Topping"
         case qty             = "Qty"
+        case price           = "Price"
     }
 }
 
