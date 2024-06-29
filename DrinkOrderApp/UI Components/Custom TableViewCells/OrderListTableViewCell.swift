@@ -98,7 +98,8 @@ class OrderListTableViewCell: UITableViewCell {
     }
 
     private func setupConstraints() {
-        drinksImageView.layer.cornerRadius = imageViewWidth / 2
+        // Set up cornerRadius
+        drinksImageView.layer.cornerRadius = imageViewWidth / 7
         self.backgroundColor = Colors.kebukeLightBlue
         self.addSubview(drinksImageView)
         self.addSubview(customStepper)
@@ -134,7 +135,6 @@ class OrderListTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        customStepper.value = 0
     }
     
     @objc func customStepperTapped() {
