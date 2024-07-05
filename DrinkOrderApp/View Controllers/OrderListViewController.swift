@@ -11,7 +11,6 @@ import Kingfisher
 class OrderListViewController: UIViewController {
     
     static let shared: String = "OrderListViewController"
-    
     private let baseUrl: String = "https://api.airtable.com/v0/appS5I28H2YO3bJzv/Kebuke"
     private let apiKey: String = "Bearer patxAQx4KLgwEsh8O.28a883dd0c29a3920aee1cc069fc876738b14186ec8ec2dd07cc762b70497e0c"
     
@@ -133,6 +132,10 @@ class OrderListViewController: UIViewController {
         self.navigationItem.scrollEdgeAppearance = appearance
     }
     
+    func fetchOrdersData() {
+
+    }
+    
     func fetchDeleteDrinksData () {
         
     }
@@ -141,7 +144,7 @@ class OrderListViewController: UIViewController {
 // MARK: - Extension:
 extension OrderListViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        orders.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -163,8 +166,10 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
         let deleteAction = UIContextualAction(style: .destructive, title: "刪除")  { _,_,_ in
             
+
             print("DEBUG PRINT: 刪除")
         }
         
