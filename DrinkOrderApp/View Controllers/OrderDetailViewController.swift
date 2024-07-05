@@ -251,9 +251,8 @@ class OrderDetailViewController: UIViewController {
         return scrollView
     } ()
     
-    
-    // MARK: - Custom Button:
-    var submitBtn: SubmitButton = {
+    // MARK: -  Button:
+    let submitBtn: SubmitButton = {
         let btn: SubmitButton = SubmitButton(type: .system)
         btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
@@ -323,13 +322,14 @@ class OrderDetailViewController: UIViewController {
         toolBar.scrollEdgeAppearance = toolAppearance
         toolBar.barStyle = .default
         toolBar.isTranslucent = true
-        toolBar.isUserInteractionEnabled = true
+        toolBar.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 30)
         toolBar.layer.cornerRadius = 20
         toolBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         toolBar.layer.masksToBounds = true
         toolBar.sizeToFit()
         toolBar.layer.borderColor = Colors.lightGray.cgColor
         toolBar.layer.borderWidth = 0.2
+        toolBar.tintColor = Colors.kebukeLightBlue
         
         // FIXME: - Auto Layout 有些問題
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneBtnTapped))
@@ -509,7 +509,7 @@ class OrderDetailViewController: UIViewController {
                 iceLevel: iceLevelTextField.text ?? "No Ice Level",
                 topping: toppingTextField.text ?? "No Topping",
                 qty: String(Int(drinksQtyStepper.value)),
-                price: Double(drinksPriceLabel.text ?? "No Price")!
+                price: drinksPriceLabel.text ?? "No Price"
             )
             
             let newOrder = Order(fields: orderFields)
