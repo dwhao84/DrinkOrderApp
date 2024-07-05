@@ -14,7 +14,6 @@ enum FavQsAPI {
     static let apiUrl: String = ""
 }
 
-
 struct Response: Codable {
     let userToken: String?
     let login: String?
