@@ -19,8 +19,8 @@ struct OrderFields: Codable {
     let sugarLevel: String
     let iceLevel: String
     let topping: String
-    let qty: String
-    let price: Double
+    let qty: String?
+    let price: String
     
     enum CodingKeys: String, CodingKey {
         case userName        = "User name"
