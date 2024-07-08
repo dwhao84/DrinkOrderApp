@@ -33,11 +33,11 @@ class SubmitButton: UIButton {
             button.alpha = button.isHighlighted ? 0.5 : 1
         }
         // Add Shadow for button.
-        self.layer.shadowColor   = Colors.black.cgColor
-        self.layer.shadowOpacity = 0.6
-        self.layer.shadowOffset  = CGSize(width: 0, height: 5)
-        self.layer.shadowRadius  = 4
-        self.layer.masksToBounds = false
+//        self.layer.shadowColor   = Colors.black.cgColor
+//        self.layer.shadowOpacity = 0.6
+//        self.layer.shadowOffset  = CGSize(width: 0, height: 5)
+//        self.layer.shadowRadius  = 4
+//        self.layer.masksToBounds = false
     }
 }
 
