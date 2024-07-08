@@ -8,13 +8,27 @@
 import UIKit
 
 class DoneButton: UIButton {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
     }
-    */
 
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+
+    private func commonInit() {
+        var config = UIButton.Configuration.plain()
+        config.title = "Done"
+        config.baseForegroundColor = Colors.kebukeLightBlue
+        self.configuration = config
+        
+        self.configurationUpdateHandler = { button in
+            let config = button.configuration
+            button.alpha = button.isHighlighted ? 0.5 : 1
+            button.configuration = config
+        }
+    }
 }
