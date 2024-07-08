@@ -67,12 +67,14 @@ class LoginViewController: UIViewController {
         setupUI()
         addTargets()
         addDelegates()
+        viewTapped()
     }
     
     // MARK: - Add Targets
     func addTargets () {
         loginButton.addTarget(self, action: #selector(loginBtnTapped), for: .touchUpInside)
         checkingPasswordBtn.addTarget(self, action: #selector(checkingPasswordBtnTapped), for: .touchUpInside)
+        
     }
     
     func addDelegates () {
@@ -85,6 +87,11 @@ class LoginViewController: UIViewController {
         passwordTextField.rightViewMode = .whileEditing
     }
     
+    func viewTapped () {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
     // MARK: - Actions
     @objc func loginBtnTapped(_ sender: UIButton) {
         // Show activity indicator on the button
@@ -93,6 +100,8 @@ class LoginViewController: UIViewController {
         // After the animation completes, present the tab bar controller
         let tabBarController = self.createTabBarController()
         tabBarController.modalPresentationStyle = .overFullScreen
+        tabBarController.tabBar.isTranslucent = true
+        tabBarController.overrideUserInterfaceStyle = .light
         self.present(tabBarController, animated: true, completion: nil)
         
         // Debugging print statement
@@ -110,6 +119,11 @@ class LoginViewController: UIViewController {
             passwordTextField.isSecureTextEntry = false
         }
         print("DEBUG PRINT: btnCount等於 \(btnCount)")
+    }
+    
+    @objc func hideKeyboard () {
+        print("hide Keyboard")
+        view.endEditing(true)
     }
       
       // MARK: - Create multiple navigation controller for tabBarController:
