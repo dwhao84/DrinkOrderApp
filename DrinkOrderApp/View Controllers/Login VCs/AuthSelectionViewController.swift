@@ -9,7 +9,7 @@ import UIKit
 
 class AuthSelectionViewController: UIViewController {
     
-    // MARK: - UIImageView:
+    // MARK: - Custom UI for UIImageView:
     var logoImageView: UIImageView = {
         let logoImageView: UIImageView = UIImageView()
         logoImageView.image       = Images.kebukeLoginLogo
@@ -17,7 +17,7 @@ class AuthSelectionViewController: UIViewController {
         return logoImageView
     } ()
     
-    // MARK: - UIButton:
+    // MARK: - Custom UI for UIButton:
     // loginButton
     var loginButton: LoginButton = {
         let button = LoginButton(type: .system)
@@ -32,7 +32,7 @@ class AuthSelectionViewController: UIViewController {
         return button
     } ()
     
-    // MARK: - UIStackView:
+    // MARK: - Custom UI for UIStackView:
     // stackView
     var stackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
@@ -70,10 +70,10 @@ class AuthSelectionViewController: UIViewController {
         print("Into the AuthVC")
         self.view.backgroundColor = Colors.kebukeDarkBlue
         setupUI()
-        addTarget()
+        addTargets()
     }
     
-    func addTarget () {
+    func addTargets () {
         loginButton.addTarget(self, action: #selector(loginBtnTapped), for: .touchUpInside)
         registerButton.addTarget(self, action: #selector(registerBtnTapped), for: .touchUpInside)
     }
@@ -94,18 +94,19 @@ class AuthSelectionViewController: UIViewController {
     
     // MARK: - Setup UI:
     func setupUI() {
-        loginButton.widthAnchor.constraint(equalToConstant: self.view.bounds.width - 120).isActive = true
-        loginButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        registerButton.widthAnchor.constraint(equalToConstant: self.view.bounds.width - 120).isActive = true
-        registerButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        let customWidth: CGFloat = self.view.bounds.width - 120
+        let customHeight: CGFloat = 50
+ 
+        [loginButton, registerButton].forEach {
+            $0.widthAnchor.constraint(equalToConstant: customWidth).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: customHeight).isActive = true
+        }
         
         let imageViewWidth: Double = self.view.bounds.width - 60.0
         logoImageView.widthAnchor.constraint(equalToConstant: imageViewWidth).isActive = true
         logoImageView.heightAnchor.constraint(equalToConstant: imageViewWidth * 0.7).isActive = true
         
         stackView.addArrangedSubview(logoImageView)
-        //        stackView.addArrangedSubview(enterNameTextField)
         stackView.addArrangedSubview(loginButton)
         stackView.addArrangedSubview(registerButton)
         

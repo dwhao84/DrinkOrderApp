@@ -42,6 +42,8 @@
 		D39CB0522BDFFC07004B96C5 /* RegisterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0512BDFFC07004B96C5 /* RegisterButton.swift */; };
 		D39CB0552BDFFDB5004B96C5 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0542BDFFDB5004B96C5 /* RegisterViewController.swift */; };
 		D39CB0572BE00897004B96C5 /* SecRegisterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0562BE00897004B96C5 /* SecRegisterButton.swift */; };
+		D3A51D742C3BA70D003B7649 /* DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A51D732C3BA70D003B7649 /* DoneButton.swift */; };
+		D3A51D762C3BA7BD003B7649 /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A51D752C3BA7BD003B7649 /* CancelButton.swift */; };
 		D3B242332C1DE7DA00EC0ED9 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B242322C1DE7DA00EC0ED9 /* EmptyStateView.swift */; };
 		D3B242352C1DEDC400EC0ED9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B242342C1DEDC400EC0ED9 /* NetworkManager.swift */; };
 		D3B2423A2C1EF9C800EC0ED9 /* DrinksQtyStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B242392C1EF9C800EC0ED9 /* DrinksQtyStepper.swift */; };
@@ -111,6 +113,8 @@
 		D39CB0512BDFFC07004B96C5 /* RegisterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterButton.swift; sourceTree = "<group>"; };
 		D39CB0542BDFFDB5004B96C5 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		D39CB0562BE00897004B96C5 /* SecRegisterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecRegisterButton.swift; sourceTree = "<group>"; };
+		D3A51D732C3BA70D003B7649 /* DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneButton.swift; sourceTree = "<group>"; };
+		D3A51D752C3BA7BD003B7649 /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
 		D3B242322C1DE7DA00EC0ED9 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		D3B242342C1DEDC400EC0ED9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D3B242392C1EF9C800EC0ED9 /* DrinksQtyStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksQtyStepper.swift; sourceTree = "<group>"; };
@@ -284,6 +288,8 @@
 			children = (
 				D38E53892B888F50008E8BDE /* LoginButton.swift */,
 				D3159C8B2C2A90AA00DBF0E0 /* CheckingPasswordButton.swift */,
+				D3A51D732C3BA70D003B7649 /* DoneButton.swift */,
+				D3A51D752C3BA7BD003B7649 /* CancelButton.swift */,
 				D366516E2C211198000FA307 /* FinishButton.swift */,
 				D39CB0512BDFFC07004B96C5 /* RegisterButton.swift */,
 				D39CB0562BE00897004B96C5 /* SecRegisterButton.swift */,
@@ -518,11 +524,13 @@
 				D39CB0252BDBFE39004B96C5 /* SettingTableViewController.swift in Sources */,
 				EB94C1DB2B8734F5008098DE /* SceneDelegate.swift in Sources */,
 				D33A9CDE2C217261005B614A /* PasswordTextField.swift in Sources */,
+				D3A51D742C3BA70D003B7649 /* DoneButton.swift in Sources */,
 				D39CB0552BDFFDB5004B96C5 /* RegisterViewController.swift in Sources */,
 				D3B2423C2C1F1F4000EC0ED9 /* DrinksOrder.swift in Sources */,
 				D38E53A12B88CB4B008E8BDE /* StoreLocationViewController.swift in Sources */,
 				D38E53882B887AAC008E8BDE /* ColorConstants.swift in Sources */,
 				D33A9CE42C217A78005B614A /* NameTextField.swift in Sources */,
+				D3A51D762C3BA7BD003B7649 /* CancelButton.swift in Sources */,
 				D38E539F2B88C2D8008E8BDE /* HomePageViewController.swift in Sources */,
 				D33A9CE62C2489B4005B614A /* ContentCheck.swift in Sources */,
 				D30C48A02BD79D8500C5B908 /* CheckoutView.swift in Sources */,
