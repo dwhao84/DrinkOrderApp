@@ -19,8 +19,6 @@ class RegisterViewController: UIViewController {
         static let mailAddress = "@gmail.com, @yahoo.com.tw"
     }
     
-
-    
     // MARK: - UIImageView:
     let logoImageView: UIImageView = {
         let logoImageView: UIImageView = UIImageView()
@@ -171,16 +169,19 @@ class RegisterViewController: UIViewController {
         addTargets ()
     }
     
+    // MARK: - addTargets
     func addTargets () {
         registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
     }
     
+    // MARK: - addTextFieldsDelegate
     func addTextFieldsDelegate () {
         nameTextField.delegate = self
         mailTextField.delegate = self
         passwordTextField.delegate = self
     }
     
+    // MARK: - addConstraints
     func addConstraints () {
         let imageViewWidth: Double = self.view.bounds.width - 100.0
         logoImageView.widthAnchor.constraint(equalToConstant: imageViewWidth).isActive = true
@@ -323,7 +324,7 @@ class RegisterViewController: UIViewController {
             return .valid }
     }
     
-    // MARK: - Action:
+    // MARK: - Actions:
     @objc func registerButtonTapped(_ sender: UIButton) {
         let enteredName = nameTextField.text ?? ""
         let enteredMail = mailTextField.text ?? ""
@@ -414,23 +415,27 @@ class RegisterViewController: UIViewController {
 
 // MARK: - Extension:
 extension RegisterViewController: UITextFieldDelegate {
+    // MARK: textField Should End Editing
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         print("textField Should End Editing")
         textField.resignFirstResponder()
         return true
     }
     
+    // MARK: textField Should Return
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         print("textField Should Return")
         textField.resignFirstResponder()
         return true
     }
     
+    // MARK: textField Did Begin Editing
     func textFieldDidBeginEditing(_ textField: UITextField) {
         print("textField Did Begin Editing")
         textField.becomeFirstResponder()
     }
     
+    // MARK: textField Did Change Selection
     func textFieldDidChangeSelection(_ textField: UITextField) {
         print("textField Did Change Selection")
         print("DEBUG PRINT: \(textField.text ?? "")")
