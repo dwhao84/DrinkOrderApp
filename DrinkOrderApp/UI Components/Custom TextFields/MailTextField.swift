@@ -30,6 +30,7 @@ class MailTextField: UITextField {
         self.font = UIFont.systemFont(ofSize: 16)
         self.textColor = Colors.darkGray
         self.clearButtonMode  = .whileEditing
+        self.overrideUserInterfaceStyle = .light
         self.translatesAutoresizingMaskIntoConstraints = false
     }
 }

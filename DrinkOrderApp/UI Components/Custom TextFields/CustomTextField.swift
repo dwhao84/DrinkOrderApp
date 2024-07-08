@@ -24,6 +24,7 @@ class CustomTextField: UITextField {
         self.isEnabled = true
         self.font = UIFont.systemFont(ofSize: 16)
         self.textColor = Colors.darkGray
+        self.overrideUserInterfaceStyle = .light
         self.translatesAutoresizingMaskIntoConstraints = false
     }
 }
