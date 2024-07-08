@@ -136,8 +136,8 @@ class OrderDetailViewController: UIViewController {
         return textField
     } ()
 
-    let drinksQtyStepper: DrinksQtyStepper = {
-        let stepper: DrinksQtyStepper = DrinksQtyStepper()
+    let drinksQtyStepper: CustomStepper = {
+        let stepper: CustomStepper = CustomStepper()
         stepper.translatesAutoresizingMaskIntoConstraints = false
         return stepper
     } ()
@@ -258,12 +258,25 @@ class OrderDetailViewController: UIViewController {
         return btn
     } ()
     
+    let doneBtn: DoneButton = {
+        let btn: DoneButton = DoneButton(type: .system)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        return btn
+    } ()
+    
+    let cancelBtn: CancelButton = {
+        let btn: CancelButton = CancelButton(type: .system)
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        return btn
+    } ()
+
+    
     // MARK: - PickerViews:
     let cupSizePickerView: UIPickerView = UIPickerView()
     let iceLevelPickerView: UIPickerView = UIPickerView()
     let sugarLevelPickerView: UIPickerView = UIPickerView()
     let toppingPickerView: UIPickerView = UIPickerView()
-    
+
     // MARK: - Life Cycle:
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -271,7 +284,7 @@ class OrderDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
         setupUI()
 
-        // Passing Data from HomePageVC:
+        // MARK: Passing Data from HomePageVC:
         guard let url = drinksImageURL else {
             print("Unable to get drinksURL")
             return
@@ -290,7 +303,7 @@ class OrderDetailViewController: UIViewController {
         
     }
     
-    // MARK: Using  viewWillAppear to Make sure the tabBar is hidding.
+    // MARK: - Using  viewWillAppear to Make sure the tabBar is hidding.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
@@ -304,7 +317,8 @@ class OrderDetailViewController: UIViewController {
         configStackView()
         addDelegateAndDataSource()
         addTargets()
-        setupTextFields()
+        setupToolBarAndTextFields()
+        addTapGesture()
         
         // tabBar is hidden.
         self.tabBarController?.tabBar.isHidden = true
@@ -313,9 +327,12 @@ class OrderDetailViewController: UIViewController {
     // MARK: - Add targets
     func addTargets () {
         submitBtn.addTarget(self, action: #selector(submitBtnTapped), for: .touchUpInside)
+        cancelBtn.addTarget(self, action: #selector(cancelBtnTapped), for: .touchUpInside)
+        doneBtn.addTarget(self, action: #selector(doneBtnTapped), for: .touchUpInside)
     }
     
-    func setupTextFields () {
+    // MARK: Set up ToolBar and Text Fields
+    func setupToolBarAndTextFields () {
         let toolBar: UIToolbar = UIToolbar()
         let toolAppearance = UIToolbarAppearance()
         toolBar.standardAppearance = toolAppearance
@@ -332,25 +349,31 @@ class OrderDetailViewController: UIViewController {
         toolBar.tintColor = Colors.kebukeLightBlue
         
         // FIXME: - Auto Layout 有些問題
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneBtnTapped))
+        let doneButton = UIBarButtonItem(customView: doneBtn)
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelBtnTapped))
+        let cancelButton = UIBarButtonItem(customView: cancelBtn)
         toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         
-        cupSizeTextField.inputAccessoryView = toolBar
+        cupSizeTextField.inputAccessoryView    = toolBar
         sugarLevelTextField.inputAccessoryView = toolBar
-        iceLevelTextField.inputAccessoryView = toolBar
-        toppingTextField.inputAccessoryView = toolBar
+        iceLevelTextField.inputAccessoryView   = toolBar
+        toppingTextField.inputAccessoryView    = toolBar
         
-        cupSizeTextField.inputView = cupSizePickerView
+        cupSizeTextField.inputView    = cupSizePickerView
         sugarLevelTextField.inputView = sugarLevelPickerView
         iceLevelTextField.inputView   = iceLevelPickerView
-        toppingTextField.inputView = toppingPickerView
+        toppingTextField.inputView    = toppingPickerView
     }
     
     // MARK: - Setup NavigationView:
     func setNavigationView () {
-        self.navigationItem.title = drinksName
+        // Add custom Label for navigationView.
+        let customLabel: UILabel = UILabel()
+        customLabel.text = drinksName
+        customLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        customLabel.textColor = Colors.white
+        
+        self.navigationItem.titleView = customLabel
         print("DEBUG PRINT: 印出產品名稱\(String(describing: drinksName))")
         
         let appearance = UINavigationBarAppearance()
@@ -362,11 +385,12 @@ class OrderDetailViewController: UIViewController {
     
     // MARK: - Add Constraints:
     func addConstraints() {
+        let safeArea = self.view.safeAreaLayoutGuide
+        
         view.addSubview(scrollView)
         scrollView.addSubview(mainStackView)
-        
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: safeArea.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
@@ -379,32 +403,34 @@ class OrderDetailViewController: UIViewController {
         ])
     }
     
+    // MARK: Config stackView
     func configStackView () {
-        drinksImageView.widthAnchor.constraint(equalToConstant: self.view.bounds.width - 60).isActive = true
-        drinksImageView.heightAnchor.constraint(equalTo: drinksImageView.widthAnchor, multiplier: 0.75).isActive = true
+        let customWidth: CGFloat =  self.view.bounds.width - 60
+        let customMultiplier: CGFloat = 0.75
+        
+        drinksImageView.widthAnchor.constraint(equalToConstant: customWidth).isActive = true
+        drinksImageView.heightAnchor.constraint(equalTo: drinksImageView.widthAnchor, multiplier: customMultiplier).isActive = true
         
         submitBtn.widthAnchor.constraint(equalToConstant: self.view.bounds.width - 60).isActive = true
         submitBtn.heightAnchor.constraint(equalTo: submitBtn.widthAnchor, multiplier: 0.15).isActive = true
+
+        [userNameTextField,
+         cupSizeTextField,
+         iceLevelTextField,
+         sugarLevelTextField,
+         toppingTextField
+        ].forEach {
+            $0.widthAnchor.constraint(greaterThanOrEqualToConstant: 250).isActive = true
+            $0.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
+        }
         
-        userNameTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 250).isActive = true
-        userNameTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
-        
-        cupSizeTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 250).isActive = true
-        cupSizeTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
-        
-        iceLevelTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 250).isActive = true
-        iceLevelTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
-        
-        sugarLevelTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 250).isActive = true
-        sugarLevelTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
-        
-        toppingTextField.widthAnchor.constraint(greaterThanOrEqualToConstant: 250).isActive = true
-        toppingTextField.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
-        
-        cupSizeLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 35).isActive = true
-        iceLevelLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 35).isActive = true
-        sugarLevelLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 35).isActive = true
-        toppingLevelLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 35).isActive = true
+        [cupSizeLabel,
+         iceLevelLabel,
+         sugarLevelLabel,
+         toppingLevelLabel
+        ].forEach {
+            $0.heightAnchor.constraint(greaterThanOrEqualToConstant: 35).isActive = true
+        }
         
         drinksPriceLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50).isActive = true
         
@@ -445,6 +471,7 @@ class OrderDetailViewController: UIViewController {
         mainStackView.addArrangedSubview(submitBtn)
     }
     
+    // MARK: Add delegate and date source
     func addDelegateAndDataSource () {
         // PickerViews:
         cupSizePickerView.delegate = self
@@ -466,6 +493,7 @@ class OrderDetailViewController: UIViewController {
         toppingTextField.delegate = self
     }
     
+    // MARK: showAlertVC
     func showAlertVC (title: String, message: String) {
         let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default)
@@ -473,9 +501,14 @@ class OrderDetailViewController: UIViewController {
         present(controller, animated: true)
     }
     
+    // MARK: - Tap Gesture
+    func addTapGesture () {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        self.view.addGestureRecognizer(tap)
+    }
+    
     // MARK: - Actions
     @objc func submitBtnTapped(_ sender: UIButton) {
-        
         print("DEBUG PRINT: submit btn tapped")
         
         if cupSizeTextField.text == selectionStatus[0] {
@@ -529,29 +562,35 @@ class OrderDetailViewController: UIViewController {
                         self.submitBtn.configuration?.showsActivityIndicator = false
                     }
                 }
-                
             }
         }
     }
     
-    @objc func cancelBtnTapped (_ sender: UIBarButtonItem) {
-        print("cancelBtnTapped")
+    @objc func cancelBtnTapped (_ sender: UIButton) {
+        print("DEBUG PRINT: cancel Btn Tapped")
         cupSizeTextField.resignFirstResponder()
         sugarLevelTextField.resignFirstResponder()
         iceLevelTextField.resignFirstResponder()
         toppingTextField.resignFirstResponder()
     }
     
-    @objc func doneBtnTapped (_ sender: UIBarButtonItem) {
-        print("doneBtnTapped")
+    @objc func doneBtnTapped (_ sender: UIButton) {
+        print("DEBUG PRINT: done Btn Tapped")
         cupSizeTextField.resignFirstResponder()
         sugarLevelTextField.resignFirstResponder()
         iceLevelTextField.resignFirstResponder()
         toppingTextField.resignFirstResponder()
     }
+    
+    @objc func viewTapped (_ sender: UITapGestureRecognizer) {
+        print("viewTapped")
+        view.endEditing(true)
+    }
 }
 
+// MARK: - text Fields Delegate
 extension OrderDetailViewController: UITextFieldDelegate {
+    // MARK: textField Should Return
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if ( textField == cupSizeTextField ) {
             textField.resignFirstResponder()
@@ -572,6 +611,7 @@ extension OrderDetailViewController: UITextFieldDelegate {
         return true
     }
     
+    // MARK: textField Did End Editing
     func textFieldDidEndEditing(_ textField: UITextField) {
         if ( textField == cupSizeTextField ) {
             let cupSizeText = cupSizeTextField.text
@@ -598,7 +638,7 @@ extension OrderDetailViewController: UITextFieldDelegate {
             let cupSizeText = cupSizeTextField.text
             
             if toppingText == toppingChoose[1] {
-                print("加白玉")
+                print("加白玉 +$10")
                 if cupSizeText == cupSize[0] {
                     drinksPriceLabel.text = "$ \(drinksMediumPrice! + 10)"
                 } else {
@@ -606,7 +646,7 @@ extension OrderDetailViewController: UITextFieldDelegate {
                 }
                     
             } else if toppingText == toppingChoose[2] {
-                print("DEBUG PRINT: 加菓玉")
+                print("DEBUG PRINT: 加菓玉 +$10")
                 if cupSizeText == cupSize[0] {
                     drinksPriceLabel.text = "$ \(drinksMediumPrice! + 10)"
                 } else {
@@ -614,13 +654,12 @@ extension OrderDetailViewController: UITextFieldDelegate {
                 }
                 
             } else if toppingText == toppingChoose[3] {
-                print("DEBUG PRINT: 加水玉")
+                print("DEBUG PRINT: 加水玉 +$10")
                 if cupSizeText == cupSize[0] {
                     drinksPriceLabel.text = "$ \(drinksMediumPrice! + 10)"
                 } else {
                     drinksPriceLabel.text = "$ \(drinksLargePrice! + 10)"
                 }
-                
             } else {
                 if cupSizeText == cupSize[0] {
                     drinksPriceLabel.text = "$ \(drinksMediumPrice!)"
@@ -632,6 +671,7 @@ extension OrderDetailViewController: UITextFieldDelegate {
         }
     }
     
+    // MARK: textField Did Change Selection
     func textFieldDidChangeSelection(_ textField: UITextField) {
         
         if ( textField == cupSizeTextField ) {
@@ -654,36 +694,33 @@ extension OrderDetailViewController: UITextFieldDelegate {
         }
     }
 }
-    
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-
-}
 
 
 // MARK: - PickerView Delegate & DataSource
 extension OrderDetailViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
-    // UIPickerViewDataSource
+    // MARK: numberOfComponents
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
+    // MARK: numberOfRowsInComponent
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
         if ( pickerView == cupSizePickerView ) {
-            print("cupSize.count equals \(cupSize.count)")
+            print("DEBUG PRINT: cupSize.count equals \(cupSize.count)")
             return cupSize.count
             
         } else if (pickerView == iceLevelPickerView) {
-            print("iceLevel.count equals \(iceLevel.count)")
+            print("DEBUG PRINT: iceLevel.count equals \(iceLevel.count)")
             return iceLevel.count
             
         } else if (pickerView == sugarLevelPickerView) {
-            print("sugarLevel.count equals \(sugarLevel.count)")
+            print("DEBUG PRINT: sugarLevel.count equals \(sugarLevel.count)")
             return sugarLevel.count
             
         } else if (pickerView == toppingPickerView) {
-            print("toppingChoose.count equals \(toppingChoose.count)")
+            print("DEBUG PRINT: toppingChoose.count equals \(toppingChoose.count)")
             return toppingChoose.count
             
         } else {
@@ -691,7 +728,7 @@ extension OrderDetailViewController: UIPickerViewDelegate, UIPickerViewDataSourc
         }
     }
     
-    // UIPickerViewDelegate
+    // MARK: didSelectRow
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         if (pickerView == cupSizePickerView ) {
@@ -716,22 +753,23 @@ extension OrderDetailViewController: UIPickerViewDelegate, UIPickerViewDataSourc
         }
     }
     
+    // MARK: titleForRow
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         if pickerView == cupSizePickerView {
-            print("切換到 尺寸PickerView")
+            print("DEBUG PRINT: 切換到 尺寸PickerView")
             return cupSize[row]
             
         } else if (pickerView == iceLevelPickerView) {
-            print("切換到 冰塊 PickerView")
+            print("DEBUG PRINT: 切換到 冰塊 PickerView")
             return iceLevel[row]
             
         } else if (pickerView == sugarLevelPickerView) {
-            print("切換到 甜度 PickerView")
+            print("DEBUG PRINT: 切換到 甜度 PickerView")
             return sugarLevel[row]
             
         } else if (pickerView == toppingPickerView) {
-            print("切換到 加料 PickerView")
+            print("DEBUG PRINT: 切換到 加料 PickerView")
             return toppingChoose[row]
         }
         return String()
