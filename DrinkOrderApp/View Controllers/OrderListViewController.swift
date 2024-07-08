@@ -62,12 +62,14 @@ class OrderListViewController: UIViewController {
         setupUI()
     }
     
-    // MARK: Using  viewWillAppear to Make sure the tabBar is showing.
+    // MARK: - view Will Appear
+    // MARK: viewWillAppear to Make sure the tabBar is showing.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    // MARK: Setup UI
     func setupUI () {
         self.view.backgroundColor = Colors.kebukeDarkBlue
         addConstraints()
@@ -77,16 +79,12 @@ class OrderListViewController: UIViewController {
         addTargets ()
     }
     
+    // MARK: Add Targets
     func addTargets () {
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
     }
-
-    @objc func refresh(_ sender: Any) {
-        refreshControl.endRefreshing()
-        tableView.reloadData()
-        print("DEBUG PRINT: End Refreshing")
-    }
     
+    // MARK: setup TableView
     func setupTableView () {
         tableView.register(OrderListTableViewCell.self, forCellReuseIdentifier: OrderListTableViewCell.identifier)
         tableView.rowHeight = 170
@@ -95,11 +93,13 @@ class OrderListViewController: UIViewController {
         tableView.tableFooterView = spinner
     }
     
+    // MARK: add Delegate & Datasource
     func addDelegateAndDatasource () {
         tableView.delegate = self
         tableView.dataSource = self
     }
 
+    // MARK: add Constraints
     func addConstraints () {
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
@@ -118,6 +118,7 @@ class OrderListViewController: UIViewController {
         ])
     }
     
+    // MARK: Set up navigation item
     func setupNavigationItem () {
         // set up titleView
         self.navigationItem.titleView = productImageView
@@ -139,6 +140,13 @@ class OrderListViewController: UIViewController {
     func fetchDeleteDrinksData () {
         
     }
+    
+    // MARK: - Add Actions:
+    @objc func refresh(_ sender: Any) {
+        refreshControl.endRefreshing()
+        tableView.reloadData()
+        print("DEBUG PRINT: End Refreshing")
+    }
 }
 
 // MARK: - Extension:
@@ -147,6 +155,7 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource, U
         orders.count
     }
     
+    // MARK: cellForRowAt
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: OrderListTableViewCell.identifier, for: indexPath) as! OrderListTableViewCell
         
@@ -165,6 +174,7 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource, U
         return cell
     }
     
+    // MARK: trailing Swipe Actions Configuration For Row At
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let deleteAction = UIContextualAction(style: .destructive, title: "刪除")  { _,_,_ in
