@@ -244,7 +244,7 @@ class NetworkManager {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue(API.application_json, forHTTPHeaderField: API.contentType)
-        request.setValue("Token token a7c01d0f0e393ecf59c17dd7a66b193a", forHTTPHeaderField: API.authorization)
+        request.setValue("Token token=a7c01d0f0e393ecf59c17dd7a66b193a", forHTTPHeaderField: API.authorization)
         
         let requestBody = ["user": user]
         
