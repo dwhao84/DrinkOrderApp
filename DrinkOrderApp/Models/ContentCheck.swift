@@ -12,6 +12,7 @@ enum NameCheck {
     case valid
     case empty
     case lackTextlength
+    case WrongEntering
 }
 
 // Checking E-mail:
