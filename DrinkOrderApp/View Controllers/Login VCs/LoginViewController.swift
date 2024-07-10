@@ -74,7 +74,6 @@ class LoginViewController: UIViewController {
     func addTargets () {
         loginButton.addTarget(self, action: #selector(loginBtnTapped), for: .touchUpInside)
         checkingPasswordBtn.addTarget(self, action: #selector(checkingPasswordBtnTapped), for: .touchUpInside)
-        
     }
     
     func addDelegates () {
