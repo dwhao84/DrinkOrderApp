@@ -9,7 +9,7 @@ import UIKit
 
 class RegisterViewController: UIViewController {
     
-    enum  Condition {
+    enum Condition {
         // Create the condiction for register.
         static let word: String       = "abcdefghijklmnopqrstuvwxyz"
         static let digit: String      = "0123456789"
@@ -44,7 +44,6 @@ class RegisterViewController: UIViewController {
         passwordTextField.isSecureTextEntry = true
         return passwordTextField
     } ()
-    
     
     // MARK: - UIButton:
     let registerButton: SecRegisterButton = {
@@ -183,7 +182,12 @@ class RegisterViewController: UIViewController {
     
     // MARK: - addConstraints
     func addConstraints () {
-        let imageViewWidth: Double = self.view.bounds.width - 100.0
+        let imageViewWidth: Double  = self.view.bounds.width - 100.0
+        let btnWidth: Double        = self.view.bounds.width - 180.0
+        let btnHeight: Double       = 50.0
+        let textFieldWidth: Double  = 280.0
+        let textFieldHeight: Double = 45.0
+        
         logoImageView.widthAnchor.constraint(equalToConstant: imageViewWidth).isActive = true
         logoImageView.heightAnchor.constraint(equalToConstant: imageViewWidth * 0.7).isActive = true
         
@@ -205,23 +209,16 @@ class RegisterViewController: UIViewController {
         mainStackView.addArrangedSubview(passwordStackView)
         mainStackView.addArrangedSubview(registerButton)
         
+        [nameTextField, mailTextField, passwordTextField].forEach {
+            $0.widthAnchor.constraint(equalToConstant: textFieldWidth).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: textFieldHeight).isActive = true
+        }
+        
         view.addSubview(mainStackView)
         NSLayoutConstraint.activate([
-            // name TextField
-            nameTextField.widthAnchor.constraint(equalToConstant: 280),
-            nameTextField.heightAnchor.constraint(equalToConstant: 45),
-            
-            // password TextField
-            passwordTextField.widthAnchor.constraint(equalToConstant: 280),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 45),
-            
-            // Mail TextField
-            mailTextField.widthAnchor.constraint(equalToConstant: 280),
-            mailTextField.heightAnchor.constraint(equalToConstant: 45),
-            
             // Register Button
-            registerButton.widthAnchor.constraint(equalToConstant: self.view.bounds.width - 180),
-            registerButton.heightAnchor.constraint(equalToConstant: 50),
+            registerButton.widthAnchor.constraint(equalToConstant: btnWidth),
+            registerButton.heightAnchor.constraint(equalToConstant: btnHeight),
             
             // Main StackView:
             mainStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -232,7 +229,6 @@ class RegisterViewController: UIViewController {
     // MARK: - Check Name correction
     func checkNameCorrection (_ userName: String) -> NameCheck {
         let textLength = Int(nameTextField.text?.count ?? 0)
-        
         if textLength < 1 && textLength > 10 {
             print("""
                    DEBUG PRINT: User Name's text length is not correct
@@ -250,16 +246,11 @@ class RegisterViewController: UIViewController {
     
     // MARK: - Check Password correction
     func checkPasswordCorrection(_ password: String) -> PasswordCheck {
-        let tenCommonPasswords = ["123456", "123456789", "qwerty", "password", "12345678", "111111", "iloveyou", "1q2w3e", "123123", "password1"]
         let digits = "0123456789"
         let punctuation = "!@#$%^&*(),.<>;'`~[]{}\\|/?_-+= "
         let textLength = Int(passwordTextField.text?.count ?? 0)
         
-        if tenCommonPasswords.contains(password) {
-            print("DEBUG PRINT: Using ten common passwords")
-            return .containsCommonPassword
-            
-        } else if textLength == 0 {
+        if textLength == 0 {
             print("DEBUG PRINT: Password is empty")
             return .empty
             
@@ -271,8 +262,7 @@ class RegisterViewController: UIViewController {
             print("DEBUG PRINT: Password is uncorrect")
             return.lacksPunctuation
             
-        } else if textLength > 16 && textLength < 9 {
-            
+        } else if textLength > 4 && textLength < 121 {
             print("""
                  DEBUG PRINT: Password's text length is not correct
                 \(textLength)
@@ -313,12 +303,15 @@ class RegisterViewController: UIViewController {
         if !email.contains(where: { punctuation.contains( $0 )}) {
             print("DEBUG PRINT: E-mail is not the correct entering")
             return .lacksPunctuation
+            
         } else if !emailDomains.contains(emailDomains) {
             print("DEBUG PRINT: E-mail is entering wrong domain")
             return .invalidDomain
+            
         } else if !email.contains(at) {
             print("DEBUG PRINT: E-mail is missing @")
             return .lackAt
+            
         } else {
             print("DEBUG PRINT: E-mail is vaild")
             return .valid }
@@ -326,12 +319,12 @@ class RegisterViewController: UIViewController {
     
     // MARK: - Actions:
     @objc func registerButtonTapped(_ sender: UIButton) {
-        let enteredName = nameTextField.text ?? ""
-        let enteredMail = mailTextField.text ?? ""
+        let enteredName     = nameTextField.text ?? ""
+        let enteredMail     = mailTextField.text ?? ""
         let enteredPassword = passwordTextField.text ?? ""
         
-        let nameResult = checkNameCorrection(enteredName)
-        let emailResult = checkEmailCorrection(enteredMail)
+        let nameResult     = checkNameCorrection(enteredName)
+        let emailResult    = checkEmailCorrection(enteredMail)
         let passwordResult = checkPasswordCorrection(enteredPassword)
         
         if nameResult != .valid {
@@ -393,11 +386,16 @@ class RegisterViewController: UIViewController {
                 print("DEBUG PRINT: 密碼為空白")
             }
         } else {
-            
+            let user = [
+                "login": enteredName,
+                "email": enteredMail,
+                "password": enteredPassword
+            ]
+        
+            NetworkManager.createUsers(user: user)
             registerButton.configuration?.showsActivityIndicator = true
             let loginVC = LoginViewController()
             self.present(loginVC, animated: true)
-            
         }
     }
     
