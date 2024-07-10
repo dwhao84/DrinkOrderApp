@@ -12,6 +12,9 @@ class NetworkManager {
     static let getApiUrl: String = "https://api.airtable.com/v0/appS5I28H2YO3bJzv/Kebuke"
     // POST, PATCH, DELETE from empty Airtable.
     private let apiUrl: String = "https://api.airtable.com/v0/appS5I28H2YO3bJzv/Kebuke%20Order"
+    
+    let token: String  = "Token token a7c01d0f0e393ecf59c17dd7a66b193a"
+    private let url: String    = "https://favqs.com/api/"
 
     enum API {
         // Set up Authorization as a string for authorization.
@@ -230,6 +233,56 @@ class NetworkManager {
                 completion(.success(()))
             } else {
                 completion(.failure(.unexpectedStatusCode))
+            }
+        }
+        task.resume()
+    }
+    
+    // MARK: - Create User
+    static func createUsers (user: [String: String]) {
+        let url: URL = URL(string: "https://favqs.com/api/users")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue(API.application_json, forHTTPHeaderField: API.contentType)
+        request.setValue("Token token a7c01d0f0e393ecf59c17dd7a66b193a", forHTTPHeaderField: API.authorization)
+        
+        let requestBody = ["user": user]
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: requestBody, options: [])
+        } catch {
+            print("Error serializing JSON: \(error)")
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Invaild response")
+                return
+            }
+            
+            print("Status Code: \(httpResponse.statusCode)")
+            
+            if let data = data {
+                if httpResponse.statusCode == 200 {
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: data, options: [])
+                        print("Response JSON: \(json)")
+                    } catch {
+                        print("Error parsing JSON: \(error)")
+                    }
+                } else {
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: data, options: [])
+                        print("\(json)")
+                    } catch {
+                        print("Error parsing JSON: \(error)")
+                    }
+                }
             }
         }
         task.resume()
