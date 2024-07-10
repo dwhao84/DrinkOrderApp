@@ -227,8 +227,13 @@ class RegisterViewController: UIViewController {
     }
     
     // MARK: - Check Name correction
+    /*
+    Username can only contain letters (a-z), numbers (0-9) and the underscore (_);
+     */
     func checkNameCorrection (_ userName: String) -> NameCheck {
         let textLength = Int(nameTextField.text?.count ?? 0)
+        let punctuation = "!@#$%^&*(),.<>;'`~[]{}\\|/?-+= "
+        
         if textLength < 1 && textLength > 10 {
             print("""
                    DEBUG PRINT: User Name's text length is not correct
@@ -238,6 +243,10 @@ class RegisterViewController: UIViewController {
         } else if textLength == 0 {
             print("DEBUG PRINT: User name is empty")
             return .empty
+            
+        } else if userName.contains(where: { punctuation.contains($0) }) {
+            print("DEBUG PRINT: User name can not contains the punctuation")
+            return .WrongEntering
         } else {
             print("DEBUG PRINT: User name is valid")
             return .valid
@@ -262,7 +271,7 @@ class RegisterViewController: UIViewController {
             print("DEBUG PRINT: Password is uncorrect")
             return.lacksPunctuation
             
-        } else if textLength > 4 && textLength < 121 {
+        } else if textLength < 4 && textLength > 121 {
             print("""
                  DEBUG PRINT: Password's text length is not correct
                 \(textLength)
@@ -340,6 +349,11 @@ class RegisterViewController: UIViewController {
                 enterNameStatusLabel.isHidden = false
                 enterNameStatusLabel.text = "輸入姓名的字數不正確"
                 print("DEBUG PRINT: 姓名字數不正確")
+                
+            case .WrongEntering:
+                enterNameStatusLabel.isHidden = false
+                enterNameStatusLabel.text = "輸入姓名不能有其他符號"
+                print("DEBUG PRINT: 輸入姓名不能有其他符號")
             }
         } else if emailResult != .valid {
             switch emailResult {
@@ -394,6 +408,7 @@ class RegisterViewController: UIViewController {
         
             NetworkManager.createUsers(user: user)
             registerButton.configuration?.showsActivityIndicator = true
+            
             let loginVC = LoginViewController()
             self.present(loginVC, animated: true)
         }
