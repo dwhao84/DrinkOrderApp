@@ -11,17 +11,17 @@ import UIKit
 
 // MARK: - Kebuke
 struct Kebuke: Codable {
-    let records: [Record]
+    let records: [KebukeRecord]
 }
 
-// MARK: - Record
-struct Record: Codable {
+// MARK: - KebukeRecord
+struct KebukeRecord: Codable {
     let id, createdTime: String
-    let fields: Fields
+    let fields: KebukeFields
 }
 
-// MARK: - Fields
-struct Fields: Codable {
+// MARK: - KebukeFields
+struct KebukeFields: Codable {
     let largePrice: Int
     let drinksImages: [DrinksImage]?
     let category: Category
@@ -71,3 +71,4 @@ struct Full: Codable {
 enum TypeEnum: String, Codable {
     case imageJPEG = "image/jpeg"
 }
+
