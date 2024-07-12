@@ -13,12 +13,12 @@ struct Order: Codable {
 
 // MARK: - Create Order data model
 struct OrderFields: Codable {
-    let userName: String
-    let drinkName: String
-    let cupSize: String
-    let sugarLevel: String
-    let iceLevel: String
-    let topping: String
+    let userName: String?
+    let drinkName: String?
+    let cupSize: String?
+    let sugarLevel: String?
+    let iceLevel: String?
+    let topping: String?
     let qty: String?
     let price: String?
     
@@ -33,6 +33,3 @@ struct OrderFields: Codable {
         case price      = "Price"
     }
 }
-
-
-
