@@ -12,6 +12,8 @@ class OrderDetailViewController: UIViewController {
     
     static let shared: String = "OrderDetailViewController"
     
+    var drinksQty: Int = 0
+    
     // MARK: - PickerView Selection Content.
     let cupSize: [String]    = ["中杯 M", "大杯 L"]
     let sugarLevel: [String] = ["正常糖", "少糖", "半糖", "微糖", "二分糖", "一分糖", "無糖"]
@@ -94,11 +96,21 @@ class OrderDetailViewController: UIViewController {
     } ()
     
     // Show drinks medium / large price
-    let drinksPriceLabel: UILabel = {
+    var drinksPriceLabel: UILabel = {
         let label: UILabel = UILabel()
         label.textColor = Colors.darkGray
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 25)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    } ()
+    
+    let drinkOrderQty: UILabel = {
+        let label: UILabel = UILabel()
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.textColor = Colors.darkGray
+        label.font = UIFont.systemFont(ofSize: 25)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     } ()
@@ -136,8 +148,12 @@ class OrderDetailViewController: UIViewController {
         return textField
     } ()
 
-    let drinksQtyStepper: CustomStepper = {
-        let stepper: CustomStepper = CustomStepper()
+    let drinkStepper: UIStepper = {
+        let stepper: UIStepper = UIStepper()
+        stepper.value = 1
+        stepper.maximumValue = 10
+        stepper.minimumValue = 1
+        stepper.overrideUserInterfaceStyle = .light
         stepper.translatesAutoresizingMaskIntoConstraints = false
         return stepper
     } ()
@@ -226,9 +242,9 @@ class OrderDetailViewController: UIViewController {
     let horizontalStackView: UIStackView = {
         let stackView: UIStackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.alignment = .fill
+        stackView.alignment = .center
         stackView.distribution = .fill
-        stackView.spacing = 10
+        stackView.spacing = 20
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     } ()
@@ -272,10 +288,10 @@ class OrderDetailViewController: UIViewController {
 
     
     // MARK: - PickerViews:
-    let cupSizePickerView: UIPickerView = UIPickerView()
-    let iceLevelPickerView: UIPickerView = UIPickerView()
+    let cupSizePickerView: UIPickerView    = UIPickerView()
+    let iceLevelPickerView: UIPickerView   = UIPickerView()
     let sugarLevelPickerView: UIPickerView = UIPickerView()
-    let toppingPickerView: UIPickerView = UIPickerView()
+    let toppingPickerView: UIPickerView    = UIPickerView()
 
     // MARK: - Life Cycle:
     override func viewDidLoad() {
@@ -311,6 +327,7 @@ class OrderDetailViewController: UIViewController {
     
     // MARK: - Set up UI.
     func setupUI () {
+        drinkOrderQty.text = "\(Int(drinkStepper.value))"
         self.view.backgroundColor = Colors.white
         setNavigationView()
         addConstraints()
@@ -329,6 +346,7 @@ class OrderDetailViewController: UIViewController {
         submitBtn.addTarget(self, action: #selector(submitBtnTapped), for: .touchUpInside)
         cancelBtn.addTarget(self, action: #selector(cancelBtnTapped), for: .touchUpInside)
         doneBtn.addTarget(self, action: #selector(doneBtnTapped), for: .touchUpInside)
+        drinkStepper.addTarget(self, action: #selector(stepperValueChanged), for: .touchUpInside)
     }
     
     // MARK: Set up ToolBar and Text Fields
@@ -454,7 +472,8 @@ class OrderDetailViewController: UIViewController {
         toppingChooseStackView.addArrangedSubview(toppingLevelLabel)
         toppingChooseStackView.addArrangedSubview(toppingTextField)
         
-        horizontalStackView.addArrangedSubview(drinksQtyStepper)
+        horizontalStackView.addArrangedSubview(drinkStepper)
+        horizontalStackView.addArrangedSubview(drinkOrderQty)
         horizontalStackView.addArrangedSubview(drinksPriceLabel)
         
         /// secondStackView
@@ -541,17 +560,15 @@ class OrderDetailViewController: UIViewController {
                 sugarLevel: sugarLevelTextField.text ?? "No Sugar Level",
                 iceLevel: iceLevelTextField.text ?? "No Ice Level",
                 topping: toppingTextField.text ?? "No Topping",
-                qty: String(Int(drinksQtyStepper.value)),
+                qty: "\(Int(drinkStepper.value))",
                 price: drinksPriceLabel.text ?? "No Price"
             )
             
             let newOrder = Order(fields: orderFields)
-            
             NetworkManager.shared.postOrdersData(order: newOrder) { result in
                 switch result {
                 case .success(_):
                     DispatchQueue.main.async {
-                        self.submitBtn.configuration?.showsActivityIndicator = true
                         self.showAlertVC(title: "Order Created", message: "Your Order is created")
                         let orderListVC = OrderListViewController()
                         self.navigationController?.pushViewController(orderListVC, animated: true)
@@ -586,6 +603,29 @@ class OrderDetailViewController: UIViewController {
         print("viewTapped")
         view.endEditing(true)
     }
+    
+    @objc func stepperValueChanged(_ sender: UIStepper) {
+        let cupSizeText = cupSizeTextField.text
+        let toppingText = toppingTextField.text
+        drinksQty = Int(drinkStepper.value)
+        drinkOrderQty.text = "\(drinksQty)"
+        var price = 0
+        
+        if cupSizeText == cupSize[0] {
+            // 中杯
+            price = drinksMediumPrice ?? 0
+        } else {
+            // 大杯
+            price = drinksLargePrice ?? 0
+        }
+        
+        if toppingText != toppingChoose[0] {
+            price += 10
+        }
+        
+        drinksPriceLabel.text = "$\(drinksQty * price)"
+    }
+
 }
 
 // MARK: - text Fields Delegate
@@ -613,63 +653,29 @@ extension OrderDetailViewController: UITextFieldDelegate {
     
     // MARK: textField Did End Editing
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if ( textField == cupSizeTextField ) {
-            let cupSizeText = cupSizeTextField.text
-            if cupSizeText == cupSize[0] {
-                print("DEBUG PRINT: 選擇 \(cupSizeTextField.text!)")
-                drinksPriceLabel.text = "$\(drinksMediumPrice!)"
-                
-            } else if cupSizeText == cupSize[1] {
-                print("DEBUG PRINT: 選擇 \(cupSizeTextField.text!)")
-                drinksPriceLabel.text = "$\(drinksLargePrice!)"
+        let cupSizeText = cupSizeTextField.text
+        let toppingText = toppingTextField.text
+        var price = 0
+
+        // 中杯
+        if cupSizeText == cupSize[0] {
+            price = drinksMediumPrice ?? 0
+            if toppingText != toppingChoose[0] {
+                price += 10
             }
-            
-            print("\(drinkNameLabel.text!)")
-            textField.resignFirstResponder()
-            
-        } else if ( textField == iceLevelTextField ) {
-            textField.resignFirstResponder()
-            
-        } else if ( textField == sugarLevelTextField ) {
-            textField.resignFirstResponder()
-            
-        } else if ( textField == toppingTextField ) {
-            let toppingText = toppingTextField.text
-            let cupSizeText = cupSizeTextField.text
-            
-            if toppingText == toppingChoose[1] {
-                print("加白玉 +$10")
-                if cupSizeText == cupSize[0] {
-                    drinksPriceLabel.text = "$ \(drinksMediumPrice! + 10)"
-                } else {
-                    drinksPriceLabel.text = "$ \(drinksLargePrice! + 10)"
-                }
-                    
-            } else if toppingText == toppingChoose[2] {
-                print("DEBUG PRINT: 加菓玉 +$10")
-                if cupSizeText == cupSize[0] {
-                    drinksPriceLabel.text = "$ \(drinksMediumPrice! + 10)"
-                } else {
-                    drinksPriceLabel.text = "$ \(drinksLargePrice! + 10)"
-                }
-                
-            } else if toppingText == toppingChoose[3] {
-                print("DEBUG PRINT: 加水玉 +$10")
-                if cupSizeText == cupSize[0] {
-                    drinksPriceLabel.text = "$ \(drinksMediumPrice! + 10)"
-                } else {
-                    drinksPriceLabel.text = "$ \(drinksLargePrice! + 10)"
-                }
-            } else {
-                if cupSizeText == cupSize[0] {
-                    drinksPriceLabel.text = "$ \(drinksMediumPrice!)"
-                } else {
-                    drinksPriceLabel.text = "$ \(drinksLargePrice!)"
-                }
+        } else {
+            // 大杯
+            price = drinksLargePrice ?? 0
+            if toppingText != toppingChoose[0] {
+                price += 10
             }
-            textField.resignFirstResponder()
         }
+        
+        drinksPriceLabel.text = "$\(Int(drinkStepper.value) * price)"
+        print("$\(drinkNameLabel.text!)")
     }
+
+
     
     // MARK: textField Did Change Selection
     func textFieldDidChangeSelection(_ textField: UITextField) {
