@@ -51,6 +51,7 @@
 		D3E8B6742C134667004D00BF /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E8B6732C134667004D00BF /* SubmitButton.swift */; };
 		D3E8B6762C134B48004D00BF /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E8B6752C134B48004D00BF /* CustomTextField.swift */; };
 		D3E8B6782C134ECF004D00BF /* CustomOrderDetailLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E8B6772C134ECF004D00BF /* CustomOrderDetailLabel.swift */; };
+		D3F25F852C41799200F1ACF8 /* OrderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F25F842C41799200F1ACF8 /* OrderList.swift */; };
 		EB94C1D92B8734F5008098DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB94C1D82B8734F5008098DE /* AppDelegate.swift */; };
 		EB94C1DB2B8734F5008098DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB94C1DA2B8734F5008098DE /* SceneDelegate.swift */; };
 		EB94C1E02B8734F5008098DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB94C1DE2B8734F5008098DE /* Main.storyboard */; };
@@ -122,6 +123,7 @@
 		D3E8B6732C134667004D00BF /* SubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
 		D3E8B6752C134B48004D00BF /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		D3E8B6772C134ECF004D00BF /* CustomOrderDetailLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOrderDetailLabel.swift; sourceTree = "<group>"; };
+		D3F25F842C41799200F1ACF8 /* OrderList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderList.swift; sourceTree = "<group>"; };
 		EB94C1D52B8734F5008098DE /* DrinkOrderApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrinkOrderApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB94C1D82B8734F5008098DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB94C1DA2B8734F5008098DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				D30C48962BD0D44F00C5B908 /* DrinksModel.swift */,
+				D3F25F842C41799200F1ACF8 /* OrderList.swift */,
 				D3B2423B2C1F1F4000EC0ED9 /* DrinksOrder.swift */,
 				D38E53A22B88CE40008E8BDE /* SettingsModel.swift */,
 				D39CB0282BDC8782004B96C5 /* KebukeStoreModel.swift */,
@@ -543,6 +546,7 @@
 				D3E8B6782C134ECF004D00BF /* CustomOrderDetailLabel.swift in Sources */,
 				D39CB0572BE00897004B96C5 /* SecRegisterButton.swift in Sources */,
 				D39CB0312BDD5F07004B96C5 /* KebukeAnnotationView.swift in Sources */,
+				D3F25F852C41799200F1ACF8 /* OrderList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

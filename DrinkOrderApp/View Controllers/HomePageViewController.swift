@@ -13,7 +13,7 @@ class HomePageViewController: UIViewController {
     static let shared: String = "HomePageViewController"
     var userName: String?
     
-    var drinks: [Record] = []
+    var drinks: [KebukeRecord] = []
     lazy var filterDrinks = drinks
     
     // MARK: - UI set up:
@@ -109,7 +109,7 @@ class HomePageViewController: UIViewController {
         kebukeLogoImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
         self.navigationItem.titleView = kebukeLogoImageView
         self.navigationItem.titleView?.backgroundColor = Colors.kebukeDarkBlue
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: Images.list, style: .plain, target: self, action: #selector(listBarBtnTapped))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: Images.list, style: .plain, target: self, action: #selector(listBarBtnTapped))
         
         // set up appearance
         let appearance = UINavigationBarAppearance()
