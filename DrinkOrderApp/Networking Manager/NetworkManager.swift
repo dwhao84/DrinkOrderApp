@@ -106,6 +106,58 @@ class NetworkManager {
         }.resume()
     }
     
+    // MARK: - GET Orders:
+    func getAirtableData(completion: @escaping (Result<[CustomerOrderFields], NetworkError>) -> Void) {
+        guard let url = URL(string: "https://api.airtable.com/v0/appS5I28H2YO3bJzv/Kebuke%20Order?maxRecords=3&view=Grid%20view") else {
+            completion(.failure(.invalidURL))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue(NetworkManager.apiKey, forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("\(error.localizedDescription)")
+                completion(.failure(.requestFailed))
+                return
+            }
+        
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                print("\(String(describing: response))")
+                completion(.failure(.unexpectedStatusCode))
+                return
+            }
+            
+            guard let data = data else {
+                print("No data received")
+                completion(.failure(.noDataReceived))
+                return
+            }
+            
+            do {
+                // Print out JSON response for debugging
+                if let jsonString = String(data: data, encoding: .utf8) {
+                    print("Response JSON: \(jsonString)")
+                }
+                
+                let decoder = JSONDecoder()
+                let orderResponse = try decoder.decode(OrderResponse.self, from: data)
+                let orderFields = orderResponse.records.map { $0.fields }
+                completion(.success(orderFields))
+                
+            } catch {
+                print("Decode error: \(error)")
+                if let jsonString = String(data: data, encoding: .utf8) {
+                    print("Response JSON: \(jsonString)")
+                }
+                completion(.failure(.decodeError))
+            }
+        }.resume()
+    }
+
+    
     // MARK: - POST orders
     func postOrdersData(order: Order, completion: @escaping (Result<Order, NetworkError>) -> Void) {
         guard let url = URL(string: apiUrl) else {
@@ -155,6 +207,7 @@ class NetworkManager {
                 if let jsonString = String(data: data, encoding: .utf8) {
                     print("Response JSON: \(jsonString)")
                 }
+                
                 print("Decode error: \(error)")
                 completion(.failure(.decodeError))
             }
