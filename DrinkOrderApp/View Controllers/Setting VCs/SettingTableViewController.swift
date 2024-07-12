@@ -14,14 +14,16 @@ class SettingTableViewController: UIViewController {
     var settings: [SettingData] = []
     
     // MARK: - UI set up:
-    var tableView: UITableView = {
-        let tableView: UITableView = UITableView(frame: .zero, style: .insetGrouped)
+    let tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.backgroundColor = Colors.kebukeLightBlue
         tableView.rowHeight = 100
         tableView.allowsSelection = true
+        tableView.separatorStyle = .none
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
-    } ()
+    }()
+
     
     // MARK: - Life cycle:
     override func viewDidLoad() {
