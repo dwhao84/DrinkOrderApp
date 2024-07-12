@@ -14,7 +14,7 @@ class OrderListViewController: UIViewController {
     private let baseUrl: String = "https://api.airtable.com/v0/appS5I28H2YO3bJzv/Kebuke"
     private let apiKey: String = "Bearer patxAQx4KLgwEsh8O.28a883dd0c29a3920aee1cc069fc876738b14186ec8ec2dd07cc762b70497e0c"
     
-    var orders: [Order] = []
+    var orders: [CustomerOrderFields] = []
     
     // MARK: - UI set up:
     private let tableView: UITableView = {
@@ -52,7 +52,7 @@ class OrderListViewController: UIViewController {
         spinner.color = Colors.kebukeBrown
         return spinner
     } ()
-    
+     
     // MARK: - Life cycle:
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +77,7 @@ class OrderListViewController: UIViewController {
         setupNavigationItem()
         setupTableView()
         addTargets ()
+        fetchOrdersData()
     }
     
     // MARK: Add Targets
@@ -134,7 +135,24 @@ class OrderListViewController: UIViewController {
     }
     
     func fetchOrdersData() {
-
+        NetworkManager.shared.getAirtableData { result in
+            switch result {
+            case .success(let order):
+                self.orders = order
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            case .failure(let error):
+                print("Failed to fetch orders: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func showErrorAlert(error: Error) {
+        let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     func fetchDeleteDrinksData () {
@@ -145,6 +163,7 @@ class OrderListViewController: UIViewController {
     @objc func refresh(_ sender: Any) {
         refreshControl.endRefreshing()
         tableView.reloadData()
+        fetchOrdersData()
         print("DEBUG PRINT: End Refreshing")
     }
 }
@@ -152,17 +171,22 @@ class OrderListViewController: UIViewController {
 // MARK: - Extension:
 extension OrderListViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        orders.count
+        print("DEBUG PRINT: \(orders.count)")
+        return orders.count
     }
     
     // MARK: cellForRowAt
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: OrderListTableViewCell.identifier, for: indexPath) as! OrderListTableViewCell
         
-        cell.drinksTitleLabel.text = "Loading..."
-        cell.toppingContentLabel.text = "Loading..."
-        cell.drinksPriceLabel.text = "Loading..."
-        cell.drinksImageView.image = Images.banner03
+        let orderData = orders[indexPath.row]
+        
+        cell.drinksTitleLabel.text    = orderData.drinkName
+        cell.userNameLabel.text       = orderData.userName
+        cell.toppingContentLabel.text = orderData.topping
+        cell.iceLevelLabel.text       = orderData.iceLevel
+        cell.drinksPriceLabel.text    = orderData.price
+        cell.qtyLabel.text            = orderData.qty
         cell.selectionStyle = .gray
         
         // Set up tableView cell when selected will show inside of the corner shape.
@@ -192,7 +216,7 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource, U
         let contentHeight = scrollView.contentSize.height
         let height = scrollView.frame.size.height
         
-        print("Offset: \(offsetY), contentHeight: \(contentHeight), height: \(height)")
+//        print("Offset: \(offsetY), contentHeight: \(contentHeight), height: \(height)")
     }
 }
 
