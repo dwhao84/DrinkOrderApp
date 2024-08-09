@@ -11,7 +11,7 @@ class SettingTableViewCell: UITableViewCell {
     
     static let identifier: String = "SettingTableViewCell"
     
-    var serviceImageView: UIImageView = {
+    let serviceImageView: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.image = Images.phone
         imageView.contentMode = .scaleAspectFill
@@ -20,21 +20,22 @@ class SettingTableViewCell: UITableViewCell {
         return imageView
     } ()
     
-    var serviceTitleLabel: UILabel = {
+    let serviceTitleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "XXXX"
-        label.textColor = Colors.white
+        label.textColor = Colors.darkGray
         label.textAlignment = .left
-        label.font = UIFont.boldSystemFont(ofSize: 22)
+        label.font = UIFont.systemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     } ()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: "drinkCell")
+        super.init(style: .default, reuseIdentifier: "reuseIdentifier")
 
         addConstraints()
-        self.backgroundColor = Colors.kebukeLightBlue
+        self.contentView.backgroundColor = Colors.white
+        accessoryType = .disclosureIndicator
      }
     
     required init?(coder: NSCoder) {
@@ -47,18 +48,18 @@ class SettingTableViewCell: UITableViewCell {
     }
     
     func addConstraints() {
-        self.addSubview(serviceImageView)
-        self.addSubview(serviceTitleLabel)
+        contentView.addSubview(serviceImageView)
+        contentView.addSubview(serviceTitleLabel)
         
         serviceImageView.widthAnchor.constraint(equalToConstant: 25).isActive = true
         serviceImageView.heightAnchor.constraint(equalToConstant: 25).isActive = true
         
         NSLayoutConstraint.activate([
-            serviceImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            serviceImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            serviceImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            serviceImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             
             serviceTitleLabel.leadingAnchor.constraint(equalTo: serviceImageView.trailingAnchor, constant: 20),
-            serviceTitleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+            serviceTitleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
 
