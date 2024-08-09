@@ -10,6 +10,7 @@ import UIKit
 struct SettingData {
     let serviceName:  String
     let serviceImage: UIImage
+    let color: UIColor
 }
 
 
