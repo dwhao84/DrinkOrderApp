@@ -32,8 +32,8 @@ class DrinkTableViewCell: UITableViewCell {
     var drinksTitleLabel: UILabel = {
         var label: UILabel = UILabel()
         label.text = "熟成紅茶"
-        label.textColor = Colors.white
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = Colors.darkGray
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -54,8 +54,8 @@ class DrinkTableViewCell: UITableViewCell {
     var drinksPriceLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "中: 40 / 大: 45"
-        label.textColor = Colors.white
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = Colors.lightGray
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -67,7 +67,7 @@ class DrinkTableViewCell: UITableViewCell {
         stackView.axis = .vertical
         stackView.distribution = .fill
         stackView.alignment = .leading
-        stackView.spacing = 12
+        stackView.spacing = 5
         return stackView
     } ()
     
@@ -78,7 +78,7 @@ class DrinkTableViewCell: UITableViewCell {
         configureStackView()
         addConstraints()
         
-        self.backgroundColor = Colors.kebukeLightBlue
+        contentView.backgroundColor = Colors.clear
      }
     
     required init?(coder: NSCoder) {
@@ -98,7 +98,7 @@ class DrinkTableViewCell: UITableViewCell {
     }
     
     func addConstraints () {
-        self.addSubview(drinksImageView)
+        contentView.addSubview(drinksImageView)
         drinksImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             drinksImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
