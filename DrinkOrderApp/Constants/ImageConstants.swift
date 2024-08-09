@@ -27,7 +27,7 @@ struct Images {
     static let homePage: UIImage       = UIImage(systemName: "house")!
        
     /// SettingVC's logo
-    static let setting: UIImage        = UIImage(systemName: "gearshape.fill")!
+    static let setting: UIImage        = UIImage(systemName: "gear")!
     static let phone: UIImage          = UIImage(systemName: "phone.down.fill")!
     static let map: UIImage            = UIImage(systemName: "mappin.circle.fill")!
     static let mail: UIImage           = UIImage(systemName: "envelope")!
