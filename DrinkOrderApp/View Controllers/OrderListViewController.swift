@@ -134,6 +134,7 @@ class OrderListViewController: UIViewController {
         self.navigationItem.scrollEdgeAppearance = appearance
     }
     
+    // MARK: - GET Order data:
     func fetchOrdersData() {
         NetworkManager.shared.getAirtableData { result in
             switch result {
@@ -148,6 +149,12 @@ class OrderListViewController: UIViewController {
         }
     }
     
+    // MARK: - DELETE Order data:
+    func fetchDeleteDrinksData () {
+        
+    }
+    
+    // MARK: Show Alert Controller:
     func showErrorAlert(error: Error) {
         let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -155,8 +162,11 @@ class OrderListViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    func fetchDeleteDrinksData () {
-        
+    func showAlertController(_ title: String, _ message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     // MARK: - Add Actions:
@@ -186,7 +196,7 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource, U
         cell.toppingContentLabel.text = orderData.topping
         cell.iceLevelLabel.text       = orderData.iceLevel
         cell.drinksPriceLabel.text    = orderData.price
-        cell.qtyLabel.text            = orderData.qty
+        cell.qtyLabel.text            = "數量: \(orderData.qty ?? "")"
         cell.selectionStyle = .gray
         
         // Set up tableView cell when selected will show inside of the corner shape.
@@ -201,22 +211,15 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource, U
     // MARK: trailing Swipe Actions Configuration For Row At
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
+        showAlertController("🚨 資料刪除", "Ok")
+        
         let deleteAction = UIContextualAction(style: .destructive, title: "刪除")  { _,_,_ in
-            
-
             print("DEBUG PRINT: 刪除")
         }
         
-        return UISwipeActionsConfiguration(actions: [deleteAction])
-    }
-    
-    // TODO: - Using calculate the tableView height to show whether spinner will show or not.
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        let height = scrollView.frame.size.height
         
-//        print("Offset: \(offsetY), contentHeight: \(contentHeight), height: \(height)")
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
 
