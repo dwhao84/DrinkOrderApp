@@ -130,7 +130,7 @@ class LoginViewController: UIViewController {
           let homePageVC              = HomePageViewController()
           let homePageNC              = UINavigationController(rootViewController: homePageVC)
           homePageNC.tabBarItem.image = Images.homePage
-          homePageNC.tabBarItem.title = "Home"
+          homePageNC.tabBarItem.title = "商品頁面"
           return homePageNC
       }
       
@@ -138,7 +138,7 @@ class LoginViewController: UIViewController {
           let orderListVC              = OrderListViewController()
           let orderListNC              = UINavigationController(rootViewController: orderListVC)
           orderListNC.tabBarItem.image = Images.cart
-          orderListNC.tabBarItem.title = "List"
+          orderListNC.tabBarItem.title = "購物清單"
           return orderListNC
       }
       
@@ -146,7 +146,7 @@ class LoginViewController: UIViewController {
           let settingTableVC           = SettingTableViewController()
           let settingTableNC           = UINavigationController(rootViewController: settingTableVC)
           settingTableNC.tabBarItem.image = Images.setting
-          settingTableNC.tabBarItem.title = "Setting"
+          settingTableNC.tabBarItem.title = "設定頁面"
           return settingTableNC
       }
       
@@ -155,7 +155,8 @@ class LoginViewController: UIViewController {
           tabBarController.tabBar.barTintColor  = Colors.white
           tabBarController.viewControllers      = [
               createTheHomePageNavigationVC        (),
-              createTheOrderListNavigationVC       ()
+              createTheOrderListNavigationVC       (),
+              createTheSettingTableViewNavigationVC()
           ]
           tabBarController.tabBar.tintColor     = Colors.kebukeBrown
           tabBarController.tabBar.isTranslucent = true
