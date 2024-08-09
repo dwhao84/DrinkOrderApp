@@ -30,7 +30,6 @@ class HomePageViewController: UIViewController {
         tableView.allowsSelection = true
         tableView.isScrollEnabled = true
         tableView.separatorStyle = .singleLine
-        tableView.backgroundColor = Colors.kebukeLightBlue
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     } ()
@@ -76,8 +75,6 @@ class HomePageViewController: UIViewController {
     }
     
     func setupUI () {
-        self.view.backgroundColor = Colors.kebukeLightBlue
-        
         setupNavigationItem()
         addTargets()
         addDelegateAndDataSource()
@@ -109,7 +106,6 @@ class HomePageViewController: UIViewController {
         kebukeLogoImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
         self.navigationItem.titleView = kebukeLogoImageView
         self.navigationItem.titleView?.backgroundColor = Colors.kebukeDarkBlue
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: Images.list, style: .plain, target: self, action: #selector(listBarBtnTapped))
         
         // set up appearance
         let appearance = UINavigationBarAppearance()
@@ -131,7 +127,6 @@ class HomePageViewController: UIViewController {
     // Add Constraints
     func addConstraints () {
         self.view.addSubview(productTableView)
-        
         // MARK:  Constraint TableView
         NSLayoutConstraint.activate([
             productTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -149,17 +144,10 @@ class HomePageViewController: UIViewController {
     // MARK: - Actions
     @objc func refresh(_ sender: Any) {
         refreshControl.endRefreshing()
-        // TODO: -
         productTableView.reloadData()
         print("DEBUG PRINT: End Refreshing")
     }
-    
-    @objc func listBarBtnTapped () {
-        let settingVC = SettingTableViewController()
-        settingVC.modalPresentationStyle = .fullScreen
-        self.navigationController?.pushViewController(settingVC, animated: true)
-    }
-    
+        
     func showActivityIndicator() {
         let activityIndicator = UIActivityIndicatorView(style: .large)
         // 設置tag 以便後續查找 以及 移除
@@ -192,7 +180,7 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DrinkTableViewCell.identifier, for: indexPath) as! DrinkTableViewCell
         //
-        cell.backgroundColor = Colors.kebukeLightBlue
+        cell.backgroundColor = Colors.white
         cell.selectionStyle  = .gray
         // Define the drinksData from drinks(an array).
         let drinksData = filterDrinks[indexPath.row]
@@ -207,13 +195,6 @@ extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
         cell.drinksTitleLabel.text       = drinksData.fields.drinkName
         cell.drinksDescriptionLabel.text = drinksData.fields.drinksDescription
         cell.drinksPriceLabel.text       = "中 : \(drinksData.fields.mediumPrice) / 大 : \(drinksData.fields.largePrice)"
-        
-        // Set up tableView cell when selected will show inside of the corner shape.
-        let backgroundView: UIView        = UIView()
-        backgroundView.backgroundColor    = Colors.kebukeDarkBlueWithAlpha
-        backgroundView.layer.cornerRadius = 25
-        backgroundView.clipsToBounds      = true
-        cell.selectedBackgroundView       = backgroundView
         return cell
     }
     
