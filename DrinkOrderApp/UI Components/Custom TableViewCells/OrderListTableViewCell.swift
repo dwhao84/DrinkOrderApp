@@ -15,8 +15,8 @@ class OrderListTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "訂購人姓名"
         label.numberOfLines = 0
-        label.textColor = Colors.white
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textColor = Colors.kebukeLightBlue
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -25,8 +25,8 @@ class OrderListTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "飲料名稱"
         label.numberOfLines = 0
-        label.textColor = Colors.white
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.textColor = Colors.kebukeBrown
+        label.font = UIFont.systemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -35,8 +35,8 @@ class OrderListTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "配料"
         label.numberOfLines = 0
-        label.textColor = Colors.white
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = Colors.lightGray
+        label.font = UIFont.systemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -45,8 +45,8 @@ class OrderListTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "冰量"
         label.numberOfLines = 0
-        label.textColor = Colors.white
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = Colors.lightGray
+        label.font = UIFont.systemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -55,8 +55,8 @@ class OrderListTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "飲料價格"
         label.numberOfLines = 0
-        label.textColor = Colors.white
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textColor = Colors.kebukeBrown
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -65,8 +65,8 @@ class OrderListTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "數量"
         label.numberOfLines = 0
-        label.textColor = Colors.white
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.textColor = Colors.lightGray
+        label.font = UIFont.systemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -94,16 +94,16 @@ class OrderListTableViewCell: UITableViewCell {
 
     private func setupConstraints() {
         // Set up cornerRadius
-        self.addSubview(drinksPriceLabel)
-        self.backgroundColor = Colors.kebukeLightBlue
-        self.addSubview(contentStackView)
+        contentView.addSubview(drinksPriceLabel)
+        contentView.backgroundColor = Colors.white
+        contentView.addSubview(contentStackView)
         
         NSLayoutConstraint.activate([
             // contentStackView
-            contentStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
-            contentStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 30),
-            drinksPriceLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -30),
-            drinksPriceLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30)
+            contentStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            drinksPriceLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30),
+            drinksPriceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30)
         ])
     }
     
