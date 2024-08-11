@@ -366,7 +366,6 @@ class OrderDetailViewController: UIViewController {
         toolBar.layer.borderWidth = 0.2
         toolBar.tintColor = Colors.kebukeLightBlue
         
-        // FIXME: - Auto Layout 有些問題
         let doneButton = UIBarButtonItem(customView: doneBtn)
         let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         let cancelButton = UIBarButtonItem(customView: cancelBtn)
@@ -425,11 +424,12 @@ class OrderDetailViewController: UIViewController {
     func configStackView () {
         let customWidth: CGFloat =  self.view.bounds.width - 60
         let customMultiplier: CGFloat = 0.75
+        let customStackViewWidth: CGFloat = self.view.bounds.width - 80
         
         drinksImageView.widthAnchor.constraint(equalToConstant: customWidth).isActive = true
         drinksImageView.heightAnchor.constraint(equalTo: drinksImageView.widthAnchor, multiplier: customMultiplier).isActive = true
         
-        submitBtn.widthAnchor.constraint(equalToConstant: self.view.bounds.width - 60).isActive = true
+        submitBtn.widthAnchor.constraint(equalToConstant: self.view.bounds.width - 80).isActive = true
         submitBtn.heightAnchor.constraint(equalTo: submitBtn.widthAnchor, multiplier: 0.15).isActive = true
 
         [userNameTextField,
@@ -438,8 +438,8 @@ class OrderDetailViewController: UIViewController {
          sugarLevelTextField,
          toppingTextField
         ].forEach {
-            $0.widthAnchor.constraint(greaterThanOrEqualToConstant: 250).isActive = true
             $0.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
+            $0.widthAnchor.constraint(greaterThanOrEqualToConstant: 230).isActive = true
         }
         
         [cupSizeLabel,
@@ -475,6 +475,14 @@ class OrderDetailViewController: UIViewController {
         horizontalStackView.addArrangedSubview(drinkStepper)
         horizontalStackView.addArrangedSubview(drinkOrderQty)
         horizontalStackView.addArrangedSubview(drinksPriceLabel)
+        
+        [userNameStackView,
+        cupSizeStackView,
+        iceLevelStackView,
+        toppingChooseStackView,
+         horizontalStackView].forEach {
+            $0.widthAnchor.constraint(equalToConstant: customStackViewWidth).isActive = true
+        }
         
         /// secondStackView
         secondStackView.addArrangedSubview(drinksInfoStackView)
