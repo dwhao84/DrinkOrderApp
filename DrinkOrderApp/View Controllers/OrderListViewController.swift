@@ -90,7 +90,7 @@ class OrderListViewController: UIViewController {
         tableView.register(OrderListTableViewCell.self, forCellReuseIdentifier: OrderListTableViewCell.identifier)
         tableView.rowHeight = 170
         tableView.refreshControl = refreshControl
-        tableView.backgroundColor = Colors.kebukeLightBlue
+        tableView.backgroundColor = Colors.white
         tableView.tableFooterView = spinner
     }
     
