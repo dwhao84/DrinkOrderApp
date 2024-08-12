@@ -12,8 +12,8 @@ class AuthSelectionViewController: UIViewController {
     // MARK: - Custom UI for UIImageView:
     var logoImageView: UIImageView = {
         let logoImageView: UIImageView = UIImageView()
-        logoImageView.image       = Images.kebukeLoginLogo
-        logoImageView.contentMode = .scaleToFill
+        logoImageView.image = Images.firstPage
+        logoImageView.contentMode = .scaleAspectFill
         return logoImageView
     } ()
     
@@ -68,7 +68,7 @@ class AuthSelectionViewController: UIViewController {
         super.viewDidLoad()
         
         print("Into the AuthVC")
-        self.view.backgroundColor = Colors.kebukeDarkBlue
+        self.view.backgroundColor = Colors.white
         setupUI()
         addTargets()
     }
@@ -94,7 +94,7 @@ class AuthSelectionViewController: UIViewController {
     
     // MARK: - Setup UI:
     func setupUI() {
-        let customWidth: CGFloat = self.view.bounds.width - 120
+        let customWidth: CGFloat = self.view.bounds.width - 180
         let customHeight: CGFloat = 50
  
         [loginButton, registerButton].forEach {

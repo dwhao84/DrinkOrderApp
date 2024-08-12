@@ -22,7 +22,7 @@ class RegisterViewController: UIViewController {
     // MARK: - UIImageView:
     let logoImageView: UIImageView = {
         let logoImageView: UIImageView = UIImageView()
-        logoImageView.image       = Images.kebukeLoginLogo
+        logoImageView.image       = Images.firstPage
         logoImageView.contentMode = .scaleAspectFill
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         return logoImageView
