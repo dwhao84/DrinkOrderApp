@@ -11,6 +11,16 @@ class OrderListTableViewCell: UITableViewCell {
     
     static let identifier: String = "OrderListTableViewCell"
     
+    let drinksImageView: UIImageView = {
+        let imageView: UIImageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "Product Sample")
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    } ()
+    
     let userNameLabel: UILabel = {
         let label = UILabel()
         label.text = "訂購人姓名"
@@ -56,7 +66,7 @@ class OrderListTableViewCell: UITableViewCell {
         label.text = "飲料價格"
         label.numberOfLines = 0
         label.textColor = Colors.kebukeBrown
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -80,39 +90,69 @@ class OrderListTableViewCell: UITableViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+        
+    let mainStackView: UIStackView = {
+        let stackView: UIStackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.spacing = 10
+        stackView.alignment = .trailing
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        configStackView()
-        setupConstraints()
+        setupUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 
+
+    private func setupUI () {
+        configStackViews()
+        setupConstraints()
+    }
+    
     private func setupConstraints() {
-        // Set up cornerRadius
+        contentView.addSubview(mainStackView)
         contentView.addSubview(drinksPriceLabel)
-        contentView.backgroundColor = Colors.white
-        contentView.addSubview(contentStackView)
-        
         NSLayoutConstraint.activate([
             // contentStackView
-            contentStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            contentStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            drinksPriceLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -30),
-            drinksPriceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30)
+            drinksImageView.widthAnchor.constraint(equalToConstant: 170),
+            drinksImageView.heightAnchor.constraint(equalTo: drinksImageView.widthAnchor, multiplier: 1),
+            mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+            mainStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            mainStackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 300),
+            
+            // drinksPriceLabel:
+            drinksPriceLabel.leadingAnchor.constraint(equalTo: mainStackView.trailingAnchor, constant: 10),
+            drinksPriceLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+            drinksPriceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
         ])
     }
     
-    func configStackView () {
+    func configStackViews () {
+//        contentStackView.layer.borderColor = Colors.red.cgColor
+//        contentStackView.layer.borderWidth = 2
+//        mainStackView.layer.borderColor = Colors.lightGray.cgColor
+//        mainStackView.layer.borderWidth = 2
+        
         contentStackView.addArrangedSubview(userNameLabel)
         contentStackView.addArrangedSubview(drinksTitleLabel)
         contentStackView.addArrangedSubview(iceLevelLabel)
         contentStackView.addArrangedSubview(toppingContentLabel)
         contentStackView.addArrangedSubview(qtyLabel)
+        
+        mainStackView.addArrangedSubview(drinksImageView)
+        mainStackView.addArrangedSubview(contentStackView)
     }
     
     override func prepareForReuse() {
