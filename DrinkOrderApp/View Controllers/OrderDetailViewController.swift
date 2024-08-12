@@ -327,8 +327,8 @@ class OrderDetailViewController: UIViewController {
     
     // MARK: - Set up UI.
     func setupUI () {
-        drinkOrderQty.text = "\(Int(drinkStepper.value))"
         self.view.backgroundColor = Colors.white
+        drinkOrderQty.text = "\(Int(drinkStepper.value))"
         setNavigationView()
         addConstraints()
         configStackView()
@@ -499,26 +499,21 @@ class OrderDetailViewController: UIViewController {
     }
     
     // MARK: Add delegate and date source
-    func addDelegateAndDataSource () {
+    func addDelegateAndDataSource() {
         // PickerViews:
-        cupSizePickerView.delegate = self
-        cupSizePickerView.dataSource = self
-        
-        iceLevelPickerView.delegate = self
-        iceLevelPickerView.dataSource = self
-        
-        sugarLevelPickerView.delegate = self
-        sugarLevelPickerView.dataSource = self
-        
-        toppingPickerView.delegate = self
-        toppingPickerView.dataSource = self
+        let pickerViews: [UIPickerView] = [cupSizePickerView, iceLevelPickerView, sugarLevelPickerView, toppingPickerView]
+        pickerViews.forEach { pickerView in
+            pickerView.delegate = self
+            pickerView.dataSource = self
+        }
         
         // TextFields:
-        cupSizeTextField.delegate = self
-        iceLevelTextField.delegate = self
-        sugarLevelTextField.delegate = self
-        toppingTextField.delegate = self
+        let textFields: [UITextField] = [cupSizeTextField, iceLevelTextField, sugarLevelTextField, toppingTextField]
+        textFields.forEach { textField in
+            textField.delegate = self
+        }
     }
+
     
     // MARK: showAlertVC
     func showAlertVC (title: String, message: String) {
@@ -540,23 +535,24 @@ class OrderDetailViewController: UIViewController {
         
         if cupSizeTextField.text == selectionStatus[0] {
             print("DEBUG PRINT: 尚未選擇飲料尺寸")
-            showAlertVC(title: selectionStatusContent[0], message: selectionStatusContent[0])
+            AlertManager.showButtonAlert(on: self, title: selectionStatusContent[0], message: selectionStatusContent[0])
             
         } else if iceLevelTextField.text == selectionStatus[1] {
             print("DEBUG PRINT: 尚未選擇飲料冰塊")
-            showAlertVC(title: selectionStatusContent[1], message: selectionStatusContent[1])
+            AlertManager.showButtonAlert(on: self, title: selectionStatusContent[1], message: selectionStatusContent[1])
             
         } else if sugarLevelTextField.text == selectionStatus[2] {
             print("DEBUG PRINT: 尚未選擇飲料甜度")
-            showAlertVC(title: selectionStatusContent[2], message: selectionStatusContent[2])
+            AlertManager.showButtonAlert(on: self, title: selectionStatusContent[2], message: selectionStatusContent[2])
+            
             
         } else if toppingTextField.text == selectionStatus[3] {
             print("DEBUG PRINT: 尚未選擇飲料加料內容")
-            showAlertVC(title: selectionStatusContent[3], message: selectionStatus[3])
+            AlertManager.showButtonAlert(on: self, title: selectionStatusContent[3], message: selectionStatusContent[3])
             
         } else if userNameTextField.text == "填入姓名" || userNameTextField.text == "" {
             print("DEBUG PRINT: 記得填入姓名，不然彼得不會幫你付錢")
-            showAlertVC(title: "記得填入姓名", message: "記得填入姓名，不然彼得不會幫你付錢")
+            AlertManager.showButtonAlert(on: self, title: "記得填入姓名", message: "記得填入姓名，不然彼得不會幫你付錢")
             
         } else {
             print("DEBUG PRINT: 飲料內容選擇完畢，將頁面傳送OrderListVC")
@@ -569,7 +565,8 @@ class OrderDetailViewController: UIViewController {
                 iceLevel: iceLevelTextField.text ?? "No Ice Level",
                 topping: toppingTextField.text ?? "No Topping",
                 qty: "\(Int(drinkStepper.value))",
-                price: drinksPriceLabel.text ?? "No Price"
+                price: drinksPriceLabel.text ?? "No Price", 
+                url: drinksImageURL
             )
             
             let newOrder = Order(fields: orderFields)
@@ -577,13 +574,14 @@ class OrderDetailViewController: UIViewController {
                 switch result {
                 case .success(_):
                     DispatchQueue.main.async {
-                        self.showAlertVC(title: "Order Created", message: "Your Order is created")
+                        AlertManager.showButtonAlert(on: self, title: "訂單建立成功!", message: "已經新增訂單!")
                         let orderListVC = OrderListViewController()
                         self.navigationController?.pushViewController(orderListVC, animated: true)
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {
-                        self.showAlertVC(title: "Error", message: error.localizedDescription)
+                        AlertManager.showButtonAlert(on: self, title: "訂單尚未建立!", message: "是不是忘了什麼!")
+                        print("\(error.localizedDescription)")
                         self.submitBtn.configuration?.showsActivityIndicator = false
                     }
                 }
@@ -593,23 +591,20 @@ class OrderDetailViewController: UIViewController {
     
     @objc func cancelBtnTapped (_ sender: UIButton) {
         print("DEBUG PRINT: cancel Btn Tapped")
-        cupSizeTextField.resignFirstResponder()
-        sugarLevelTextField.resignFirstResponder()
-        iceLevelTextField.resignFirstResponder()
-        toppingTextField.resignFirstResponder()
+        let textFields = [cupSizeTextField, sugarLevelTextField, iceLevelTextField, toppingTextField]
+        textFields.forEach { $0.resignFirstResponder() }
     }
     
-    @objc func doneBtnTapped (_ sender: UIButton) {
+    @objc func doneBtnTapped(_ sender: UIButton) {
         print("DEBUG PRINT: done Btn Tapped")
-        cupSizeTextField.resignFirstResponder()
-        sugarLevelTextField.resignFirstResponder()
-        iceLevelTextField.resignFirstResponder()
-        toppingTextField.resignFirstResponder()
+        let textFields = [cupSizeTextField, sugarLevelTextField, iceLevelTextField, toppingTextField]
+        textFields.forEach { $0.resignFirstResponder() }
     }
+
     
     @objc func viewTapped (_ sender: UITapGestureRecognizer) {
-        print("viewTapped")
-        view.endEditing(true)
+        print("view Tapped")
+        self.view.endEditing(true)
     }
     
     @objc func stepperValueChanged(_ sender: UIStepper) {
@@ -617,20 +612,17 @@ class OrderDetailViewController: UIViewController {
         let toppingText = toppingTextField.text
         drinksQty = Int(drinkStepper.value)
         drinkOrderQty.text = "\(drinksQty)"
-        var price = 0
         
+        var price = 0
         if cupSizeText == cupSize[0] {
-            // 中杯
-            price = drinksMediumPrice ?? 0
+            price = drinksMediumPrice ?? 0  // Medium
         } else {
-            // 大杯
-            price = drinksLargePrice ?? 0
+            price = drinksLargePrice ?? 0   // Large
         }
         
         if toppingText != toppingChoose[0] {
             price += 10
         }
-        
         drinksPriceLabel.text = "$\(drinksQty * price)"
     }
 
@@ -638,26 +630,51 @@ class OrderDetailViewController: UIViewController {
 
 // MARK: - text Fields Delegate
 extension OrderDetailViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        switch textField {
+        case cupSizeTextField:
+            activateTextField(cupSizeTextField, with: cupSizePickerView, selection: cupSize, debugMessage: "Cup size selected")
+            
+        case iceLevelTextField:
+            activateTextField(iceLevelTextField, with: iceLevelPickerView, selection: iceLevel, debugMessage: "ice Level selected")
+            
+        case sugarLevelTextField:
+            activateTextField(sugarLevelTextField, with: sugarLevelPickerView, selection: sugarLevel, debugMessage: "sugar Level selected")
+            
+        default:
+            activateTextField(toppingTextField, with: toppingPickerView, selection: toppingChoose, debugMessage: "topping Choose selected")
+        }
+    }
+    
+    private func activateTextField(_ textField: UITextField, with pickerView: UIPickerView, selection: [String], debugMessage: String) {
+        print("DEBUG PRINT: \(debugMessage)")
+        let index = pickerView.selectedRow(inComponent: 0)
+        textField.text = selection[index]
+        textField.becomeFirstResponder()
+    }
+    
     // MARK: textField Should Return
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if ( textField == cupSizeTextField ) {
-            textField.resignFirstResponder()
+        textField.resignFirstResponder()
+        switch textField {
+        case cupSizeTextField:
             cupSizePickerView.isHidden = true
             
-        } else if ( textField == iceLevelTextField ) {
-            textField.resignFirstResponder()
+        case iceLevelTextField:
             iceLevelPickerView.isHidden = true
             
-        } else if ( textField == sugarLevelTextField ) {
-            textField.resignFirstResponder()
+        case sugarLevelTextField:
             sugarLevelPickerView.isHidden = true
             
-        } else if ( textField == toppingTextField ) {
-            textField.resignFirstResponder()
+        case toppingTextField:
             toppingPickerView.isHidden = true
+            
+        default:
+            break
         }
         return true
     }
+
     
     // MARK: textField Did End Editing
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -687,26 +704,29 @@ extension OrderDetailViewController: UITextFieldDelegate {
     
     // MARK: textField Did Change Selection
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        
-        if ( textField == cupSizeTextField ) {
+        switch textField {
+        case cupSizeTextField:
             print(cupSizeTextField.text ?? "Unable to get cupSizeTextField's text")
             
-        } else if ( textField == iceLevelTextField ) {
+        case iceLevelTextField:
             print(iceLevelTextField.text ?? "Unable to get iceLevelTextField's text")
             
-        } else if ( textField == sugarLevelTextField ) {
+        case sugarLevelTextField:
             print(sugarLevelTextField.text ?? "Unable to get sugarLevelTextField's text")
             
-        } else if ( textField == toppingTextField ) {
+        case toppingTextField:
             print(toppingTextField.text ?? "Unable to get toppingTextField's text")
             
-        } else if ( textField == userNameTextField ) {
+        case userNameTextField:
             print("""
                   DEBUG PRINT: textFieldDidChangeSelection
                   \(textField.text ?? "")
                   """)
+        default:
+            break
         }
     }
+
 }
 
 

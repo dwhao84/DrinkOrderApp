@@ -48,6 +48,7 @@
 		D3B242352C1DEDC400EC0ED9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B242342C1DEDC400EC0ED9 /* NetworkManager.swift */; };
 		D3B2423A2C1EF9C800EC0ED9 /* DrinksQtyStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B242392C1EF9C800EC0ED9 /* DrinksQtyStepper.swift */; };
 		D3B2423C2C1F1F4000EC0ED9 /* DrinksOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B2423B2C1F1F4000EC0ED9 /* DrinksOrder.swift */; };
+		D3D8F29B2C6A47290006D328 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D8F29A2C6A47290006D328 /* AlertManager.swift */; };
 		D3E8B6742C134667004D00BF /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E8B6732C134667004D00BF /* SubmitButton.swift */; };
 		D3E8B6762C134B48004D00BF /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E8B6752C134B48004D00BF /* CustomTextField.swift */; };
 		D3E8B6782C134ECF004D00BF /* CustomOrderDetailLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E8B6772C134ECF004D00BF /* CustomOrderDetailLabel.swift */; };
@@ -120,6 +121,7 @@
 		D3B242342C1DEDC400EC0ED9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		D3B242392C1EF9C800EC0ED9 /* DrinksQtyStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksQtyStepper.swift; sourceTree = "<group>"; };
 		D3B2423B2C1F1F4000EC0ED9 /* DrinksOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksOrder.swift; sourceTree = "<group>"; };
+		D3D8F29A2C6A47290006D328 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		D3E8B6732C134667004D00BF /* SubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
 		D3E8B6752C134B48004D00BF /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		D3E8B6772C134ECF004D00BF /* CustomOrderDetailLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOrderDetailLabel.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 				D38E539B2B88AB92008E8BDE /* View Controllers */,
 				D35F55882C0F5EDC001A3730 /* UI Components */,
 				D39CB0262BDC0B0D004B96C5 /* KebukeStoreJson.json */,
+				D3D8F29A2C6A47290006D328 /* AlertManager.swift */,
 				D35F55852C0F5673001A3730 /* GoogleService-Info.plist */,
 			);
 			path = DrinkOrderApp;
@@ -508,6 +511,7 @@
 				D30C489C2BD41C1C00C5B908 /* CustomStepper.swift in Sources */,
 				D30C48972BD0D44F00C5B908 /* DrinksModel.swift in Sources */,
 				D3E8B6762C134B48004D00BF /* CustomTextField.swift in Sources */,
+				D3D8F29B2C6A47290006D328 /* AlertManager.swift in Sources */,
 				D38E538A2B888F50008E8BDE /* LoginButton.swift in Sources */,
 				D366516F2C211198000FA307 /* FinishButton.swift in Sources */,
 				EB94C1D92B8734F5008098DE /* AppDelegate.swift in Sources */,
@@ -721,7 +725,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7NJ9W73ML8;
+				DEVELOPMENT_TEAM = 5862HZ6X6T;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DrinkOrderApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -750,7 +754,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7NJ9W73ML8;
+				DEVELOPMENT_TEAM = 5862HZ6X6T;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DrinkOrderApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
