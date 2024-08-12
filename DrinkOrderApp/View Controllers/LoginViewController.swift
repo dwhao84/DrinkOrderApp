@@ -14,8 +14,8 @@ class LoginViewController: UIViewController {
     // MARK: - UIImageView:
     private let logoImageView: UIImageView = {
         let logoImageView: UIImageView = UIImageView()
-        logoImageView.image       = Images.kebukeLoginLogo
-        logoImageView.contentMode = .scaleToFill
+        logoImageView.image       = Images.firstPage
+        logoImageView.contentMode = .scaleAspectFill
         return logoImageView
     } ()
     
@@ -63,7 +63,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         print("Into the LoginVC")
-        self.view.backgroundColor = Colors.kebukeDarkBlue
+        self.view.backgroundColor = Colors.white
         setupUI()
         addTargets()
         addDelegates()
