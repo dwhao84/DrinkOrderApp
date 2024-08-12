@@ -32,15 +32,15 @@ class SettingTableViewController: UIViewController {
     
     func fetchSettingData () -> [SettingData] {
         // First group -> Contact Information.
-        let telephoneNumber = SettingData(serviceName: "聯絡我們", serviceImage: Images.phone, color: UIColor.systemRed)
-        let location        = SettingData(serviceName: "門市據點", serviceImage: Images.map, color: UIColor.systemBlue)
-        let email           = SettingData(serviceName: "店家信箱", serviceImage: Images.mail, color: UIColor.systemCyan)
+        let telephoneNumber = SettingData(serviceName: "聯絡我們", serviceImage: Images.phone, color: Colors.kebukeLightBlue)
+        let location        = SettingData(serviceName: "門市據點", serviceImage: Images.map, color: Colors.kebukeLightBlue)
+        let email           = SettingData(serviceName: "店家信箱", serviceImage: Images.mail, color: Colors.kebukeLightBlue)
         
         // Second group -> Company Information.
-        let declaration     = SettingData(serviceName: "聲明公告", serviceImage: Images.declaration, color: .magenta)
-        let inspectReport   = SettingData(serviceName: "檢驗報告", serviceImage: Images.report, color: .orange)
-        let privacy         = SettingData(serviceName: "用戶隱私權", serviceImage: Images.privacy, color: .systemPink)
-        let brandStory      = SettingData(serviceName: "品牌故事", serviceImage: Images.brandStory, color: .systemTeal)
+        let declaration     = SettingData(serviceName: "聲明公告", serviceImage: Images.declaration, color: Colors.kebukeLightBlue)
+        let inspectReport   = SettingData(serviceName: "檢驗報告", serviceImage: Images.report, color: Colors.kebukeLightBlue)
+        let privacy         = SettingData(serviceName: "用戶隱私權", serviceImage: Images.privacy, color: Colors.kebukeLightBlue)
+        let brandStory      = SettingData(serviceName: "品牌故事", serviceImage: Images.brandStory, color: Colors.kebukeLightBlue)
         return [telephoneNumber, location, email, declaration, inspectReport, privacy, brandStory]
     }
     
@@ -92,7 +92,7 @@ class SettingTableViewController: UIViewController {
         ])
     }
     
-    // MARK: callPhoneNumber
+    // MARK: Make a call
     func callPhoneNumber(phoneNumber: String) {
         if let phoneCallURL = URL(string: "tel://\(phoneNumber)") {
             let application:UIApplication = UIApplication.shared
