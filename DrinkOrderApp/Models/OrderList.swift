@@ -26,6 +26,7 @@ struct CustomerOrderFields: Codable {
     let topping: String?
     let qty: String?
     let price: String?
+    let url: String?
     
     enum CodingKeys: String, CodingKey {
         case userName   = "User name"
@@ -36,6 +37,7 @@ struct CustomerOrderFields: Codable {
         case topping    = "Topping"
         case qty        = "Qty"
         case price      = "Price"
+        case url        = "URL"
     }
 }
 
