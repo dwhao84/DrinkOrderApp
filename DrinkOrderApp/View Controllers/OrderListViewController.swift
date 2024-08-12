@@ -190,21 +190,14 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource, U
         let cell = tableView.dequeueReusableCell(withIdentifier: OrderListTableViewCell.identifier, for: indexPath) as! OrderListTableViewCell
         
         let orderData = orders[indexPath.row]
-        
         cell.drinksTitleLabel.text    = orderData.drinkName
         cell.userNameLabel.text       = orderData.userName
         cell.toppingContentLabel.text = orderData.topping
         cell.iceLevelLabel.text       = orderData.iceLevel
         cell.drinksPriceLabel.text    = orderData.price
         cell.qtyLabel.text            = "數量: \(orderData.qty ?? "")"
+    
         cell.selectionStyle = .gray
-        
-        // Set up tableView cell when selected will show inside of the corner shape.
-        let backgroundView: UIView = UIView()
-        backgroundView.backgroundColor = Colors.kebukeDarkBlueWithAlpha
-        backgroundView.layer.cornerRadius = 18
-        backgroundView.clipsToBounds = true
-        cell.selectedBackgroundView = backgroundView
         return cell
     }
     
@@ -216,8 +209,6 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource, U
         let deleteAction = UIContextualAction(style: .destructive, title: "刪除")  { _,_,_ in
             print("DEBUG PRINT: 刪除")
         }
-        
-        
         
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
