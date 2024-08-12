@@ -12,14 +12,14 @@ class StoreLocationViewController: UIViewController {
     
     var stores: [Store] = []
     
-    var mapView: MKMapView = {
+    let mapView: MKMapView = {
         let mapView: MKMapView = MKMapView()
         mapView.showsUserLocation = true
         mapView.translatesAutoresizingMaskIntoConstraints = false
         return mapView
     } ()
     
-    var scaleView: MKScaleView = {
+    let scaleView: MKScaleView = {
         let scaleView: MKScaleView = MKScaleView()
         scaleView.scaleVisibility = .visible
         scaleView.legendAlignment = .trailing
