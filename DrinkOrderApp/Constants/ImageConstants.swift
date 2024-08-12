@@ -49,6 +49,6 @@ struct Images {
     static let eyeCircle: UIImage      = UIImage(systemName: "eye.circle")!
     static let eyeSlashCircle: UIImage = UIImage(systemName: "eye.slash.circle")!
     
-    static let firstPage: UIImage = UIImage(named: "Kebuke_Logo")!
+    static let firstPage: UIImage      = UIImage(named: "Kebuke")!
     
 }
