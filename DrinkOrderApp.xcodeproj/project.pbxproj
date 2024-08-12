@@ -295,12 +295,13 @@
 			path = "Custom Buttons";
 			sourceTree = "<group>";
 		};
-		D3B242362C1DEDD400EC0ED9 /* Networking Manager */ = {
+		D3B242362C1DEDD400EC0ED9 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				D3D8F29A2C6A47290006D328 /* AlertManager.swift */,
 				D3B242342C1DEDC400EC0ED9 /* NetworkManager.swift */,
 			);
-			path = "Networking Manager";
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		EB94C1CC2B8734F5008098DE = {
@@ -330,12 +331,11 @@
 				EB94C1E62B8734F7008098DE /* Info.plist */,
 				D38E537D2B8876FD008E8BDE /* Supporting Files */,
 				D38E53862B887A85008E8BDE /* Constants */,
-				D3B242362C1DEDD400EC0ED9 /* Networking Manager */,
+				D3B242362C1DEDD400EC0ED9 /* Managers */,
 				D38E538F2B889A07008E8BDE /* Models */,
 				D38E539B2B88AB92008E8BDE /* View Controllers */,
 				D35F55882C0F5EDC001A3730 /* UI Components */,
 				D39CB0262BDC0B0D004B96C5 /* KebukeStoreJson.json */,
-				D3D8F29A2C6A47290006D328 /* AlertManager.swift */,
 				D35F55852C0F5673001A3730 /* GoogleService-Info.plist */,
 			);
 			path = DrinkOrderApp;
