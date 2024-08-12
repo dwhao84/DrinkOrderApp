@@ -23,7 +23,7 @@ class SettingTableViewCell: UITableViewCell {
     let serviceTitleLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "XXXX"
-        label.textColor = Colors.darkGray
+        label.textColor = Colors.systemGray3
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
