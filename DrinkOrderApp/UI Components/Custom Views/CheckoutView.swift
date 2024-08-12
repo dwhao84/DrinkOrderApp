@@ -13,7 +13,7 @@ class CheckoutView: UIView {
         let label: UILabel = UILabel()
         label.text = "🛒 購物車總金額"
         label.textColor = Colors.white
-        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     } ()
@@ -22,17 +22,17 @@ class CheckoutView: UIView {
         let label: UILabel = UILabel()
         label.text = "共計X杯"
         label.textColor = Colors.lightGray
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 18)
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     } ()
 
-    var totalPriceLabel: UILabel = {
+    public var totalPriceLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "$XXX"
         label.textColor = Colors.white
-        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -43,7 +43,6 @@ class CheckoutView: UIView {
         super.init(frame: .zero)
         
         setupUI ()
-        addConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -53,6 +52,7 @@ class CheckoutView: UIView {
     // MARK: - UI Setup:
     func setupUI () {
         self.backgroundColor = Colors.kebukeDarkBlue
+        addConstraints()
     }
     
     func addConstraints () {
