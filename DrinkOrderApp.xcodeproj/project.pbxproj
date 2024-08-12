@@ -208,16 +208,6 @@
 			path = "Setting VCs";
 			sourceTree = "<group>";
 		};
-		D35F558A2C105643001A3730 /* Login VCs */ = {
-			isa = PBXGroup;
-			children = (
-				D366516C2C2110E5000FA307 /* AuthSelectionViewController.swift */,
-				D38E53952B889ADD008E8BDE /* LoginViewController.swift */,
-				D39CB0542BDFFDB5004B96C5 /* RegisterViewController.swift */,
-			);
-			path = "Login VCs";
-			sourceTree = "<group>";
-		};
 		D36651722C21128E000FA307 /* Custom TextFields */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,7 +268,9 @@
 			isa = PBXGroup;
 			children = (
 				D35F55892C105609001A3730 /* Setting VCs */,
-				D35F558A2C105643001A3730 /* Login VCs */,
+				D366516C2C2110E5000FA307 /* AuthSelectionViewController.swift */,
+				D38E53952B889ADD008E8BDE /* LoginViewController.swift */,
+				D39CB0542BDFFDB5004B96C5 /* RegisterViewController.swift */,
 				D38E539E2B88C2D8008E8BDE /* HomePageViewController.swift */,
 				D30C48942BD08EB400C5B908 /* OrderDetailViewController.swift */,
 				D38E53972B889B04008E8BDE /* OrderListViewController.swift */,
@@ -290,11 +282,11 @@
 			isa = PBXGroup;
 			children = (
 				D38E53892B888F50008E8BDE /* LoginButton.swift */,
+				D39CB0512BDFFC07004B96C5 /* RegisterButton.swift */,
 				D3159C8B2C2A90AA00DBF0E0 /* CheckingPasswordButton.swift */,
 				D3A51D732C3BA70D003B7649 /* DoneButton.swift */,
 				D3A51D752C3BA7BD003B7649 /* CancelButton.swift */,
 				D366516E2C211198000FA307 /* FinishButton.swift */,
-				D39CB0512BDFFC07004B96C5 /* RegisterButton.swift */,
 				D39CB0562BE00897004B96C5 /* SecRegisterButton.swift */,
 				D3E8B6732C134667004D00BF /* SubmitButton.swift */,
 			);
