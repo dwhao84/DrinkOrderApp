@@ -23,8 +23,8 @@ class SubmitButton: UIButton {
         var config                 = UIButton.Configuration.filled()
         config.baseBackgroundColor = Colors.kebukeLightBlue
         var attributes = AttributeContainer()
-        attributes.font = UIFont.boldSystemFont(ofSize: 20)
-        config.attributedTitle = AttributedString("送出訂單", attributes: attributes)
+        attributes.font = UIFont.systemFont(ofSize: 18)
+        config.attributedTitle = AttributedString("送出", attributes: attributes)
         config.titleAlignment      = .center
         config.cornerStyle         = .large
         config.showsActivityIndicator = false
