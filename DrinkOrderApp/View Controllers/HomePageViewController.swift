@@ -88,7 +88,6 @@ class HomePageViewController: UIViewController {
         addConstraints()
         self.navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
-        
     }
     
     func fetchDrinksData() {
