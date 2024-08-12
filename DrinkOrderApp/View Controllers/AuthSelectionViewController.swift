@@ -17,6 +17,7 @@ class AuthSelectionViewController: UIViewController {
         return logoImageView
     } ()
     
+    
     // MARK: - Custom UI for UIButton:
     // loginButton
     var loginButton: LoginButton = {
@@ -115,19 +116,6 @@ class AuthSelectionViewController: UIViewController {
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
-    }
-    
-    // MARK: - Show Alert Controller:
-    func showMissingNameAC (title: String, message: String) {
-        let controller = UIAlertController(
-            title: """
-            缺少姓名資料
-            """,
-            message: "",
-            preferredStyle: .alert
-        )
-        controller.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(controller, animated: true, completion: nil)
     }
 }
 

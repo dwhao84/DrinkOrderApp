@@ -193,19 +193,6 @@ class LoginViewController: UIViewController {
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
-    
-    // MARK: - Show Alert Controller:
-    func showMissingNameAC (title: String, message: String) {
-        let controller = UIAlertController(
-            title: """
-            缺少姓名資料
-            """,
-            message: "",
-            preferredStyle: .alert
-        )
-        controller.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(controller, animated: true, completion: nil)
-    }
 }
 
 // MARK: - Extenstion:

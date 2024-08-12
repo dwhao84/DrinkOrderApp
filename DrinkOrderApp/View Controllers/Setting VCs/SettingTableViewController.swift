@@ -115,10 +115,7 @@ class SettingTableViewController: UIViewController {
             // Present the view controller modally.
             self.present(mailComposeViewController, animated: true, completion: nil)
         } else {
-            // Alert the user that mail services are not available.
-            let alert = UIAlertController(title: "Cannot Send Email", message: "Please check e-mail configuration and try again.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            self.present(alert, animated: true, completion: nil)
+            AlertManager.showButtonAlert(on: self, title: "寄件失敗", message: "請重新確認是否郵件正確")
         }
     }
     
@@ -186,6 +183,7 @@ extension SettingTableViewController: UITableViewDelegate, UITableViewDataSource
         content.image = setting.serviceImage
         content.imageProperties.tintColor = setting.color
         content.text = setting.serviceName
+        content.textProperties.color = Colors.darkGray
         
         // Set up tableView cell when selected will show inside of the corner shape.
         let backgroundView: UIView = UIView()

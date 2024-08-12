@@ -413,17 +413,6 @@ class RegisterViewController: UIViewController {
             self.present(loginVC, animated: true)
         }
     }
-    
-    // MARK: - Alert Controller:
-    func showAlertVC (title: String, message: String) {
-        let controller = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
-        controller.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(controller, animated: true, completion: nil)
-    }
 }
 
 // MARK: - Extension:

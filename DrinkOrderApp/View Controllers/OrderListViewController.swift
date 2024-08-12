@@ -9,13 +9,12 @@ import UIKit
 import Kingfisher
 
 class OrderListViewController: UIViewController {
-    
     static let shared: String = "OrderListViewController"
     private let baseUrl: String = "https://api.airtable.com/v0/appS5I28H2YO3bJzv/Kebuke"
     private let apiKey: String = "Bearer patxAQx4KLgwEsh8O.28a883dd0c29a3920aee1cc069fc876738b14186ec8ec2dd07cc762b70497e0c"
     
     var orders: [CustomerOrderFields] = []
-    
+
     // MARK: - UI set up:
     private let tableView: UITableView = {
         let tableView: UITableView = UITableView()
@@ -58,7 +57,6 @@ class OrderListViewController: UIViewController {
         super.viewDidLoad()
         
         print("Go into the OrderListVC")
-        
         setupUI()
     }
     
@@ -71,6 +69,7 @@ class OrderListViewController: UIViewController {
     
     // MARK: Setup UI
     func setupUI () {
+        updateCheckoutViewText()
         self.view.backgroundColor = Colors.kebukeDarkBlue
         addConstraints()
         addDelegateAndDatasource()
@@ -78,6 +77,12 @@ class OrderListViewController: UIViewController {
         setupTableView()
         addTargets ()
         fetchOrdersData()
+    }
+    
+    func updateCheckoutViewText () {
+        checkoutView.cupCountLabel.text = "杯數: \(0)"
+        checkoutView.totalPriceLabel.text = "$ \(0)"
+        print("DEBUG PRINT: Update the cup count & total price as zero")
     }
     
     // MARK: Add Targets
@@ -134,6 +139,29 @@ class OrderListViewController: UIViewController {
         self.navigationItem.scrollEdgeAppearance = appearance
     }
     
+    func updateTotalLabels() {
+        let totals = calculateTotalQtyAndPrice(from: orders)
+        checkoutView.totalPriceLabel.text = "$ \(totals.totalPrice)"
+        checkoutView.cupCountLabel.text = "杯數: \(totals.totalQty)"
+    }
+    
+    func calculateTotalQtyAndPrice(from orders: [CustomerOrderFields]) -> (totalQty: Int, totalPrice: Int) {
+        var totalQty = 0
+        var totalPrice = 0
+        
+        for order in orders {
+            if let qtyString = order.qty, let qty = Int(qtyString),
+               let priceString = order.price?.replacingOccurrences(of: "$", with: ""), let price = Int(priceString) {
+                totalQty += qty
+                totalPrice += (price * qty)
+            }
+        }
+        
+        return (totalQty, totalPrice)
+    }
+
+
+    
     // MARK: - GET Order data:
     func fetchOrdersData() {
         NetworkManager.shared.getAirtableData { result in
@@ -142,6 +170,7 @@ class OrderListViewController: UIViewController {
                 self.orders = order
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    self.updateTotalLabels()
                 }
             case .failure(let error):
                 print("Failed to fetch orders: \(error.localizedDescription)")
@@ -154,26 +183,17 @@ class OrderListViewController: UIViewController {
         
     }
     
-    // MARK: Show Alert Controller:
-    func showErrorAlert(error: Error) {
-        let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertController.addAction(okAction)
-        present(alertController, animated: true, completion: nil)
-    }
-    
-    func showAlertController(_ title: String, _ message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertController.addAction(okAction)
-        present(alertController, animated: true, completion: nil)
-    }
-    
     // MARK: - Add Actions:
     @objc func refresh(_ sender: Any) {
         refreshControl.endRefreshing()
         tableView.reloadData()
         fetchOrdersData()
+        
+        // Cancel the selected indexPath for item, and selected tableView.
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+        
         print("DEBUG PRINT: End Refreshing")
     }
 }
@@ -196,21 +216,18 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource, U
         cell.iceLevelLabel.text       = orderData.iceLevel
         cell.drinksPriceLabel.text    = orderData.price
         cell.qtyLabel.text            = "數量: \(orderData.qty ?? "")"
-    
+        if let urlString = orderData.url, let url = URL(string: urlString) {
+            cell.drinksImageView.kf.setImage(with: url)
+        }
+        
         cell.selectionStyle = .gray
         return cell
     }
     
     // MARK: trailing Swipe Actions Configuration For Row At
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        showAlertController("🚨 資料刪除", "Ok")
-        
-        let deleteAction = UIContextualAction(style: .destructive, title: "刪除")  { _,_,_ in
-            print("DEBUG PRINT: 刪除")
-        }
-        
-        return UISwipeActionsConfiguration(actions: [deleteAction])
+
+        return UISwipeActionsConfiguration(actions: [])
     }
 }
 
