@@ -30,7 +30,7 @@ class AccountTextField: UITextField {
         self.font = UIFont.systemFont(ofSize: 16)
         self.textColor = Colors.darkGray
         self.clearButtonMode  = .whileEditing
-        self.overrideUserInterfaceStyle = .light
+        self.backgroundColor = Colors.systemGray6
         self.translatesAutoresizingMaskIntoConstraints = false
     }
 }
