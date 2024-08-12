@@ -21,7 +21,7 @@ class DoneButton: UIButton {
 
     private func commonInit() {
         var config = UIButton.Configuration.plain()
-        config.title = "Done"
+        config.title = "完成"
         config.baseForegroundColor = Colors.kebukeLightBlue
         self.configuration = config
         

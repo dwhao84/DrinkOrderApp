@@ -24,7 +24,7 @@ class SubmitButton: UIButton {
         config.baseBackgroundColor = Colors.kebukeLightBlue
         var attributes = AttributeContainer()
         attributes.font = UIFont.boldSystemFont(ofSize: 20)
-        config.attributedTitle = AttributedString("Submit", attributes: attributes)
+        config.attributedTitle = AttributedString("送出訂單", attributes: attributes)
         config.titleAlignment      = .center
         config.cornerStyle         = .large
         config.showsActivityIndicator = false
@@ -32,12 +32,6 @@ class SubmitButton: UIButton {
         configurationUpdateHandler = { button in
             button.alpha = button.isHighlighted ? 0.5 : 1
         }
-        // Add Shadow for button.
-//        self.layer.shadowColor   = Colors.black.cgColor
-//        self.layer.shadowOpacity = 0.6
-//        self.layer.shadowOffset  = CGSize(width: 0, height: 5)
-//        self.layer.shadowRadius  = 4
-//        self.layer.masksToBounds = false
     }
 }
 

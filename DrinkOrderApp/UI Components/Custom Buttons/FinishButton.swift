@@ -24,7 +24,7 @@ class FinishButton: UIButton {
         config.baseBackgroundColor = Colors.kebukeBrown
         var container = AttributeContainer()
         container.font = UIFont.boldSystemFont(ofSize: 18)
-        config.attributedTitle = AttributedString("Finish", attributes: container)
+        config.attributedTitle = AttributedString("完成", attributes: container)
         config.titleAlignment      = .center
         config.cornerStyle         = .large
         self.configuration         = config

@@ -21,7 +21,7 @@ class CancelButton: UIButton {
 
     private func commonInit() {
         var config = UIButton.Configuration.plain()
-        config.title = "Cancel"
+        config.title = "取消"
         config.baseForegroundColor = Colors.kebukeLightBlue
         self.configuration = config
         

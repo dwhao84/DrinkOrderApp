@@ -21,15 +21,16 @@ class RegisterButton: UIButton {
 
     private func commonInit() {
         
-        var config                 = UIButton.Configuration.filled()
-        config.baseBackgroundColor = Colors.kebukeLightBlue
+        var config                 = UIButton.Configuration.plain()
+        config.baseForegroundColor = Colors.kebukeLightBlue
         var container = AttributeContainer()
-        container.font = UIFont.boldSystemFont(ofSize: 18)
-        config.attributedTitle = AttributedString("Register", attributes: container)
+        container.font = UIFont.systemFont(ofSize: 18)
+        config.attributedTitle = AttributedString("註冊", attributes: container)
         config.titleAlignment      = .center
         config.cornerStyle         = .capsule
+        config.background.strokeColor = Colors.kebukeLightBlue
+        config.background.strokeWidth = 1
         config.showsActivityIndicator = false
-        
         self.configuration         = config
 
         configurationUpdateHandler = { button in
