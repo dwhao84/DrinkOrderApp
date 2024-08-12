@@ -40,22 +40,22 @@ class DrinkTableViewCell: UITableViewCell {
         return label
     } ()
     
-    var drinksDescriptionLabel: UILabel = {
-        var label: UILabel = UILabel()
-        label.text = "帶有濃穩果香的經典紅茶"
-        label.textColor = Colors.lightGray
-        label.font = UIFont.systemFont(ofSize: 10)
+    var drinksPriceLabel: UILabel = {
+        let label: UILabel = UILabel()
+        label.text = "中: 40 / 大: 45"
+        label.textColor = Colors.kebukeBrown
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     } ()
     
-    var drinksPriceLabel: UILabel = {
-        let label: UILabel = UILabel()
-        label.text = "中: 40 / 大: 45"
+    var drinksDescriptionLabel: UILabel = {
+        var label: UILabel = UILabel()
+        label.text = "帶有濃穩果香的經典紅茶"
         label.textColor = Colors.lightGray
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 10)
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
