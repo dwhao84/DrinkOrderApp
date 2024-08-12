@@ -25,7 +25,7 @@ class HomePageViewController: UIViewController {
         return imageView
     } ()
     
-    let productTableView: UITableView = {
+    let tableView: UITableView = {
         let tableView: UITableView = UITableView()
         tableView.allowsSelection = true
         tableView.isScrollEnabled = true
@@ -66,12 +66,19 @@ class HomePageViewController: UIViewController {
         setupUI()
         fetchDrinksData ()
         self.tabBarController?.tabBar.isHidden = false
+        
+        tableView.reloadData()
     }
     
     // MARK: Using  viewWillAppear to Make sure the tabBar is showing.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
+        
+        // Cancel the selected indexPath for item, and selected tableView.
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
     
     func setupUI () {
@@ -93,7 +100,7 @@ class HomePageViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.drinks = drinksData.records
                     self.filterDrinks = self.drinks
-                    self.productTableView.reloadData()
+                    self.tableView.reloadData()
                 }
             case .failure(_):
                 print("Unable to get data")
@@ -117,22 +124,22 @@ class HomePageViewController: UIViewController {
     
     // Add tableview delegate & dataSource
     func addDelegateAndDataSource () {
-        productTableView.delegate = self
-        productTableView.dataSource = self
-        productTableView.register(DrinkTableViewCell.self, forCellReuseIdentifier: DrinkTableViewCell.identifier)
-        productTableView.rowHeight = 150
-        productTableView.refreshControl = refreshControl
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(DrinkTableViewCell.self, forCellReuseIdentifier: DrinkTableViewCell.identifier)
+        tableView.rowHeight = 150
+        tableView.refreshControl = refreshControl
     }
     
     // Add Constraints
     func addConstraints () {
-        self.view.addSubview(productTableView)
+        self.view.addSubview(tableView)
         // MARK:  Constraint TableView
         NSLayoutConstraint.activate([
-            productTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            productTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            productTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            productTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
     
@@ -144,7 +151,7 @@ class HomePageViewController: UIViewController {
     // MARK: - Actions
     @objc func refresh(_ sender: Any) {
         refreshControl.endRefreshing()
-        productTableView.reloadData()
+        self.tableView.reloadData()
         print("DEBUG PRINT: End Refreshing")
     }
         
@@ -226,7 +233,7 @@ extension HomePageViewController: UISearchResultsUpdating, UISearchTextFieldDele
         } else {
             filterDrinks = drinks
         }
-        productTableView.reloadData()
+        tableView.reloadData()
     }
     
     
