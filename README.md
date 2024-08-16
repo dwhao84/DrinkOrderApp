@@ -1,5 +1,5 @@
 <p align="left">
-<img src="https://github.com/dwhao84/DrinkOrderApp/blob/6fefd274c1c3ed436c1d042ca24a7fbd1ba97af0/DrinkOrderApp/Supporting%20Files/Assets.xcassets/Kebuke-Banner.imageset/Kebuke-Banner.png" width="800" height="428"/>
+<img src="https://github.com/dwhao84/DrinkOrderApp/blob/6fefd274c1c3ed436c1d042ca24a7fbd1ba97af0/DrinkOrderApp/Supporting%20Files/Assets.xcassets/Kebuke-Banner.imageset/Kebuke-Banner.png" width="800" height="400"/>
 </p>
 
 
@@ -9,9 +9,9 @@
 - Restful Api
 - 自訂Components
 - OOP 概念
-- Library使用:
-- Kingfisher
-- IQKeyboardManager
+- **Library使用:**
+  - Kingfisher
+  - IQKeyboardManager
 
 
 ## Login View Controller
@@ -20,7 +20,6 @@
 <p align="left">
 <img src="https://github.com/dwhao84/DrinkOrderApp/blob/6fefd274c1c3ed436c1d042ca24a7fbd1ba97af0/DrinkOrderApp/Supporting%20Files/Assets.xcassets/README%20Use/Login%20VC.imageset/Login%20VC.png" width="428" height="800"/>
 </p>
-
 
 
 ## Register View Controller
