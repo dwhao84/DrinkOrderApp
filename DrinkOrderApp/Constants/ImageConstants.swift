@@ -50,5 +50,7 @@ struct Images {
     static let eyeSlashCircle: UIImage = UIImage(systemName: "eye.slash.circle")!
     
     static let firstPage: UIImage      = UIImage(named: "Kebuke")!
+    static let locationFill: UIImage   = UIImage(systemName: "location.fill")!
+    static let route: UIImage   = UIImage(systemName: "arrow.uturn.up")!
     
 }
