@@ -21,7 +21,7 @@ class NameTextField: UITextField {
     
     private func commonInit () {
         let attributedPlaceholder = NSAttributedString(
-            string: "Enter your name",
+            string: "輸入你的名字",
             attributes: [NSAttributedString.Key.foregroundColor: Colors.lightGray]
         )
         self.attributedPlaceholder = attributedPlaceholder

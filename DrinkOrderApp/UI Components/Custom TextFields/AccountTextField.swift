@@ -21,7 +21,7 @@ class AccountTextField: UITextField {
     
     private func commonInit () {
         let attributedPlaceholder = NSAttributedString(
-            string: "Enter your account",
+            string: "輸入你的姓名",
             attributes: [NSAttributedString.Key.foregroundColor: Colors.lightGray]
         )
         self.attributedPlaceholder = attributedPlaceholder

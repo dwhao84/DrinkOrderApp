@@ -21,7 +21,7 @@ class PasswordTextField: UITextField {
     
     private func commonInit () {
         let attributedPlaceholder = NSAttributedString(
-            string: "Enter your password",
+            string: "輸入你的密碼",
             attributes: [NSAttributedString.Key.foregroundColor: Colors.lightGray]
         )
         self.attributedPlaceholder = attributedPlaceholder
