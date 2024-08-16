@@ -30,6 +30,10 @@ class SettingTableViewController: UIViewController {
         settings = fetchSettingData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     func fetchSettingData () -> [SettingData] {
         // First group -> Contact Information.
         let telephoneNumber = SettingData(serviceName: "聯絡我們", serviceImage: Images.phone, color: Colors.kebukeLightBlue)

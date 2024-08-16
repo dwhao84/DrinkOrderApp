@@ -226,7 +226,9 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource, U
     
     // MARK: trailing Swipe Actions Configuration For Row At
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-
+        
+        
+        print("DEBUG PRINT: Swipe action, delete the \(indexPath.row) of item.")
         return UISwipeActionsConfiguration(actions: [])
     }
 }
