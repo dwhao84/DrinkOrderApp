@@ -11,7 +11,6 @@
 		D30C48952BD08EB400C5B908 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30C48942BD08EB400C5B908 /* OrderDetailViewController.swift */; };
 		D30C48972BD0D44F00C5B908 /* DrinksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30C48962BD0D44F00C5B908 /* DrinksModel.swift */; };
 		D30C48992BD1F41E00C5B908 /* DrinkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30C48982BD1F41E00C5B908 /* DrinkTableViewCell.swift */; };
-		D30C489C2BD41C1C00C5B908 /* CustomStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30C489B2BD41C1C00C5B908 /* CustomStepper.swift */; };
 		D30C48A02BD79D8500C5B908 /* CheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30C489F2BD79D8500C5B908 /* CheckoutView.swift */; };
 		D3159C872C286F4C00DBF0E0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D3159C862C286F4C00DBF0E0 /* Kingfisher */; };
 		D3159C8A2C286F8D00DBF0E0 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D3159C892C286F8D00DBF0E0 /* IQKeyboardManagerSwift */; };
@@ -46,7 +45,6 @@
 		D3A51D762C3BA7BD003B7649 /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3A51D752C3BA7BD003B7649 /* CancelButton.swift */; };
 		D3B242332C1DE7DA00EC0ED9 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B242322C1DE7DA00EC0ED9 /* EmptyStateView.swift */; };
 		D3B242352C1DEDC400EC0ED9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B242342C1DEDC400EC0ED9 /* NetworkManager.swift */; };
-		D3B2423A2C1EF9C800EC0ED9 /* DrinksQtyStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B242392C1EF9C800EC0ED9 /* DrinksQtyStepper.swift */; };
 		D3B2423C2C1F1F4000EC0ED9 /* DrinksOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B2423B2C1F1F4000EC0ED9 /* DrinksOrder.swift */; };
 		D3D8F29B2C6A47290006D328 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D8F29A2C6A47290006D328 /* AlertManager.swift */; };
 		D3E8B6742C134667004D00BF /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E8B6732C134667004D00BF /* SubmitButton.swift */; };
@@ -85,7 +83,6 @@
 		D30C48942BD08EB400C5B908 /* OrderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
 		D30C48962BD0D44F00C5B908 /* DrinksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksModel.swift; sourceTree = "<group>"; };
 		D30C48982BD1F41E00C5B908 /* DrinkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTableViewCell.swift; sourceTree = "<group>"; };
-		D30C489B2BD41C1C00C5B908 /* CustomStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStepper.swift; sourceTree = "<group>"; };
 		D30C489F2BD79D8500C5B908 /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
 		D3159C8B2C2A90AA00DBF0E0 /* CheckingPasswordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckingPasswordButton.swift; sourceTree = "<group>"; };
 		D31D781E2C2156980039557A /* FavQsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavQsAPI.swift; sourceTree = "<group>"; };
@@ -119,7 +116,6 @@
 		D3A51D752C3BA7BD003B7649 /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
 		D3B242322C1DE7DA00EC0ED9 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		D3B242342C1DEDC400EC0ED9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		D3B242392C1EF9C800EC0ED9 /* DrinksQtyStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksQtyStepper.swift; sourceTree = "<group>"; };
 		D3B2423B2C1F1F4000EC0ED9 /* DrinksOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinksOrder.swift; sourceTree = "<group>"; };
 		D3D8F29A2C6A47290006D328 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		D3E8B6732C134667004D00BF /* SubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
@@ -190,8 +186,6 @@
 			isa = PBXGroup;
 			children = (
 				D3E8B6772C134ECF004D00BF /* CustomOrderDetailLabel.swift */,
-				D30C489B2BD41C1C00C5B908 /* CustomStepper.swift */,
-				D3B242392C1EF9C800EC0ED9 /* DrinksQtyStepper.swift */,
 				D36651722C21128E000FA307 /* Custom TextFields */,
 				D39CB0532BDFFCF3004B96C5 /* Custom Buttons */,
 				D30C489A2BD263BE00C5B908 /* Custom TableViewCells */,
@@ -508,7 +502,6 @@
 				D38E53982B889B04008E8BDE /* OrderListViewController.swift in Sources */,
 				D38E53852B887A6C008E8BDE /* ImageConstants.swift in Sources */,
 				D3B242332C1DE7DA00EC0ED9 /* EmptyStateView.swift in Sources */,
-				D30C489C2BD41C1C00C5B908 /* CustomStepper.swift in Sources */,
 				D30C48972BD0D44F00C5B908 /* DrinksModel.swift in Sources */,
 				D3E8B6762C134B48004D00BF /* CustomTextField.swift in Sources */,
 				D3D8F29B2C6A47290006D328 /* AlertManager.swift in Sources */,
@@ -519,7 +512,6 @@
 				D33A9CDC2C21723D005B614A /* AccountTextField.swift in Sources */,
 				D39CB0232BDAB18B004B96C5 /* SettingTableViewCell.swift in Sources */,
 				D3B242352C1DEDC400EC0ED9 /* NetworkManager.swift in Sources */,
-				D3B2423A2C1EF9C800EC0ED9 /* DrinksQtyStepper.swift in Sources */,
 				D39CB0252BDBFE39004B96C5 /* SettingTableViewController.swift in Sources */,
 				EB94C1DB2B8734F5008098DE /* SceneDelegate.swift in Sources */,
 				D33A9CDE2C217261005B614A /* PasswordTextField.swift in Sources */,
