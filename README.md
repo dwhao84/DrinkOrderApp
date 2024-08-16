@@ -35,7 +35,7 @@
 ## Home Page View Controller
 Home Page View Controller是顯示所有產品頁面的資料頁面，TableViewCell裡面有顯示大小杯的價錢、產品說明、
 <p align="left">
-<img src="https://github.com/dwhao84/DrinkOrderApp/blob/c84809bcb5cc6ab5c0cac4542ccaf4839803f621/DrinkOrderApp/Supporting%20Files/Assets.xcassets/README%20Use/Home%20Page%20VC.imageset/Home%20Page%20VC.png" width="428" height="700"/>
+<img src="https://github.com/dwhao84/DrinkOrderApp/blob/c84809bcb5cc6ab5c0cac4542ccaf4839803f621/DrinkOrderApp/Supporting%20Files/Assets.xcassets/README%20Use/Home%20Page%20VC.imageset/Home%20Page%20VC.png" width="428" height="800"/>
 </p>
 
 
