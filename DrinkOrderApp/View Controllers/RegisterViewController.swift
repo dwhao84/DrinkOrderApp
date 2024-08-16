@@ -162,7 +162,7 @@ class RegisterViewController: UIViewController {
     
     // MARK: - Beginning to set up:
     func setupUI () {
-        self.view.backgroundColor = Colors.kebukeDarkBlue
+        self.view.backgroundColor = Colors.white
         addConstraints()
         addTextFieldsDelegate ()
         addTargets ()
