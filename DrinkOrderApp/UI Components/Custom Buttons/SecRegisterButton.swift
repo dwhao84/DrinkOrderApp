@@ -22,12 +22,15 @@ class SecRegisterButton: UIButton {
     private func commonInit() {
         
         var config                 = UIButton.Configuration.filled()
-        config.baseBackgroundColor = Colors.kebukeBrown
         var container = AttributeContainer()
         container.font = UIFont.boldSystemFont(ofSize: 18)
-        config.attributedTitle = AttributedString("Register", attributes: container)
+        config.attributedTitle = AttributedString("註冊", attributes: container)
         config.titleAlignment      = .center
-        config.cornerStyle         = .large
+        config.cornerStyle         = .capsule
+        config.background.strokeColor = Colors.kebukeLightBlue
+        config.background.strokeWidth = 1
+        config.baseForegroundColor = Colors.kebukeLightBlue
+        config.baseBackgroundColor = Colors.white
         self.configuration         = config
 
         configurationUpdateHandler = { button in
