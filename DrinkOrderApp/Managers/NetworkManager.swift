@@ -107,8 +107,8 @@ class NetworkManager {
     }
     
     // MARK: - GET Orders:
-    func getAirtableData(completion: @escaping (Result<[CustomerOrderFields], NetworkError>) -> Void) {
-        guard let url = URL(string: "https://api.airtable.com/v0/appS5I28H2YO3bJzv/Kebuke%20Order?maxRecords=3&view=Grid%20view") else {
+    func getAirtableData(completion: @escaping (Result<[CustomerOrder], NetworkError>) -> Void) {
+        guard let url = URL(string: "https://api.airtable.com/v0/appS5I28H2YO3bJzv/Kebuke%20Order?maxRecords=100&view=Grid%20view") else {
             completion(.failure(.invalidURL))
             return
         }
@@ -117,45 +117,110 @@ class NetworkManager {
         request.httpMethod = "GET"
         request.setValue(NetworkManager.apiKey, forHTTPHeaderField: "Authorization")
         
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            // Handle network error
             if let error = error {
-                print("\(error.localizedDescription)")
-                completion(.failure(.requestFailed))
-                return
-            }
-        
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                print("\(String(describing: response))")
-                completion(.failure(.unexpectedStatusCode))
+                print("Network error: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    completion(.failure(.requestFailed))
+                }
                 return
             }
             
+            // Check the response status code
+            if let httpResponse = response as? HTTPURLResponse, !(200...299).contains(httpResponse.statusCode) {
+                print("Unexpected status code: \(httpResponse.statusCode)")
+                DispatchQueue.main.async {
+                    completion(.failure(.unexpectedStatusCode))
+                }
+                return
+            }
+            
+            // Ensure data is not nil
             guard let data = data else {
                 print("No data received")
-                completion(.failure(.noDataReceived))
+                DispatchQueue.main.async {
+                    completion(.failure(.noDataReceived))
+                }
                 return
             }
             
             do {
-                // Print out JSON response for debugging
+                // Debug: Print out JSON response
                 if let jsonString = String(data: data, encoding: .utf8) {
                     print("Response JSON: \(jsonString)")
                 }
                 
+                // Decode the JSON data
                 let decoder = JSONDecoder()
                 let orderResponse = try decoder.decode(OrderResponse.self, from: data)
-                let orderFields = orderResponse.records.map { $0.fields }
-                completion(.success(orderFields))
+                
+                // Pass the result back on the main thread
+                DispatchQueue.main.async {
+                    completion(.success(orderResponse.records))
+                }
                 
             } catch {
+                // Handle decoding error
                 print("Decode error: \(error)")
                 if let jsonString = String(data: data, encoding: .utf8) {
-                    print("Response JSON: \(jsonString)")
+                    print("Failed JSON: \(jsonString)")
                 }
-                completion(.failure(.decodeError))
+                DispatchQueue.main.async {
+                    completion(.failure(.decodeError))
+                }
+            }
+        }
+        
+        // Start the data task
+        task.resume()
+    }
+
+
+    func updateOrder(recordID: String, updatedFields: [String: Any], completion: @escaping (Result<Void, NetworkError>) -> Void) {
+        guard let url = URL(string: "https://api.airtable.com/v0/appS5I28H2YO3bJzv/Kebuke%20Order/\(recordID)") else {
+            completion(.failure(.invalidURL))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        request.setValue("Bearer YOUR_API_KEY", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let requestBody: [String: Any] = ["fields": updatedFields]
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: requestBody, options: [])
+        } catch {
+            completion(.failure(.requestFailed))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Network error: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    completion(.failure(.requestFailed))
+                }
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                print("Unexpected status code")
+                DispatchQueue.main.async {
+                    completion(.failure(.unexpectedStatusCode))
+                }
+                return
+            }
+            
+            DispatchQueue.main.async {
+                completion(.success(()))
             }
         }.resume()
     }
+
+
 
     
     // MARK: - POST orders

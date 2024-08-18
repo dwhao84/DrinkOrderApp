@@ -250,8 +250,8 @@
 			isa = PBXGroup;
 			children = (
 				D30C48962BD0D44F00C5B908 /* DrinksModel.swift */,
-				D3F25F842C41799200F1ACF8 /* OrderList.swift */,
 				D3B2423B2C1F1F4000EC0ED9 /* DrinksOrder.swift */,
+				D3F25F842C41799200F1ACF8 /* OrderList.swift */,
 				D38E53A22B88CE40008E8BDE /* SettingsModel.swift */,
 				D39CB0282BDC8782004B96C5 /* KebukeStoreModel.swift */,
 				D31D781E2C2156980039557A /* FavQsAPI.swift */,
