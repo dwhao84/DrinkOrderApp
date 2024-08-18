@@ -12,11 +12,11 @@ struct OrderResponse: Codable {
 }
 
 struct CustomerOrder: Codable {
+    let id: String
     let fields: CustomerOrderFields
 }
 
 // MARK: - CustomerOrderFields Model
-
 struct CustomerOrderFields: Codable {
     let userName: String?
     let drinkName: String?
