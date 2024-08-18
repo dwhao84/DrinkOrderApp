@@ -14,6 +14,7 @@ class OrderListViewController: UIViewController {
     private let apiKey: String = "Bearer patxAQx4KLgwEsh8O.28a883dd0c29a3920aee1cc069fc876738b14186ec8ec2dd07cc762b70497e0c"
     
     var orders: [CustomerOrderFields] = []
+    var orderResponse: [CustomerOrder] = []
 
     // MARK: - UI set up:
     private let tableView: UITableView = {
@@ -58,6 +59,7 @@ class OrderListViewController: UIViewController {
         
         print("Go into the OrderListVC")
         setupUI()
+//        print(orders.id)
     }
     
     // MARK: - view Will Appear
@@ -153,41 +155,84 @@ class OrderListViewController: UIViewController {
             if let qtyString = order.qty, let qty = Int(qtyString),
                let priceString = order.price?.replacingOccurrences(of: "$", with: ""), let price = Int(priceString) {
                 totalQty += qty
-                totalPrice += (price * qty)
+                totalPrice += (price / qty * qty)
             }
         }
-        
         return (totalQty, totalPrice)
     }
 
-
-    
-    // MARK: - GET Order data:
+    // MARK: - Fetch Orders Data
     func fetchOrdersData() {
-        NetworkManager.shared.getAirtableData { result in
+        NetworkManager.shared.getAirtableData { [weak self] result in
+            guard let self = self else { return }
+            
             switch result {
-            case .success(let order):
-                self.orders = order
+            case .success(let orders):
                 DispatchQueue.main.async {
+                    // 更新 orderResponse 数组，保持完整的 CustomerOrder 对象
+                    self.orderResponse = orders
+                    
+                    // 仅提取 fields 部分，更新 orders 数组
+                    self.orders = orders.map { $0.fields }
+                    
+                    print("DEBUG: Number of orders fetched: \(self.orders.count)") // 调试：打印订单数量
+                    
+                    // 刷新表格视图
                     self.tableView.reloadData()
+                    
+                    // 更新总计标签（如有必要）
                     self.updateTotalLabels()
                 }
             case .failure(let error):
                 print("Failed to fetch orders: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    // 处理错误情况，例如显示警告视图或刷新UI
+                }
+            }
+        }
+    }
+
+
+    
+    // MARK: - DELETE Order data:
+    func deleteOrder(orderId: String, at indexPath: IndexPath, completionHandler: @escaping (Bool) -> Void) {
+        NetworkManager.shared.deleteOrdersData(orderId: orderId) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success():
+                // 从数据源中移除订单
+                DispatchQueue.main.async {
+                    self.orders.remove(at: indexPath.row)
+                    self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                    completionHandler(true)  // 通知 swipe action 完成
+                }
+            case .failure(let error):
+                print("Failed to delete order: \(error.localizedDescription)")
+                // 处理错误，可能向用户展示一个警告框
+                completionHandler(false)
             }
         }
     }
     
-    // MARK: - DELETE Order data:
-    func fetchDeleteDrinksData () {
-        
+    func fetchPathDrinksData(recordID: String, updatedFields: [String: Any]) {
+        NetworkManager.shared.updateOrder(recordID: recordID, updatedFields: updatedFields) { result in
+            switch result {
+            case .success():
+                print("Successfully updated the record with ID: \(recordID)")
+                // 你可以在这里刷新数据或更新UI
+                self.fetchOrdersData()  // 如果需要，重新获取最新数据并刷新UI
+            case .failure(let error):
+                print("Failed to update the record: \(error.localizedDescription)")
+                // 处理错误，例如显示错误提示
+            }
+        }
     }
+
     
     // MARK: - Add Actions:
     @objc func refresh(_ sender: Any) {
         refreshControl.endRefreshing()
-        tableView.reloadData()
-        fetchOrdersData()
         
         // Cancel the selected indexPath for item, and selected tableView.
         if let indexPath = tableView.indexPathForSelectedRow {
@@ -224,13 +269,34 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource, U
         return cell
     }
     
-    // MARK: trailing Swipe Actions Configuration For Row At
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        
+
+        let deleteAction = UIContextualAction(style: .destructive, title: "刪除") { [weak self] (action, view, completionHandler) in
+            guard let self = self else { return }
+
+            // 获取对应的 CustomerOrder 对象
+            let orderToDelete = self.orderResponse[indexPath.row]
+            let id = orderToDelete.id  // Get the id from orderResponse.
+
+            print("Order ID: \(id)")
+
+            // 调用删除方法
+            self.deleteOrder(orderId: id, at: indexPath) { success in
+                if success {
+                    // if delete success, then update UI.
+                    print("Delete success")
+                    completionHandler(true)
+                } else {
+                    // if delete failed, then update UI.
+                    print("Delete failed")
+                    completionHandler(false)
+                }
+            }
+        }
         print("DEBUG PRINT: Swipe action, delete the \(indexPath.row) of item.")
-        return UISwipeActionsConfiguration(actions: [])
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
+
 }
 
 #Preview {
