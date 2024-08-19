@@ -220,11 +220,9 @@ class OrderListViewController: UIViewController {
             switch result {
             case .success():
                 print("Successfully updated the record with ID: \(recordID)")
-                // 你可以在这里刷新数据或更新UI
                 self.fetchOrdersData()  // 如果需要，重新获取最新数据并刷新UI
             case .failure(let error):
                 print("Failed to update the record: \(error.localizedDescription)")
-                // 处理错误，例如显示错误提示
             }
         }
     }
@@ -277,10 +275,9 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource, U
             // 获取对应的 CustomerOrder 对象
             let orderToDelete = self.orderResponse[indexPath.row]
             let id = orderToDelete.id  // Get the id from orderResponse.
-
             print("Order ID: \(id)")
 
-            // 调用删除方法
+            // API for delete.
             self.deleteOrder(orderId: id, at: indexPath) { success in
                 if success {
                     // if delete success, then update UI.
@@ -296,7 +293,6 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource, U
         print("DEBUG PRINT: Swipe action, delete the \(indexPath.row) of item.")
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
-
 }
 
 #Preview {
