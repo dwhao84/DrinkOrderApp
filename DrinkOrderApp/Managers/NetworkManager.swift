@@ -15,7 +15,7 @@ class NetworkManager {
     
     let token: String  = "Token token a7c01d0f0e393ecf59c17dd7a66b193a"
     private let url: String    = "https://favqs.com/api/"
-
+    
     enum API {
         // Set up Authorization as a string for authorization.
         static let authorization: String = "Authorization"
@@ -175,8 +175,8 @@ class NetworkManager {
         // Start the data task
         task.resume()
     }
-
-
+    
+    
     func updateOrder(recordID: String, updatedFields: [String: Any], completion: @escaping (Result<Void, NetworkError>) -> Void) {
         guard let url = URL(string: "https://api.airtable.com/v0/appS5I28H2YO3bJzv/Kebuke%20Order/\(recordID)") else {
             completion(.failure(.invalidURL))
@@ -219,9 +219,6 @@ class NetworkManager {
             }
         }.resume()
     }
-
-
-
     
     // MARK: - POST orders
     func postOrdersData(order: Order, completion: @escaping (Result<Order, NetworkError>) -> Void) {
