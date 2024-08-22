@@ -7,8 +7,6 @@
 
 import UIKit
 
-// API URL:https://api.airtable.com/v0/appS5I28H2YO3bJzv/Kebuke
-
 // MARK: - Kebuke
 struct Kebuke: Codable {
     let records: [KebukeRecord]
@@ -72,3 +70,5 @@ enum TypeEnum: String, Codable {
     case imageJPEG = "image/jpeg"
 }
 
+
+// API URL:https://api.airtable.com/v0/appS5I28H2YO3bJzv/Kebuke
