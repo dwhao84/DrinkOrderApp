@@ -23,11 +23,6 @@ class NetworkManager {
         static let application_json: String = "application/json"
     }
     
-    enum Result<T, Error: Swift.Error> {
-        case success(T)
-        case failure(Error)
-    }
-    
     enum NetworkError: Swift.Error {
         case invalidURL
         case requestFailed
