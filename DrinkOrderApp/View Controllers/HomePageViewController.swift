@@ -174,9 +174,6 @@ class HomePageViewController: UIViewController {
 
 // MARK: - Extension:
 extension HomePageViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return ""
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("DEBUG PRINT: 資料為\(filterDrinks.count)筆")
