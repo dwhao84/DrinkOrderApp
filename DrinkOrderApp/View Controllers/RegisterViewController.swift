@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class RegisterViewController: UIViewController {
     
@@ -80,15 +82,6 @@ class RegisterViewController: UIViewController {
         return label
     } ()
     
-    let enterNameStatusLabel: UILabel = {
-        let label: UILabel = UILabel()
-        label.text = "狀態"
-        label.textColor = Colors.red
-        label.font = UIFont.systemFont(ofSize: 15)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    } ()
-    
     let enterEmailStatusLabel: UILabel = {
         let label: UILabel = UILabel()
         label.text = "狀態"
@@ -155,7 +148,6 @@ class RegisterViewController: UIViewController {
         print("Into the RegisterVC")
         setupUI()
         
-        enterNameStatusLabel.isHidden = true
         enterEmailStatusLabel.isHidden = true
         enterPasswordStatusLabel.isHidden = true
     }
@@ -193,7 +185,6 @@ class RegisterViewController: UIViewController {
         
         nameStackView.addArrangedSubview(nameLabel)
         nameStackView.addArrangedSubview(nameTextField)
-        nameStackView.addArrangedSubview(enterNameStatusLabel)
         
         mailStackView.addArrangedSubview(mailLabel)
         mailStackView.addArrangedSubview(mailTextField)
@@ -204,7 +195,6 @@ class RegisterViewController: UIViewController {
         passwordStackView.addArrangedSubview(enterPasswordStatusLabel)
         
         mainStackView.addArrangedSubview(logoImageView)
-        mainStackView.addArrangedSubview(nameStackView)
         mainStackView.addArrangedSubview(mailStackView)
         mainStackView.addArrangedSubview(passwordStackView)
         mainStackView.addArrangedSubview(registerButton)
@@ -226,32 +216,6 @@ class RegisterViewController: UIViewController {
         ])
     }
     
-    // MARK: - Check Name correction
-    /*
-    Username can only contain letters (a-z), numbers (0-9) and the underscore (_);
-     */
-    func checkNameCorrection (_ userName: String) -> NameCheck {
-        let textLength = Int(nameTextField.text?.count ?? 0)
-        let punctuation = "!@#$%^&*(),.<>;'`~[]{}\\|/?-+= "
-        
-        if textLength < 1 && textLength > 10 {
-            print("""
-                   DEBUG PRINT: User Name's text length is not correct
-                   \(textLength)
-                """)
-            return .lackTextlength
-        } else if textLength == 0 {
-            print("DEBUG PRINT: User name is empty")
-            return .empty
-            
-        } else if userName.contains(where: { punctuation.contains($0) }) {
-            print("DEBUG PRINT: User name can not contains the punctuation")
-            return .WrongEntering
-        } else {
-            print("DEBUG PRINT: User name is valid")
-            return .valid
-        }
-    }
     
     // MARK: - Check Password correction
     func checkPasswordCorrection(_ password: String) -> PasswordCheck {
@@ -323,39 +287,19 @@ class RegisterViewController: UIViewController {
             
         } else {
             print("DEBUG PRINT: E-mail is vaild")
-            return .valid }
+            return .valid
+        }
     }
     
     // MARK: - Actions:
     @objc func registerButtonTapped(_ sender: UIButton) {
-        let enteredName     = nameTextField.text ?? ""
         let enteredMail     = mailTextField.text ?? ""
         let enteredPassword = passwordTextField.text ?? ""
-        
-        let nameResult     = checkNameCorrection(enteredName)
+
         let emailResult    = checkEmailCorrection(enteredMail)
         let passwordResult = checkPasswordCorrection(enteredPassword)
-        
-        if nameResult != .valid {
-            switch nameResult {
-            case .valid:
-                enterNameStatusLabel.isHidden = true
-                print("DEBUG PRINT: 姓名輸入正確")
-            case .empty:
-                enterNameStatusLabel.isHidden = false
-                enterNameStatusLabel.text = "姓名欄位不得空白"
-                print("DEBUG PRINT: 姓名是空白")
-            case .lackTextlength:
-                enterNameStatusLabel.isHidden = false
-                enterNameStatusLabel.text = "輸入姓名的字數不正確"
-                print("DEBUG PRINT: 姓名字數不正確")
-                
-            case .WrongEntering:
-                enterNameStatusLabel.isHidden = false
-                enterNameStatusLabel.text = "輸入姓名不能有其他符號"
-                print("DEBUG PRINT: 輸入姓名不能有其他符號")
-            }
-        } else if emailResult != .valid {
+
+        if emailResult != .valid {
             switch emailResult {
             case .valid:
                 enterEmailStatusLabel.isHidden = true
@@ -400,17 +344,23 @@ class RegisterViewController: UIViewController {
                 print("DEBUG PRINT: 密碼為空白")
             }
         } else {
-            let user = [
-                "login": enteredName,
-                "email": enteredMail,
-                "password": enteredPassword
-            ]
-        
-            NetworkManager.createUsers(user: user)
-            registerButton.configuration?.showsActivityIndicator = true
-            
-            let loginVC = LoginViewController()
-            self.present(loginVC, animated: true)
+            Auth.auth().createUser(withEmail: enteredMail, password: enteredPassword) { (authResult, error) in
+                // Handle any errors during registration
+                if let error = error {
+                    AlertManager.showButtonAlert(on: self, title: "輸入錯誤", message: error.localizedDescription)
+                    return
+                }
+
+                // Show activity indicator
+                self.registerButton.configuration?.showsActivityIndicator = true
+                
+                // Registration successful, show success alert
+                AlertManager.showButtonAlert(on: self, title: "註冊成功", message: "恭喜你，註冊成功!!!")
+                
+                // Present login view controller
+                let loginVC = LoginViewController()
+                self.present(loginVC, animated: true)
+            }
         }
     }
 }
