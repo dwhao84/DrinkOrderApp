@@ -7,6 +7,8 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import Firebase
+import FirebaseAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Import the IQKeyboardManager, when user using the textField, it'll automatically adjust the view's height.
         IQKeyboardManager.shared.enable = true
-        
+        // Make sure the FirebaseApp is enable to see.
+        FirebaseApp.configure()
         // Ask the UINavigationBar appearance's tintColor
         UINavigationBar.appearance().tintColor = Colors.kebukeBrown
         
