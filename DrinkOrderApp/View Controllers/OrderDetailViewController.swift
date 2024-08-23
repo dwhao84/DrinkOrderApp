@@ -514,15 +514,6 @@ class OrderDetailViewController: UIViewController {
         }
     }
 
-    
-    // MARK: showAlertVC
-    func showAlertVC (title: String, message: String) {
-        let controller = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default)
-        controller.addAction(okAction)
-        present(controller, animated: true)
-    }
-    
     // MARK: - Tap Gesture
     func addTapGesture () {
         let tap = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
@@ -726,9 +717,7 @@ extension OrderDetailViewController: UITextFieldDelegate {
             break
         }
     }
-
 }
-
 
 // MARK: - PickerView Delegate & DataSource
 extension OrderDetailViewController: UIPickerViewDelegate, UIPickerViewDataSource {
