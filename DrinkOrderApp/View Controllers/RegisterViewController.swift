@@ -30,12 +30,6 @@ class RegisterViewController: UIViewController {
         return logoImageView
     } ()
     
-    // MARK: - UITextField:
-    let nameTextField: NameTextField = {
-        let nameTextField: NameTextField = NameTextField()
-        return nameTextField
-    } ()
-    
     let mailTextField: MailTextField = {
         let mailTextField: MailTextField = MailTextField()
         return mailTextField
@@ -54,19 +48,9 @@ class RegisterViewController: UIViewController {
         return button
     } ()
     
-    // MARK: - UILabel:
-    let nameLabel: UILabel = {
-        let label: UILabel = UILabel()
-        label.text = "Enter your name:"
-        label.textColor = Colors.white
-        label.font = UIFont.systemFont(ofSize: 15)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    } ()
-    
     let mailLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "Enter your E-mail:"
+        label.text = "輸入郵件:"
         label.textColor = Colors.white
         label.font = UIFont.systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -75,7 +59,7 @@ class RegisterViewController: UIViewController {
     
     let passwordLabel: UILabel = {
         let label: UILabel = UILabel()
-        label.text = "Enter your Password:"
+        label.text = "輸入密碼:"
         label.textColor = Colors.white
         label.font = UIFont.systemFont(ofSize: 15)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -167,7 +151,6 @@ class RegisterViewController: UIViewController {
     
     // MARK: - addTextFieldsDelegate
     func addTextFieldsDelegate () {
-        nameTextField.delegate = self
         mailTextField.delegate = self
         passwordTextField.delegate = self
     }
@@ -183,9 +166,6 @@ class RegisterViewController: UIViewController {
         logoImageView.widthAnchor.constraint(equalToConstant: imageViewWidth).isActive = true
         logoImageView.heightAnchor.constraint(equalToConstant: imageViewWidth * 0.7).isActive = true
         
-        nameStackView.addArrangedSubview(nameLabel)
-        nameStackView.addArrangedSubview(nameTextField)
-        
         mailStackView.addArrangedSubview(mailLabel)
         mailStackView.addArrangedSubview(mailTextField)
         mailStackView.addArrangedSubview(enterEmailStatusLabel)
@@ -199,7 +179,7 @@ class RegisterViewController: UIViewController {
         mainStackView.addArrangedSubview(passwordStackView)
         mainStackView.addArrangedSubview(registerButton)
         
-        [nameTextField, mailTextField, passwordTextField].forEach {
+        [mailTextField, passwordTextField].forEach {
             $0.widthAnchor.constraint(equalToConstant: textFieldWidth).isActive = true
             $0.heightAnchor.constraint(equalToConstant: textFieldHeight).isActive = true
         }
@@ -402,6 +382,5 @@ extension RegisterViewController: UITextFieldDelegate {
 }
 
 #Preview {
-    let registerVC = RegisterViewController()
-    return registerVC
+    UINavigationController(rootViewController: RegisterViewController())
 }
