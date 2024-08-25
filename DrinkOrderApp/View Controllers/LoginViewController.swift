@@ -95,17 +95,39 @@ class LoginViewController: UIViewController {
     
     // MARK: - Actions
     @objc func loginBtnTapped(_ sender: UIButton) {
-        // Show activity indicator on the button
-        loginButton.configuration?.showsActivityIndicator = true
+        // Get the email content, and password.
+        let email = accountTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
         
-        // After the animation completes, present the tab bar controller
-        let tabBarController = self.createTabBarController()
-        tabBarController.modalPresentationStyle = .overFullScreen
-        tabBarController.tabBar.isTranslucent = true
-        tabBarController.overrideUserInterfaceStyle = .light
-        self.present(tabBarController, animated: true, completion: nil)
-        
-        // Debugging print statement
+        // 驗證使用者是否使用電子郵件連結登入
+        if Auth.auth().isSignIn(withEmailLink: email) {
+            // 使用者通過電子郵件連結登入的邏輯
+            print("DEBUG PRINT: 使用者正在使用電子郵件連結登入")
+        } else {
+            // 使用者使用電子郵件和密碼登入
+            Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+                // 確保 self 是弱引用以避免內存洩漏
+                guard let self = self else { return }
+                // Inspect is correct or not.
+                if let error = error {
+                    // show error by using AlertManager for showing localizedDescription.
+                    AlertManager.showButtonAlert(on: self, title: "登入失敗", message: error.localizedDescription)
+                    //
+                    self.loginButton.configuration?.showsActivityIndicator = false
+                    return
+                }
+                
+                // 成功登入後，顯示活動指示器
+                self.loginButton.configuration?.showsActivityIndicator = true
+                
+                // 延遲動畫完成後，顯示 Tab Bar Controller
+                let tabBarController = self.createTabBarController()
+                tabBarController.modalPresentationStyle = .overFullScreen
+                tabBarController.tabBar.isTranslucent = true
+                tabBarController.overrideUserInterfaceStyle = .light
+                self.present(tabBarController, animated: true, completion: nil)
+            }
+        }
         print("DEBUG PRINT: loginBtnTapped")
     }
 
