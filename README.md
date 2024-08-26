@@ -13,6 +13,11 @@
   - Kingfisher
   - IQKeyboardManager
 
+- 相關文章說明:
+
+[Drink Order App -1 GET](https://medium.com/彼得潘的-swift-ios-app-開發教室/hw-50-drink-order-app-1-get-6d4f7566c6f5)
+
+[Drink Order App -2 - POST](https://medium.com/彼得潘的-swift-ios-app-開發教室/hw-50-drink-order-app-2-post-db7b69faf12d)
 
 ## Login View Controller
 登入頁面，基本上是使用FAQs Api，如果有註冊成功的話，會回傳token的值，以確保有登入成功，登入成功之後，才有辦法進行飲料的訂購。
