@@ -12,6 +12,3 @@ struct SettingData {
     let serviceImage: UIImage
     let color: UIColor
 }
-
-
-
