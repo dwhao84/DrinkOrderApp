@@ -125,38 +125,27 @@ class SettingTableViewController: UIViewController {
     
     // MARK: show Inspect Report
     func showInspectReport () {
-        guard let url = URL(string:"https://kebuke.com/report/") else {
-            print("Unable to get Inspect Report")
-            return
-        }
-        let safari = SFSafariViewController(url: url)
-        self.present(safari, animated: true)
+        getURL(urlString: "https://kebuke.com/report/", printOutContent: "Unable to get Inspect Report")
     }
     
     // MARK: show Privacy Content
     func showPrivacyContent () {
-        guard let url = URL(string:"https://www.kebuke.com/privacy/") else {
-            print("Unable to get privacy content")
-            return
-        }
-        let safari = SFSafariViewController(url: url)
-        self.present(safari, animated: true)
+        getURL(urlString: "https://www.kebuke.com/privacy/", printOutContent: "Unable to get privacy content")
     }
     
     // MARK: show Announcement:
     func showAnnouncement () {
-        guard let url = URL(string:"https://www.kebuke.com/announcement/20210319/") else {
-            print("Unable to get announcement")
-            return
-        }
-        let safari = SFSafariViewController(url: url)
-        self.present(safari, animated: true)
+        getURL(urlString: "https://www.kebuke.com/announcement/20210319/", printOutContent: "Unable to get announcement")
     }
     
     // MARK: show Brand Story:
     func showBrandStory () {
-        guard let url = URL(string:"https://www.kebuke.com/about/") else {
-            print("Unable to get Brand Story")
+        getURL(urlString: "https://www.kebuke.com/about/", printOutContent: "Unable to get Brand Story")
+    }
+    
+    private func getURL(urlString: String, printOutContent: String) {
+        guard let url = URL(string: urlString) else {
+            print(printOutContent)
             return
         }
         let safari = SFSafariViewController(url: url)
