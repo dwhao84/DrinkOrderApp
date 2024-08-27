@@ -13,7 +13,7 @@ class StoreLocationViewController: UIViewController {
     
     var stores: [Store] = []
     
-    var locationMgr: CLLocationManager = CLLocationManager()
+    let locationMgr: CLLocationManager = CLLocationManager()
     var currentCoordinates: CLLocation?
     var selectedAnnotation: MKAnnotation?
     var coordinates: CLLocationCoordinate2D?
@@ -103,12 +103,12 @@ class StoreLocationViewController: UIViewController {
     }
     
     func performNavigation() {
-        
         // Create a placemark and map item for the destination
         let targetPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: coordinates!.latitude, longitude: coordinates!.longitude))
+        let storeName = selectedAnnotation?.title
         
         let targetItem = MKMapItem(placemark: targetPlacemark)
-        targetItem.name = stores.first?.name
+        targetItem.name = storeName!
         
         // Get the current user location as a map item
         let userMapItem = MKMapItem.forCurrentLocation()
@@ -219,7 +219,6 @@ extension StoreLocationViewController: MKMapViewDelegate, CLLocationManagerDeleg
         guard let kebukeAnnotation = annotation as? KebukeAnnotation else {
             return nil
         }
-        
         let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: KebukeAnnotationView.identifier, for: kebukeAnnotation) as? KebukeAnnotationView
         annotationView?.annotation = kebukeAnnotation
         annotationView?.configure(with: kebukeAnnotation.image, title: kebukeAnnotation.title ?? "")
@@ -228,9 +227,10 @@ extension StoreLocationViewController: MKMapViewDelegate, CLLocationManagerDeleg
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let annotation = view.annotation else { return }
+
         selectedAnnotation = annotation
         coordinates = annotation.coordinate
-        print("DEBUG PRINT: GET lat: \(coordinates!.latitude), long: \(coordinates!.longitude)")
+        print("DEBUG PRINT: GET location name: \(selectedAnnotation?.title! ?? ""), lat: \(coordinates!.latitude), long: \(coordinates!.longitude)")
         
         let region = MKCoordinateRegion(center: annotation.coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
         // 帶有動畫的更新地圖視圖以顯示新的區域
@@ -238,18 +238,12 @@ extension StoreLocationViewController: MKMapViewDelegate, CLLocationManagerDeleg
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        currentCoordinates = locations.first?.coordinate
     }
-    
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error.localizedDescription)
+        print("DEBUG PRINT: didFailWithError \(error.localizedDescription)")
     }
-    
 }
-
-
-
 
 #Preview {
     let storeLocationViewController = StoreLocationViewController()
