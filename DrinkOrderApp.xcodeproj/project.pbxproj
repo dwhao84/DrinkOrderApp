@@ -15,7 +15,6 @@
 		D3159C872C286F4C00DBF0E0 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D3159C862C286F4C00DBF0E0 /* Kingfisher */; };
 		D3159C8A2C286F8D00DBF0E0 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D3159C892C286F8D00DBF0E0 /* IQKeyboardManagerSwift */; };
 		D3159C8C2C2A90AA00DBF0E0 /* CheckingPasswordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3159C8B2C2A90AA00DBF0E0 /* CheckingPasswordButton.swift */; };
-		D31D781F2C2156980039557A /* FavQsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31D781E2C2156980039557A /* FavQsAPI.swift */; };
 		D33A9CDC2C21723D005B614A /* AccountTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33A9CDB2C21723C005B614A /* AccountTextField.swift */; };
 		D33A9CDE2C217261005B614A /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33A9CDD2C217261005B614A /* PasswordTextField.swift */; };
 		D33A9CE22C217A40005B614A /* MailTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33A9CE12C217A40005B614A /* MailTextField.swift */; };
@@ -88,7 +87,6 @@
 		D30C48982BD1F41E00C5B908 /* DrinkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTableViewCell.swift; sourceTree = "<group>"; };
 		D30C489F2BD79D8500C5B908 /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
 		D3159C8B2C2A90AA00DBF0E0 /* CheckingPasswordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckingPasswordButton.swift; sourceTree = "<group>"; };
-		D31D781E2C2156980039557A /* FavQsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavQsAPI.swift; sourceTree = "<group>"; };
 		D33A9CDB2C21723C005B614A /* AccountTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTextField.swift; sourceTree = "<group>"; };
 		D33A9CDD2C217261005B614A /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		D33A9CE12C217A40005B614A /* MailTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailTextField.swift; sourceTree = "<group>"; };
@@ -260,7 +258,6 @@
 				D3F25F842C41799200F1ACF8 /* OrderList.swift */,
 				D38E53A22B88CE40008E8BDE /* SettingsModel.swift */,
 				D39CB0282BDC8782004B96C5 /* KebukeStoreModel.swift */,
-				D31D781E2C2156980039557A /* FavQsAPI.swift */,
 				D33A9CE52C2489B4005B614A /* ContentCheck.swift */,
 			);
 			path = Models;
@@ -537,7 +534,6 @@
 				D30C48A02BD79D8500C5B908 /* CheckoutView.swift in Sources */,
 				D30C48932BD0218800C5B908 /* OrderListTableViewCell.swift in Sources */,
 				D366516D2C2110E5000FA307 /* AuthSelectionViewController.swift in Sources */,
-				D31D781F2C2156980039557A /* FavQsAPI.swift in Sources */,
 				D3E8B6742C134667004D00BF /* SubmitButton.swift in Sources */,
 				D39CB02F2BDD4F15004B96C5 /* KebukeAnnotation.swift in Sources */,
 				D39CB0522BDFFC07004B96C5 /* RegisterButton.swift in Sources */,
