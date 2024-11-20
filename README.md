@@ -78,7 +78,7 @@
   - 品牌故事
 - 專業文件存取
 
-## 所使用技術
+## 使用技術
 - **網路層**：自訂NetworkManager處理API互動
 - **UI架構**：使用Auto Layout的程式化UI
 - **資料管理**：使用Airtable後端的CRUD操作
@@ -89,7 +89,7 @@
   - 錯誤處理
   - 即時回饋
 
-## 相依套件
+## 使用套件
 - **Kingfisher**：高效的圖片載入和快取
 - **IQKeyboardManager**：增強的鍵盤互動
 
