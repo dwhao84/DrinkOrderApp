@@ -96,3 +96,103 @@
 ## 相關文件
 - [飲料訂購 App -1 GET](https://medium.com/彼得潘的-swift-ios-app-開發教室/hw-50-drink-order-app-1-get-6d4f7566c6f5)
 - [飲料訂購 App -2 POST](https://medium.com/彼得潘的-swift-ios-app-開發教室/hw-50-drink-order-app-2-post-db7b69faf12d)
+
+
+# Drink Order App
+An iOS application implementing CRUD functionality with the following technical features:
+- Programmatically UI
+- RESTful API Integration
+- Custom UI
+- OOP
+- Libraries:
+  - Kingfisher: Image loading
+  - IQKeyboardManager: Keyboard handling
+
+## App Architecture
+<p align="center">
+<img src="https://github.com/dwhao84/DrinkOrderApp/blob/f190c8aed6f04815e7781bb33e31223f07d38f5d/DrinkOrderApp/Supporting%20Files/Assets.xcassets/README%20Use/Drink%20Order%20App.imageset/Drink%20Order%20App.png" width="800"/>
+</p>
+
+## Main Features
+
+### 1. User Authentication
+- Token-based login system
+- User registration functionality
+- Secure ordering system access control
+
+### 2. Home Page (Product Catalog)
+<p align="center">
+<img src="https://github.com/dwhao84/DrinkOrderApp/blob/main/DrinkOrderApp/Supporting%20Files/Assets.xcassets/README%20Use/Home%20Page%20VC.imageset/Home%20Page%20VC.png" width="300"/>
+</p>
+
+- Display all available drinks
+- Custom TableViewCell showing:
+  - Product images
+  - Medium/Large cup prices
+  - Product descriptions
+- Drink search functionality
+- Pull-to-refresh mechanism
+- Dynamic API data loading
+
+### 3. Order Details
+<p align="center">
+<img src="https://github.com/dwhao84/DrinkOrderApp/blob/f190c8aed6f04815e7781bb33e31223f07d38f5d/DrinkOrderApp/Supporting%20Files/Assets.xcassets/README%20Use/Order%20Detail%20VC.imageset/Order%20Detail%20VC.png" width="300"/>
+</p>
+
+- Complete order customization:
+  - Size selection (Medium/Large)
+  - Sugar level options (7 levels)
+  - Ice level options (8 levels)
+  - Topping selection
+- Real-time price calculation
+- Quantity adjustment
+- Input validation for all fields
+- Custom UI components:
+  - Picker views
+  - Custom text fields
+  - Custom buttons
+- Responsive layout with scroll view
+
+### 4. Order Management
+<p align="center">
+<img src="https://github.com/dwhao84/DrinkOrderApp/blob/f190c8aed6f04815e7781bb33e31223f07d38f5d/DrinkOrderApp/Supporting%20Files/Assets.xcassets/README%20Use/Order%20List%20VC.imageset/Order%20List%20VC.png" width="300"/>
+</p>
+
+- View all placed orders
+- Swipe-to-delete orders
+- Real-time calculations:
+  - Total cup count
+  - Total price
+- Order data persistence using Airtable
+- Pull-to-refresh functionality
+- Custom order display cells
+
+### 5. Settings
+- Store contact features:
+  - Direct calling
+  - Email integration
+- Legal and information sections:
+  - Terms of service
+  - Product inspection reports
+  - Privacy policy
+  - Brand story
+- Professional documentation access
+
+## Technologies Used
+- **Network Layer**: Custom NetworkManager for API interactions
+- **UI Architecture**: Programmatic UI with Auto Layout
+- **Data Management**: CRUD operations with Airtable backend
+- **Image Handling**: Asynchronous image loading with Kingfisher
+- **User Experience**:
+  - Form validation
+  - Loading indicators
+  - Error handling
+  - Real-time feedback
+
+## Dependencies
+- **Kingfisher**: Efficient image loading and caching
+- **IQKeyboardManager**: Enhanced keyboard interaction
+
+## Related Documentation
+- [Drink Order App -1 GET](https://medium.com/彼得潘的-swift-ios-app-開發教室/hw-50-drink-order-app-1-get-6d4f7566c6f5)
+- [Drink Order App -2 POST](https://medium.com/彼得潘的-swift-ios-app-開發教室/hw-50-drink-order-app-2-post-db7b69faf12d)
