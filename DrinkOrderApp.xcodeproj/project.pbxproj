@@ -20,6 +20,7 @@
 		D33A9CE22C217A40005B614A /* MailTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33A9CE12C217A40005B614A /* MailTextField.swift */; };
 		D33A9CE42C217A78005B614A /* NameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33A9CE32C217A78005B614A /* NameTextField.swift */; };
 		D33A9CE62C2489B4005B614A /* ContentCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33A9CE52C2489B4005B614A /* ContentCheck.swift */; };
+		D33EE9002CEE36C800144167 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33EE8FF2CEE36C800144167 /* APIConfig.swift */; };
 		D366516D2C2110E5000FA307 /* AuthSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D366516C2C2110E5000FA307 /* AuthSelectionViewController.swift */; };
 		D366516F2C211198000FA307 /* FinishButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D366516E2C211198000FA307 /* FinishButton.swift */; };
 		D38E53852B887A6C008E8BDE /* ImageConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38E53842B887A6C008E8BDE /* ImageConstants.swift */; };
@@ -32,7 +33,6 @@
 		D38E53A32B88CE40008E8BDE /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38E53A22B88CE40008E8BDE /* SettingsModel.swift */; };
 		D39CB0232BDAB18B004B96C5 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0222BDAB18B004B96C5 /* SettingTableViewCell.swift */; };
 		D39CB0252BDBFE39004B96C5 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0242BDBFE39004B96C5 /* SettingTableViewController.swift */; };
-		D39CB0272BDC0B0D004B96C5 /* KebukeStoreJson.json in Resources */ = {isa = PBXBuildFile; fileRef = D39CB0262BDC0B0D004B96C5 /* KebukeStoreJson.json */; };
 		D39CB0292BDC8782004B96C5 /* KebukeStoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0282BDC8782004B96C5 /* KebukeStoreModel.swift */; };
 		D39CB02F2BDD4F15004B96C5 /* KebukeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB02E2BDD4F15004B96C5 /* KebukeAnnotation.swift */; };
 		D39CB0312BDD5F07004B96C5 /* KebukeAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39CB0302BDD5F07004B96C5 /* KebukeAnnotationView.swift */; };
@@ -92,6 +92,7 @@
 		D33A9CE12C217A40005B614A /* MailTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailTextField.swift; sourceTree = "<group>"; };
 		D33A9CE32C217A78005B614A /* NameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameTextField.swift; sourceTree = "<group>"; };
 		D33A9CE52C2489B4005B614A /* ContentCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCheck.swift; sourceTree = "<group>"; };
+		D33EE8FF2CEE36C800144167 /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
 		D366516C2C2110E5000FA307 /* AuthSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSelectionViewController.swift; sourceTree = "<group>"; };
 		D366516E2C211198000FA307 /* FinishButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishButton.swift; sourceTree = "<group>"; };
 		D37E7D062C1ABC580079736E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -105,7 +106,6 @@
 		D38E53A22B88CE40008E8BDE /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		D39CB0222BDAB18B004B96C5 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
 		D39CB0242BDBFE39004B96C5 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
-		D39CB0262BDC0B0D004B96C5 /* KebukeStoreJson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = KebukeStoreJson.json; path = ../../../../Desktop/KebukeStoreJson.json; sourceTree = "<group>"; };
 		D39CB0282BDC8782004B96C5 /* KebukeStoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KebukeStoreModel.swift; sourceTree = "<group>"; };
 		D39CB02E2BDD4F15004B96C5 /* KebukeAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KebukeAnnotation.swift; sourceTree = "<group>"; };
 		D39CB0302BDD5F07004B96C5 /* KebukeAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KebukeAnnotationView.swift; sourceTree = "<group>"; };
@@ -245,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				D38E53842B887A6C008E8BDE /* ImageConstants.swift */,
+				D33EE8FF2CEE36C800144167 /* APIConfig.swift */,
 				D38E53872B887AAC008E8BDE /* ColorConstants.swift */,
 			);
 			path = Constants;
@@ -332,7 +333,6 @@
 				D38E538F2B889A07008E8BDE /* Models */,
 				D38E539B2B88AB92008E8BDE /* View Controllers */,
 				D35F55882C0F5EDC001A3730 /* UI Components */,
-				D39CB0262BDC0B0D004B96C5 /* KebukeStoreJson.json */,
 				D3A1F6512C78EB7E001FAAA9 /* GoogleService-Info.plist */,
 			);
 			path = DrinkOrderApp;
@@ -474,7 +474,6 @@
 				EB94C1E52B8734F7008098DE /* LaunchScreen.storyboard in Resources */,
 				EB94C1E22B8734F7008098DE /* Assets.xcassets in Resources */,
 				D3A1F6522C78EB7E001FAAA9 /* GoogleService-Info.plist in Resources */,
-				D39CB0272BDC0B0D004B96C5 /* KebukeStoreJson.json in Resources */,
 				EB94C1E02B8734F5008098DE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,6 +539,7 @@
 				D3E8B6782C134ECF004D00BF /* CustomOrderDetailLabel.swift in Sources */,
 				D39CB0572BE00897004B96C5 /* SecRegisterButton.swift in Sources */,
 				D39CB0312BDD5F07004B96C5 /* KebukeAnnotationView.swift in Sources */,
+				D33EE9002CEE36C800144167 /* APIConfig.swift in Sources */,
 				D3F25F852C41799200F1ACF8 /* OrderList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
