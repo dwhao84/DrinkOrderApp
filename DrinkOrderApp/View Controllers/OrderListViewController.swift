@@ -165,22 +165,13 @@ class OrderListViewController: UIViewController {
     func fetchOrdersData() {
         NetworkManager.shared.getAirtableData { [weak self] result in
             guard let self = self else { return }
-            
             switch result {
             case .success(let orders):
                 DispatchQueue.main.async {
-                    // 更新 orderResponse 数组，保持完整的 CustomerOrder 对象
                     self.orderResponse = orders
-                    
-                    // 仅提取 fields 部分，更新 orders 数组
                     self.orders = orders.map { $0.fields }
-                    
                     print("DEBUG: Number of orders fetched: \(self.orders.count)") // 调试：打印订单数量
-                    
-                    // 刷新表格视图
                     self.tableView.reloadData()
-                    
-                    // 更新总计标签（如有必要）
                     self.updateTotalLabels()
                 }
             case .failure(let error):
@@ -230,8 +221,8 @@ class OrderListViewController: UIViewController {
     
     // MARK: - Add Actions:
     @objc func refresh(_ sender: Any) {
+        fetchOrdersData()
         refreshControl.endRefreshing()
-        
         // Cancel the selected indexPath for item, and selected tableView.
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: true)

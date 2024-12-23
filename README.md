@@ -78,9 +78,15 @@
   - 品牌故事
 - 專業文件存取
 
+<<<<<<< HEAD
 ## 使用技術
 - **網路層**：自訂NetworkManager處理API互動
 - **UI架構**：使用Auto Layout的程式化UI
+=======
+## 所使用技術
+- **網路層**：自訂NetworkManager處理API互動
+- **UI架構**：使用Auto Layout的Programmatically UI
+>>>>>>> Delete-gitignore
 - **資料管理**：使用Airtable後端的CRUD操作
 - **圖片處理**：使用Kingfisher進行非同步圖片載入
 - **使用者體驗**：
@@ -89,7 +95,11 @@
   - 錯誤處理
   - 即時回饋
 
+<<<<<<< HEAD
 ## 使用套件
+=======
+## 相依套件
+>>>>>>> Delete-gitignore
 - **Kingfisher**：高效的圖片載入和快取
 - **IQKeyboardManager**：增強的鍵盤互動
 
@@ -98,6 +108,10 @@
 - [飲料訂購 App -2 POST](https://medium.com/彼得潘的-swift-ios-app-開發教室/hw-50-drink-order-app-2-post-db7b69faf12d)
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> Delete-gitignore
 # Drink Order App
 An iOS application implementing CRUD functionality with the following technical features:
 - Programmatically UI

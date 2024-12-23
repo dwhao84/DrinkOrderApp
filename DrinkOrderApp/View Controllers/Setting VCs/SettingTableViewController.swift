@@ -197,12 +197,12 @@ extension SettingTableViewController: UITableViewDelegate, UITableViewDataSource
             print("DEBUG PRINT: 撥打客服電話")
             callPhoneNumber(phoneNumber: "+(886)0800-000-961")
             
-        case 1:
-            print("DEBUG PRINT: 門市據點")
-            let storeLocationVC = StoreLocationViewController()
-            storeLocationVC.navigationItem.title = "門市據點"
-            storeLocationVC.modalPresentationStyle = .overFullScreen
-            self.navigationController?.pushViewController(storeLocationVC, animated: true)
+//        case :
+//            print("DEBUG PRINT: 門市據點")
+//            let storeLocationVC = StoreLocationViewController()
+//            storeLocationVC.navigationItem.title = "門市據點"
+//            storeLocationVC.modalPresentationStyle = .overFullScreen
+//            self.navigationController?.pushViewController(storeLocationVC, animated: true)
             
         case 2:
             print("DEBUG PRINT: 點擊 店家信箱")
